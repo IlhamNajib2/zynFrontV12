@@ -1,0 +1,108 @@
+
+<p-dialog [(visible)]="viewDialog" [style]="{width: '70vw'}" header="{{'inscriptionCollaborator.tabPan' | translate}}" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <p-tabView>
+            <p-tabPanel header="{{'inscriptionCollaborator.tabPan' | translate}}">
+                <div class="grid">
+                    <div class="field col-12 md:col-6">
+                        <label for="1">{{'inscriptionCollaborator.startDate' | translate}}</label>
+                        <p-calendar id="1" [disabled]="true"  [showTime]="true" [showSeconds]="false" placeholder="{{'inscriptionCollaborator.startDate' | translate}}"  [ngModel]="item.startDate" dateFormat="{{dateFormat}}"></p-calendar>
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="2">{{'inscriptionCollaborator.endDate' | translate}}</label>
+                        <p-calendar id="2" [disabled]="true"  [showTime]="true" [showSeconds]="false" placeholder="{{'inscriptionCollaborator.endDate' | translate}}"  [ngModel]="item.endDate" dateFormat="{{dateFormat}}"></p-calendar>
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="3">{{'inscriptionCollaborator.renewDate' | translate}}</label>
+                        <p-calendar id="3" [disabled]="true"  [showTime]="true" [showSeconds]="false" placeholder="{{'inscriptionCollaborator.renewDate' | translate}}"  [ngModel]="item.renewDate" dateFormat="{{dateFormat}}"></p-calendar>
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="4">{{'inscriptionCollaborator.packaging' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'inscriptionCollaborator.packaging' | translate}}" autofocus  id="4" [ngModel]="item.packaging?.id">
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="5">{{'inscriptionCollaborator.consumedEntity' | translate}}</label>
+                        <p-inputNumber class="mb-2 mr-2" id="5" [disabled]="true" placeholder="{{'inscriptionCollaborator.consumedEntity' | translate}}" [ngModel]="item.consumedEntity"></p-inputNumber>
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="6">{{'inscriptionCollaborator.consumedProjet' | translate}}</label>
+                        <p-inputNumber class="mb-2 mr-2" id="6" [disabled]="true" placeholder="{{'inscriptionCollaborator.consumedProjet' | translate}}" [ngModel]="item.consumedProjet"></p-inputNumber>
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="7">{{'inscriptionCollaborator.consumedAttribut' | translate}}</label>
+                        <p-inputNumber class="mb-2 mr-2" id="7" [disabled]="true" placeholder="{{'inscriptionCollaborator.consumedAttribut' | translate}}" [ngModel]="item.consumedAttribut"></p-inputNumber>
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="8">{{'inscriptionCollaborator.consumedIndicator' | translate}}</label>
+                        <p-inputNumber class="mb-2 mr-2" id="8" [disabled]="true" placeholder="{{'inscriptionCollaborator.consumedIndicator' | translate}}" [ngModel]="item.consumedIndicator"></p-inputNumber>
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="9">{{'inscriptionCollaborator.collaborator' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'inscriptionCollaborator.collaborator' | translate}}" autofocus  id="9" [ngModel]="item.collaborator?.description">
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="10">{{'inscriptionCollaborator.inscriptionCollaboratorState' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'inscriptionCollaborator.inscriptionCollaboratorState' | translate}}" autofocus  id="10" [ngModel]="item.inscriptionCollaboratorState?.name">
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="11">{{'inscriptionCollaborator.inscriptionCollaboratorType' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'inscriptionCollaborator.inscriptionCollaboratorType' | translate}}" autofocus  id="11" [ngModel]="item.inscriptionCollaboratorType?.name">
+                    </div>
+                </div>
+            </p-tabPanel>
+
+            <p-tabPanel header="{{'inscriptionCollaborator.inscriptionMembres' | translate}}">
+                <div class="grid">
+                    <div class="col">
+                        <div class="card">
+                            <p-table [value]="item.inscriptionMembres" [scrollable]="true" scrollHeight="200px">
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th>Inscription date</th>
+                                        <th>Member</th>
+                                        <th>Inscription membre state</th>
+                                        <th>Consumed entity</th>
+                                        <th>Consumed projet</th>
+                                        <th>Consumed attribut</th>
+                                        <th>Consumed indicator</th>
+                                        <th>Affected entity</th>
+                                        <th>Affected projet</th>
+                                        <th>Affected attribut</th>
+                                        <th>Affected indicator</th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-p>
+                                    <tr>
+                                        <td>{{p.inscriptionDate | date: dateFormatColumn}}</td>
+                                        <td>{{p.member?.id}}</td>
+                                        <td>{{p.inscriptionMembreState?.name}}</td>
+                                        <td>{{p.consumedEntity}}</td>
+                                        <td>{{p.consumedProjet}}</td>
+                                        <td>{{p.consumedAttribut}}</td>
+                                        <td>{{p.consumedIndicator}}</td>
+                                        <td>{{p.affectedEntity}}</td>
+                                        <td>{{p.affectedProjet}}</td>
+                                        <td>{{p.affectedAttribut}}</td>
+                                        <td>{{p.affectedIndicator}}</td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                        </div>
+                    </div>
+                </div>
+            </p-tabPanel>
+        </p-tabView>
+
+    </ng-template>
+
+    <ng-template pTemplate="footer" >
+        <div class="p-flexbox">
+            <div>
+                <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-outlined" (click)="hideViewDialog()"></button>
+            </div>
+        </div>
+    </ng-template>
+</p-dialog>
+
+
+

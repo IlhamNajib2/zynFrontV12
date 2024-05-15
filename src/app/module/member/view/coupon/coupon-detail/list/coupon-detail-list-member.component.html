@@ -1,0 +1,198 @@
+<div class="grid"  *ngIf="listActionIsValid">
+    <div class="col-12">
+        <p-toast></p-toast>
+        <div class="card">
+            <p-toolbar styleClass="mb-4">
+                <ng-template pTemplate="left">
+                                        <button pButton pRipple label=" {{'new' | translate}}" icon="pi pi-plus" class="p-button-info mr-2 mb-2" (click)="openCreate('CouponDetail')" *ngIf="createActionIsValid"></button>
+                    <button [disabled]="isSelectionDisabled()" pButton pRipple label=" {{'delete' | translate}}" icon="pi pi-trash" class="p-button-danger mr-2 mb-2" (click)=deleteMultiple()  *ngIf="deleteActionIsValid"></button>
+                    <button pButton pRipple label=" {{'search' | translate}}" icon="pi pi-{{findByCriteriaShow?'angle-down':'angle-right'}}" class="p-button-secondary mr-2 mb-2" (click)="this.showSearch()"></button>
+                </ng-template>
+                <ng-template pTemplate="right">
+                    <div class="flex">
+                        <p-splitButton label=" {{'export' | translate}}" icon="pi pi-download" styleClass="p-button-secondary" [model]="excelPdfButons"></p-splitButton>
+                    </div>
+                </ng-template>
+
+            </p-toolbar>
+            <p-toolbar *ngIf="findByCriteriaShow">
+
+                <div class="col-12">
+                    <div class="flex flex-wrap p-fluid col-12">
+                        <div class="lg:col-3 md:col-6 sm:col-12 mb-4">
+                            <label  class="font-bold block mb-2" for="1-2">{{'couponDetail.packaging' | translate}}</label>
+                            <p-dropdown [options]="packagings" [(ngModel)]="criteria.packaging" id="1" [filter]="true" class="p-fluid"
+                                        [showClear]="true"  placeholder="{{'couponDetail.packaging' | translate}}" optionLabel="id">
+                            </p-dropdown>
+                        </div>
+                        <div class="lg:col-3 md:col-6 sm:col-12 mb-4">
+                            <label  class="font-bold block mb-2" for="2-1">{{'couponDetail.discountMin' | translate}}</label>
+                            <p-inputNumber  mode="decimal" [(ngModel)]="criteria.discountMin" id="2-1"></p-inputNumber>
+                        </div>
+                        <div class="lg:col-3 md:col-6 sm:col-12 mb-4">
+                            <label  class="font-bold block mb-2" for="2-2">{{'couponDetail.discountMax' | translate}}</label>
+                            <p-inputNumber  mode="decimal" [(ngModel)]="criteria.discountMax" id="2-2"></p-inputNumber>
+                       </div>
+                        <div class="lg:col-3 md:col-6 sm:col-12 mb-4">
+                            <label  class="font-bold block mb-2" for="3-1">{{'couponDetail.amountGivenInfluencerMin' | translate}}</label>
+                            <p-inputNumber  mode="decimal" [(ngModel)]="criteria.amountGivenInfluencerMin" id="3-1"></p-inputNumber>
+                        </div>
+                        <div class="lg:col-3 md:col-6 sm:col-12 mb-4">
+                            <label  class="font-bold block mb-2" for="3-2">{{'couponDetail.amountGivenInfluencerMax' | translate}}</label>
+                            <p-inputNumber  mode="decimal" [(ngModel)]="criteria.amountGivenInfluencerMax" id="3-2"></p-inputNumber>
+                       </div>
+                        <div class="lg:col-3 md:col-6 sm:col-12 mb-4">
+                            <label  class="font-bold block mb-2" for="4-1">{{'couponDetail.usingNumberMin' | translate}}</label>
+                            <p-inputNumber  mode="decimal" [(ngModel)]="criteria.usingNumberMin" id="4-1"></p-inputNumber>
+                        </div>
+                        <div class="lg:col-3 md:col-6 sm:col-12 mb-4">
+                            <label  class="font-bold block mb-2" for="4-2">{{'couponDetail.usingNumberMax' | translate}}</label>
+                            <p-inputNumber  mode="decimal" [(ngModel)]="criteria.usingNumberMax" id="4-2"></p-inputNumber>
+                       </div>
+                        <div class="lg:col-3 md:col-6 sm:col-12 mb-4">
+                            <label  class="font-bold block mb-2" for="5-1">{{'couponDetail.maxUsingNumberMin' | translate}}</label>
+                            <p-inputNumber  mode="decimal" [(ngModel)]="criteria.maxUsingNumberMin" id="5-1"></p-inputNumber>
+                        </div>
+                        <div class="lg:col-3 md:col-6 sm:col-12 mb-4">
+                            <label  class="font-bold block mb-2" for="5-2">{{'couponDetail.maxUsingNumberMax' | translate}}</label>
+                            <p-inputNumber  mode="decimal" [(ngModel)]="criteria.maxUsingNumberMax" id="5-2"></p-inputNumber>
+                       </div>
+                        <div class="lg:col-3 md:col-6 sm:col-12 mb-4">
+                            <label  class="font-bold block mb-2" for="6-2">{{'couponDetail.coupon' | translate}}</label>
+                            <p-dropdown [options]="coupons" [(ngModel)]="criteria.coupon" id="6" [filter]="true" class="p-fluid"
+                                        [showClear]="true"  placeholder="{{'couponDetail.coupon' | translate}}" optionLabel="name">
+                            </p-dropdown>
+                        </div>
+                    </div>
+                    <div [style]="{ marginTop : '1rem', display: 'flex', justifyContent: 'flex-end' }">
+                        <button pButton pRipple label="{{'validate' | translate}}" icon="pi pi-sort-amount-down" class="p-button-info mr-2" (click)="findPaginatedByCriteria()"></button>
+                    </div>
+                </div>
+
+
+            </p-toolbar>
+
+
+            <p-table #dt [value]="items" [columns]="cols" [rows]="8" [paginator]="false"
+                    [globalFilterFields]="['packagingid', 'discount', 'amountGivenInfluencer', 'usingNumber', 'maxUsingNumber', 'couponname']" [(selection)]="selections"
+                    [rowHover]="true" dataKey="id" styleClass="p-datatable-customers"
+                    currentPageReportTemplate="{{'les éléments de {first} à {last} sur {totalRecords} ' | translate}}"
+                    [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" selectionMode="multiple">
+                <ng-template pTemplate="caption">
+                    <div class="flex flex-column flex-row justify-content-between table-header">
+                        <h5 class="p-m-0">{{'couponDetail.header' | translate}}</h5>
+                        <span class="p-input-icon-left ml-auto">
+                            <i class="pi pi-search"></i>
+                            <input pInputText type="text" placeholder="{{'searchInput' | translate}}" (input)="dt.filterGlobal($event.target.value, 'contains')"/>
+                        </span>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width: 3rem">
+                            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                        </th>
+                                
+                        <th pSortableColumn="packaging">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'couponDetail.packaging' | translate}}</span>
+                                <p-sortIcon field="packaging"></p-sortIcon>
+                            </div>
+                        </th>
+                                
+                                
+                        <th pSortableColumn="discount">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'couponDetail.discount' | translate}}</span>
+                                <p-sortIcon field="discount"></p-sortIcon>
+                            </div>
+                        </th>
+                                
+                                
+                        <th pSortableColumn="amountGivenInfluencer">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'couponDetail.amountGivenInfluencer' | translate}}</span>
+                                <p-sortIcon field="amountGivenInfluencer"></p-sortIcon>
+                            </div>
+                        </th>
+                                
+                                
+                        <th pSortableColumn="usingNumber">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'couponDetail.usingNumber' | translate}}</span>
+                                <p-sortIcon field="usingNumber"></p-sortIcon>
+                            </div>
+                        </th>
+                                
+                                
+                        <th pSortableColumn="maxUsingNumber">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'couponDetail.maxUsingNumber' | translate}}</span>
+                                <p-sortIcon field="maxUsingNumber"></p-sortIcon>
+                            </div>
+                        </th>
+                                
+                                
+                        <th pSortableColumn="coupon">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'couponDetail.coupon' | translate}}</span>
+                                <p-sortIcon field="coupon"></p-sortIcon>
+                            </div>
+                        </th>
+                                
+                        <th>Actions</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-element>
+                    <tr>
+                        <td>
+                            <p-tableCheckbox [value]="element"></p-tableCheckbox>
+                        </td>
+                            
+                        <td>{{element.packaging?.id}}</td>
+                            
+                            
+                        <td>{{element.discount}}</td>
+                            
+                            
+                        <td>{{element.amountGivenInfluencer}}</td>
+                            
+                            
+                        <td>{{element.usingNumber}}</td>
+                            
+                            
+                        <td>{{element.maxUsingNumber}}</td>
+                            
+                            
+                        <td>{{element.coupon?.name}}</td>
+                            
+                        <td>
+                            <button pButton pRipple icon="pi pi-pencil"  class="p-button-rounded p-button-info mr-2" (click)="edit(element)"  *ngIf="editActionIsValid"></button>
+                            <button pButton pRipple icon="pi pi-list" class="p-button-rounded p-button-secondary mr-2" (click)="view(element)"  *ngIf="viewActionIsValid"></button>
+                            <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger mr-2" (click)="delete(element)"  *ngIf="deleteActionIsValid"></button>
+                            <button pButton pRipple icon="pi pi-copy" class="p-button-rounded p-button-raised p-button-warning mr-2" (click)="duplicate(element)"  *ngIf="duplicateActionIsValid"></button>
+                        </td>
+                    </tr>
+                </ng-template>
+
+                <ng-template pTemplate="summary">
+                    <p-paginator  [rows]="10" [totalRecords]="totalRecords" (onPageChange)="onPage($event)"></p-paginator>
+                    <div class="p-d-flex p-ai-center p-jc-between">
+                        En totale il {{items ? totalRecords == 1 ? 'y a' : 'y a' : 'y a' }} {{items ? totalRecords : 0 }} {{items ? totalRecords == 1 ? 'coupon detail' : 'coupon details' : 0 }}.
+                    </div>
+                </ng-template>
+            </p-table>
+        </div>
+
+        <app-coupon-detail-create-member  *ngIf="createDialog  && createActionIsValid"></app-coupon-detail-create-member>
+        <app-coupon-detail-edit-member  *ngIf="editDialog  && editActionIsValid"></app-coupon-detail-edit-member>
+        <app-coupon-detail-view-member  *ngIf="viewDialog  && viewActionIsValid"></app-coupon-detail-view-member>
+        <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+    </div>
+</div>
+
+<p-card header="Permission not allowed" *ngIf="!listActionIsValid">
+    <p class="m-0">
+        You don't have permission to access !
+    </p>
+</p-card>

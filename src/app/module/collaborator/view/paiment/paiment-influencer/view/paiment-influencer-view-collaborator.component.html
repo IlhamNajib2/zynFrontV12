@@ -1,0 +1,60 @@
+
+<p-dialog [(visible)]="viewDialog" [style]="{width: '70vw'}" header="{{'paimentInfluencer.tabPan' | translate}}" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <p-tabView>
+            <p-tabPanel header="{{'paimentInfluencer.tabPan' | translate}}">
+                <div class="grid">
+                    <div class="field col-12 md:col-6">
+                        <label for="1">{{'paimentInfluencer.name' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'paimentInfluencer.name' | translate}}" autofocus  id="1" [ngModel]="item.name">
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="2">{{'paimentInfluencer.description' | translate}}</label>
+                        <textarea id="2" pInputTextarea rows="5" cols="30" [disabled]="true" placeholder="{{'paimentInfluencer.description' | translate}}"  [ngModel]="item.description"></textarea>
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="3">{{'paimentInfluencer.code' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'paimentInfluencer.code' | translate}}" autofocus  id="3" [ngModel]="item.code">
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="4">{{'paimentInfluencer.influencer' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'paimentInfluencer.influencer' | translate}}" autofocus  id="4" [ngModel]="item.influencer?.id">
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="5">{{'paimentInfluencer.coupon' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'paimentInfluencer.coupon' | translate}}" autofocus  id="5" [ngModel]="item.coupon?.name">
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="6">{{'paimentInfluencer.total' | translate}}</label>
+                        <p-inputNumber class="mb-2 mr-2" id="6" [disabled]="true" placeholder="{{'paimentInfluencer.total' | translate}}" [ngModel]="item.total"></p-inputNumber>
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="7">{{'paimentInfluencer.nbrUtilisation' | translate}}</label>
+                        <p-inputNumber class="mb-2 mr-2" id="7" [disabled]="true" placeholder="{{'paimentInfluencer.nbrUtilisation' | translate}}" [ngModel]="item.nbrUtilisation"></p-inputNumber>
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="8">{{'paimentInfluencer.datePaiement' | translate}}</label>
+                        <p-calendar id="8" [disabled]="true"  [showTime]="true" [showSeconds]="false" placeholder="{{'paimentInfluencer.datePaiement' | translate}}"  [ngModel]="item.datePaiement" dateFormat="{{dateFormat}}"></p-calendar>
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="9">{{'paimentInfluencer.paimentInfluencerState' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'paimentInfluencer.paimentInfluencerState' | translate}}" autofocus  id="9" [ngModel]="item.paimentInfluencerState?.code">
+                    </div>
+                </div>
+            </p-tabPanel>
+
+        </p-tabView>
+
+    </ng-template>
+
+    <ng-template pTemplate="footer" >
+        <div class="p-flexbox">
+            <div>
+                <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-outlined" (click)="hideViewDialog()"></button>
+            </div>
+        </div>
+    </ng-template>
+</p-dialog>
+
+
+

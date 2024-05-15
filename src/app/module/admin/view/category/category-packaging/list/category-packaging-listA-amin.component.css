@@ -1,0 +1,51 @@
+.statistics-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.statistic-card {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 16px;
+    width: 100%;
+    max-width: 300px;
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.category {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.card-content {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.value {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #4caf50;
+}
+
+.card-footer {
+    display: flex;
+    align-items: center;
+    font-size: 0.875rem;
+    color: #999;
+}
+
+.period {
+    margin-right: 8px;
+}
+
+.divider {
+    margin: 0 4px;
+}

@@ -1,0 +1,114 @@
+        <p-dialog [(visible)]="createDialog" [style]="{width: '70vw'}" header="{{'inscriptionMembre.tabPan' | translate}}" [modal]="true" styleClass="p-fluid" [maximizable]="true" [draggable]="false" [resizable]="false">
+            <ng-template pTemplate="content" >
+                        <p-tabView>
+                            <p-tabPanel header="{{'inscriptionMembre.tabPan' | translate}}">
+                                <div class="grid">
+
+                                                <div class="field col-12 md:col-6">
+                                                    <label for="1">{{'inscriptionMembre.inscriptionDate' | translate}}</label>
+                                                    <p-calendar appendTo="body" id="1"  [showTime]="true" [showSeconds]="false" placeholder="{{'inscriptionMembre.inscriptionDate' | translate}}"  [(ngModel)]="item.inscriptionDate"
+                                                            dateFormat="{{dateFormat}}"  >
+                                                    </p-calendar>
+                                                    
+                                                </div>
+
+                                            <div class="field col-11 md:col-6">
+                                                <label for="2">{{'inscriptionMembre.member' | translate}}</label>
+                                                <p-dropdown  appendTo="body"  [options]="members" [(ngModel)]="item.member" id="2" [filter]="true" filterMatchMode="contains"
+                                                        [showClear]="true" optionLabel="id" placeholder="{{'inscriptionMembre.member' | translate}}"  >
+                                                </p-dropdown>
+                                                
+                                            </div>
+
+                                            <div class="field col-11 md:col-6">
+                                                <label for="3">{{'inscriptionMembre.inscriptionMembreState' | translate}}</label>
+                                                <p-dropdown  appendTo="body"  [options]="inscriptionMembreStates" [(ngModel)]="item.inscriptionMembreState" id="3" [filter]="true" filterMatchMode="contains"
+                                                        [showClear]="true" optionLabel="name" placeholder="{{'inscriptionMembre.inscriptionMembreState' | translate}}"  >
+                                                </p-dropdown>
+                                                
+                                            </div>
+
+                                            <div class="field col-11 md:col-6">
+                                                <label for="4">{{'inscriptionMembre.inscriptionCollaborator' | translate}}</label>
+                                                <p-dropdown  appendTo="body"  [options]="inscriptionCollaborators" [(ngModel)]="item.inscriptionCollaborator" id="4" [filter]="true" filterMatchMode="contains"
+                                                        [showClear]="true" optionLabel="id" placeholder="{{'inscriptionMembre.inscriptionCollaborator' | translate}}"  >
+                                                </p-dropdown>
+                                                
+                                            </div>
+
+                                                <div class="field col-12 md:col-6">
+                                                    <label for="5">{{'inscriptionMembre.consumedEntity' | translate}}</label>
+                                                    <p-inputNumber class="mb-2 mr-2" id="5" placeholder="{{'inscriptionMembre.consumedEntity' | translate}}" [(ngModel)]="item.consumedEntity"  >
+                                                    </p-inputNumber>
+                                                    
+                                                </div>
+
+                                                <div class="field col-12 md:col-6">
+                                                    <label for="6">{{'inscriptionMembre.consumedProjet' | translate}}</label>
+                                                    <p-inputNumber class="mb-2 mr-2" id="6" placeholder="{{'inscriptionMembre.consumedProjet' | translate}}" [(ngModel)]="item.consumedProjet"  >
+                                                    </p-inputNumber>
+                                                    
+                                                </div>
+
+                                                <div class="field col-12 md:col-6">
+                                                    <label for="7">{{'inscriptionMembre.consumedAttribut' | translate}}</label>
+                                                    <p-inputNumber class="mb-2 mr-2" id="7" placeholder="{{'inscriptionMembre.consumedAttribut' | translate}}" [(ngModel)]="item.consumedAttribut"  >
+                                                    </p-inputNumber>
+                                                    
+                                                </div>
+
+                                                <div class="field col-12 md:col-6">
+                                                    <label for="8">{{'inscriptionMembre.consumedIndicator' | translate}}</label>
+                                                    <p-inputNumber class="mb-2 mr-2" id="8" placeholder="{{'inscriptionMembre.consumedIndicator' | translate}}" [(ngModel)]="item.consumedIndicator"  >
+                                                    </p-inputNumber>
+                                                    
+                                                </div>
+
+                                                <div class="field col-12 md:col-6">
+                                                    <label for="9">{{'inscriptionMembre.affectedEntity' | translate}}</label>
+                                                    <p-inputNumber class="mb-2 mr-2" id="9" placeholder="{{'inscriptionMembre.affectedEntity' | translate}}" [(ngModel)]="item.affectedEntity"  >
+                                                    </p-inputNumber>
+                                                    
+                                                </div>
+
+                                                <div class="field col-12 md:col-6">
+                                                    <label for="10">{{'inscriptionMembre.affectedProjet' | translate}}</label>
+                                                    <p-inputNumber class="mb-2 mr-2" id="10" placeholder="{{'inscriptionMembre.affectedProjet' | translate}}" [(ngModel)]="item.affectedProjet"  >
+                                                    </p-inputNumber>
+                                                    
+                                                </div>
+
+                                                <div class="field col-12 md:col-6">
+                                                    <label for="11">{{'inscriptionMembre.affectedAttribut' | translate}}</label>
+                                                    <p-inputNumber class="mb-2 mr-2" id="11" placeholder="{{'inscriptionMembre.affectedAttribut' | translate}}" [(ngModel)]="item.affectedAttribut"  >
+                                                    </p-inputNumber>
+                                                    
+                                                </div>
+
+                                                <div class="field col-12 md:col-6">
+                                                    <label for="12">{{'inscriptionMembre.affectedIndicator' | translate}}</label>
+                                                    <p-inputNumber class="mb-2 mr-2" id="12" placeholder="{{'inscriptionMembre.affectedIndicator' | translate}}" [(ngModel)]="item.affectedIndicator"  >
+                                                    </p-inputNumber>
+                                                    
+                                                </div>
+
+                                </div>
+                            </p-tabPanel>
+
+                        </p-tabView>
+
+            </ng-template>
+
+            <ng-template pTemplate="footer" >
+                <div class="p-flexbox">
+
+                            <button pButton pRipple  label="{{'validate' | translate}}"  icon="pi pi-check"  (click)="save()"></button>
+
+
+                            <button pButton pRipple  label="{{'cancel' | translate}}" icon="pi pi-times" class="p-button-outlined" (click)="hideCreateDialog()"></button>
+
+
+                </div>
+            </ng-template>
+
+    </p-dialog>

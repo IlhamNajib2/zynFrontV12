@@ -1,0 +1,72 @@
+
+<p-dialog [(visible)]="viewDialog" [style]="{width: '70vw'}" header="{{'inscriptionMembre.tabPan' | translate}}" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <p-tabView>
+            <p-tabPanel header="{{'inscriptionMembre.tabPan' | translate}}">
+                <div class="grid">
+                    <div class="field col-12 md:col-6">
+                        <label for="1">{{'inscriptionMembre.inscriptionDate' | translate}}</label>
+                        <p-calendar id="1" [disabled]="true"  [showTime]="true" [showSeconds]="false" placeholder="{{'inscriptionMembre.inscriptionDate' | translate}}"  [ngModel]="item.inscriptionDate" dateFormat="{{dateFormat}}"></p-calendar>
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="2">{{'inscriptionMembre.member' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'inscriptionMembre.member' | translate}}" autofocus  id="2" [ngModel]="item.member?.id">
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="3">{{'inscriptionMembre.inscriptionMembreState' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'inscriptionMembre.inscriptionMembreState' | translate}}" autofocus  id="3" [ngModel]="item.inscriptionMembreState?.name">
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="4">{{'inscriptionMembre.inscriptionCollaborator' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'inscriptionMembre.inscriptionCollaborator' | translate}}" autofocus  id="4" [ngModel]="item.inscriptionCollaborator?.id">
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="5">{{'inscriptionMembre.consumedEntity' | translate}}</label>
+                        <p-inputNumber class="mb-2 mr-2" id="5" [disabled]="true" placeholder="{{'inscriptionMembre.consumedEntity' | translate}}" [ngModel]="item.consumedEntity"></p-inputNumber>
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="6">{{'inscriptionMembre.consumedProjet' | translate}}</label>
+                        <p-inputNumber class="mb-2 mr-2" id="6" [disabled]="true" placeholder="{{'inscriptionMembre.consumedProjet' | translate}}" [ngModel]="item.consumedProjet"></p-inputNumber>
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="7">{{'inscriptionMembre.consumedAttribut' | translate}}</label>
+                        <p-inputNumber class="mb-2 mr-2" id="7" [disabled]="true" placeholder="{{'inscriptionMembre.consumedAttribut' | translate}}" [ngModel]="item.consumedAttribut"></p-inputNumber>
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="8">{{'inscriptionMembre.consumedIndicator' | translate}}</label>
+                        <p-inputNumber class="mb-2 mr-2" id="8" [disabled]="true" placeholder="{{'inscriptionMembre.consumedIndicator' | translate}}" [ngModel]="item.consumedIndicator"></p-inputNumber>
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="9">{{'inscriptionMembre.affectedEntity' | translate}}</label>
+                        <p-inputNumber class="mb-2 mr-2" id="9" [disabled]="true" placeholder="{{'inscriptionMembre.affectedEntity' | translate}}" [ngModel]="item.affectedEntity"></p-inputNumber>
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="10">{{'inscriptionMembre.affectedProjet' | translate}}</label>
+                        <p-inputNumber class="mb-2 mr-2" id="10" [disabled]="true" placeholder="{{'inscriptionMembre.affectedProjet' | translate}}" [ngModel]="item.affectedProjet"></p-inputNumber>
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="11">{{'inscriptionMembre.affectedAttribut' | translate}}</label>
+                        <p-inputNumber class="mb-2 mr-2" id="11" [disabled]="true" placeholder="{{'inscriptionMembre.affectedAttribut' | translate}}" [ngModel]="item.affectedAttribut"></p-inputNumber>
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="12">{{'inscriptionMembre.affectedIndicator' | translate}}</label>
+                        <p-inputNumber class="mb-2 mr-2" id="12" [disabled]="true" placeholder="{{'inscriptionMembre.affectedIndicator' | translate}}" [ngModel]="item.affectedIndicator"></p-inputNumber>
+                    </div>
+                </div>
+            </p-tabPanel>
+
+        </p-tabView>
+
+    </ng-template>
+
+    <ng-template pTemplate="footer" >
+        <div class="p-flexbox">
+            <div>
+                <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-outlined" (click)="hideViewDialog()"></button>
+            </div>
+        </div>
+    </ng-template>
+</p-dialog>
+
+
+

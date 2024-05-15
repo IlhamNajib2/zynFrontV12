@@ -1,0 +1,68 @@
+
+<p-dialog [(visible)]="viewDialog" [style]="{width: '70vw'}" header="{{'packaging.tabPan' | translate}}" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <p-tabView>
+            <p-tabPanel header="{{'packaging.tabPan' | translate}}">
+                <div class="grid">
+                    <div class="field col-12 md:col-6">
+                        <label for="1">{{'packaging.name' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'packaging.name' | translate}}" autofocus  id="1" [ngModel]="item.name">
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="2">{{'packaging.code' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'packaging.code' | translate}}" autofocus  id="2" [ngModel]="item.code">
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="3">{{'packaging.description' | translate}}</label>
+                        <textarea id="3" pInputTextarea rows="5" cols="30" [disabled]="true" placeholder="{{'packaging.description' | translate}}"  [ngModel]="item.description"></textarea>
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="4">{{'packaging.dateStart' | translate}}</label>
+                        <p-calendar id="4" [disabled]="true"  [showTime]="true" [showSeconds]="false" placeholder="{{'packaging.dateStart' | translate}}"  [ngModel]="item.dateStart" dateFormat="{{dateFormat}}"></p-calendar>
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="5">{{'packaging.dateEnd' | translate}}</label>
+                        <p-calendar id="5" [disabled]="true"  [showTime]="true" [showSeconds]="false" placeholder="{{'packaging.dateEnd' | translate}}"  [ngModel]="item.dateEnd" dateFormat="{{dateFormat}}"></p-calendar>
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="6">{{'packaging.price' | translate}}</label>
+                        <p-inputNumber class="mb-2 mr-2" id="6" [disabled]="true" placeholder="{{'packaging.price' | translate}}" [ngModel]="item.price"></p-inputNumber>
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="7">{{'packaging.maxEntity' | translate}}</label>
+                        <p-inputNumber class="mb-2 mr-2" id="7" [disabled]="true" placeholder="{{'packaging.maxEntity' | translate}}" [ngModel]="item.maxEntity"></p-inputNumber>
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="8">{{'packaging.maxProjet' | translate}}</label>
+                        <p-inputNumber class="mb-2 mr-2" id="8" [disabled]="true" placeholder="{{'packaging.maxProjet' | translate}}" [ngModel]="item.maxProjet"></p-inputNumber>
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="9">{{'packaging.maxAttribut' | translate}}</label>
+                        <p-inputNumber class="mb-2 mr-2" id="9" [disabled]="true" placeholder="{{'packaging.maxAttribut' | translate}}" [ngModel]="item.maxAttribut"></p-inputNumber>
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="10">{{'packaging.maxIndicator' | translate}}</label>
+                        <p-inputNumber class="mb-2 mr-2" id="10" [disabled]="true" placeholder="{{'packaging.maxIndicator' | translate}}" [ngModel]="item.maxIndicator"></p-inputNumber>
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="11">{{'packaging.categoryPackaging' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'packaging.categoryPackaging' | translate}}" autofocus  id="11" [ngModel]="item.categoryPackaging?.name">
+                    </div>
+                </div>
+            </p-tabPanel>
+
+        </p-tabView>
+
+    </ng-template>
+
+    <ng-template pTemplate="footer" >
+        <div class="p-flexbox">
+            <div>
+                <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-outlined" (click)="hideViewDialog()"></button>
+            </div>
+        </div>
+    </ng-template>
+</p-dialog>
+
+
+

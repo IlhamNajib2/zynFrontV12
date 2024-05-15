@@ -1,0 +1,140 @@
+    <p-dialog [(visible)]="editDialog" [style]="{width: '70vw'}" header="{{'coupon.tabPan' | translate}}" [modal]="true" styleClass="p-fluid" [maximizable]="true" [draggable]="false" [resizable]="false">
+        <ng-template pTemplate="content" >
+                <p-tabView>
+                    <p-tabPanel header="{{'coupon.tabPan' | translate}}">
+                        <div class="grid">
+
+                                        <div class="field col-12 md:col-6">
+                                            <label for="1">{{'coupon.code' | translate}}<span style="color: red;">*</span></label>
+                                            <input class="mb-2 mr-2" type="text" pInputText  placeholder="{{'coupon.code' | translate}}" id="1" [(ngModel)]="item.code"
+                                                   [ngClass]="{'ng-invalid ng-dirty' : !validCouponCode}"  />
+                                            <small class='p-error' *ngIf='!validCouponCode'>Code est obligatoire.</small>
+                                        </div>
+
+
+
+                                        <div class="field col-12 md:col-6">
+                                            <label for="2">{{'coupon.dateStart' | translate}}</label>
+                                            <p-calendar appendTo="body" id="2"  [showTime]="true" [showSeconds]="false" placeholder="{{'coupon.dateStart' | translate}}"  [(ngModel)]="item.dateStart"
+                                                        dateFormat="{{dateFormat}}"  >
+                                            </p-calendar>
+                                            
+                                        </div>
+
+                                        <div class="field col-12 md:col-6">
+                                            <label for="3">{{'coupon.dateEnd' | translate}}</label>
+                                            <p-calendar appendTo="body" id="3"  [showTime]="true" [showSeconds]="false" placeholder="{{'coupon.dateEnd' | translate}}"  [(ngModel)]="item.dateEnd"
+                                                        dateFormat="{{dateFormat}}"  >
+                                            </p-calendar>
+                                            
+                                        </div>
+
+                                        <div class="field col-12 md:col-6">
+                                            <label for="4">{{'coupon.name' | translate}}<span style="color: red;">*</span></label>
+                                            <input class="mb-2 mr-2" type="text" pInputText  placeholder="{{'coupon.name' | translate}}" id="4" [(ngModel)]="item.name"
+                                                   [ngClass]="{'ng-invalid ng-dirty' : !validCouponName}"  />
+                                            <small class='p-error' *ngIf='!validCouponName'>Name est obligatoire.</small>
+                                        </div>
+
+
+
+                                    <div class="field col-11 md:col-6">
+                                        <label for="6">{{'coupon.influencer' | translate}}</label>
+                                        <p-dropdown  appendTo="body"  [options]="influencers" [(ngModel)]="item.influencer" id="6" [filter]="true" filterMatchMode="contains"
+                                                     [showClear]="true" optionLabel="id" placeholder="{{'coupon.influencer' | translate}}"  >
+                                        </p-dropdown>
+                                        
+                                    </div>
+
+                        </div>
+                    </p-tabPanel>
+                            <p-tabPanel header="{{'coupon.couponDetails' | translate}}">
+                                <p-tabView [(activeIndex)]="activeTab">
+                                    <p-tabPanel header="Création">
+                                            <div class="grid">
+                                                            <div class="field col-11 md:col-6">
+                                                                <label>Packaging</label>
+                                                                <p-dropdown  appendTo="body"  [options]="packagings" [(ngModel)]="couponDetailsElement.packaging"
+                                                                             id="1"  [filter]="true" filterMatchMode="contains" [showClear]="true" optionLabel="id"
+                                                                             placeholder="Packaging"  >
+                                                                </p-dropdown>
+                                                                
+                                                            </div>
+
+                                                            <div class="field col-12 md:col-6">
+                                                                <label for="2">Discount</label>
+                                                                <p-inputNumber class="mb-2 mr-2" id="discount" placeholder="Discount"  [(ngModel)]="couponDetailsElement.discount"></p-inputNumber>
+                                                                
+                                                            </div>
+                                                            <div class="field col-12 md:col-6">
+                                                                <label for="3">Amount given influencer</label>
+                                                                <p-inputNumber class="mb-2 mr-2" id="amountGivenInfluencer" placeholder="Amount given influencer"  [(ngModel)]="couponDetailsElement.amountGivenInfluencer"></p-inputNumber>
+                                                                
+                                                            </div>
+                                                            <div class="field col-12 md:col-6">
+                                                                <label for="4">Using number</label>
+                                                                <p-inputNumber class="mb-2 mr-2" id="usingNumber" placeholder="Using number"  [(ngModel)]="couponDetailsElement.usingNumber"></p-inputNumber>
+                                                                
+                                                            </div>
+                                                            <div class="field col-12 md:col-6">
+                                                                <label for="5">Max using number</label>
+                                                                <p-inputNumber class="mb-2 mr-2" id="maxUsingNumber" placeholder="Max using number"  [(ngModel)]="couponDetailsElement.maxUsingNumber"></p-inputNumber>
+                                                                
+                                                            </div>
+                                                <div class="field col-12 md:col-1">
+                                                    <button pButton pRipple type="button" icon="pi pi-plus" class="mt-4" label="OK" (click)="addCouponDetails()"></button>
+                                                </div>
+
+                                            </div>
+                                    </p-tabPanel>
+                                    <p-tabPanel header="Liste {{item.couponDetails?.length > 0 ? '(' + item.couponDetails?.length + ')' : ''}}">
+                                            <div class="card">
+                                                <p-table [value]="item.couponDetails" [scrollable]="true" scrollHeight="200px">
+                                                    <ng-template pTemplate="header">
+                                                        <tr>
+                                                                        <th>Packaging</th>
+                                                                        <th>Discount</th>
+                                                                        <th>Amount given influencer</th>
+                                                                        <th>Using number</th>
+                                                                        <th>Max using number</th>
+                                                            <th>Actions</th>
+                                                        </tr>
+                                                    </ng-template>
+                                                    <ng-template pTemplate="body" let-p>
+                                                        <tr>
+                                                                    <td>{{p.packaging?.id}}</td>
+                                                                        <td>{{p.discount}}</td>
+                                                                        <td>{{p.amountGivenInfluencer}}</td>
+                                                                        <td>{{p.usingNumber}}</td>
+                                                                        <td>{{p.maxUsingNumber}}</td>
+                                                            <td>
+                                                                <button (click)="deleteCouponDetails(p)" pButton type="button" icon="pi pi-times"  class="p-button-rounded p-button-danger"></button>
+                                                                <button (click)="editCouponDetails(p)" pButton type="button" icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2"></button>
+                                                            </td>
+                                                        </tr>
+                                                    </ng-template>
+                                                </p-table>
+                                            </div>
+
+                                    </p-tabPanel>
+                                </p-tabView>
+                            </p-tabPanel>
+
+
+                </p-tabView>
+
+        </ng-template>
+
+        <ng-template pTemplate="footer" >
+            <div class="p-flexbox">
+
+                    <button pButton pRipple  label="{{'validate' | translate}}"  icon="pi pi-check"  (click)="edit()"></button>
+
+
+                        <button pButton pRipple  label="{{'cancel' | translate}}" icon="pi pi-times" class="p-button-outlined" (click)="hideEditDialog()"></button>
+
+
+            </div>
+        </ng-template>
+
+    </p-dialog>

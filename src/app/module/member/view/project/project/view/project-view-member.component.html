@@ -1,0 +1,52 @@
+
+<p-dialog [(visible)]="viewDialog" [style]="{width: '70vw'}" header="{{'project.tabPan' | translate}}" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <p-tabView>
+            <p-tabPanel header="{{'project.tabPan' | translate}}">
+                <div class="grid">
+                    <div class="field col-12 md:col-6">
+                        <label for="1">{{'project.code' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'project.code' | translate}}" autofocus  id="1" [ngModel]="item.code">
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="2">{{'project.name' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'project.name' | translate}}" autofocus  id="2" [ngModel]="item.name">
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="3">{{'project.generatedDate' | translate}}</label>
+                        <p-calendar id="3" [disabled]="true"  [showTime]="true" [showSeconds]="false" placeholder="{{'project.generatedDate' | translate}}"  [ngModel]="item.generatedDate" dateFormat="{{dateFormat}}"></p-calendar>
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="4">{{'project.yaml' | translate}}</label>
+                        <textarea id="4" pInputTextarea rows="5" cols="30" [disabled]="true" placeholder="{{'project.yaml' | translate}}"  [ngModel]="item.yaml"></textarea>
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="5">{{'project.projectState' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'project.projectState' | translate}}" autofocus  id="5" [ngModel]="item.projectState?.code">
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="6">{{'project.inscriptionMembre' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'project.inscriptionMembre' | translate}}" autofocus  id="6" [ngModel]="item.inscriptionMembre?.id">
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="7">{{'project.domainTemplate' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'project.domainTemplate' | translate}}" autofocus  id="7" [ngModel]="item.domainTemplate?.name">
+                    </div>
+                </div>
+            </p-tabPanel>
+
+        </p-tabView>
+
+    </ng-template>
+
+    <ng-template pTemplate="footer" >
+        <div class="p-flexbox">
+            <div>
+                <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-outlined" (click)="hideViewDialog()"></button>
+            </div>
+        </div>
+    </ng-template>
+</p-dialog>
+
+
+

@@ -1,0 +1,131 @@
+        <p-dialog [(visible)]="createDialog" [style]="{width: '70vw'}" header="{{'template.tabPan' | translate}}" [modal]="true" styleClass="p-fluid" [maximizable]="true" [draggable]="false" [resizable]="false">
+            <ng-template pTemplate="content" >
+                        <p-tabView>
+                            <p-tabPanel header="{{'template.tabPan' | translate}}">
+                                <div class="grid">
+
+                                                <div class="field col-12 md:col-6">
+                                                    <label for="1">{{'template.code' | translate}}<span style="color: red;">*</span></label>
+                                                    <input class="mb-2 mr-2" type="text" pInputText  placeholder="{{'template.code' | translate}}" id="1" [(ngModel)]="item.code"
+                                                            [ngClass]="{'ng-invalid ng-dirty' : !validTemplateCode}"  />
+                                                    <small class='p-error' *ngIf='!validTemplateCode'>Code est obligatoire.</small>
+                                                </div>
+
+
+
+                                                <div class="field col-12 md:col-6">
+                                                    <label for="2">{{'template.name' | translate}}<span style="color: red;">*</span></label>
+                                                    <input class="mb-2 mr-2" type="text" pInputText  placeholder="{{'template.name' | translate}}" id="2" [(ngModel)]="item.name"
+                                                            [ngClass]="{'ng-invalid ng-dirty' : !validTemplateName}"  />
+                                                    <small class='p-error' *ngIf='!validTemplateName'>Name est obligatoire.</small>
+                                                </div>
+
+
+
+                                                <div class="field col-12 md:col-6">
+                                                    <label for="3">{{'template.description' | translate}}</label>
+                                                    <textarea id="3" pInputTextarea rows="5" cols="30" placeholder="{{'template.description' | translate}}"  [(ngModel)]="item.description"
+                                                             ></textarea>
+                                                    
+                                                </div>
+
+                                                <div class="field col-12 md:col-6">
+                                                    <label for="4">{{'template.addingDate' | translate}}</label>
+                                                    <p-calendar appendTo="body" id="4"  [showTime]="true" [showSeconds]="false" placeholder="{{'template.addingDate' | translate}}"  [(ngModel)]="item.addingDate"
+                                                            dateFormat="{{dateFormat}}"  >
+                                                    </p-calendar>
+                                                    
+                                                </div>
+
+                                                <div class="field col-12 md:col-6">
+                                                    <label for="5">{{'template.lastUpdateDate' | translate}}</label>
+                                                    <p-calendar appendTo="body" id="5"  [showTime]="true" [showSeconds]="false" placeholder="{{'template.lastUpdateDate' | translate}}"  [(ngModel)]="item.lastUpdateDate"
+                                                            dateFormat="{{dateFormat}}"  >
+                                                    </p-calendar>
+                                                    
+                                                </div>
+
+                                            <div class="field col-11 md:col-6">
+                                                <label for="6">{{'template.categoryTemplate' | translate}}</label>
+                                                <p-dropdown  appendTo="body"  [options]="categoryTemplates" [(ngModel)]="item.categoryTemplate" id="6" [filter]="true" filterMatchMode="contains"
+                                                        [showClear]="true" optionLabel="name" placeholder="{{'template.categoryTemplate' | translate}}"  >
+                                                </p-dropdown>
+                                                
+                                            </div>
+
+                                            <div class="field col-11 md:col-6">
+                                                <label for="7">{{'template.typeTemplate' | translate}}</label>
+                                                <p-dropdown  appendTo="body"  [options]="typeTemplates" [(ngModel)]="item.typeTemplate" id="7" [filter]="true" filterMatchMode="contains"
+                                                        [showClear]="true" optionLabel="name" placeholder="{{'template.typeTemplate' | translate}}"  >
+                                                </p-dropdown>
+                                                
+                                            </div>
+
+                                            <div class="field col-11 md:col-6">
+                                                <label for="8">{{'template.levelTemplate' | translate}}</label>
+                                                <p-dropdown  appendTo="body"  [options]="levelTemplates" [(ngModel)]="item.levelTemplate" id="8" [filter]="true" filterMatchMode="contains"
+                                                        [showClear]="true" optionLabel="name" placeholder="{{'template.levelTemplate' | translate}}"  >
+                                                </p-dropdown>
+                                                
+                                            </div>
+
+                                                <div class="field col-12 md:col-6">
+                                                    <label for="9">{{'template.templateTags' | translate}}</label>
+                                                    <input class="mb-2 mr-2" type="text" pInputText  placeholder="{{'template.templateTags' | translate}}" id="9" [(ngModel)]="item.templateTags"
+                                                             />
+                                                    
+                                                </div>
+
+
+
+                                            <div class="field col-11 md:col-6">
+                                                <label for="10">{{'template.domainTemplate' | translate}}</label>
+                                                <p-dropdown  appendTo="body"  [options]="domainTemplates" [(ngModel)]="item.domainTemplate" id="10" [filter]="true" filterMatchMode="contains"
+                                                        [showClear]="true" optionLabel="name" placeholder="{{'template.domainTemplate' | translate}}"  >
+                                                </p-dropdown>
+                                                
+                                            </div>
+
+                                                <div class="field col-12 md:col-6">
+                                                    <label for="11">{{'template.price' | translate}}</label>
+                                                    <p-inputNumber class="mb-2 mr-2" id="11" placeholder="{{'template.price' | translate}}" [(ngModel)]="item.price"  >
+                                                    </p-inputNumber>
+                                                    
+                                                </div>
+
+                                            <div class="field col-11 md:col-6">
+                                                <label for="12">{{'template.member' | translate}}</label>
+                                                <p-dropdown  appendTo="body"  [options]="members" [(ngModel)]="item.member" id="12" [filter]="true" filterMatchMode="contains"
+                                                        [showClear]="true" optionLabel="id" placeholder="{{'template.member' | translate}}"  >
+                                                </p-dropdown>
+                                                
+                                            </div>
+
+                                            <div class="field col-11 md:col-6">
+                                                <label for="13">{{'template.technology' | translate}}</label>
+                                                <p-dropdown  appendTo="body"  [options]="technologys" [(ngModel)]="item.technology" id="13" [filter]="true" filterMatchMode="contains"
+                                                        [showClear]="true" optionLabel="name" placeholder="{{'template.technology' | translate}}"  >
+                                                </p-dropdown>
+                                                
+                                            </div>
+
+                                </div>
+                            </p-tabPanel>
+
+                        </p-tabView>
+
+            </ng-template>
+
+            <ng-template pTemplate="footer" >
+                <div class="p-flexbox">
+
+                            <button pButton pRipple  label="{{'validate' | translate}}"  icon="pi pi-check"  (click)="save()"></button>
+
+
+                            <button pButton pRipple  label="{{'cancel' | translate}}" icon="pi pi-times" class="p-button-outlined" (click)="hideCreateDialog()"></button>
+
+
+                </div>
+            </ng-template>
+
+    </p-dialog>

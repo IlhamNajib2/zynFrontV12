@@ -1,0 +1,97 @@
+        <p-dialog [(visible)]="createDialog" [style]="{width: '70vw'}" header="{{'paimentInfluencer.tabPan' | translate}}" [modal]="true" styleClass="p-fluid" [maximizable]="true" [draggable]="false" [resizable]="false">
+            <ng-template pTemplate="content" >
+                        <p-tabView>
+                            <p-tabPanel header="{{'paimentInfluencer.tabPan' | translate}}">
+                                <div class="grid">
+
+                                                <div class="field col-12 md:col-6">
+                                                    <label for="1">{{'paimentInfluencer.name' | translate}}<span style="color: red;">*</span></label>
+                                                    <input class="mb-2 mr-2" type="text" pInputText  placeholder="{{'paimentInfluencer.name' | translate}}" id="1" [(ngModel)]="item.name"
+                                                            [ngClass]="{'ng-invalid ng-dirty' : !validPaimentInfluencerName}"  />
+                                                    <small class='p-error' *ngIf='!validPaimentInfluencerName'>Name est obligatoire.</small>
+                                                </div>
+
+
+
+                                                <div class="field col-12 md:col-6">
+                                                    <label for="2">{{'paimentInfluencer.description' | translate}}</label>
+                                                    <textarea id="2" pInputTextarea rows="5" cols="30" placeholder="{{'paimentInfluencer.description' | translate}}"  [(ngModel)]="item.description"
+                                                             ></textarea>
+                                                    
+                                                </div>
+
+                                                <div class="field col-12 md:col-6">
+                                                    <label for="3">{{'paimentInfluencer.code' | translate}}<span style="color: red;">*</span></label>
+                                                    <input class="mb-2 mr-2" type="text" pInputText  placeholder="{{'paimentInfluencer.code' | translate}}" id="3" [(ngModel)]="item.code"
+                                                            [ngClass]="{'ng-invalid ng-dirty' : !validPaimentInfluencerCode}"  />
+                                                    <small class='p-error' *ngIf='!validPaimentInfluencerCode'>Code est obligatoire.</small>
+                                                </div>
+
+
+
+                                            <div class="field col-11 md:col-6">
+                                                <label for="4">{{'paimentInfluencer.influencer' | translate}}</label>
+                                                <p-dropdown  appendTo="body"  [options]="influencers" [(ngModel)]="item.influencer" id="4" [filter]="true" filterMatchMode="contains"
+                                                        [showClear]="true" optionLabel="id" placeholder="{{'paimentInfluencer.influencer' | translate}}"  >
+                                                </p-dropdown>
+                                                
+                                            </div>
+
+                                            <div class="field col-11 md:col-6">
+                                                <label for="5">{{'paimentInfluencer.coupon' | translate}}</label>
+                                                <p-dropdown  appendTo="body"  [options]="coupons" [(ngModel)]="item.coupon" id="5" [filter]="true" filterMatchMode="contains"
+                                                        [showClear]="true" optionLabel="name" placeholder="{{'paimentInfluencer.coupon' | translate}}"  >
+                                                </p-dropdown>
+                                                
+                                            </div>
+
+                                                <div class="field col-12 md:col-6">
+                                                    <label for="6">{{'paimentInfluencer.total' | translate}}</label>
+                                                    <p-inputNumber class="mb-2 mr-2" id="6" placeholder="{{'paimentInfluencer.total' | translate}}" [(ngModel)]="item.total"  >
+                                                    </p-inputNumber>
+                                                    
+                                                </div>
+
+                                                <div class="field col-12 md:col-6">
+                                                    <label for="7">{{'paimentInfluencer.nbrUtilisation' | translate}}</label>
+                                                    <p-inputNumber class="mb-2 mr-2" id="7" placeholder="{{'paimentInfluencer.nbrUtilisation' | translate}}" [(ngModel)]="item.nbrUtilisation"  >
+                                                    </p-inputNumber>
+                                                    
+                                                </div>
+
+                                                <div class="field col-12 md:col-6">
+                                                    <label for="8">{{'paimentInfluencer.datePaiement' | translate}}</label>
+                                                    <p-calendar appendTo="body" id="8"  [showTime]="true" [showSeconds]="false" placeholder="{{'paimentInfluencer.datePaiement' | translate}}"  [(ngModel)]="item.datePaiement"
+                                                            dateFormat="{{dateFormat}}"  >
+                                                    </p-calendar>
+                                                    
+                                                </div>
+
+                                            <div class="field col-11 md:col-6">
+                                                <label for="9">{{'paimentInfluencer.paimentInfluencerState' | translate}}</label>
+                                                <p-dropdown  appendTo="body"  [options]="paimentInfluencerStates" [(ngModel)]="item.paimentInfluencerState" id="9" [filter]="true" filterMatchMode="contains"
+                                                        [showClear]="true" optionLabel="code" placeholder="{{'paimentInfluencer.paimentInfluencerState' | translate}}"  >
+                                                </p-dropdown>
+                                                
+                                            </div>
+
+                                </div>
+                            </p-tabPanel>
+
+                        </p-tabView>
+
+            </ng-template>
+
+            <ng-template pTemplate="footer" >
+                <div class="p-flexbox">
+
+                            <button pButton pRipple  label="{{'validate' | translate}}"  icon="pi pi-check"  (click)="save()"></button>
+
+
+                            <button pButton pRipple  label="{{'cancel' | translate}}" icon="pi pi-times" class="p-button-outlined" (click)="hideCreateDialog()"></button>
+
+
+                </div>
+            </ng-template>
+
+    </p-dialog>

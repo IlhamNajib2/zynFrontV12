@@ -1,0 +1,68 @@
+
+<p-dialog [(visible)]="viewDialog" [style]="{width: '70vw'}" header="{{'paimentCollaborator.tabPan' | translate}}" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <p-tabView>
+            <p-tabPanel header="{{'paimentCollaborator.tabPan' | translate}}">
+                <div class="grid">
+                    <div class="field col-12 md:col-6">
+                        <label for="1">{{'paimentCollaborator.name' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'paimentCollaborator.name' | translate}}" autofocus  id="1" [ngModel]="item.name">
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="2">{{'paimentCollaborator.description' | translate}}</label>
+                        <textarea id="2" pInputTextarea rows="5" cols="30" [disabled]="true" placeholder="{{'paimentCollaborator.description' | translate}}"  [ngModel]="item.description"></textarea>
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="3">{{'paimentCollaborator.code' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'paimentCollaborator.code' | translate}}" autofocus  id="3" [ngModel]="item.code">
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="4">{{'paimentCollaborator.couponDetail' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'paimentCollaborator.couponDetail' | translate}}" autofocus  id="4" [ngModel]="item.couponDetail?.id">
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="5">{{'paimentCollaborator.amountToPaid' | translate}}</label>
+                        <p-inputNumber class="mb-2 mr-2" id="5" [disabled]="true" placeholder="{{'paimentCollaborator.amountToPaid' | translate}}" [ngModel]="item.amountToPaid"></p-inputNumber>
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="6">{{'paimentCollaborator.total' | translate}}</label>
+                        <p-inputNumber class="mb-2 mr-2" id="6" [disabled]="true" placeholder="{{'paimentCollaborator.total' | translate}}" [ngModel]="item.total"></p-inputNumber>
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="7">{{'paimentCollaborator.discount' | translate}}</label>
+                        <p-inputNumber class="mb-2 mr-2" id="7" [disabled]="true" placeholder="{{'paimentCollaborator.discount' | translate}}" [ngModel]="item.discount"></p-inputNumber>
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="8">{{'paimentCollaborator.remaining' | translate}}</label>
+                        <p-inputNumber class="mb-2 mr-2" id="8" [disabled]="true" placeholder="{{'paimentCollaborator.remaining' | translate}}" [ngModel]="item.remaining"></p-inputNumber>
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="9">{{'paimentCollaborator.paiementDate' | translate}}</label>
+                        <p-calendar id="9" [disabled]="true"  [showTime]="true" [showSeconds]="false" placeholder="{{'paimentCollaborator.paiementDate' | translate}}"  [ngModel]="item.paiementDate" dateFormat="{{dateFormat}}"></p-calendar>
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="10">{{'paimentCollaborator.inscriptionCollaborator' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'paimentCollaborator.inscriptionCollaborator' | translate}}" autofocus  id="10" [ngModel]="item.inscriptionCollaborator?.id">
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="11">{{'paimentCollaborator.paimentCollaboratorState' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'paimentCollaborator.paimentCollaboratorState' | translate}}" autofocus  id="11" [ngModel]="item.paimentCollaboratorState?.code">
+                    </div>
+                </div>
+            </p-tabPanel>
+
+        </p-tabView>
+
+    </ng-template>
+
+    <ng-template pTemplate="footer" >
+        <div class="p-flexbox">
+            <div>
+                <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-outlined" (click)="hideViewDialog()"></button>
+            </div>
+        </div>
+    </ng-template>
+</p-dialog>
+
+
+
