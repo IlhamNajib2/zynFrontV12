@@ -1,305 +1,185 @@
-<div class="grid"  *ngIf="listActionIsValid">
+<div class="grid" *ngIf="listActionIsValid">
     <div class="col-12">
         <p-toast></p-toast>
         <div class="card">
+            <div *ngIf="showDefaultView">
             <p-toolbar styleClass="mb-4">
                 <ng-template pTemplate="left">
-                                        <button pButton pRipple label=" {{'new' | translate}}" icon="pi pi-plus" class="p-button-info mr-2 mb-2" (click)="openCreate('Template')" *ngIf="createActionIsValid"></button>
-                    <button [disabled]="isSelectionDisabled()" pButton pRipple label=" {{'delete' | translate}}" icon="pi pi-trash" class="p-button-danger mr-2 mb-2" (click)=deleteMultiple()  *ngIf="deleteActionIsValid"></button>
-                    <button pButton pRipple label=" {{'search' | translate}}" icon="pi pi-{{findByCriteriaShow?'angle-down':'angle-right'}}" class="p-button-secondary mr-2 mb-2" (click)="this.showSearch()"></button>
+                    <button pButton pRipple label="{{'new' | translate}}" icon="pi pi-plus" class="p-button-info mr-2 mb-2" (click)="openCreate('Template')" *ngIf="createActionIsValid"></button>
+                    <a class="sidebar-link mr-4 ml-4" (click)="showTemplate()">
+                        <i style="font-size: 1rem"></i><span class="link-label">Template</span>
+                    </a>
+                    <a class="sidebar-link mr-4 ml-4" (click)="showDefault()">
+                        <i style="font-size: 1rem"></i><span class="link-label">New</span>
+                    </a>
+                    <a class="sidebar-link mr-4 ml-4">
+                        <i style="font-size: 1rem"></i><span class="link-label">My Template</span>
+                    </a>
                 </ng-template>
                 <ng-template pTemplate="right">
-                    <div class="flex">
-                        <p-splitButton label=" {{'export' | translate}}" icon="pi pi-download" styleClass="p-button-secondary" [model]="excelPdfButons"></p-splitButton>
-                    </div>
                 </ng-template>
-
             </p-toolbar>
-            <p-toolbar *ngIf="findByCriteriaShow">
-
-                <div class="col-12">
-                    <div class="flex flex-wrap p-fluid col-12">
-                       <div class="lg:col-3 md:col-6 sm:col-12 mb-4">
-                            <label  class="font-bold block mb-2" for="1">{{'template.code' | translate}}</label>
-                            <input  class="w-full"  pInputText id="1" type="text"  [(ngModel)]="criteria.codeLike">
-                        </div>
-                       <div class="lg:col-3 md:col-6 sm:col-12 mb-4">
-                            <label  class="font-bold block mb-2" for="2">{{'template.name' | translate}}</label>
-                            <input  class="w-full"  pInputText id="2" type="text"  [(ngModel)]="criteria.nameLike">
-                        </div>
-
-                        <div class="lg:col-3 md:col-6 sm:col-12 mb-4">
-                            <label class="font-bold block mb-2" for="4-1">{{'template.addingDateMin' | translate}}</label>
-                            <p-calendar class="mr-2" [(ngModel)]="criteria.addingDateFrom"
-                                    id="4-1" dateFormat="dd-MM-yy"  [showIcon]="true"  class="p-fluid"></p-calendar>
-                        </div>
-
-                        <div class="lg:col-3 md:col-6 sm:col-12 mb-4">
-                            <label  class="font-bold block mb-2" for="4-2">{{'template.addingDateMax' | translate}}</label>
-                            <p-calendar class="mr-2" [(ngModel)]="criteria.addingDateTo"
-                                    id="4-2" dateFormat="dd-MM-yy"  [showIcon]="true" class="p-fluid"></p-calendar>
-                        </div>
-
-
-                        <div class="lg:col-3 md:col-6 sm:col-12 mb-4">
-                            <label class="font-bold block mb-2" for="5-1">{{'template.lastUpdateDateMin' | translate}}</label>
-                            <p-calendar class="mr-2" [(ngModel)]="criteria.lastUpdateDateFrom"
-                                    id="5-1" dateFormat="dd-MM-yy"  [showIcon]="true"  class="p-fluid"></p-calendar>
-                        </div>
-
-                        <div class="lg:col-3 md:col-6 sm:col-12 mb-4">
-                            <label  class="font-bold block mb-2" for="5-2">{{'template.lastUpdateDateMax' | translate}}</label>
-                            <p-calendar class="mr-2" [(ngModel)]="criteria.lastUpdateDateTo"
-                                    id="5-2" dateFormat="dd-MM-yy"  [showIcon]="true" class="p-fluid"></p-calendar>
-                        </div>
-
-                        <div class="lg:col-3 md:col-6 sm:col-12 mb-4">
-                            <label  class="font-bold block mb-2" for="6-2">{{'template.categoryTemplate' | translate}}</label>
-                            <p-dropdown [options]="categoryTemplates" [(ngModel)]="criteria.categoryTemplate" id="6" [filter]="true" class="p-fluid"
-                                        [showClear]="true"  placeholder="{{'template.categoryTemplate' | translate}}" optionLabel="name">
-                            </p-dropdown>
-                        </div>
-                        <div class="lg:col-3 md:col-6 sm:col-12 mb-4">
-                            <label  class="font-bold block mb-2" for="7-2">{{'template.typeTemplate' | translate}}</label>
-                            <p-dropdown [options]="typeTemplates" [(ngModel)]="criteria.typeTemplate" id="7" [filter]="true" class="p-fluid"
-                                        [showClear]="true"  placeholder="{{'template.typeTemplate' | translate}}" optionLabel="name">
-                            </p-dropdown>
-                        </div>
-                        <div class="lg:col-3 md:col-6 sm:col-12 mb-4">
-                            <label  class="font-bold block mb-2" for="8-2">{{'template.levelTemplate' | translate}}</label>
-                            <p-dropdown [options]="levelTemplates" [(ngModel)]="criteria.levelTemplate" id="8" [filter]="true" class="p-fluid"
-                                        [showClear]="true"  placeholder="{{'template.levelTemplate' | translate}}" optionLabel="name">
-                            </p-dropdown>
-                        </div>
-                       <div class="lg:col-3 md:col-6 sm:col-12 mb-4">
-                            <label  class="font-bold block mb-2" for="9">{{'template.templateTags' | translate}}</label>
-                            <input  class="w-full"  pInputText id="9" type="text"  [(ngModel)]="criteria.templateTagsLike">
-                        </div>
-                        <div class="lg:col-3 md:col-6 sm:col-12 mb-4">
-                            <label  class="font-bold block mb-2" for="10-2">{{'template.domainTemplate' | translate}}</label>
-                            <p-dropdown [options]="domainTemplates" [(ngModel)]="criteria.domainTemplate" id="10" [filter]="true" class="p-fluid"
-                                        [showClear]="true"  placeholder="{{'template.domainTemplate' | translate}}" optionLabel="name">
-                            </p-dropdown>
-                        </div>
-                        <div class="lg:col-3 md:col-6 sm:col-12 mb-4">
-                            <label  class="font-bold block mb-2" for="11-1">{{'template.priceMin' | translate}}</label>
-                            <p-inputNumber  mode="decimal" [(ngModel)]="criteria.priceMin" id="11-1"></p-inputNumber>
-                        </div>
-                        <div class="lg:col-3 md:col-6 sm:col-12 mb-4">
-                            <label  class="font-bold block mb-2" for="11-2">{{'template.priceMax' | translate}}</label>
-                            <p-inputNumber  mode="decimal" [(ngModel)]="criteria.priceMax" id="11-2"></p-inputNumber>
-                       </div>
-                        <div class="lg:col-3 md:col-6 sm:col-12 mb-4">
-                            <label  class="font-bold block mb-2" for="12-2">{{'template.member' | translate}}</label>
-                            <p-dropdown [options]="members" [(ngModel)]="criteria.member" id="12" [filter]="true" class="p-fluid"
-                                        [showClear]="true"  placeholder="{{'template.member' | translate}}" optionLabel="id">
-                            </p-dropdown>
-                        </div>
-                        <div class="lg:col-3 md:col-6 sm:col-12 mb-4">
-                            <label  class="font-bold block mb-2" for="13-2">{{'template.technology' | translate}}</label>
-                            <p-dropdown [options]="technologys" [(ngModel)]="criteria.technology" id="13" [filter]="true" class="p-fluid"
-                                        [showClear]="true"  placeholder="{{'template.technology' | translate}}" optionLabel="name">
-                            </p-dropdown>
-                        </div>
-                    </div>
-                    <div [style]="{ marginTop : '1rem', display: 'flex', justifyContent: 'flex-end' }">
-                        <button pButton pRipple label="{{'validate' | translate}}" icon="pi pi-sort-amount-down" class="p-button-info mr-2" (click)="findPaginatedByCriteria()"></button>
-                    </div>
-                </div>
-
-
-            </p-toolbar>
-
-
-            <p-table #dt [value]="items" [columns]="cols" [rows]="8" [paginator]="false"
-                    [globalFilterFields]="['code', 'name', 'addingDate', 'lastUpdateDate', 'categoryTemplatename', 'typeTemplatename', 'levelTemplatename', 'templateTags', 'domainTemplatename', 'price', 'memberid', 'technologyname']" [(selection)]="selections"
-                    [rowHover]="true" dataKey="id" styleClass="p-datatable-customers"
-                    currentPageReportTemplate="{{'les éléments de {first} à {last} sur {totalRecords} ' | translate}}"
-                    [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" selectionMode="multiple">
-                <ng-template pTemplate="caption">
-                    <div class="flex flex-column flex-row justify-content-between table-header">
-                        <h5 class="p-m-0">{{'template.header' | translate}}</h5>
-                        <span class="p-input-icon-left ml-auto">
+                <app-template-create-collaborator *ngIf="createDialog && createActionIsValid"></app-template-create-collaborator>
+                <app-template-edit-collaborator *ngIf="editDialog && editActionIsValid"></app-template-edit-collaborator>
+                <app-template-view-collaborator *ngIf="viewDialog && viewActionIsValid"></app-template-view-collaborator>
+                <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+                <p-table #dt [value]="items" [columns]="cols" [rows]="8" [paginator]="false"
+                         [globalFilterFields]="['code', 'name', 'addingDate', 'lastUpdateDate', 'categoryTemplatename', 'typeTemplatename', 'levelTemplatename', 'templateTags', 'domainTemplatename', 'price', 'memberid', 'technologyname']" [(selection)]="selections"
+                         [rowHover]="true" dataKey="id" styleClass="p-datatable-customers"
+                         currentPageReportTemplate="{{'les éléments de {first} à {last} sur {totalRecords} ' | translate}}"
+                         [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" selectionMode="multiple">
+                    <ng-template pTemplate="caption">
+                        <span class="p-input-icon-left ml-auto mr-4">
                             <i class="pi pi-search"></i>
-                            <input pInputText type="text" placeholder="{{'searchInput' | translate}}" (input)="dt.filterGlobal($event.target.value, 'contains')"/>
+                            <input (click)="findPaginatedByCriteria()" pInputText type="text" placeholder="{{'searchInput' | translate}}" (input)="dt.filterGlobal($event.target.value, 'contains')"/>
                         </span>
-                    </div>
-                </ng-template>
-                <ng-template pTemplate="header">
-                    <tr>
-                        <th style="width: 3rem">
-                            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
-                        </th>
-                                
-                        <th pSortableColumn="code">
-                            <div class="p-d-flex p-jc-between p-ai-center">
-                                <span>{{'template.code' | translate}}</span>
-                                <p-sortIcon field="code"></p-sortIcon>
-                                <p-columnFilter type="text" field="element.code" display="menu" class="ml-auto"></p-columnFilter>
-                            </div>
-                        </th>
-                                
-                                
-                        <th pSortableColumn="name">
-                            <div class="p-d-flex p-jc-between p-ai-center">
-                                <span>{{'template.name' | translate}}</span>
-                                <p-sortIcon field="name"></p-sortIcon>
-                                <p-columnFilter type="text" field="element.name" display="menu" class="ml-auto"></p-columnFilter>
-                            </div>
-                        </th>
-                                
-                                
-                        <th pSortableColumn="addingDate">
-                            <div class="p-d-flex p-jc-between p-ai-center">
-                                <span>{{'template.addingDate' | translate}}</span>
-                                <p-sortIcon field="addingDate"></p-sortIcon>
-                            </div>
-                        </th>
-                                
-                                
-                        <th pSortableColumn="lastUpdateDate">
-                            <div class="p-d-flex p-jc-between p-ai-center">
-                                <span>{{'template.lastUpdateDate' | translate}}</span>
-                                <p-sortIcon field="lastUpdateDate"></p-sortIcon>
-                            </div>
-                        </th>
-                                
-                                
-                        <th pSortableColumn="categoryTemplate">
-                            <div class="p-d-flex p-jc-between p-ai-center">
-                                <span>{{'template.categoryTemplate' | translate}}</span>
-                                <p-sortIcon field="categoryTemplate"></p-sortIcon>
-                            </div>
-                        </th>
-                                
-                                
-                        <th pSortableColumn="typeTemplate">
-                            <div class="p-d-flex p-jc-between p-ai-center">
-                                <span>{{'template.typeTemplate' | translate}}</span>
-                                <p-sortIcon field="typeTemplate"></p-sortIcon>
-                            </div>
-                        </th>
-                                
-                                
-                        <th pSortableColumn="levelTemplate">
-                            <div class="p-d-flex p-jc-between p-ai-center">
-                                <span>{{'template.levelTemplate' | translate}}</span>
-                                <p-sortIcon field="levelTemplate"></p-sortIcon>
-                            </div>
-                        </th>
-                                
-                                
-                        <th pSortableColumn="templateTags">
-                            <div class="p-d-flex p-jc-between p-ai-center">
-                                <span>{{'template.templateTags' | translate}}</span>
-                                <p-sortIcon field="templateTags"></p-sortIcon>
-                                <p-columnFilter type="text" field="element.templateTags" display="menu" class="ml-auto"></p-columnFilter>
-                            </div>
-                        </th>
-                                
-                                
-                        <th pSortableColumn="domainTemplate">
-                            <div class="p-d-flex p-jc-between p-ai-center">
-                                <span>{{'template.domainTemplate' | translate}}</span>
-                                <p-sortIcon field="domainTemplate"></p-sortIcon>
-                            </div>
-                        </th>
-                                
-                                <!-- 
-                        <th pSortableColumn="price">
-                            <div class="p-d-flex p-jc-between p-ai-center">
-                                <span>{{'template.price' | translate}}</span>
-                                <p-sortIcon field="price"></p-sortIcon>
-                            </div>
-                        </th>
-                                --> 
-                                <!-- 
-                        <th pSortableColumn="member">
-                            <div class="p-d-flex p-jc-between p-ai-center">
-                                <span>{{'template.member' | translate}}</span>
-                                <p-sortIcon field="member"></p-sortIcon>
-                            </div>
-                        </th>
-                                --> 
-                                <!-- 
-                        <th pSortableColumn="technology">
-                            <div class="p-d-flex p-jc-between p-ai-center">
-                                <span>{{'template.technology' | translate}}</span>
-                                <p-sortIcon field="technology"></p-sortIcon>
-                            </div>
-                        </th>
-                                --> 
-                        <th>Actions</th>
-                    </tr>
-                </ng-template>
-                <ng-template pTemplate="body" let-element>
-                    <tr>
-                        <td>
-                            <p-tableCheckbox [value]="element"></p-tableCheckbox>
-                        </td>
-                            
-                        <td>{{element.code}}</td>
-                            
-                            
-                        <td>{{element.name}}</td>
-                            
-                            
-                        <td>{{element.addingDate | date :'dd/MM/yyyy HH:mm' }}</td>
-                            
-                            
-                        <td>{{element.lastUpdateDate | date :'dd/MM/yyyy HH:mm' }}</td>
-                            
-                            
-                        <td>{{element.categoryTemplate?.name}}</td>
-                            
-                            
-                        <td>{{element.typeTemplate?.name}}</td>
-                            
-                            
-                        <td>{{element.levelTemplate?.name}}</td>
-                            
-                            
-                        <td>{{element.templateTags}}</td>
-                            
-                            
-                        <td>{{element.domainTemplate?.name}}</td>
-                            
-                             <!-- 
-                        <td>{{element.price}}</td>
-                             --> 
-                             <!-- 
-                        <td>{{element.member?.id}}</td>
-                             --> 
-                             <!-- 
-                        <td>{{element.technology?.name}}</td>
-                             --> 
-                        <td>
-                            <button pButton pRipple icon="pi pi-pencil"  class="p-button-rounded p-button-info mr-2" (click)="edit(element)"  *ngIf="editActionIsValid"></button>
-                            <button pButton pRipple icon="pi pi-list" class="p-button-rounded p-button-secondary mr-2" (click)="view(element)"  *ngIf="viewActionIsValid"></button>
-                            <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger mr-2" (click)="delete(element)"  *ngIf="deleteActionIsValid"></button>
-                            <button pButton pRipple icon="pi pi-copy" class="p-button-rounded p-button-raised p-button-warning mr-2" (click)="duplicate(element)"  *ngIf="duplicateActionIsValid"></button>
-                        </td>
-                    </tr>
-                </ng-template>
+                        <p-dropdown  appendTo="body"  [options]="domainTemplates" [(ngModel)]="item.domainTemplate" id="10" [filter]="true" filterMatchMode="contains"
+                                     [showClear]="true" optionLabel="name" placeholder="{{'template.domainTemplate' | translate}}">
+                        </p-dropdown>
+                        <a (click)="selecteProjectTemplate('private')"  class="mr-6 ml-6">private</a>
+                        <a (click)="selecteProjectTemplate('public')">public</a>
+                        <a (click)="showDefault()" class="sidebar-link mr-4 ml-4">
+                            <i style="font-size: 1rem" ></i><span class="link-label">View All</span>
+                        </a>
+                    </ng-template>
+                    <ng-template style="width:1000px; height:300px" pTemplate="body" let-element>
+                        <div *ngIf="showDefaultView">
+                        <div *ngIf="showProjectTemplateDetails">
+                            <div *ngIf="element.categoryTemplate.name===selectedProjectTemplate">
 
-                <ng-template pTemplate="summary">
-                    <p-paginator  [rows]="10" [totalRecords]="totalRecords" (onPageChange)="onPage($event)"></p-paginator>
-                    <div class="p-d-flex p-ai-center p-jc-between">
-                        En totale il {{items ? totalRecords == 1 ? 'y a' : 'y a' : 'y a' }} {{items ? totalRecords : 0 }} {{items ? totalRecords == 1 ? 'template' : 'templates' : 0 }}.
+                                <div  class="border-solid mt-4 mb-6 flex flex-wrap border-gray-300">
+                                    <div class=" left-100 ml-8 mr-8 text-left align-items-left"> <span class="vertical-align-baseline">
+                               <pre> <svg width="40" height="40" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="50" cy="50" r="50" fill="#dd1b16"/>
+                                    <circle cx="50" cy="50" r="30" fill="#f2f2f2"/>
+                                    <circle cx="50" cy="50" r="15" fill="#dd1b16"/>
+                                </svg>      {{ element.name }} :  {{ element.description }}           <p-rating class="ml-3" [(ngModel)]="value" [cancel]="false" /></pre>
+                            </span>
+                                <span class="vertical-align-baseline"><pre><p class="text-left mt-0 mr-3 mb-0 ml-8"><b class="text-red-500">{{ element.price }}  $</b>                <u class="text-pink-900">technology:</u>  <b class="text-teal-600">{{ element.technology.name }}</b>                <u class="text-pink-900">domain:</u>  <b>{{ element.domainTemplate.name }}</b></p></pre></span>
+                                <div>
+                                    <span class="vertical-align-baseline"><pre><p class="text-left mt-0 mr-3 ml-8"><b class="text-red-500">{{ element.categoryTemplate.name }}</b>                <u class="text-pink-900">type:</u>  <b class="text-teal-600">{{ element.typeTemplate.name }}</b>                    <u class="text-pink-900">level:</u>  <b>{{ element.levelTemplate.name }}</b></p></pre></span>
+                                </div>
+                                <span class=" flex align-items-left justify-content-left vertical-align-baseline"><p-button class=" text-blue-300 background-blue-200 button mr-7 mb-3 ml-8" label="shop" (click)="showYamlDialog(element.description)" severity="secondary" /><p-button class=" text-blue-300 background-blue-200 button mr-8 mb-3 ml-8" label="Tag" (click)="showYamlDialog(element.templateTags)" severity="secondary" /><p-button class=" text-blue-300 background-blue-200 button mr-4 mb-3 ml-8" label="use"  severity="secondary" />
+                                    <!--<button class=" text-blue-300 background-blue-200 border-1 button mr-4 mb-3 ml-8" (click)="showYamlDialog(element.description)">description</button><button class="button text-blue-300 background-surface-0 border-50 ml-6 mb-3" (click)="showYamlDialog(element.templateTags)">Tag</button> <button class="button mr-4 mb-3 ml-8 text-blue-300 background-surface-0 border-none border-white-alpha-30">use</button>-->
+                            </span>
+                            </div>
+                            <!--
+                            <p-divider layout="vertical" />
+                            <div class="text-right w-12  pt-0 pb-0 pl-0 pr-0">
+                            </div>
+                            -->
+                        </div>
+                        </div>
+                        </div>
+                        </div>
+
+                    </ng-template>
+                </p-table>
+                <!-- Contenu de la vue par défaut -->
+                <p>Default view content goes here.</p>
+            </div>
+            <!-- Vue template -->
+            <div *ngIf="showTemplateView">
+                <p-toolbar styleClass="mb-4">
+                    <ng-template pTemplate="left">
+                        <button pButton pRipple label="{{'new' | translate}}" icon="pi pi-plus" class="p-button-info mr-2 mb-2" (click)="openCreate('Template')" *ngIf="createActionIsValid"></button>
+                        <a class="sidebar-link mr-4 ml-4" (click)="showTemplate()">
+                            <i style="font-size: 1rem"></i><span class="link-label">Template</span>
+                        </a>
+                        <a class="sidebar-link mr-4 ml-4" (click)="showDefault()">
+                            <i style="font-size: 1rem"></i><span class="link-label">New</span>
+                        </a>
+                        <a class="sidebar-link mr-4 ml-4">
+                            <i style="font-size: 1rem"></i><span class="link-label">My Template</span>
+                        </a>
+                    </ng-template>
+                    <ng-template pTemplate="right">
+                    </ng-template>
+                </p-toolbar>
+                <app-template-create-collaborator *ngIf="createDialog && createActionIsValid"></app-template-create-collaborator>
+                <app-template-edit-collaborator *ngIf="editDialog && editActionIsValid"></app-template-edit-collaborator>
+                <app-template-view-collaborator *ngIf="viewDialog && viewActionIsValid"></app-template-view-collaborator>
+                <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+                <p-tabView class="justify-content-center">
+                    <div class="grid">
+                        <div class="field col-12 md:col-6">
+                            <div class="mb-2">
+                                <label class="text-surface-900 text-xl" for="2">{{'template.name' | translate}}<span style="color: red;">*</span></label>
+                            </div>
+                            <input class="mb-2 mr-2" type="text" pInputText  placeholder="{{'template.name' | translate}}" id="2" [(ngModel)]="item.name"
+                                   [ngClass]="{'ng-invalid ng-dirty' : !validTemplateName}"  />
+                            <small class='p-error' *ngIf='!validTemplateName'>Name est obligatoire.</small>
+                        </div>
+                        <div class="field col-12 md:col-6">
+                            <div class="mb-2">
+                                <label class="text-surface-900 text-xl" for="10">{{'template.domainTemplate' | translate}}</label>
+                            </div>
+                            <p-dropdown class="w-full" appendTo="body"  [options]="domainTemplates" [(ngModel)]="item.domainTemplate" id="11" [filter]="true" filterMatchMode="contains"
+                                        [showClear]="true" optionLabel="name" placeholder="{{'template.domainWithTemplate' | translate}}"  >
+                            </p-dropdown>
+                        </div>
+                        <div class="field col-12 md:col-6">
+                            <div class="mb-2">
+                                <label class="text-surface-900 text-xl" for="6">{{'template.categoryTemplate' | translate}}</label>
+                            </div>
+                            <p-dropdown   appendTo="body"  [options]="categoryTemplates" [(ngModel)]="item.categoryTemplate" id="6" [filter]="true" filterMatchMode="contains"
+                                          [showClear]="true" optionLabel="name" placeholder="{{'template.categoryWithTemplate' | translate}}"  >
+                            </p-dropdown>
+                        </div>
+                        <div class="field col-12 md:col-6">
+                            <div class="mb-2">
+                                <label class="text-surface-900 text-xl" for="11">{{'template.price' | translate}}</label>
+                            </div>
+                            <p-inputNumber style="width:100vh;" class="mb-2 mr-2" id="12" placeholder="{{'template.price' | translate}}" [(ngModel)]="item.price"  >
+                            </p-inputNumber>
+                        </div>
+                        <div class="field col-11 md:col-6">
+                            <div class="mb-2">
+                                <label class="text-surface-900 text-xl" for="7">{{'template.typeTemplate' | translate}}</label>
+                            </div>
+                            <p-dropdown class="w-12" style="width:300px; padding-right:2rem" appendTo="body"  [options]="typeTemplates" [(ngModel)]="item.typeTemplate" id="7" [filter]="true" filterMatchMode="contains"
+                                        [showClear]="true" optionLabel="name" placeholder="{{'template.typeWithTemplate' | translate}}"  >
+                            </p-dropdown>
+                        </div>
+                        <div class="field col-11 md:col-6">
+                            <div class="mb-2">
+                                <label class="text-surface-900 text-xl" for="13">{{'template.technology' | translate}}</label>
+                            </div>
+                            <p-dropdown  appendTo="body"  [options]="technologys" [(ngModel)]="item.technology" id="13" [filter]="true" filterMatchMode="contains"
+                                         [showClear]="true" optionLabel="name" placeholder="{{'template.technologyWithTemplate' | translate}}"  >
+                            </p-dropdown>
+                        </div>
+                        <div class="field col-11 md:col-6">
+                            <div class="mb-2">
+                                <label class="text-surface-900 text-xl" for="8">{{'template.levelTemplate' | translate}}</label>
+                            </div>
+                            <p-dropdown  appendTo="body"  [options]="levelTemplates" [(ngModel)]="item.levelTemplate" id="8" [filter]="true" filterMatchMode="contains"
+                                         [showClear]="true" optionLabel="name" placeholder="{{'template.levelWithTemplate' | translate}}"  >
+                            </p-dropdown>
+                        </div>
+                        <div class="field col-12 md:col-6">
+                            <div class="mb-2">
+                                <label class="text-surface-900 text-xl" for="9">{{'template.templateTags' | translate}}</label>
+                            </div>
+                            <input class="mb-2 mr-2" type="text" pInputText  placeholder="{{'template.templateTags' | translate}}" id="9" [(ngModel)]="item.templateTags"
+                            />
+                        </div>
+                        <div class="field col-12 md:col-6">
+                            <div class="mb-2">
+                                <label class="text-surface-900 text-xl" for="3">{{'template.description' | translate}}</label>
+                            </div>
+                            <textarea id="3" pInputTextarea rows="5" cols="46" placeholder="{{'template.description' | translate}}"  [(ngModel)]="item.description"
+                            ></textarea>
+                        </div>
                     </div>
-                </ng-template>
-            </p-table>
+                </p-tabView>
+                <div class="p-flexbox ml-4">
+                    <button pButton pRipple  label="{{'validate' | translate}}"  icon="pi pi-check"  (click)="save()"></button>
+                    <button pButton pRipple  label="{{'cancel' | translate}}" icon="pi pi-times" class="p-button-outlined" (click)="hideCreateDialog()"></button>
+                </div>
+                <!-- Contenu de la vue template -->
+                <p>Template view content goes here.</p>
+            </div>
         </div>
-
-        <app-template-create-collaborator  *ngIf="createDialog  && createActionIsValid"></app-template-create-collaborator>
-        <app-template-edit-collaborator  *ngIf="editDialog  && editActionIsValid"></app-template-edit-collaborator>
-        <app-template-view-collaborator  *ngIf="viewDialog  && viewActionIsValid"></app-template-view-collaborator>
-        <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
     </div>
-</div>
-
-<p-card header="Permission not allowed" *ngIf="!listActionIsValid">
-    <p class="m-0">
-        You don't have permission to access !
-    </p>
-</p-card>
+   </div>

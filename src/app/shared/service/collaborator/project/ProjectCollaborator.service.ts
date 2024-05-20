@@ -300,5 +300,9 @@ export class ProjectCollaboratorService {
     set entityName(value: string) {
         this._entityName = value;
     }
+    //ajouter
+    getAllProject():Observable<ProjectDto[]>{
+        return this.http.get<ProjectDto[]>('http://localhost:8036/api/collaborator/project/');
+    }
 
 }

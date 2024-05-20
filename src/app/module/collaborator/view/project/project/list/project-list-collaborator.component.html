@@ -1,195 +1,220 @@
-<div class="grid"  *ngIf="listActionIsValid">
-    <div class="col-12">
-        <p-toast></p-toast>
-        <div class="card">
-            <p-toolbar styleClass="mb-4">
-                <ng-template pTemplate="left">
-                                        <button pButton pRipple label=" {{'new' | translate}}" icon="pi pi-plus" class="p-button-info mr-2 mb-2" (click)="openCreate('Project')" *ngIf="createActionIsValid"></button>
-                    <button [disabled]="isSelectionDisabled()" pButton pRipple label=" {{'delete' | translate}}" icon="pi pi-trash" class="p-button-danger mr-2 mb-2" (click)=deleteMultiple()  *ngIf="deleteActionIsValid"></button>
-                    <button pButton pRipple label=" {{'search' | translate}}" icon="pi pi-{{findByCriteriaShow?'angle-down':'angle-right'}}" class="p-button-secondary mr-2 mb-2" (click)="this.showSearch()"></button>
-                </ng-template>
-                <ng-template pTemplate="right">
-                    <div class="flex">
-                        <p-splitButton label=" {{'export' | translate}}" icon="pi pi-download" styleClass="p-button-secondary" [model]="excelPdfButons"></p-splitButton>
-                    </div>
-                </ng-template>
+   <div class="grid"  *ngIf="listActionIsValid">
+        <div class="col-12">
+            <p-toast></p-toast>
+            <div class="card">
+                <div *ngIf="showDefaultView">
+                <p-toolbar styleClass="mb-4">
+                    <ng-template pTemplate="left">
+                        <button pButton pRipple label=" {{'new' | translate}}" icon="pi pi-plus" class="p-button-info mr-2 mb-2" (click)="openCreate('Project')" *ngIf="createActionIsValid"></button>
+                        <a (click)="showDefault()" class="sidebar-link mr-4 ml-4">
+                            <i style="font-size: 1rem" ></i><span class="link-label">Genery</span>
+                        </a>
 
-            </p-toolbar>
-            <p-toolbar *ngIf="findByCriteriaShow">
+                        <a (click)="showProject()" class="sidebar-link mr-4 ml-4">
+                            <i style="font-size: 1rem" ></i><span class="link-label">Project</span>
+                        </a>
 
-                <div class="col-12">
-                    <div class="flex flex-wrap p-fluid col-12">
-                       <div class="lg:col-3 md:col-6 sm:col-12 mb-4">
-                            <label  class="font-bold block mb-2" for="1">{{'project.code' | translate}}</label>
-                            <input  class="w-full"  pInputText id="1" type="text"  [(ngModel)]="criteria.codeLike">
-                        </div>
-                       <div class="lg:col-3 md:col-6 sm:col-12 mb-4">
-                            <label  class="font-bold block mb-2" for="2">{{'project.name' | translate}}</label>
-                            <input  class="w-full"  pInputText id="2" type="text"  [(ngModel)]="criteria.nameLike">
-                        </div>
-
-                        <div class="lg:col-3 md:col-6 sm:col-12 mb-4">
-                            <label class="font-bold block mb-2" for="3-1">{{'project.generatedDateMin' | translate}}</label>
-                            <p-calendar class="mr-2" [(ngModel)]="criteria.generatedDateFrom"
-                                    id="3-1" dateFormat="dd-MM-yy"  [showIcon]="true"  class="p-fluid"></p-calendar>
-                        </div>
-
-                        <div class="lg:col-3 md:col-6 sm:col-12 mb-4">
-                            <label  class="font-bold block mb-2" for="3-2">{{'project.generatedDateMax' | translate}}</label>
-                            <p-calendar class="mr-2" [(ngModel)]="criteria.generatedDateTo"
-                                    id="3-2" dateFormat="dd-MM-yy"  [showIcon]="true" class="p-fluid"></p-calendar>
-                        </div>
-
-                        <div class="lg:col-3 md:col-6 sm:col-12 mb-4">
-                            <label  class="font-bold block mb-2" for="5-2">{{'project.projectState' | translate}}</label>
-                            <p-dropdown [options]="projectStates" [(ngModel)]="criteria.projectState" id="5" [filter]="true" class="p-fluid"
-                                        [showClear]="true"  placeholder="{{'project.projectState' | translate}}" optionLabel="code">
-                            </p-dropdown>
-                        </div>
-                        <div class="lg:col-3 md:col-6 sm:col-12 mb-4">
-                            <label  class="font-bold block mb-2" for="6-2">{{'project.inscriptionMembre' | translate}}</label>
-                            <p-dropdown [options]="inscriptionMembres" [(ngModel)]="criteria.inscriptionMembre" id="6" [filter]="true" class="p-fluid"
-                                        [showClear]="true"  placeholder="{{'project.inscriptionMembre' | translate}}" optionLabel="id">
-                            </p-dropdown>
-                        </div>
-                        <div class="lg:col-3 md:col-6 sm:col-12 mb-4">
-                            <label  class="font-bold block mb-2" for="7-2">{{'project.domainTemplate' | translate}}</label>
-                            <p-dropdown [options]="domainTemplates" [(ngModel)]="criteria.domainTemplate" id="7" [filter]="true" class="p-fluid"
-                                        [showClear]="true"  placeholder="{{'project.domainTemplate' | translate}}" optionLabel="name">
-                            </p-dropdown>
-                        </div>
-                    </div>
-                    <div [style]="{ marginTop : '1rem', display: 'flex', justifyContent: 'flex-end' }">
-                        <button pButton pRipple label="{{'validate' | translate}}" icon="pi pi-sort-amount-down" class="p-button-info mr-2" (click)="findPaginatedByCriteria()"></button>
-                    </div>
+                        <a (click)="toggleCodePart('part3')" class="sidebar-link mr-4 ml-4">
+                            <i style="font-size: 1rem" ></i><span class="link-label">My Template</span>
+                        </a>
+                    </ng-template>
+                    <ng-template pTemplate="right">
+                    </ng-template>
+                </p-toolbar>
+                    <app-project-create-collaborator  *ngIf="createDialog  && createActionIsValid"></app-project-create-collaborator>
+                    <app-project-edit-collaborator  *ngIf="editDialog  && editActionIsValid"></app-project-edit-collaborator>
+                    <app-project-view-collaborator  *ngIf="viewDialog  && viewActionIsValid"></app-project-view-collaborator>
+                    <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
                 </div>
+                    <div *ngIf="showDefaultView">
+                <p-splitter [panelSizes]="[25, 75]" [style]="{ height: '500px', width: '60vw' }" styleClass="mb-5 mt-4">
+                    <ng-template pTemplate class="min-w-max">
+                        <h3 class="flex ml-3 mb-6 justify-content-center h3">History:</h3>
+                        <p-table #dt [value]="items" [columns]="cols" [rows]="8" [paginator]="false"
+                                 [globalFilterFields]="['code', 'name', 'generatedDate', 'projectStatecode', 'inscriptionMembreid', 'domainTemplatename']" [(selection)]="selections"
+                                 [rowHover]="true" dataKey="id" styleClass="p-datatable-customers"
+                                 currentPageReportTemplate="{{'les éléments de {first} à {last} sur {totalRecords} ' | translate}}"
+                                 [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" selectionMode="multiple" class="mt-6 flex ml-0 justify-content-center">
+                            <ng-template pTemplate="body" let-element>
+                                <div class=" justify-content-center mr-3">
+                                    <ul style="padding-left: 0;" class="flex justify-content-center">
+                                        <li class="container flex justify-content-center mt-2" style="list-style-type: none;padding-left: 0;" >
+                                            <a (click)="show()"><p>{{element.name}}</p></a>
+                                            <p-dialog header="Header" [modal]="true" [(visible)]="visible" [style]="{ width: '50rem' }" [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }" [maximizable]="true">
+                                                <pre><p>
+                                                    {{element.code}}
+                                                    {{element.name}}
+                                                    {{element.domainTemplate.name}}
+                                                    {{element.generatedDate}}
+                                                </p></pre>
+                                            </p-dialog>
+                                        </li>
+                                    </ul>
+                                </div>
 
+                            </ng-template>
+                        </p-table>
+                    </ng-template>
+                    <ng-template pTemplate class="min-w-max">
+                        <div class="mt-3">
+                            <div class="top-right">
+                        <span class="vertical-align-baseline mt-2">
+                        <p-button (click)="showDialog()" icon="pi pi-external-link" icon="pi pi-eye" label="Template" class=" mt-2 ml-8 top-right  "></p-button>
+                            <button class="btn flex-end ml-8" (click)="toggleSidebar()">Toggle Sidebar</button>
+                        </span>
+                            </div>
+                            <span class="vertical-align-baseline">
+                            <div class="col flex align-items-center justify-content-center">
+                            <div class="col flex align-items-center min-w-max w-30rem justify-content-center">
+                                <textarea id="4" pInputTextarea rows="20" cols="70" placeholder="{{'project.yaml' | translate}}"  [(ngModel)]="item.yaml"></textarea>
 
-            </p-toolbar>
+                            </div>
+                        </div>
+                        </span>
+                        </div>
+                    </ng-template>
+                </p-splitter>
+                <div class="col flex align-items-center justify-content-center mr-8 right-0">
+                    <button pButton pRipple  label="{{'validate' | translate}}"  icon="pi pi-check"  (click)="save()" class="top"></button>
+                </div>
+            </div>
+                <div *ngIf="showProjectView">
+                    <p-toolbar styleClass="mb-4">
+                        <ng-template pTemplate="left">
+                            <button pButton pRipple label=" {{'new' | translate}}" icon="pi pi-plus" class="p-button-info mr-2 mb-2" (click)="openCreate('Project')" *ngIf="createActionIsValid"></button>
+                            <a (click)="showDefault()" class="sidebar-link mr-4 ml-4">
+                                <i style="font-size: 1rem" ></i><span class="link-label">Genery</span>
+                            </a>
 
+                            <a (click)="showProject()" class="sidebar-link mr-4 ml-4">
+                                <i style="font-size: 1rem" ></i><span class="link-label">Project</span>
+                            </a>
 
-            <p-table #dt [value]="items" [columns]="cols" [rows]="8" [paginator]="false"
-                    [globalFilterFields]="['code', 'name', 'generatedDate', 'projectStatecode', 'inscriptionMembreid', 'domainTemplatename']" [(selection)]="selections"
-                    [rowHover]="true" dataKey="id" styleClass="p-datatable-customers"
-                    currentPageReportTemplate="{{'les éléments de {first} à {last} sur {totalRecords} ' | translate}}"
-                    [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" selectionMode="multiple">
-                <ng-template pTemplate="caption">
-                    <div class="flex flex-column flex-row justify-content-between table-header">
-                        <h5 class="p-m-0">{{'project.header' | translate}}</h5>
+                            <a (click)="toggleCodePart('part3')" class="sidebar-link mr-4 ml-4">
+                                <i style="font-size: 1rem" ></i><span class="link-label">My Template</span>
+                            </a>
+                        </ng-template>
+                        <ng-template pTemplate="right">
+                        </ng-template>
+                    </p-toolbar>
+                    <app-project-create-collaborator  *ngIf="createDialog  && createActionIsValid"></app-project-create-collaborator>
+                    <app-project-edit-collaborator  *ngIf="editDialog  && editActionIsValid"></app-project-edit-collaborator>
+                    <app-project-view-collaborator  *ngIf="viewDialog  && viewActionIsValid"></app-project-view-collaborator>
+                    <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+                    <p-table #dt [value]="items" [columns]="cols" [rows]="8" [paginator]="false"
+                             [globalFilterFields]="['code', 'name', 'generatedDate', 'projectStatecode', 'inscriptionMembreid', 'domainTemplatename']" [(selection)]="selections"
+                             [rowHover]="true" dataKey="id" styleClass="p-datatable-customers"
+                             currentPageReportTemplate="{{'les éléments de {first} à {last} sur {totalRecords} ' | translate}}"
+                             [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" selectionMode="multiple">
+                        <ng-template pTemplate="caption">
                         <span class="p-input-icon-left ml-auto">
                             <i class="pi pi-search"></i>
                             <input pInputText type="text" placeholder="{{'searchInput' | translate}}" (input)="dt.filterGlobal($event.target.value, 'contains')"/>
                         </span>
-                    </div>
-                </ng-template>
-                <ng-template pTemplate="header">
-                    <tr>
-                        <th style="width: 3rem">
-                            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
-                        </th>
-                                
-                        <th pSortableColumn="code">
-                            <div class="p-d-flex p-jc-between p-ai-center">
-                                <span>{{'project.code' | translate}}</span>
-                                <p-sortIcon field="code"></p-sortIcon>
-                                <p-columnFilter type="text" field="element.code" display="menu" class="ml-auto"></p-columnFilter>
-                            </div>
-                        </th>
-                                
-                                
-                        <th pSortableColumn="name">
-                            <div class="p-d-flex p-jc-between p-ai-center">
-                                <span>{{'project.name' | translate}}</span>
-                                <p-sortIcon field="name"></p-sortIcon>
-                                <p-columnFilter type="text" field="element.name" display="menu" class="ml-auto"></p-columnFilter>
-                            </div>
-                        </th>
-                                
-                                
-                        <th pSortableColumn="generatedDate">
-                            <div class="p-d-flex p-jc-between p-ai-center">
-                                <span>{{'project.generatedDate' | translate}}</span>
-                                <p-sortIcon field="generatedDate"></p-sortIcon>
-                            </div>
-                        </th>
-                                
-                                
-                        <th pSortableColumn="projectState">
-                            <div class="p-d-flex p-jc-between p-ai-center">
-                                <span>{{'project.projectState' | translate}}</span>
-                                <p-sortIcon field="projectState"></p-sortIcon>
-                            </div>
-                        </th>
-                                
-                                
-                        <th pSortableColumn="inscriptionMembre">
-                            <div class="p-d-flex p-jc-between p-ai-center">
-                                <span>{{'project.inscriptionMembre' | translate}}</span>
-                                <p-sortIcon field="inscriptionMembre"></p-sortIcon>
-                            </div>
-                        </th>
-                                
-                                
-                        <th pSortableColumn="domainTemplate">
-                            <div class="p-d-flex p-jc-between p-ai-center">
-                                <span>{{'project.domainTemplate' | translate}}</span>
-                                <p-sortIcon field="domainTemplate"></p-sortIcon>
-                            </div>
-                        </th>
-                                
-                        <th>Actions</th>
-                    </tr>
-                </ng-template>
-                <ng-template pTemplate="body" let-element>
-                    <tr>
-                        <td>
-                            <p-tableCheckbox [value]="element"></p-tableCheckbox>
-                        </td>
-                            
-                        <td>{{element.code}}</td>
-                            
-                            
-                        <td>{{element.name}}</td>
-                            
-                            
-                        <td>{{element.generatedDate | date :'dd/MM/yyyy HH:mm' }}</td>
-                            
-                            
-                        <td>{{element.projectState?.code}}</td>
-                            
-                            
-                        <td>{{element.inscriptionMembre?.id}}</td>
-                            
-                            
-                        <td>{{element.domainTemplate?.name}}</td>
-                            
-                        <td>
-                            <button pButton pRipple icon="pi pi-pencil"  class="p-button-rounded p-button-info mr-2" (click)="edit(element)"  *ngIf="editActionIsValid"></button>
-                            <button pButton pRipple icon="pi pi-list" class="p-button-rounded p-button-secondary mr-2" (click)="view(element)"  *ngIf="viewActionIsValid"></button>
-                            <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger mr-2" (click)="delete(element)"  *ngIf="deleteActionIsValid"></button>
-                            <button pButton pRipple icon="pi pi-copy" class="p-button-rounded p-button-raised p-button-warning mr-2" (click)="duplicate(element)"  *ngIf="duplicateActionIsValid"></button>
-                        </td>
-                    </tr>
-                </ng-template>
+                        </ng-template>
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th>Code</th>
+                                <th>Name</th>
+                                <th>Date</th>
+                                <th>domain</th>
+                                <th>Yaml</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-element>
+                            <tr>
+                                <td>{{element.code}}</td>
+                                <td>{{element.name}}</td>
+                                <td>{{element.generatedDate | date :'dd/MM/yyyy HH:mm' }}</td>
+                                <!--<td>{{element.projectState?.code}}</td>
+                                <td>{{element.inscriptionMembre?.id}}</td>-->
+                                <td>{{element.domainTemplate?.name}}</td>
+                                <td><p-button  (click)="showYamlDialog(element.yaml)" label="Yaml" severity="warning" /></td>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="summary">
+                        </ng-template>
+                    </p-table>
 
-                <ng-template pTemplate="summary">
-                    <p-paginator  [rows]="10" [totalRecords]="totalRecords" (onPageChange)="onPage($event)"></p-paginator>
-                    <div class="p-d-flex p-ai-center p-jc-between">
-                        En totale il {{items ? totalRecords == 1 ? 'y a' : 'y a' : 'y a' }} {{items ? totalRecords : 0 }} {{items ? totalRecords == 1 ? 'project' : 'projects' : 0 }}.
-                    </div>
-                </ng-template>
-            </p-table>
+              </div>
+              </div>
+    </div>
+
+    <p-card header="Permission not allowed" *ngIf="!listActionIsValid">
+        <p class="m-0">
+            You don't have permission to access !
+        </p>
+    </p-card>
+</div>
+
+
+
+       <div *ngIf="showYamlDialogVisible">
+           <textarea [(ngModel)]="separateContent" *ngIf="!isEditing"></textarea>
+           <div *ngIf="isEditing">{{ separateContent }}</div>
+           <div>
+               <!--<button class="button" (click)="toggleEditMode()">{{ isEditing ? 'Modifier' : 'Terminer' }}</button>-->
+               <button class="but" (click)="copyYaml()">
+                   <i class="pi pi-clone" style="font-size: 1.5rem"></i>
+               </button>
+           </div>
+       </div>
+
+
+
+
+
+
+
+
+<div *ngIf="showSidebar" class="sidebar bg-surface-100" style="width:60vh;">
+    <h4 style="margin-top:20vh">Yaml GPT</h4>
+    <div class="card wiw flex justify-content-center bg-gray-400" style="width:47vh;margin:0vh;height: 68vh;padding:0vh;">
+        <div style="width:47vh;margin:0vh;padding:2vh;">
+            <form [formGroup]="queryFormGroup" (ngSubmit)="handleAskGPT()">
+                <div>
+                    <label class="form-label text-black-alpha-90">Query:</label>
+                </div>
+                <div class="mb-3">
+                    <textarea formControlName="query" class="form-control bg-gray-400" style="width:40vh;height:15vh;"></textarea>
+                </div>
+                <div styl="flex-end">
+                    <button class="btn btn-success btn border-circle" ><i class="pi pi-send ml-0 mr-0 pl-0 pr-0" style="font-size: 1.4rem"></i></button>
+                </div>
+                <div class="alert alert-success" *ngIf="result">
+                    <!--<pre>{{result|json}}</pre>-->
+                    <ul class="lis-group">
+                        <li class="list-group-item" *ngFor="let choic of result.choices" >
+                            {{choic.content}}
+                        </li>
+                    </ul>
+                </div>
+            </form>
         </div>
-
-        <app-project-create-collaborator  *ngIf="createDialog  && createActionIsValid"></app-project-create-collaborator>
-        <app-project-edit-collaborator  *ngIf="editDialog  && editActionIsValid"></app-project-edit-collaborator>
-        <app-project-view-collaborator  *ngIf="viewDialog  && viewActionIsValid"></app-project-view-collaborator>
-        <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
     </div>
 </div>
 
-<p-card header="Permission not allowed" *ngIf="!listActionIsValid">
-    <p class="m-0">
-        You don't have permission to access !
-    </p>
-</p-card>
+
+<!-- formatter.component.html
+
+<div>
+    <h2>Formatter</h2>
+
+    <div>
+        <label for="classNameInput">Class Name:</label>
+        <input id="classNameInput" type="text" [(ngModel)]="className">
+    </div>
+
+    <div>
+        <label for="attributesInput">Attributes:</label>
+        <input id="attributesInput" type="text" [(ngModel)]="attributes">
+    </div>
+
+    <button (click)="format()">Format Attributes</button>
+
+    <div *ngIf="result">
+        <h3>Result:</h3>
+        <pre>{{ result }}</pre>
+    </div>
+</div>
+-->

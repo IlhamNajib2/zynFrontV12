@@ -5,7 +5,6 @@ import {ProjectCriteria} from 'src/app/shared/criteria/project/ProjectCriteria.m
 
 
 import {ConfirmationService, MessageService,MenuItem} from 'primeng/api';
-import {FileTempDto} from 'src/app/zynerator/dto/FileTempDto.model';
 import {DatePipe} from '@angular/common';
 import {Router} from '@angular/router';
 import {Inject, Injectable, PLATFORM_ID} from '@angular/core';
@@ -33,11 +32,18 @@ import {DomainTemplateDto} from 'src/app/shared/model/template/DomainTemplate.mo
 import {DomainTemplateCollaboratorService} from 'src/app/shared/service/collaborator/template/DomainTemplateCollaborator.service';
 import {ProjectTemplateDto} from 'src/app/shared/model/template/ProjectTemplate.model';
 import {ProjectTemplateCollaboratorService} from 'src/app/shared/service/collaborator/template/ProjectTemplateCollaborator.service';
+import {FormBuilder, FormGroup} from "@angular/forms";
+import {HttpClient, HttpClientModule, HttpHeaders} from "@angular/common/http";
+
+
+
+
 
 
 @Component({
-  selector: 'app-project-list-collaborator',
-  templateUrl: './project-list-collaborator.component.html'
+    selector: 'app-project-list-collaborator',
+    templateUrl: './project-list-collaborator.component.html',
+    styleUrls:['./project-list-collaborator.component.scss']
 })
 export class ProjectListCollaboratorComponent implements OnInit {
 
@@ -69,7 +75,7 @@ export class ProjectListCollaboratorComponent implements OnInit {
     domainTemplates: Array<DomainTemplateDto>;
 
 
-    constructor( private service: ProjectCollaboratorService  , private inscriptionMembreService: InscriptionMembreCollaboratorService, private projectStateService: ProjectStateCollaboratorService, private templateService: TemplateCollaboratorService, private domainTemplateService: DomainTemplateCollaboratorService, private projectTemplateService: ProjectTemplateCollaboratorService, @Inject(PLATFORM_ID) private platformId?) {
+    constructor(private projectCollaboratorService:ProjectCollaboratorService,private httpClient :HttpClient,private fb:FormBuilder,private service: ProjectCollaboratorService, private inscriptionMembreService: InscriptionMembreCollaboratorService, private projectStateService: ProjectStateCollaboratorService, private domainTemplateService: DomainTemplateCollaboratorService, private projectTemplateService: ProjectTemplateCollaboratorService, @Inject(PLATFORM_ID) private platformId?) {
         this.datePipe = ServiceLocator.injector.get(DatePipe);
         this.messageService = ServiceLocator.injector.get(MessageService);
         this.confirmationService = ServiceLocator.injector.get(ConfirmationService);
@@ -87,7 +93,17 @@ export class ProjectListCollaboratorComponent implements OnInit {
         this.loadInscriptionMembre();
         this.loadDomainTemplate();
 
+
+        this.service.getAllProject().subscribe(projectData => {
+            this.projectData = projectData;
+        });
+
+        this.queryFormGroup=this.fb.group({
+            query:this.fb.control("")
+        })
+
     }
+
 
 
 
@@ -259,7 +275,7 @@ export class ProjectListCollaboratorComponent implements OnInit {
             this.items[myIndex] = data;
             this.editDialog = false;
             this.item = new ProjectDto();
-        } , error => {
+        }, error => {
             console.log(error);
         });
     }
@@ -295,50 +311,53 @@ export class ProjectListCollaboratorComponent implements OnInit {
     }
 
 
-    public async loadProjectState(){
+    public async loadProjectState() {
         this.projectStateService.findAllOptimized().subscribe(projectStates => this.projectStates = projectStates, error => console.log(error))
     }
-    public async loadInscriptionMembre(){
+
+    public async loadInscriptionMembre() {
         this.inscriptionMembreService.findAll().subscribe(inscriptionMembres => this.inscriptionMembres = inscriptionMembres, error => console.log(error))
     }
-    public async loadDomainTemplate(){
+
+    public async loadDomainTemplate() {
         this.domainTemplateService.findAllOptimized().subscribe(domainTemplates => this.domainTemplates = domainTemplates, error => console.log(error))
     }
 
 
-	public initDuplicate(res: ProjectDto) {
+    public initDuplicate(res: ProjectDto) {
         if (res.projectTemplates != null) {
-             res.projectTemplates.forEach(d => { d.project = null; d.id = null; });
+            res.projectTemplates.forEach(d => {
+                d.project = null;
+                d.id = null;
+            });
         }
-	}
+    }
 
 
-
-   public prepareColumnExport(): void {
+    public prepareColumnExport(): void {
         this.exportData = this.items.map(e => {
             return {
-                 'Code': e.code ,
-                 'Name': e.name ,
-                'Generated date': this.datePipe.transform(e.generatedDate , 'dd/MM/yyyy hh:mm'),
-                 'Yaml': e.yaml ,
-                'Project state': e.projectState?.code ,
-                'Inscription membre': e.inscriptionMembre?.id ,
-                'Domain template': e.domainTemplate?.name ,
+                'Code': e.code,
+                'Name': e.name,
+                'Generated date': this.datePipe.transform(e.generatedDate, 'dd/MM/yyyy hh:mm'),
+                'Yaml': e.yaml,
+                'Project state': e.projectState?.code,
+                'Inscription membre': e.inscriptionMembre?.id,
+                'Domain template': e.domainTemplate?.name,
             }
         });
 
         this.criteriaData = [{
-            'Code': this.criteria.code ? this.criteria.code : environment.emptyForExport ,
-            'Name': this.criteria.name ? this.criteria.name : environment.emptyForExport ,
-            'Generated date Min': this.criteria.generatedDateFrom ? this.datePipe.transform(this.criteria.generatedDateFrom , this.dateFormat) : environment.emptyForExport ,
-            'Generated date Max': this.criteria.generatedDateTo ? this.datePipe.transform(this.criteria.generatedDateTo , this.dateFormat) : environment.emptyForExport ,
-            'Yaml': this.criteria.yaml ? this.criteria.yaml : environment.emptyForExport ,
-        //'Project state': this.criteria.projectState?.code ? this.criteria.projectState?.code : environment.emptyForExport ,
-        //'Inscription membre': this.criteria.inscriptionMembre?.id ? this.criteria.inscriptionMembre?.id : environment.emptyForExport ,
-        //'Domain template': this.criteria.domainTemplate?.name ? this.criteria.domainTemplate?.name : environment.emptyForExport ,
+            'Code': this.criteria.code ? this.criteria.code : environment.emptyForExport,
+            'Name': this.criteria.name ? this.criteria.name : environment.emptyForExport,
+            'Generated date Min': this.criteria.generatedDateFrom ? this.datePipe.transform(this.criteria.generatedDateFrom, this.dateFormat) : environment.emptyForExport,
+            'Generated date Max': this.criteria.generatedDateTo ? this.datePipe.transform(this.criteria.generatedDateTo, this.dateFormat) : environment.emptyForExport,
+            'Yaml': this.criteria.yaml ? this.criteria.yaml : environment.emptyForExport,
+            //'Project state': this.criteria.projectState?.code ? this.criteria.projectState?.code : environment.emptyForExport ,
+            //'Inscription membre': this.criteria.inscriptionMembre?.id ? this.criteria.inscriptionMembre?.id : environment.emptyForExport ,
+            //'Domain template': this.criteria.domainTemplate?.name ? this.criteria.domainTemplate?.name : environment.emptyForExport ,
         }];
-      }
-
+    }
 
 
     get items(): Array<ProjectDto> {
@@ -523,4 +542,126 @@ export class ProjectListCollaboratorComponent implements OnInit {
     set entityName(value: string) {
         this.service.entityName = value;
     }
+
+
+
+
+    showYamlDialogVisible: boolean = false;
+    separateContent: string = '';
+
+    showYamlDialog(yamlContent: string): void {
+        this.setView('yaml');
+        this.separateContent = yamlContent; // Set content for the dialog
+        this.showYamlDialogVisible = true; // Show the dialog
+    }
+
+    projectData: ProjectDto[] = [];
+
+    protected readonly TemplateDto = TemplateDto;
+    isEditing: boolean = true;
+
+    copyYaml() {
+        const textField = document.createElement('textarea');
+        textField.value = this.separateContent; // Get the YAML content from the textarea
+        document.body.appendChild(textField);
+        textField.select();
+        document.execCommand('copy'); // Copy the selected text
+        textField.remove();
+        // Optional: Show a success message to the user
+    }
+    visible: boolean = false;
+
+    showDialog() {
+        // Vous pouvez ajouter ici la logique supplémentaire avant de naviguer, si nécessaire
+        this.router.navigate(['/app/collaborator/template/template/list']);
+    }
+
+
+    show() {
+        this.visible = true;
+    }
+    queryFormGroup!:FormGroup;
+    message=[{role:"system", content:"You are a helpful assistant."}];
+    result:any;
+    handleAskGPT() {
+        let url='https://api.openai.com/v1/chat/completions';
+        let httpHeaders=new HttpHeaders().set("Authorization","");
+        let payload={
+            model:"gpt-3.5-turbo",
+            message:this.message
+        }
+        this.message.push({
+            role:"user" , content:this.queryFormGroup.value.query
+        })
+        this.httpClient.post(url,payload,{headers:httpHeaders})
+            .subscribe({
+                next:(resp)=>{
+                    this.result=resp;
+                },
+                error:(err)=>{
+
+                }
+
+            })
+    }
+
+
+
+
+
+    showSidebar: boolean = false;
+
+    toggleSidebar() {
+        this.showSidebar = !this.showSidebar;
+    }
+
+    className: string = '';
+    attributes: string = '';
+    resultt: string = '';
+
+
+
+    //format(): void {
+    //const attributesArray = this.attributes.split(',').map(attr => attr.trim());
+    //this.projectCollaboratorService.formatClassAttributes(this.className, attributesArray).subscribe(
+    //  (data) => this.result = data,
+    //(error) => this.resultt = 'Error formatting attributes'
+    //);
+    //}
+    showCodePart: string = '';
+    // Dans votre composant TypeScript
+
+    showContentDefault: boolean = true;
+
+    toggleCodePart(part: string) {
+        if (part === 'part1' || part === 'part2' || part === 'part3' || part === 'part4' || part === 'part5' || part === 'part6' || part === 'part7') {
+            this.showContentDefault = false;
+            this.showCodePart = part;
+        }
+    }
+
+
+
+    showDefaultView: boolean = true;
+    showProjectView: boolean = false;
+    showYmlView: boolean= false;
+    setView(view: string) {
+        this.showDefaultView = view === 'default';
+        this.showProjectView = view === 'project';
+        this.showYmlView= view==='yaml';
+        // Enregistrer l'état de la vue dans le stockage local
+        localStorage.setItem('currentView', view);
+    }
+
+    showDefault() {
+        this.setView('default');
+    }
+
+    showProject() {
+        this.setView('project');
+    }
+    showYmll(){
+        this.setView('yaml')
+    }
+
 }
