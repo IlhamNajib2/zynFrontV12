@@ -1,0 +1,26 @@
+
+
+.sidebar {
+    width: 200px;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    right: 0; /* Pour positionner la barre latérale à droite */
+    background-color: gray;
+    color: white;
+    padding: 20px;
+}
+.btn {
+    background-color: darkslategray; /* Couleur de fond */
+    color: white; /* Couleur du texte */
+    padding: 8px 15px; /* Espacement à l'intérieur du bouton */
+    font-size: 16px; /* Taille de la police */
+    border: none; /* Supprime la bordure */
+    border-radius: 4px; /* Arrondi les coins */
+    cursor: pointer; /* Change le curseur au survol */
+}
+
+.btn:hover {
+    background-color: grey; /* Change la couleur de fond au survol */
+}
+

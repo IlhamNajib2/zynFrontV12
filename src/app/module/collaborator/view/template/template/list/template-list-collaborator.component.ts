@@ -3,7 +3,6 @@ import {TemplateCollaboratorService} from 'src/app/shared/service/collaborator/t
 import {TemplateDto} from 'src/app/shared/model/template/Template.model';
 import {TemplateCriteria} from 'src/app/shared/criteria/template/TemplateCriteria.model';
 
-
 import {ConfirmationService, MessageService,MenuItem} from 'primeng/api';
 import {FileTempDto} from 'src/app/zynerator/dto/FileTempDto.model';
 import {DatePipe} from '@angular/common';
@@ -35,11 +34,13 @@ import {DomainTemplateDto} from 'src/app/shared/model/template/DomainTemplate.mo
 import {DomainTemplateCollaboratorService} from 'src/app/shared/service/collaborator/template/DomainTemplateCollaborator.service';
 import {MemberDto} from 'src/app/shared/model/collaborator/Member.model';
 import {MemberCollaboratorService} from 'src/app/shared/service/collaborator/collaborator/MemberCollaborator.service';
+import {ChartType} from "chart.js";
 
 
 @Component({
-  selector: 'app-template-list-collaborator',
-  templateUrl: './template-list-collaborator.component.html'
+    selector: 'app-template-list-collaborator',
+    templateUrl: './template-list-collaborator.component.html',
+    styleUrls:['./template-list-collaborator.component.scss']
 })
 export class TemplateListCollaboratorComponent implements OnInit {
 
@@ -73,6 +74,10 @@ export class TemplateListCollaboratorComponent implements OnInit {
     members: Array<MemberDto>;
     technologys: Array<TechnologyDto>;
 
+    private _validTemplateCode = true;
+    private _validTemplateName = true;
+
+
 
     constructor( private service: TemplateCollaboratorService  , private categoryTemplateService: CategoryTemplateCollaboratorService, private technologyService: TechnologyCollaboratorService, private levelTemplateService: LevelTemplateCollaboratorService, private typeTemplateService: TypeTemplateCollaboratorService, private domainTemplateService: DomainTemplateCollaboratorService, private memberService: MemberCollaboratorService, @Inject(PLATFORM_ID) private platformId?) {
         this.datePipe = ServiceLocator.injector.get(DatePipe);
@@ -94,6 +99,8 @@ export class TemplateListCollaboratorComponent implements OnInit {
         this.loadDomainTemplate();
         this.loadMember();
         this.loadTechnology();
+        this.selectedProjectTemplate === 'public';
+        this.showProjectTemplateDetails = true;
 
     }
 
@@ -271,23 +278,23 @@ export class TemplateListCollaboratorComponent implements OnInit {
             console.log(error);
         });
     }
+    /*
+        public save() {
+            this.service.save().subscribe(item => {
+                if (item != null) {
+                    this.items.push({...item});
+                    this.createDialog = false;
 
-    public save() {
-        this.service.save().subscribe(item => {
-            if (item != null) {
-                this.items.push({...item});
-                this.createDialog = false;
 
-
-                this.item = new TemplateDto();
-            } else {
-                this.messageService.add({severity: 'error', summary: 'Erreurs', detail: 'Element existant'});
-            }
-        }, error => {
-            console.log(error);
-        });
-    }
-
+                    this.item = new TemplateDto();
+                } else {
+                    this.messageService.add({severity: 'error', summary: 'Erreurs', detail: 'Element existant'});
+                }
+            }, error => {
+                console.log(error);
+            });
+        }
+    */
 // add
 
 
@@ -329,25 +336,25 @@ export class TemplateListCollaboratorComponent implements OnInit {
     }
 
 
-	public initDuplicate(res: TemplateDto) {
-	}
+    public initDuplicate(res: TemplateDto) {
+    }
 
 
 
-   public prepareColumnExport(): void {
+    public prepareColumnExport(): void {
         this.exportData = this.items.map(e => {
             return {
-                 'Code': e.code ,
-                 'Name': e.name ,
-                 'Description': e.description ,
+                'Code': e.code ,
+                'Name': e.name ,
+                'Description': e.description ,
                 'Adding date': this.datePipe.transform(e.addingDate , 'dd/MM/yyyy hh:mm'),
                 'Last update date': this.datePipe.transform(e.lastUpdateDate , 'dd/MM/yyyy hh:mm'),
                 'Category template': e.categoryTemplate?.name ,
                 'Type template': e.typeTemplate?.name ,
                 'Level template': e.levelTemplate?.name ,
-                 'Template tags': e.templateTags ,
+                'Template tags': e.templateTags ,
                 'Domain template': e.domainTemplate?.name ,
-                 'Price': e.price ,
+                'Price': e.price ,
                 'Member': e.member?.id ,
                 'Technology': e.technology?.name ,
             }
@@ -361,17 +368,17 @@ export class TemplateListCollaboratorComponent implements OnInit {
             'Adding date Max': this.criteria.addingDateTo ? this.datePipe.transform(this.criteria.addingDateTo , this.dateFormat) : environment.emptyForExport ,
             'Last update date Min': this.criteria.lastUpdateDateFrom ? this.datePipe.transform(this.criteria.lastUpdateDateFrom , this.dateFormat) : environment.emptyForExport ,
             'Last update date Max': this.criteria.lastUpdateDateTo ? this.datePipe.transform(this.criteria.lastUpdateDateTo , this.dateFormat) : environment.emptyForExport ,
-        //'Category template': this.criteria.categoryTemplate?.name ? this.criteria.categoryTemplate?.name : environment.emptyForExport ,
-        //'Type template': this.criteria.typeTemplate?.name ? this.criteria.typeTemplate?.name : environment.emptyForExport ,
-        //'Level template': this.criteria.levelTemplate?.name ? this.criteria.levelTemplate?.name : environment.emptyForExport ,
+            //'Category template': this.criteria.categoryTemplate?.name ? this.criteria.categoryTemplate?.name : environment.emptyForExport ,
+            //'Type template': this.criteria.typeTemplate?.name ? this.criteria.typeTemplate?.name : environment.emptyForExport ,
+            //'Level template': this.criteria.levelTemplate?.name ? this.criteria.levelTemplate?.name : environment.emptyForExport ,
             'Template tags': this.criteria.templateTags ? this.criteria.templateTags : environment.emptyForExport ,
-        //'Domain template': this.criteria.domainTemplate?.name ? this.criteria.domainTemplate?.name : environment.emptyForExport ,
+            //'Domain template': this.criteria.domainTemplate?.name ? this.criteria.domainTemplate?.name : environment.emptyForExport ,
             'Price Min': this.criteria.priceMin ? this.criteria.priceMin : environment.emptyForExport ,
             'Price Max': this.criteria.priceMax ? this.criteria.priceMax : environment.emptyForExport ,
-        //'Member': this.criteria.member?.id ? this.criteria.member?.id : environment.emptyForExport ,
-        //'Technology': this.criteria.technology?.name ? this.criteria.technology?.name : environment.emptyForExport ,
+            //'Member': this.criteria.member?.id ? this.criteria.member?.id : environment.emptyForExport ,
+            //'Technology': this.criteria.technology?.name ? this.criteria.technology?.name : environment.emptyForExport ,
         }];
-      }
+    }
 
 
 
@@ -556,5 +563,144 @@ export class TemplateListCollaboratorComponent implements OnInit {
 
     set entityName(value: string) {
         this.service.entityName = value;
+    }
+
+    showYamlDialogVisible: boolean = false;
+    separateContent: string = '';
+
+    showYamlDialog(yamlContent: string): void {
+        this.separateContent = yamlContent; // Set content for the dialog
+        this.showYamlDialogVisible = true; // Show the dialog
+    }
+    isEditing: boolean = true;
+    copyYaml() {
+        const textField = document.createElement('textarea');
+        textField.value = this.separateContent; // Get the YAML content from the textarea
+        document.body.appendChild(textField);
+        textField.select();
+        document.execCommand('copy'); // Copy the selected text
+        textField.remove();
+        // Optional: Show a success message to the user
+    }
+    searchValue: string = '';
+    filteredTemplates: any[] = []; // contient les templates filtrés
+    value!: number;
+    showCodePart: string = '';
+    // Dans votre composant TypeScript
+    showContentDefault: boolean = true;
+
+
+    get validTemplateCode(): boolean {
+        return this._validTemplateCode;
+    }
+
+    set validTemplateCode(value: boolean) {
+        this._validTemplateCode = value;
+    }
+    get validTemplateName(): boolean {
+        return this._validTemplateName;
+    }
+    public  setValidation(value: boolean){
+        this.validTemplateCode = value;
+        this.validTemplateName = value;
+    }
+    set validTemplateName(value: boolean) {
+        this._validTemplateName = value;
+    }
+    public hideCreateDialog() {
+        this.createDialog = false;
+        this.setValidation(true);
+    }
+    public  validateForm(): void{
+        this.errorMessages = new Array<string>();
+        this.validateTemplateCode();
+        this.validateTemplateName();
+    }
+    public validateTemplateCode(){
+        if (this.stringUtilService.isEmpty(this.item.code)) {
+            this.errorMessages.push('Code non valide');
+            this.validTemplateCode = false;
+        } else {
+            this.validTemplateCode = true;
+        }
+    }
+    public validateTemplateName(){
+        if (this.stringUtilService.isEmpty(this.item.name)) {
+            this.errorMessages.push('Name non valide');
+            this.validTemplateName = false;
+        } else {
+            this.validTemplateName = true;
+        }
+    }
+    get submitted(): boolean {
+        return this._submitted;
+    }
+
+    set submitted(value: boolean) {
+        this._submitted = value;
+    }
+    get errorMessages(): string[] {
+        if (this._errorMessages == null) {
+            this._errorMessages = new Array<string>();
+        }
+        return this._errorMessages;
+    }
+    protected _submitted = false;
+    protected _errorMessages = new Array<string>();
+
+    set errorMessages(value: string[]) {
+        this._errorMessages = value;
+    }
+    public saveWithShowOption(showList: boolean) {
+        this.service.save().subscribe(item => {
+            if (item != null) {
+                this.items.push({...item});
+                this.createDialog = false;
+                this.submitted = false;
+                this.item = new TemplateDto();
+            } else {
+                this.messageService.add({severity: 'error', summary: 'Erreurs', detail: 'Element existant'});
+            }
+        }, error => {
+            console.log(error);
+        });
+    }
+    public save(): void {
+        this.submitted = true;
+        this.validateForm();
+        if (this.errorMessages.length === 0) {
+            this.saveWithShowOption(false);
+        } else {
+            this.messageService.add({severity: 'error',summary: 'Erreurs',detail: 'Merci de corrigé les erreurs sur le formulaire'});
+        }
+    }
+//ajouter
+    selectedProjectTemplate:string='public';
+    showProjectTemplateDetails : boolean=false;
+    selecteProjectTemplate(category:string):void{
+        this.showDefault();
+        this.selectedProjectTemplate=category;
+        this.showProjectTemplateDetails=true;
+    }
+    public categoryProjectTemplate: CategoryTemplateDto ;
+    public domainTemplate: DomainTemplateDto ;
+    public member: MemberDto ;
+// Variables pour gérer l'affichage des vues
+
+    showDefaultView: boolean = true;
+    showTemplateView: boolean = false;
+    setView(view: string) {
+        this.showDefaultView = view === 'default';
+        this.showTemplateView = view === 'template';
+        // Enregistrer l'état de la vue dans le stockage local
+        localStorage.setItem('currentView', view);
+    }
+
+    showDefault() {
+        this.setView('default');
+    }
+
+    showTemplate() {
+        this.setView('template');
     }
 }
