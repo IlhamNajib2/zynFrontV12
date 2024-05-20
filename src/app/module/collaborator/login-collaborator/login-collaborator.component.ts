@@ -17,7 +17,13 @@ export class LoginCollaboratorComponent implements OnInit {
     password: new FormControl('',Validators.required)
   });
 
+    forgetPass = new FormGroup({
+        username: new FormControl('',Validators.required),
+        email: new FormControl('',Validators.required)
+    });
+
   messages: Message[] = [];
+  active : boolean=false;
 
   constructor(private authService: AuthService,public layoutService: LayoutService, private router: Router) { }
 
@@ -28,11 +34,15 @@ export class LoginCollaboratorComponent implements OnInit {
   submit(){
     const formValues = this.loginForm.value;
     const username = formValues.username;
-    const passowrd = formValues.password;
-    this.authService.login(username, passowrd);
+    const password = formValues.password;
+    this.authService.login(username,password);
 
   }
     register(){
     this.router.navigate(['/collaborator/register']);
   }
+    forget(){
+        this.router.navigate(['/changePassword']);
+    }
+
 }

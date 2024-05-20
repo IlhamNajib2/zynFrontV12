@@ -1,0 +1,36 @@
+.body{
+//background-color: black;
+///display: flex;
+    background-color: rgb(7, 15, 30);
+
+    justify-content:center;
+}
+.body1{
+//background-color: black;
+///display: flex;
+    background-color: rgb(7, 15, 30);
+
+    justify-content:center;
+    display:flex;
+}
+
+.colum {
+    flex: 1;
+    padding: 0 0 0 0;
+}
+.white{
+    color:white;
+    margin:2vh;
+}
+
+
+.space{
+    width:87vh;
+}
+.awili{
+    margin-bottom:5px;
+}
+.container {
+    display: flex;
+    justify-content: space-around;
+}

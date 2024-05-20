@@ -1,0 +1,99 @@
+
+<!--
+<div class="flex justify-content-around flex-wrap bg-white-alpha-10">
+    <div class="flex align-items-center justify-content-center  m-2">
+        <div class="authentication-container bg-white-alpha-10">
+            <div class="authentication-card-container">
+                <div class="contain ">
+                    <div class="authentication-card">
+                        <div class="p-col logo">Login</div>
+        <div class="p-col login-item">
+            <form [formGroup]="loginForm"  class="form form-login">
+                <div class="form-field">
+                    <label class="p-field" for="login-username"><span class="hidden">Username</span></label>
+                    <input id="login-username" type="text" class="form-input" placeholder="Username" pInputText formControlName="username" required>
+                </div>
+
+                <div class="form-field">
+                    <label class="p-field" for="login-password"><span class="hidden">Password</span></label>
+                    <input id="login-password" type="password" class="form-input" placeholder="Password" pInputText formControlName="password" required>
+                </div>
+
+                <div class="form-field">
+                    <button type="submit" pButton label="Log in" class="p-button" (click)="register()"></button>
+                </div>
+            </form>
+        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/primeflex@2.0.0/css/primeflex.min.css"/>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/primeicons@4.1.0/fonts/primeicons.ttf"/>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/primeicons@4.1.0/fonts/primeicons.woff"/>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/primeicons@4.1.0/fonts/primeicons.woff2"/>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/primeicons@4.1.0/fonts/primeicons.svg"/>
+
+<script src="https://use.typekit.net/rjb4unc.js"></script>
+<script>try {
+    Typekit.load({async: true});
+} catch (e) {
+}</script>
+<div class="flex justify-content-around flex-wrap bg-white-alpha-10">
+    <div class="flex align-items-center justify-content-center  m-2">
+        <div class="authentication-container bg-white-alpha-10">
+            <div class="authentication-card-container">
+                <div class="container">
+                    <div class="logo">Agent Q Dashboard</div>
+                    <div class="login-item">
+                        <form action="" method="post" class="form form-login">
+                            <div class="form-field">
+                                <label class="user" for="login-username"><span class="hidden">Username</span></label>
+                                <input id="login-username" type="text" class="form-input" placeholder="Username"
+                                       required>
+                            </div>
+
+                            <div class="form-field">
+                                <label class="lock" for="login-password"><span class="hidden">Password</span></label>
+                                <input id="login-password" type="password" class="form-input" placeholder="Password"
+                                       required>
+                            </div>
+
+                            <div class="form-field">
+                                <input type="submit" value="Log in">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+-->
+
+<div class="login-container">
+
+    <form [formGroup]="loginForm" >
+        <h3 class="text-surface-900">Login Here</h3>
+
+        <label class="text-surface-900" for="userName">User Name</label>
+        <input type="text" placeholder="userName" id="userName" formControlName="userName"  required
+               autofocus>
+
+        <label class="text-surface-900" for="password">Password</label>
+        <input type="text" placeholder="password" id="password" formControlName="password"  required
+               autofocus>
+
+
+        <div class="go"><button type="submit" pButton label="Log in" class="p p-button text-surface-900" (click)="submit()"></button></div>
+        <div class="go"><button type="submit" pButton label="Register" class="p p-button p1 text-surface-900" (click)="register()"></button></div>
+        <br>
+        <button pButton type="button" label="Forget password ? "  class="p-button-text text-surface-900" style="color:#df7e1d;" (click)="forget()"></button>
+    </form>
+</div>
+
+
+

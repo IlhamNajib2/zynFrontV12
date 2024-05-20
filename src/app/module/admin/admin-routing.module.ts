@@ -7,6 +7,7 @@ import {AuthGuard} from 'src/app/zynerator/security/guards/auth.guard';
 
 import { LoginAdminComponent } from './login-admin/login-admin.component';
 import { RegisterAdminComponent } from './register-admin/register-admin.component';
+import {ProjectListAdminComponent} from "./view/project/project/list/project-list-admin.component";
 
 @NgModule({
     imports: [
@@ -15,6 +16,11 @@ import { RegisterAdminComponent } from './register-admin/register-admin.componen
                 {
                     path: '',
                     children: [
+                        {
+                            path: '',
+                            component: ProjectListAdminComponent,
+                            pathMatch:'full'
+                        },
                         {
                             path: 'login',
                             children: [
@@ -35,6 +41,7 @@ import { RegisterAdminComponent } from './register-admin/register-admin.componen
                                 }
                               ]
                         },
+
                         {
                             path: 'template',
                             loadChildren: () => import('./view/template/template-admin-routing.module').then(x => x.TemplateAdminRoutingModule),

@@ -12,7 +12,7 @@ import {AbstractService} from 'src/app/zynerator/service/AbstractService';
 
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class PackagingCollaboratorService {
     protected _API = '';
@@ -48,6 +48,15 @@ export class PackagingCollaboratorService {
         this.API_PERMISSION = environment.apiUrl + 'modelPermissionUser/';
     }
 
+
+
+
+    splitDescriptionIntoLines(description: string): string[] {
+        return description.split(/./);
+    }
+    getAllPackagesData(): Observable<PackagingDto[]> {
+        return this.http.get<PackagingDto[]>('http://localhost:8036/api/collaborator/packaging/');
+    }
 
     public findAll() {
         return this.http.get<Array<PackagingDto>>(this.API);

@@ -37,11 +37,14 @@ import {InscriptionCollaboratorStateDto} from 'src/app/shared/model/inscription/
 import {InscriptionCollaboratorStateCollaboratorService} from 'src/app/shared/service/collaborator/inscription/InscriptionCollaboratorStateCollaborator.service';
 import {MemberDto} from 'src/app/shared/model/collaborator/Member.model';
 import {MemberCollaboratorService} from 'src/app/shared/service/collaborator/collaborator/MemberCollaborator.service';
+import {PaimentCollaboratorDto} from "../../../../../../shared/model/paiment/PaimentCollaborator.model";
+import {ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 
 
 @Component({
   selector: 'app-inscription-collaborator-list-collaborator',
-  templateUrl: './inscription-collaborator-list-collaborator.component.html'
+  templateUrl: './inscription-collaborator-list-collaborator.component.html',
+    styleUrls: ['./inscription-collaborator-list-collaborator.component.scss']
 })
 export class InscriptionCollaboratorListCollaboratorComponent implements OnInit {
 
@@ -54,6 +57,8 @@ export class InscriptionCollaboratorListCollaboratorComponent implements OnInit 
     protected criteriaData: any[] = [];
     protected _totalRecords = 0;
     private _pdfName: string;
+    protected _errorMessages = new Array<string>();
+
 
 
     protected datePipe: DatePipe;
@@ -67,11 +72,48 @@ export class InscriptionCollaboratorListCollaboratorComponent implements OnInit 
     protected excelFile: File | undefined;
     protected enableSecurity = false;
 
-
+    isIndividual: boolean = false;
+    activeIndex: number = 0;
+    activeIndex1: number;
+    confirmed = false;
+    totalCalcule: boolean = false;
     packagings: Array<PackagingDto>;
     collaborators: Array<CollaboratorDto>;
     inscriptionCollaboratorStates: Array<InscriptionCollaboratorStateDto>;
     inscriptionCollaboratorTypes: Array<InscriptionCollaboratorTypeDto>;
+    private _inscriptionCollaborator: InscriptionCollaboratorDto = new InscriptionCollaboratorDto();
+
+
+
+    private _inscriptionMembresElement = new InscriptionMembreDto();
+    private _inscriptionMembresElements = new Array<InscriptionMembreDto>();
+    private _paiment: PaimentCollaboratorDto = new PaimentCollaboratorDto();
+    private _packaging: PackagingDto = new PackagingDto();
+    private _b: InscriptionMembreDto = new InscriptionMembreDto();
+    private _validPackagingCode = true;
+    private _validCollaboratorDescription = true;
+    private _validInscriptionCollaboratorStateCode = true;
+    private _validInscriptionCollaboratorTypeCode = true;
+    protected _validPaimentCollaboratorName: boolean = true;
+    protected _validPaimentCollaboratorCode: boolean = true;
+    private _validInscriptionCollaboratorStateName = true;
+    private _validInscriptionCollaboratorTypeName = true;
+    validCollaboratorDescription: any;
+    dateFormatColumn: string;
+    inscriptionCollaboratorType:InscriptionCollaboratorTypeDto=new InscriptionCollaboratorTypeDto();
+    inscriptionCollaboratorState:InscriptionCollaboratorStateDto=new InscriptionCollaboratorStateDto();
+
+
+
+    private _inscribe: InscriptionCollaboratorDto = new InscriptionCollaboratorDto();
+
+    @ViewChild('myElement') myElementRef!: ElementRef;
+
+    ngAfterViewInit() {
+        // Accédez à nativeElement ici
+        const nativeElement = this.myElementRef.nativeElement;
+        console.log(nativeElement);
+    }
 
 
     constructor( private service: InscriptionCollaboratorCollaboratorService  , private collaboratorService: CollaboratorCollaboratorService, private inscriptionMembreService: InscriptionMembreCollaboratorService, private inscriptionCollaboratorTypeService: InscriptionCollaboratorTypeCollaboratorService, private inscriptionMembreStateService: InscriptionMembreStateCollaboratorService, private packagingService: PackagingCollaboratorService, private inscriptionCollaboratorStateService: InscriptionCollaboratorStateCollaboratorService, private memberService: MemberCollaboratorService, @Inject(PLATFORM_ID) private platformId?) {
@@ -82,9 +124,21 @@ export class InscriptionCollaboratorListCollaboratorComponent implements OnInit 
         this.router = ServiceLocator.injector.get(Router);
         this.authService = ServiceLocator.injector.get(AuthService);
         this.exportService = ServiceLocator.injector.get(ExportService);
+        this.updateItemsMenu();
     }
 
     ngOnInit(): void {
+        this.inscription.collaborator =  new CollaboratorDto();
+        this.inscription.inscriptionCollaboratorType =  new InscriptionCollaboratorTypeDto();
+        this.inscriptionMembresElement.member = new MemberDto();
+        this.memberService.findAll().subscribe((data) => this.members = data);
+        this.inscriptionMembresElement.inscriptionMembreState = new InscriptionMembreStateDto();
+        this.inscriptionMembreStateService.findAll().subscribe((data) => this.inscriptionMembreStates = data);
+        this.packagingService.findAll().subscribe((data) => this.packagings = data);
+        this.collaboratorService.findAll().subscribe((data) => this.collaborators = data);
+        this.inscriptionCollaboratorStateService.findAll().subscribe((data) => this.inscriptionCollaboratorStates = data);
+        this.inscriptionCollaboratorTypeService.findAll().subscribe((data) => this.inscriptionCollaboratorTypes = data);
+
         this.findPaginatedByCriteria();
         this.initExport();
         this.initCol();
@@ -92,8 +146,260 @@ export class InscriptionCollaboratorListCollaboratorComponent implements OnInit 
         this.loadCollaborator();
         this.loadInscriptionCollaboratorState();
         this.loadInscriptionCollaboratorType();
+        this.isIndividual = true;
+        console.log("haad"+this.item.inscriptionCollaboratorType.name);
+    }
+
+//start
+
+    itemsMenu = [
+        {label: 'Collaborator'},
+        {label: 'Payment'},
+        {label: 'Confirmation'},
+    ];
+
+
+
+
+
+    public async delete1(dto: InscriptionMembreDto) {
+
+        this.confirmationService.confirm({
+            message: 'Voulez-vous supprimer cet élément ?',
+            header: 'Confirmation',
+            icon: 'pi pi-exclamation-triangle',
+            accept: () => {
+                this.inscriptionMembreService.delete(dto).subscribe(status => {
+                    if (status > 0) {
+                        const position = this.inscriptionMembresElements.indexOf(dto);
+                        position > -1 ? this.items.splice(position, 1) : false;
+                        this.messageService.add({
+                            severity: 'success',
+                            summary: 'Succès',
+                            detail: 'Element Supprimé',
+                            life: 3000
+                        });
+                    }
+
+                }, error => console.log(error));
+            }
+        });
 
     }
+
+    public async edit1(dto: InscriptionMembreDto) {
+        this.inscriptionMembreService.findByIdWithAssociatedList(dto).subscribe(res => {
+            this.inscriptionMembresElement = res;
+            this.editDialog = true;
+        });
+
+    }
+
+    action1() {
+        this.updateItemsMenu();
+    }
+
+    protected readonly Date = Date;
+
+    public CalcultotalRestant(couponName: string, total: number): number {
+        let result = null;
+        if (this.errorMessages.length === 0) {
+            result = this.service.CalcultotalRestant(couponName, total);
+            this.paiment.remaining = result;
+            this.totalCalcule = true;
+        } else {
+            this.messageService.add({
+                severity: 'error',
+                summary: 'Erreurs',
+                detail: 'Merci de verifier votre coupon '
+            });
+
+
+        }
+        return result;
+    }
+
+    public hideCreateDialog() {
+        this.createDialog = false;
+        this.setValidation(true);
+    }
+
+    public setValidation(value: boolean) {
+    }
+
+/*
+ if (!this.inscription || !this.inscription.inscriptionCollaboratorType) {
+
+            this.inscription = new InscriptionCollaboratorDto();
+            this.inscription.inscriptionCollaboratorType= new InscriptionCollaboratorTypeDto();
+        }
+ */
+    updateItemsMenu() {
+        if (!this.inscription|| !this.inscription.inscriptionCollaboratorType) {
+            this.inscription = new InscriptionCollaboratorDto();
+            this.inscription.inscriptionCollaboratorType= new InscriptionCollaboratorTypeDto();}
+        if (this.inscription.inscriptionCollaboratorType.name === 'company') {
+            this.itemsMenu.splice(1, 0, {label: 'Member'});
+        } else {
+            this.removeItem('Member');
+            this.isIndividual = true;
+            this.activeIndex = 0;
+        }
+    }
+
+
+
+
+    removeItem(label: string) {
+        const index = this.itemsMenu.findIndex(item => item.label === label);
+        if (index !== -1) {
+            this.itemsMenu.splice(index, 1);
+        }
+    }
+
+    action() {
+        if (!this.inscription|| !this.inscription.inscriptionCollaboratorType) {
+            this.inscription = new InscriptionCollaboratorDto();
+            this.inscription.inscriptionCollaboratorType= new InscriptionCollaboratorTypeDto();}
+
+        if (this.inscription.inscriptionCollaboratorType.name === 'company') {
+            this.changeActiveIndexes();
+            this.isIndividual = false;
+        }
+        this.updateItemsMenu();
+    }
+
+    changeActiveIndexes() {
+        this.activeIndex1 = 0;
+    }
+    nextb() {
+        if (!this.inscription || !this.inscription.inscriptionCollaboratorType) {
+            this.inscription = new InscriptionCollaboratorDto();
+            this.inscription.inscriptionCollaboratorType= new InscriptionCollaboratorTypeDto();}
+        let validationPassed = false;
+        if (this.inscription.inscriptionCollaboratorType.name === 'Individual') {
+            validationPassed = this.validateStepMember(this.activeIndex);
+        } else if (this.inscription.inscriptionCollaboratorType.name === 'company') {
+            validationPassed = this.validateStepMember(this.activeIndex1);
+        }
+
+        if (validationPassed) {
+            if (this.inscription.inscriptionCollaboratorType.name === 'Individual') {
+                if (this.activeIndex < 2) { // Assuming there are 3 steps in total for individual
+                    this.activeIndex++;
+                }
+            } else if (this.inscription.inscriptionCollaboratorType.name === 'company') {
+                if (this.activeIndex1 < 3) { // Assuming there are 4 steps in total for company
+                    if (this.activeIndex1 === 0) {
+                        this.activeIndex1 = 1;
+                    } else if (this.activeIndex1 === 1) {
+                        this.activeIndex1 = 2; // Skip the member step
+                    } else if (this.activeIndex1 === 2) {
+                        this.activeIndex1 = 3;
+                    }
+                }
+            }
+        } else {
+            this.activeIndex++;
+        }
+    }
+
+
+    validateStepMember(index: number) {
+        switch (index) {
+            case 0:
+                if (!this.validateCollaborator()) {
+                    return true;
+                }
+                break;
+            case 1:
+                if (!this.validateMembers()) {
+                    return true;
+                }
+                break;
+            case 2:
+                if (!this.validatePayment()) {
+                    return true;
+                }
+                break;
+            default:
+                return true;
+        }
+        return true;
+    }
+
+
+    prev() {
+        if (this.activeIndex != 0 || this.activeIndex1 != 0) {
+            this.activeIndex1--;
+            this.activeIndex--;
+        }
+
+    }
+
+
+    validateCollaborator(): boolean {
+        if (
+            this.collaborator.description &&
+            this.collaborator.username &&
+            this.collaborator.password
+
+        ) {
+            return true;
+        }
+        return false;
+    }
+
+    validateMembers(): boolean {
+        if (this.member.username && this.member.password) {
+            return true;
+        }
+        return false;
+    }
+
+    validatePayment(): boolean {
+        if (
+            this.paiment.name &&
+            this.paiment.description &&
+            this.paiment.code &&
+            this.paiment.couponDetail
+        ) {
+            return true;
+        }
+        return false;
+    }
+
+    save2() {
+        if (!this.inscription ) {
+            this.inscription = new InscriptionCollaboratorDto();
+        }
+        this._b.inscriptionDate = new Date();
+        const newInscriptionMembre = {...this._b};
+        this.inscription.inscriptionMembres.push(newInscriptionMembre);
+        this.inscriptionMembresElements.push(newInscriptionMembre);
+        this._b = new InscriptionMembreDto();
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -368,6 +674,100 @@ export class InscriptionCollaboratorListCollaboratorComponent implements OnInit 
       }
 
 
+
+
+
+    get inscription(): InscriptionCollaboratorDto {
+        return this._inscribe;
+    }
+
+    set inscription(value: InscriptionCollaboratorDto) {
+        this._inscribe = value;
+    }
+
+
+
+
+
+    get errorMessages(): string[] {
+        if (this._errorMessages == null) {
+            this._errorMessages = new Array<string>();
+        }
+        return this._errorMessages;
+    }
+
+    set errorMessages(value: string[]) {
+        this._errorMessages = value;
+    }
+
+    get inscriptionMembresElement(): InscriptionMembreDto {
+        if (this._inscriptionMembresElement == null)
+            this._inscriptionMembresElement = new InscriptionMembreDto();
+        return this._inscriptionMembresElement;
+    }
+
+    set inscriptionMembresElement(value: InscriptionMembreDto) {
+        this._inscriptionMembresElement = value;
+    }
+
+
+    get inscriptionMembresElements(): InscriptionMembreDto[] {
+        return this._inscriptionMembresElements;
+    }
+
+    set inscriptionMembresElements(value: InscriptionMembreDto[]) {
+        this._inscriptionMembresElements = value;
+    }
+
+    get paiment(): PaimentCollaboratorDto {
+        return this._paiment;
+    }
+
+    set paiment(value: PaimentCollaboratorDto) {
+        this._paiment = value;
+    }
+
+    get member(): MemberDto {
+        return this.memberService.item;
+    }
+
+    set member(value: MemberDto) {
+        this.memberService.item = value;
+    }
+
+    get members(): Array<MemberDto> {
+        return this.memberService.items;
+    }
+
+    set members(value: Array<MemberDto>) {
+        this.memberService.items = value;
+    }
+
+    get collaborator(): CollaboratorDto {
+        return this.collaboratorService.item;
+    }
+
+    set collaborator(value: CollaboratorDto) {
+        this.collaboratorService.item = value;
+    }
+
+
+
+    get inscriptionMembreStates(): Array<InscriptionMembreStateDto> {
+        return this.inscriptionMembreStateService.items;
+    }
+
+    set inscriptionMembreStates(value: Array<InscriptionMembreStateDto>) {
+        this.inscriptionMembreStateService.items = value;
+    }
+
+    get b(): InscriptionMembreDto {
+        return this._b;
+    }
+
+    set b(value: InscriptionMembreDto) {
+        this._b = value;
+    }
 
     get items(): Array<InscriptionCollaboratorDto> {
         return this.service.items;

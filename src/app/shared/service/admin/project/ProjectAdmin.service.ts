@@ -53,6 +53,13 @@ export class ProjectAdminService {
         this.countsUpdated.next();
     }
 
+
+    getProjectsByMonth(year: number): Observable<{ [month: string]: number }> {
+        return this.http.get<{ [month: string]: number }>(`${this.API}monthly`, { params: new HttpParams().set('year', year.toString()) });
+    }
+
+
+
     getCountsUpdated(): Observable<void> {
         return this.countsUpdated.asObservable();
     }

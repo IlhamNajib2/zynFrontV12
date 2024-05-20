@@ -25,15 +25,27 @@ import {ExportService} from 'src/app/zynerator/util/Export.service';
 
 import {CategoryPackagingDto} from 'src/app/shared/model/category/CategoryPackaging.model';
 import {CategoryPackagingCollaboratorService} from 'src/app/shared/service/collaborator/category/CategoryPackagingCollaborator.service';
+import {catchError, forkJoin, of, tap} from "rxjs";
 
 
 @Component({
   selector: 'app-packaging-list-collaborator',
-  templateUrl: './packaging-list-collaborator.component.html'
+  templateUrl: './packaging-list-collaborator.component.html',
+    styleUrls:['./packaging-list-collaborator.component.scss']
 })
 export class PackagingListCollaboratorComponent implements OnInit {
 
-    protected fileName = 'Packaging';
+
+
+    showPackageDetailsFlag: boolean = false;
+    selectedCategory: string = 'Free';
+    fileName = 'Packaging';
+
+    selectCategory(category: string) {
+        this.selectedCategory = category;
+        this.showPackageDetailsFlag = true;
+    }
+
 
     protected findByCriteriaShow = false;
     protected cols: any[] = [];
@@ -59,7 +71,7 @@ export class PackagingListCollaboratorComponent implements OnInit {
     categoryPackagings: Array<CategoryPackagingDto>;
 
 
-    constructor( private service: PackagingCollaboratorService  , private categoryPackagingService: CategoryPackagingCollaboratorService, @Inject(PLATFORM_ID) private platformId?) {
+    constructor( private packagingService: PackagingCollaboratorService, private categoryPackagingService: CategoryPackagingCollaboratorService, @Inject(PLATFORM_ID) private platformId?) {
         this.datePipe = ServiceLocator.injector.get(DatePipe);
         this.messageService = ServiceLocator.injector.get(MessageService);
         this.confirmationService = ServiceLocator.injector.get(ConfirmationService);
@@ -74,8 +86,68 @@ export class PackagingListCollaboratorComponent implements OnInit {
         this.initExport();
         this.initCol();
         this.loadCategoryPackaging();
+        this.packagingService.getAllPackagesData().subscribe(packagesData => {
+            this.packagesData = packagesData.map(packageData => {
+                return {
+                    ...packageData,
+                    descriptionLines: this.packagingService.splitDescriptionIntoLines(packageData.description)
+                };
+            });
+        });
+        this.packagingService.getAllPackagesData().subscribe(packagesData => {
+            this.packagesData = packagesData;
+        });
 
+        // this.packagingService.getAllPackagesData().subscribe(packagesData => {
+        //this.packagesData = packagesData.map(packageData => {
+        // return {
+        //         ...packageData,
+        //       descriptionLines: this.packagingService.splitDescriptionIntoLines(packageData.description)
+        // };
+        // });
+        //});
+        // Appelez le service pour récupérer les données de tous les packages
+
+        this.packagingService.getAllPackagesData().subscribe(data => {
+            this.packagesData = data;
+        });
+        //  this.loadPackagingById('1');
+        this.activateSecurityConstraint('Packaging').subscribe(() => {
+            if (true || this.listActionIsValid) {
+                this.findPaginatedByCriteria();
+                this.initExport();
+                this.initCol();
+                this.loadCategoryPackaging();
+            }
+        });
+        this.selectedCategory === 'Free';
+        this.showPackageDetailsFlag = true;
     }
+
+
+
+
+    onSearchInput(event: any) {
+        const searchTerm = event.target.value;
+        // Handle search input here
+        console.log('Search term:', searchTerm);
+    }
+
+
+
+    packagesData: PackagingDto[];
+    visible: boolean = false;
+
+
+
+
+
+    login: boolean=false;
+
+    public async loadCategoryPackaging(){
+        this.categoryPackagingService.findAllOptimized().subscribe(categoryPackagings => this.categoryPackagings = categoryPackagings, error => console.log(error))
+    }
+
 
 
 
@@ -89,7 +161,7 @@ export class PackagingListCollaboratorComponent implements OnInit {
 
     public importExcel(): void {
         if (this.excelFile) {
-            this.service.importExcel(this.excelFile).subscribe(
+            this.packagingService.importExcel(this.excelFile).subscribe(
                 response => {
                     console.log('File uploaded successfully!', response);
                 },
@@ -101,7 +173,7 @@ export class PackagingListCollaboratorComponent implements OnInit {
     }
 
     public findPaginatedByCriteria() {
-        this.service.findPaginatedByCriteria(this.criteria).subscribe(paginatedItems => {
+        this.packagingService.findPaginatedByCriteria(this.criteria).subscribe(paginatedItems => {
             this.items = paginatedItems.list;
             this.totalRecords = paginatedItems.dataSize;
             this.selections = new Array<PackagingDto>();
@@ -115,7 +187,7 @@ export class PackagingListCollaboratorComponent implements OnInit {
     }
 
     public async edit(dto: PackagingDto) {
-        this.service.findByIdWithAssociatedList(dto).subscribe(res => {
+        this.packagingService.findByIdWithAssociatedList(dto).subscribe(res => {
             this.item = res;
             console.log(res);
             this.editDialog = true;
@@ -124,7 +196,7 @@ export class PackagingListCollaboratorComponent implements OnInit {
     }
 
     public async view(dto: PackagingDto) {
-        this.service.findByIdWithAssociatedList(dto).subscribe(res => {
+        this.packagingService.findByIdWithAssociatedList(dto).subscribe(res => {
             this.item = res;
             this.viewDialog = true;
         });
@@ -141,7 +213,7 @@ export class PackagingListCollaboratorComponent implements OnInit {
             header: 'Confirmation',
             icon: 'pi pi-exclamation-triangle',
             accept: () => {
-                this.service.deleteMultiple().subscribe(() => {
+                this.packagingService.deleteMultiple().subscribe(() => {
                     this.items = this.items.filter(item => !this.selections.includes(item));
                     this.selections = new Array<PackagingDto>();
                     this.messageService.add({
@@ -169,7 +241,7 @@ export class PackagingListCollaboratorComponent implements OnInit {
             header: 'Confirmation',
             icon: 'pi pi-exclamation-triangle',
             accept: () => {
-                this.service.delete(dto).subscribe(status => {
+                this.packagingService.delete(dto).subscribe(status => {
                     if (status > 0) {
                         const position = this.items.indexOf(dto);
                         position > -1 ? this.items.splice(position, 1) : false;
@@ -188,7 +260,7 @@ export class PackagingListCollaboratorComponent implements OnInit {
     }
 
     public async duplicate(dto: PackagingDto) {
-        this.service.findByIdWithAssociatedList(dto).subscribe(
+        this.packagingService.findByIdWithAssociatedList(dto).subscribe(
             res => {
                 this.initDuplicate(res);
                 this.item = res;
@@ -222,7 +294,7 @@ export class PackagingListCollaboratorComponent implements OnInit {
     }
 
     public exportPdf(dto: PackagingDto): void {
-        this.service.exportPdf(dto).subscribe((data: ArrayBuffer) => {
+        this.packagingService.exportPdf(dto).subscribe((data: ArrayBuffer) => {
             const blob = new Blob([data], {type: 'application/pdf'});
             const url = window.URL.createObjectURL(blob);
             const link = document.createElement('a');
@@ -242,7 +314,7 @@ export class PackagingListCollaboratorComponent implements OnInit {
 
 
     update() {
-        this.service.edit().subscribe(data => {
+        this.packagingService.edit().subscribe(data => {
             const myIndex = this.items.findIndex(e => e.id === this.item.id);
             this.items[myIndex] = data;
             this.editDialog = false;
@@ -251,9 +323,109 @@ export class PackagingListCollaboratorComponent implements OnInit {
             console.log(error);
         });
     }
+    public activateSecurityConstraint(entityName: string) {
+        this.entityName = entityName;
+        let createActionPermission = of(true);
+        let editActionPermission = of(true);
+        let deleteActionPermission = of(true);
+        let listActionPermission = of(true);
+        let duplicateActionPermission = of(true);
+        let viewActionPermission = of(true);
+        if (this.enableSecurity){
+            createActionPermission = this.hasCreateActionPermission(this.createAction);
+            editActionPermission = this.hasEditeActionPermission(this.editAction);
+            deleteActionPermission = this.hasDeleteActionPermission(this.deleteAction);
+            listActionPermission = this.hasListActionPermission(this.listAction);
+            duplicateActionPermission = this.hasDuplicateActionPermission(this.duplicateAction);
+            viewActionPermission = this.hasViewActionPermission(this.viewAction);
+        }
+        else {
+            this.createActionIsValid= true;
+            this.editActionIsValid= true;
+            this.deleteActionIsValid= true;
+            this.listActionIsValid= true;
+            this.duplicateActionIsValid= true;
+            this.viewActionIsValid= true;
+        }
+        return forkJoin([
+            createActionPermission,
+            editActionPermission,
+            deleteActionPermission,
+            listActionPermission,
+            duplicateActionPermission,
+            viewActionPermission
+        ]);
+    }
+
+    public hasCreateActionPermission(action: string) {
+        const username = this.authService.authenticatedUser.username;
+        return this.packagingService.hasActionPermission(username, action).pipe(
+            tap(data => this.createActionIsValid = data),
+            catchError(error => {
+                console.log(error);
+                return of(null);
+            })
+        );
+    }
+    public hasEditeActionPermission(action: string) {
+        const username = this.authService.authenticatedUser.username;
+        return this.packagingService.hasActionPermission(username, action).pipe(
+            tap(data => this.editActionIsValid = data),
+            catchError(error => {
+                console.log(error);
+                return of(null);
+            })
+        );
+    }
+
+    public hasDeleteActionPermission(action: string) {
+        const username = this.authService.authenticatedUser.username;
+        return this.packagingService.hasActionPermission(username, action).pipe(
+            tap(data => this.deleteActionIsValid = data),
+            catchError(error => {
+                console.log(error);
+                return of(null);
+            })
+        );
+    }
+
+    public hasListActionPermission(action: string) {
+        const username = this.authService.authenticatedUser.username;
+        return this.packagingService.hasActionPermission(username, action).pipe(
+            tap(data => this.listActionIsValid = data),
+            catchError(error => {
+                console.log(error);
+                return of(null);
+            })
+        );
+    }
+
+    public hasDuplicateActionPermission(action: string) {
+        const username = this.authService.authenticatedUser.username;
+        return this.packagingService.hasActionPermission(username, action).pipe(
+            tap(data => this.duplicateActionIsValid = data),
+            catchError(error => {
+                console.log(error);
+                return of(null);
+            })
+        );
+    }
+
+    public hasViewActionPermission(action: string) {
+        const username = this.authService.authenticatedUser.username;
+        return this.packagingService.hasActionPermission(username, action).pipe(
+            tap(data => this.viewActionIsValid = data),
+            catchError(error => {
+                console.log(error);
+                return of(null);
+            })
+        );
+    }
+
+
 
     public save() {
-        this.service.save().subscribe(item => {
+        this.packagingService.save().subscribe(item => {
             if (item != null) {
                 this.items.push({...item});
                 this.createDialog = false;
@@ -268,7 +440,7 @@ export class PackagingListCollaboratorComponent implements OnInit {
         });
     }
 
-// add
+
 
 
     public initCol() {
@@ -287,9 +459,6 @@ export class PackagingListCollaboratorComponent implements OnInit {
     }
 
 
-    public async loadCategoryPackaging(){
-        this.categoryPackagingService.findAllOptimized().subscribe(categoryPackagings => this.categoryPackagings = categoryPackagings, error => console.log(error))
-    }
 
 
 	public initDuplicate(res: PackagingDto) {
@@ -339,59 +508,59 @@ export class PackagingListCollaboratorComponent implements OnInit {
 
 
     get items(): Array<PackagingDto> {
-        return this.service.items;
+        return this.packagingService.items;
     }
 
     set items(value: Array<PackagingDto>) {
-        this.service.items = value;
+        this.packagingService.items = value;
     }
 
     get selections(): Array<PackagingDto> {
-        return this.service.selections;
+        return this.packagingService.selections;
     }
 
     set selections(value: Array<PackagingDto>) {
-        this.service.selections = value;
+        this.packagingService.selections = value;
     }
 
     get item(): PackagingDto {
-        return this.service.item;
+        return this.packagingService.item;
     }
 
     set item(value: PackagingDto) {
-        this.service.item = value;
+        this.packagingService.item = value;
     }
 
     get createDialog(): boolean {
-        return this.service.createDialog;
+        return this.packagingService.createDialog;
     }
 
     set createDialog(value: boolean) {
-        this.service.createDialog = value;
+        this.packagingService.createDialog = value;
     }
 
     get editDialog(): boolean {
-        return this.service.editDialog;
+        return this.packagingService.editDialog;
     }
 
     set editDialog(value: boolean) {
-        this.service.editDialog = value;
+        this.packagingService.editDialog = value;
     }
 
     get viewDialog(): boolean {
-        return this.service.viewDialog;
+        return this.packagingService.viewDialog;
     }
 
     set viewDialog(value: boolean) {
-        this.service.viewDialog = value;
+        this.packagingService.viewDialog = value;
     }
 
     get criteria(): PackagingCriteria {
-        return this.service.criteria;
+        return this.packagingService.criteria;
     }
 
     set criteria(value: PackagingCriteria) {
-        this.service.criteria = value;
+        this.packagingService.criteria = value;
     }
 
     get dateFormat() {
@@ -416,108 +585,108 @@ export class PackagingListCollaboratorComponent implements OnInit {
     }
 
     get createActionIsValid(): boolean {
-        return this.service.createActionIsValid;
+        return this.packagingService.createActionIsValid;
     }
 
     set createActionIsValid(value: boolean) {
-        this.service.createActionIsValid = value;
+        this.packagingService.createActionIsValid = value;
     }
 
 
     get editActionIsValid(): boolean {
-        return this.service.editActionIsValid;
+        return this.packagingService.editActionIsValid;
     }
 
     set editActionIsValid(value: boolean) {
-        this.service.editActionIsValid = value;
+        this.packagingService.editActionIsValid = value;
     }
 
     get listActionIsValid(): boolean {
-        return this.service.listActionIsValid;
+        return this.packagingService.listActionIsValid;
     }
 
     set listActionIsValid(value: boolean) {
-        this.service.listActionIsValid = value;
+        this.packagingService.listActionIsValid = value;
     }
 
     get deleteActionIsValid(): boolean {
-        return this.service.deleteActionIsValid;
+        return this.packagingService.deleteActionIsValid;
     }
 
     set deleteActionIsValid(value: boolean) {
-        this.service.deleteActionIsValid = value;
+        this.packagingService.deleteActionIsValid = value;
     }
 
 
     get viewActionIsValid(): boolean {
-        return this.service.viewActionIsValid;
+        return this.packagingService.viewActionIsValid;
     }
 
     set viewActionIsValid(value: boolean) {
-        this.service.viewActionIsValid = value;
+        this.packagingService.viewActionIsValid = value;
     }
 
     get duplicateActionIsValid(): boolean {
-        return this.service.duplicateActionIsValid;
+        return this.packagingService.duplicateActionIsValid;
     }
 
     set duplicateActionIsValid(value: boolean) {
-        this.service.duplicateActionIsValid = value;
+        this.packagingService.duplicateActionIsValid = value;
     }
 
     get createAction(): string {
-        return this.service.createAction;
+        return this.packagingService.createAction;
     }
 
     set createAction(value: string) {
-        this.service.createAction = value;
+        this.packagingService.createAction = value;
     }
 
     get listAction(): string {
-        return this.service.listAction;
+        return this.packagingService.listAction;
     }
 
     set listAction(value: string) {
-        this.service.listAction = value;
+        this.packagingService.listAction = value;
     }
 
     get editAction(): string {
-        return this.service.editAction;
+        return this.packagingService.editAction;
     }
 
     set editAction(value: string) {
-        this.service.editAction = value;
+        this.packagingService.editAction = value;
     }
 
     get deleteAction(): string {
-        return this.service.deleteAction;
+        return this.packagingService.deleteAction;
     }
 
     set deleteAction(value: string) {
-        this.service.deleteAction = value;
+        this.packagingService.deleteAction = value;
     }
 
     get viewAction(): string {
-        return this.service.viewAction;
+        return this.packagingService.viewAction;
     }
 
     set viewAction(value: string) {
-        this.service.viewAction = value;
+        this.packagingService.viewAction = value;
     }
 
     get duplicateAction(): string {
-        return this.service.duplicateAction;
+        return this.packagingService.duplicateAction;
     }
 
     set duplicateAction(value: string) {
-        this.service.duplicateAction = value;
+        this.packagingService.duplicateAction = value;
     }
 
     get entityName(): string {
-        return this.service.entityName;
+        return this.packagingService.entityName;
     }
 
     set entityName(value: string) {
-        this.service.entityName = value;
+        this.packagingService.entityName = value;
     }
 }

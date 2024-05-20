@@ -1,3 +1,5 @@
+<!--
+
 <div class="grid"  *ngIf="listActionIsValid">
     <div class="col-12">
         <p-toast></p-toast>
@@ -143,94 +145,93 @@
                         <th style="width: 3rem">
                             <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
                         </th>
-                                
+
                         <th pSortableColumn="startDate">
                             <div class="p-d-flex p-jc-between p-ai-center">
                                 <span>{{'inscriptionCollaborator.startDate' | translate}}</span>
                                 <p-sortIcon field="startDate"></p-sortIcon>
                             </div>
                         </th>
-                                
-                                
+
+
                         <th pSortableColumn="endDate">
                             <div class="p-d-flex p-jc-between p-ai-center">
                                 <span>{{'inscriptionCollaborator.endDate' | translate}}</span>
                                 <p-sortIcon field="endDate"></p-sortIcon>
                             </div>
                         </th>
-                                
-                                
+
+
                         <th pSortableColumn="renewDate">
                             <div class="p-d-flex p-jc-between p-ai-center">
                                 <span>{{'inscriptionCollaborator.renewDate' | translate}}</span>
                                 <p-sortIcon field="renewDate"></p-sortIcon>
                             </div>
                         </th>
-                                
-                                
+
+
                         <th pSortableColumn="packaging">
                             <div class="p-d-flex p-jc-between p-ai-center">
                                 <span>{{'inscriptionCollaborator.packaging' | translate}}</span>
                                 <p-sortIcon field="packaging"></p-sortIcon>
                             </div>
                         </th>
-                                
-                                
+
+
                         <th pSortableColumn="consumedEntity">
                             <div class="p-d-flex p-jc-between p-ai-center">
                                 <span>{{'inscriptionCollaborator.consumedEntity' | translate}}</span>
                                 <p-sortIcon field="consumedEntity"></p-sortIcon>
                             </div>
                         </th>
-                                
-                                
+
+
                         <th pSortableColumn="consumedProjet">
                             <div class="p-d-flex p-jc-between p-ai-center">
                                 <span>{{'inscriptionCollaborator.consumedProjet' | translate}}</span>
                                 <p-sortIcon field="consumedProjet"></p-sortIcon>
                             </div>
                         </th>
-                                
-                                
+
+
                         <th pSortableColumn="consumedAttribut">
                             <div class="p-d-flex p-jc-between p-ai-center">
                                 <span>{{'inscriptionCollaborator.consumedAttribut' | translate}}</span>
                                 <p-sortIcon field="consumedAttribut"></p-sortIcon>
                             </div>
                         </th>
-                                
-                                
+
+
                         <th pSortableColumn="consumedIndicator">
                             <div class="p-d-flex p-jc-between p-ai-center">
                                 <span>{{'inscriptionCollaborator.consumedIndicator' | translate}}</span>
                                 <p-sortIcon field="consumedIndicator"></p-sortIcon>
                             </div>
                         </th>
-                                
-                                
+
+
                         <th pSortableColumn="collaborator">
                             <div class="p-d-flex p-jc-between p-ai-center">
                                 <span>{{'inscriptionCollaborator.collaborator' | translate}}</span>
                                 <p-sortIcon field="collaborator"></p-sortIcon>
                             </div>
                         </th>
-                                
-                                <!-- 
+
+
                         <th pSortableColumn="inscriptionCollaboratorState">
                             <div class="p-d-flex p-jc-between p-ai-center">
                                 <span>{{'inscriptionCollaborator.inscriptionCollaboratorState' | translate}}</span>
                                 <p-sortIcon field="inscriptionCollaboratorState"></p-sortIcon>
                             </div>
                         </th>
-                                --> 
-                                <!-- 
+
                         <th pSortableColumn="inscriptionCollaboratorType">
                             <div class="p-d-flex p-jc-between p-ai-center">
                                 <span>{{'inscriptionCollaborator.inscriptionCollaboratorType' | translate}}</span>
                                 <p-sortIcon field="inscriptionCollaboratorType"></p-sortIcon>
                             </div>
                         </th>
-                                --> 
+
                         <th>Actions</th>
                     </tr>
                 </ng-template>
@@ -239,39 +240,38 @@
                         <td>
                             <p-tableCheckbox [value]="element"></p-tableCheckbox>
                         </td>
-                            
+
                         <td>{{element.startDate | date :'dd/MM/yyyy HH:mm' }}</td>
-                            
-                            
+
+
                         <td>{{element.endDate | date :'dd/MM/yyyy HH:mm' }}</td>
-                            
-                            
+
+
                         <td>{{element.renewDate | date :'dd/MM/yyyy HH:mm' }}</td>
-                            
-                            
+
+
                         <td>{{element.packaging?.id}}</td>
-                            
-                            
+
+
                         <td>{{element.consumedEntity}}</td>
-                            
-                            
+
+
                         <td>{{element.consumedProjet}}</td>
-                            
-                            
+
+
                         <td>{{element.consumedAttribut}}</td>
-                            
-                            
+
+
                         <td>{{element.consumedIndicator}}</td>
-                            
-                            
+
+
                         <td>{{element.collaborator?.description}}</td>
-                            
-                             <!-- 
+
+
                         <td>{{element.inscriptionCollaboratorState?.name}}</td>
-                             --> 
-                             <!-- 
+
                         <td>{{element.inscriptionCollaboratorType?.name}}</td>
-                             --> 
+
                         <td>
                             <button pButton pRipple icon="pi pi-pencil"  class="p-button-rounded p-button-info mr-2" (click)="edit(element)"  *ngIf="editActionIsValid"></button>
                             <button pButton pRipple icon="pi pi-list" class="p-button-rounded p-button-secondary mr-2" (click)="view(element)"  *ngIf="viewActionIsValid"></button>
@@ -302,3 +302,224 @@
         You don't have permission to access !
     </p>
 </p-card>
+-->
+
+
+<div class="grid h11" >
+    <div   style="display: flex; justify-content: center; align-items: center; height: 150vh;">
+        <p-card style="display: flex; justify-content: center;">
+            <ng-template pTemplate="content" >
+
+                <div class="p-grid">
+                    <div class="p-col-12 ">
+                        <p-toast></p-toast>
+                        <div>
+                            <p-steps [model]="itemsMenu" [readonly]="false" *ngIf="isIndividual" [(activeIndex)]="activeIndex"></p-steps>
+                            <p-steps [model]="itemsMenu" [readonly]="false" *ngIf="!isIndividual"   [(activeIndex)]="activeIndex1"></p-steps>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div [ngSwitch]="isIndividual ? activeIndex : activeIndex1">
+                    <div *ngIf="(activeIndex === 0 && isIndividual) || (activeIndex1 === 0 && !isIndividual)" header="{{'inscriptionCollaborator.tabPan' | translate}}">
+
+                        <div class="grid mt-4">
+
+                        <div class="field col-11 md:col-6">
+                            <label for="2">{{ 'collaborator.username' | translate }}</label>
+                            <input class=" input-grey bg-surface-100 mb-2 mr-2 mt-2 px-4" type="text" pInputText placeholder="{{'enter username' | translate}}" id="2" [(ngModel)]=" collaborator.username"/>
+                        </div>
+
+                        <div class="field col-11 md:col-6">
+                            <label for="3">{{ 'collaborator.password' | translate }}</label>
+                            <input class=" input-grey bg-surface-100 mb-2 mr-2 mt-2 px-4" type="text" pInputText placeholder="{{'enter password' | translate}}" id="3" [(ngModel)]="collaborator.password"/>
+                        </div>
+
+                        <div class="field col-11 md:col-6">
+                            <label for="40">{{ 'collaborator.rib' | translate }}</label>
+                            <input class=" input-grey bg-surface-100 mb-2 mr-2 mt-2 px-4" type="text" pInputText placeholder="{{'enter rib' | translate}}" id="40" [(ngModel)]="collaborator.rib"/>
+                        </div>
+
+                            <div class="field col-11 md:col-6">
+                                <label for="1">{{ 'collaborator.description' | translate }}<span style="color: red;">*</span></label>
+                                <input class=" input-grey bg-surface-100 mb-2 mr-2 mt-2 px-4" type="text" pInputText placeholder="{{'enter discription' | translate}}" id="1" [(ngModel)]=" collaborator.description" />
+
+                            </div>
+
+
+                            <div class="field col-11 md:col-6">
+                                <div class="col-3 md:col-3">
+                                    <div class="field-radiobutton">
+                                        <p-radioButton name="radio1" value="Individual" required (onClick)="action1()" [(ngModel)]="inscription.inscriptionCollaboratorType.name" id="radio1"></p-radioButton>
+                                        <label for="radio1">individual</label>
+
+                                    </div>
+                                </div>
+                                <div class="col-3 md:3">
+                                    <div class="field-radiobutton">
+                                        <p-radioButton name="radio2" value="company" required (onClick)="action()" [(ngModel)]="inscription.inscriptionCollaboratorType.name" id="radio2"></p-radioButton>
+                                        <label for="radio2">company</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div *ngIf="activeIndex1===1&&!isIndividual" header="Inscription Member"  style="display: flex; justify-content: center; align-items: center; min-height: 90vh;min-width:150vh;">
+                        <div>
+                            <div class="p-col"  >
+                                <div class="grid mt-4">
+                                    <div class="field col-11 md:col-6">
+                                        <label for="4">{{ 'member.username' | translate }}</label>
+                                        <input class="input-grey bg-surface-100 mb-2 mr-2 mt-2 px-4" type="text" pInputText placeholder="{{'enter username' | translate}}" id="4" [(ngModel)]="b.member.username"/>
+                                    </div>
+
+                                    <div class="field col-11 md:col-6">
+                                        <label for="5">{{ 'member.password' | translate }}</label>
+                                        <input class="input-grey bg-surface-100 mb-2 mr-2 mt-2 px-4" type="text" pInputText placeholder="{{'enter password' | translate}}" id="5" [(ngModel)]="b.member.password"/>
+                                    </div>
+                                    <div class="field col-11 md:col-6">
+                                        <label for="10">{{ 'inscriptionMembres.maxEntity' | translate }}</label>
+                                        <input class="input-grey bg-surface-100 mb-2 mr-2 mt-2 px-4" type="text" pInputText placeholder="{{'enter maxEntity' | translate}}" id="10" [(ngModel)]="b.affectedEntity"/>
+                                    </div>
+                                    <div class="field col-11 md:col-6">
+                                        <label for="20">{{ 'inscriptionMembres.maxEntity' | translate }}</label>
+                                        <input class="input-grey bg-surface-100 mb-2 mr-2 mt-2 px-4" type="text" pInputText placeholder="{{'enter maxEntity' | translate}}" id="20" [(ngModel)]="b.affectedAttribut"/>
+                                    </div>
+                                    <div class="field col-11 md:col-6">
+                                        <label for="21">{{ 'inscriptionMembres.maxEntity' | translate }}</label>
+                                        <input class="input-grey bg-surface-100 mb-2 mr-2 mt-2 px-4" type="text" pInputText placeholder="{{'enter maxEntity' | translate}}" id="21" [(ngModel)]="b.affectedProjet"/>
+                                    </div>
+                                </div>
+                                <div class="p-col">
+                                    <div class="grid mt-4">
+                                        <div class="row mt-4">
+                                            <div class="col-md-10"></div>
+                                            <div class="col-md-2 d-flex justify-content-end">
+                                                <button pButton pRipple label="{{'save' | translate}}" icon="pi pi-check" class="btn button-purple" (click)="save2()"></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="p-col  " style=" overflow-y: auto; margin-bottom: 20px">
+                                <div class="card tabl ">
+                                    <p-scrollPanel [style]="{ width: '100%', height: '150px'}" styleClass="custombar1">
+                                        <p-table [scrollable]="true"  [value]="inscriptionMembresElements"  scrollHeight="400px">
+
+                                            <ng-template pTemplate="header">
+                                                <tr>
+                                                    <th>Inscription date</th>
+                                                    <th>Member name</th>
+                                                    <th>Member password</th>
+                                                    <th>Member maxEntity</th>
+                                                    <th>Member maxProjet</th>
+                                                    <th>Member maxAttribut</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </ng-template>
+                                            <ng-template pTemplate="body" *ngFor="let p of inscriptionMembresElements" >
+                                                <tr>
+                                                    <td>{{p.inscriptionDate| date: dateFormatColumn}}</td>
+                                                    <td>{{p.member.username}}</td>
+                                                    <td>{{p.member.password}}</td>
+                                                    <td>{{p.affectedEntity}}</td>
+                                                    <td>{{p.affectedProjet}}</td>
+                                                    <td>{{p.affectedAttribut}}</td>
+                                                    <td>
+                                                        <button (click)="delete1(p)" pButton type="button" icon="pi pi-times"  class="p-button-rounded p-button-danger"></button>
+                                                        <button (click)="edit1(p)" pButton type="button" icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2"></button>
+                                                    </td>
+                                                </tr>
+                                            </ng-template>
+
+                                        </p-table>
+                                    </p-scrollPanel>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div  *ngIf="(activeIndex === 1 && isIndividual) || (activeIndex1 === 2 && !isIndividual)" header="{{'paiment Collaborator' | translate}}">
+                        <div class="grid mt-4">
+                            <div class="field col-11 md:col-6">
+                                <label for="6">{{'paimentCollaborator.name' | translate}}<span style="color: red;">*</span></label>
+                                <input class=" input-grey mb-2 mr-2" type="text" pInputText  placeholder="{{'paimentCollaborator.name' | translate}}" id="6" [(ngModel)]=" paiment.name"
+                                       [ngClass]="{'ng-invalid ng-dirty' : !_validPaimentCollaboratorName}"  />
+                                <small class='p-error' *ngIf='!_validPaimentCollaboratorName'>Name est obligatoire.</small>
+                            </div>
+
+                            <div class="field col-11 md:col-6">
+                                <label for="7">{{'paimentCollaborator.description' | translate}}</label>
+                                <textarea id="7"  class="input-grey" pInputTextarea rows="5" cols="30" placeholder="{{'paimentCollaborator.description' | translate}}"  [(ngModel)]=" paiment.description"
+                                ></textarea>
+                            </div>
+
+                            <div class="field col-11 md:col-6">
+                                <label for="8">{{'paimentCollaborator.code' | translate}}<span style="color: red;">*</span></label>
+                                <input class=" input-grey mb-2 mr-2" type="text" pInputText  placeholder="{{'paimentCollaborator.code' | translate}}" id="8" [(ngModel)]=" paiment.code"
+                                       [ngClass]="{'ng-invalid ng-dirty' : !_validPaimentCollaboratorCode}"  />
+                                <small class='p-error' *ngIf='!_validPaimentCollaboratorCode'>Code est obligatoire.</small>
+                            </div>
+
+                            <div class="field col-11 md:col-6" *ngIf="!totalCalcule">
+                                <label for="13">{{'paimentCollaborator.Total' | translate}}</label>
+                                <input class=" input-grey mb-2 mr-2" type="text" pInputText  [readonly]="true" value="50Mad" placeholder="{{'paimentCollaborator.amountToPaid' | translate}}" id="13" [ngModel]="paiment.total"
+                                />
+
+                            </div>
+                            <div class="field col-11 md:col-6" *ngIf="totalCalcule">
+                                <label for="15">{{'paimentCollaborator.totalRestant' | translate}}</label>
+                                <input class=" input-grey mb-2 mr-2" type="text" pInputText  [readonly]="true" value="50Mad"  id="15" [ngModel]="paiment.remaining"
+                                />
+                            </div>
+
+                            <div class="field col-11 md:col-6">
+                                <label for="14">{{'paymentCollaborator.amountToPaid' | translate}}</label>
+                                <input class=" input-grey mb-2 mr-2" type="text" pInputText  [readonly]="false"  placeholder="{{'paymentCollaborator.amountToPaid' | translate}}" id="14" [ngModel]="paiment.amountToPaid"
+                                />
+                            </div>
+                            <div class="field col-11 md:col-6">
+                                <label for="9">{{'paymentCollaborator.coupon.name' | translate}}</label>
+                                <input class="input-grey mb-2 mr-2" appendTo="body" pInputText   [(ngModel)]="paiment.name" id="9"
+                                       (ngModelChange)="CalcultotalRestant(this.paiment.name,paiment.total)"  placeholder="{{'paymentCollaborator.coupon.name' | translate}}"  />
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div *ngIf="(activeIndex === 2 && isIndividual) || (activeIndex1 === 3 && !isIndividual)" header="{{'Confermation ' | translate}}"  style="min-height: 50vh;min-width:140vh;" >
+                        <div class="grid mt-80px">
+                            <div style="min-height: 30vh;min-width:100vh;">
+                                <h4 style="margin-top:40px;"> <b>Please confirm your details:</b></h4>
+
+                                <br>
+                                <span>
+                      <label class="font-weight-bold mr-3" for="confirm">I confirm that all the information provided is correct</label>
+                      <p-checkbox  class="mr-1" id="confirm" name="confirm" value="confirm"
+                                   [(ngModel)]="confirmed"></p-checkbox><br>
+
+                          </span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </ng-template>
+
+            <ng-template pTemplate="footer" >
+                <div class="button-container  p-flexbox ">
+                    <button  pButton pRipple  label="{{'next' | translate}}"  icon="pi pi-check" class="button-purple hh  " *ngIf="(activeIndex!=2&&isIndividual)||(activeIndex1!=3&&!isIndividual)" (click)="nextb()"></button>
+                    <button pButton pRipple  label="{{'previous' | translate}}"  icon="pi pi-check" class="button-purple"  *ngIf="(activeIndex!=0&&isIndividual)||(activeIndex1!=0&&!isIndividual)" (click)="prev()"></button>
+                    <button pButton pRipple  label="{{'cancel' | translate}}" icon="pi pi-times"  class="p-button-outlined" (click)="hideCreateDialog()"></button>
+                    <button pButton pRipple  label="{{'validate' | translate}}"  icon="pi pi-check" class="button-purple"   *ngIf="(activeIndex==2&&isIndividual)||(activeIndex1==3&&!isIndividual)" (click)="save()" [routerLink]="['/admin/project/project/list']"></button>
+                </div>
+            </ng-template>
+        </p-card>
+    </div>
+</div>
+
