@@ -703,4 +703,32 @@ export class TemplateListCollaboratorComponent implements OnInit {
     showTemplate() {
         this.setView('template');
     }
+
+
+
+
+
+
+
+    getTechnologyLogo(technologyName: string | undefined): string {
+        if (!technologyName) {
+            return 'assets/layout/images/default-logo.svg'; // Default logo if no technology is selected
+        }
+
+        switch (technologyName.toLowerCase()) {
+            case 'spring':
+                return 'assets/layout/images/spring.svg';
+            case 'angular':
+                return 'assets/layout/images/angular.svg';
+            // Add more cases for other technologies
+            default:
+                return 'assets/layout/images/default-logo.svg'; // Default logo if technology is not recognized
+        }
+    }
 }
+
+
+
+
+
+

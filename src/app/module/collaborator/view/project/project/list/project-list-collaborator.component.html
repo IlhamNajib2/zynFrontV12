@@ -39,19 +39,11 @@
                                 <div class=" justify-content-center mr-3">
                                     <ul style="padding-left: 0;" class="flex justify-content-center">
                                         <li class="container flex justify-content-center mt-2" style="list-style-type: none;padding-left: 0;" >
-                                            <a (click)="show()"><p>{{element.name}}</p></a>
-                                            <p-dialog header="Header" [modal]="true" [(visible)]="visible" [style]="{ width: '50rem' }" [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }" [maximizable]="true">
-                                                <pre><p>
-                                                    {{element.code}}
-                                                    {{element.name}}
-                                                    {{element.domainTemplate.name}}
-                                                    {{element.generatedDate}}
-                                                </p></pre>
-                                            </p-dialog>
+                                            <a (click)="showw(element)"><p>{{ element.name }}</p></a>
+
                                         </li>
                                     </ul>
                                 </div>
-
                             </ng-template>
                         </p-table>
                     </ng-template>
@@ -116,21 +108,47 @@
                             <tr>
                                 <th>Code</th>
                                 <th>Name</th>
+                                <th>Template</th>
                                 <th>Date</th>
                                 <th>domain</th>
                                 <th>Yaml</th>
+                                <th>Template</th>
                             </tr>
                         </ng-template>
                         <ng-template pTemplate="body" let-element>
                             <tr>
                                 <td>{{element.code}}</td>
                                 <td>{{element.name}}</td>
+                                <td>{{element.template}}</td>
                                 <td>{{element.generatedDate | date :'dd/MM/yyyy HH:mm' }}</td>
                                 <!--<td>{{element.projectState?.code}}</td>
                                 <td>{{element.inscriptionMembre?.id}}</td>-->
                                 <td>{{element.domainTemplate?.name}}</td>
-                                <td><p-button  (click)="showYamlDialog(element.yaml)" label="Yaml" severity="warning" /></td>
+                                <!--<td><p-button  (click)="showYamlDialog(element.yaml)" label="Yaml" severity="warning" /></td>-->
+                                <td><p-button  (click)="showYamllDialog(element)" label="Yaml" severity="warning" /></td>
+                                <td>
+                                    <p-button (click)="showTemplateDetails(element.template)" label="Yaml" severity="warning"></p-button>
+                                </td>
                             </tr>
+                            <p-dialog header="Template Details" [(visible)]="displayDialog" [modal]="true" [style]="{width: '50vw'}">
+                                <ng-template pTemplate="content">
+                                    <div *ngIf="selectedTemplate">
+                                        <h3>{{selectedTemplate.name}}</h3>
+                                        <p>{{selectedTemplate.description}}</p>
+                                        <p><b>Price:</b> {{selectedTemplate.price}} $</p>
+                                        <p><b>Technology:</b> {{selectedTemplate.technology?.name}}</p>
+                                        <p><b>Domain:</b> {{selectedTemplate.domainTemplate?.name}}</p>
+                                        <p><b>Category:</b> {{selectedTemplate.categoryTemplate?.name}}</p>
+                                        <p><b>Type:</b> {{selectedTemplate.typeTemplate?.name}}</p>
+                                        <p><b>Level:</b> {{selectedTemplate.levelTemplate?.name}}</p>
+                                        <p><b>Tags:</b> {{selectedTemplate.templateTags}}</p>
+                                    </div>
+                                </ng-template>
+                                <ng-template pTemplate="footer">
+                                    <p-button label="Close" icon="pi pi-times" (click)="displayDialog=false"></p-button>
+                                </ng-template>
+                            </p-dialog>
+
                         </ng-template>
                         <ng-template pTemplate="summary">
                         </ng-template>
@@ -149,16 +167,48 @@
 
 
 
-       <div *ngIf="showYamlDialogVisible">
+       <!--<div *ngIf="showYamlDialogVisible">
            <textarea [(ngModel)]="separateContent" *ngIf="!isEditing"></textarea>
            <div *ngIf="isEditing">{{ separateContent }}</div>
            <div>
-               <!--<button class="button" (click)="toggleEditMode()">{{ isEditing ? 'Modifier' : 'Terminer' }}</button>-->
+              commentaire-- <button class="button" (click)="toggleEditMode()">{{ isEditing ? 'Modifier' : 'Terminer' }}</button>
                <button class="but" (click)="copyYaml()">
                    <i class="pi pi-clone" style="font-size: 1.5rem"></i>
                </button>
            </div>
-       </div>
+       </div>-->
+   <div *ngIf="showYamlDialogVisible">
+           <div *ngIf="selectedProject">
+               <h2>Project Details</h2>
+               <p><strong>Name:</strong> {{ selectedProject.name }}</p>
+               <p><strong>Description:</strong> {{ selectedProject.code }}</p>
+               <p><strong>Details:</strong> {{ selectedProject.yaml }}</p>
+           </div>
+   </div>
+
+
+
+
+
+
+   <div *ngIf="showSidebar" class="sidebar bg-surface-100" style="width:60vh;">
+   <ng-template pTemplate="content">
+           <div *ngIf="selectedTemplate">
+               <h3>{{selectedTemplate.name}}</h3>
+               <p>{{selectedTemplate.description}}</p>
+               <p><b>Price:</b> {{selectedTemplate.price}} $</p>
+               <p><b>Technology:</b> {{selectedTemplate.technology?.name}}</p>
+               <p><b>Domain:</b> {{selectedTemplate.domainTemplate?.name}}</p>
+               <p><b>Category:</b> {{selectedTemplate.categoryTemplate?.name}}</p>
+               <p><b>Type:</b> {{selectedTemplate.typeTemplate?.name}}</p>
+               <p><b>Level:</b> {{selectedTemplate.levelTemplate?.name}}</p>
+               <p><b>Tags:</b> {{selectedTemplate.templateTags}}</p>
+           </div>
+       </ng-template>
+       <ng-template pTemplate="footer">
+           <p-button label="Close" icon="pi pi-times" (click)="displayDialog=false"></p-button>
+       </ng-template>
+   </div>
 
 
 
@@ -178,7 +228,7 @@
                 <div class="mb-3">
                     <textarea formControlName="query" class="form-control bg-gray-400" style="width:40vh;height:15vh;"></textarea>
                 </div>
-                <div styl="flex-end">
+                <div class="flex-end">
                     <button class="btn btn-success btn border-circle" ><i class="pi pi-send ml-0 mr-0 pl-0 pr-0" style="font-size: 1.4rem"></i></button>
                 </div>
                 <div class="alert alert-success" *ngIf="result">
@@ -193,6 +243,35 @@
         </div>
     </div>
 </div>
+
+
+
+
+<div *ngIf="showProjectDialogVisible">
+   <div *ngIf="selectedProject">
+       <h2>Project Details</h2>
+       <p><strong>Name:</strong> {{ selectedProject.name }}</p>
+       <p><strong>Description:</strong> {{ selectedProject.code }}</p>
+       <p><strong>Details:</strong> {{ selectedProject.yaml }}</p>
+   </div>
+</div>
+   <div *ngIf="showProjectDialogVisible">
+       <div *ngIf="selecteddProject">
+           <h2>Project Details</h2>
+           <p><strong>Name:</strong> {{ selecteddProject.name }}</p>
+           <p><strong>Details:</strong> {{ selecteddProject.yaml }}</p>
+       </div>
+   </div>
+
+
+
+
+
+
+
+
+
+
 
 
 <!-- formatter.component.html
@@ -218,3 +297,5 @@
     </div>
 </div>
 -->
+
+
