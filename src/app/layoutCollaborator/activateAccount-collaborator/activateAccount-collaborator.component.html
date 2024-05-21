@@ -1,4 +1,4 @@
-<div class="login-body">
+<!--<div class="login-body">
     <div class="card login-panel p-fluid  mt-30px">
         <h3>Zouani Generator   </h3>
         <b> Your Account Is acctivate from now . </b>
@@ -8,4 +8,39 @@
         </div>
     </div>
 </div>
+-->
+
+
+
+
+
+
+
+
+<div class="login-container">
+
+    <form [formGroup]="loginForm" >
+        <h3>Zouani Generator   </h3>
+        <h4> Your Account Is acctivate from now . </h4>
+        <h5>login here </h5>
+
+        <label class="text-surface-900" for="userName">User Name</label>
+        <input type="text" placeholder="userName" id="userName" formControlName="username"  required
+               autofocus>
+
+        <label class="text-surface-900" for="password">Password</label>
+        <input type="password" placeholder="password" id="password" formControlName="password"  required
+               autofocus>
+
+
+        <div class="go"><button type="submit" pButton label="Log in" class="p p-button text-surface-900" (click)="submit()"></button></div>
+
+        <br>
+        <button pButton type="button" label="Forget password ? "  class="p-button-text text-surface-900" style="color:#df7e1d;" (click)="forget()"></button>
+    </form>
+
+</div>
+
+
+
 <p-toast></p-toast>

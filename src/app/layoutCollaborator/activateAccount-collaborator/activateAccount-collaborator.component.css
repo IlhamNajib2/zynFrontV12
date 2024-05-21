@@ -1,112 +1,143 @@
-.login-body {
+
+
+
+
+*,
+*:before,
+*:after{
     padding: 0;
-    overflow: hidden;
-    margin: 0 auto;
-    position: relative;
-    height: 100vh;
-    background: url("src/assets/layout/images/login-bg.jpg") no-repeat;
-    background-size: cover;
+    margin: 0;
+    box-sizing: border-box;
+
+
 }
-.login-body .login-panel {
-    padding: 0 70px 20px 70px;
-    height: 100%;
-    width: 556px;
+
+body{
+    background-color: #080710;
+}
+.background{
+    width: 430px;
+    height: 520px;
     position: absolute;
-    right: 0;
-    background-color: rgba(255, 255, 255, 0.9);
-    -moz-border-radius: 2px;
-    -webkit-border-radius: 2px;
-    border-radius: 2px;
+    transform: translate(-50%,-50%);
+    left: 50%;
+    top: 50%;
 }
-.login-body .login-panel .login-panel-content {
-    margin-top: 33.3%;
+
+form{
+    width: 400px;
+    background-color: #343a40;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    border-radius: 10px;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+    padding: 50px 35px;
 }
-.login-body .login-panel .logo-container {
-    text-align: left;
+form *{
+    font-family: 'Poppins',sans-serif;
+    letter-spacing: 0.5px;
+    outline: none;
+    border: none;
 }
-.login-body .login-panel .logo-container img {
+form h3{
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 42px;
+    text-align: center;
+}
+
+label{
     display: block;
-    margin-bottom: 25px;
-}
-.login-body .login-panel .username-container, .login-body .login-panel .password-container {
-    text-align: left;
-}
-.login-body .login-panel h1 {
-    display: inline-block;
+    margin-top: 30px;
     font-size: 16px;
-    background-color: #feedbc;
-    margin: 0 0 16px 0;
-    color: #666666;
-    padding: 4px 8px;
-    -moz-border-radius: 2px;
-    -webkit-border-radius: 2px;
-    border-radius: 2px;
+    font-weight: 500;
+    color: #e2d6d6;
 }
-.login-body .login-panel .guest-sign-in {
-    color: #303030;
-}
-.login-body .login-panel label {
+input{
     display: block;
-    color: #252529;
-    margin: 0.5em 0 0.5em 0;
+    height: 50px;
+    width: 100%;
+//background-color: rgba(255,255,255,0.07);
+//border-radius: 3px;
+    padding: 0 10px;
+//margin-top: 8px;
+    font-size: 14px;
+    font-weight: 300;
+    border: 2px solid white;
+    border-radius: 5px;
+    margin-top: 2px;
+    color: white;
+    background-color: #040d1c;
 }
-.login-body .login-panel input {
-    background: #ffffff;
-    border: 1px solid #65656a;
-
-
+::placeholder{
+    color: #e5e5e5;
 }
-.login-body .login-panel .forgetpassword-container {
-    padding-top: 1em;
-    text-align: right;
-}
-.login-body .login-panel .rememberme-container {
-    padding-top: 1em;
-}
-.login-body .login-panel .rememberme-container label {
-    display: inline;
-    vertical-align: middle;
-}
-.login-body .login-panel button {
-    margin-top: 0.5em;
-    display: block;
-    min-width: 120px;
-}
-.login-body .login-panel a {
-    color: #1cb9d7;
-}
-.login-body .login-panel .footer {
-    color: #65656a;
-    margin-top: 100%;
+.p{
+    margin-top: 50px;
+    width: 100%;
+    background-color: #df7e1d;
+    color: #343a40;
+    padding: 15px 0;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
-@media screen and (max-width: 40em) {
-    .login-body .login-image {
-        height: calc(100%);
-        width: calc(100%);
-        transform: scale(1.5);
-        background-position-x: -290px;
-        background-position-y: -160px;
-    }
-    .login-body .login-panel {
-        left: 0;
-        bottom: 0%;
-        width: 100%;
-        margin-bottom: 0px;
-        margin-top: 0;
-        margin-left: 0;
-        padding: 0 27px 20px 28px;
-        height: calc(100% - 128px);
-    }
-    .login-body .login-panel .login-panel-content {
-        margin-top: 30px;
-    }
-    .login-body .login-panel input {
-        width: 100%;
-    }
-    .login-body .login-panel .footer {
-        font-size: 11px;
-        padding-right: 11px;
-        margin-top: 60px;
-    }
+
+.p-button-text[_ngcontent-ng-c2268119243] {
+    background: none;
+    border: none;
+    color: #da7621;
+    text-decoration: underline;
+}
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height to center the login form */
+    position: relative;
+    overflow: hidden; /* Ensures the background shapes are contained */
+
+}
+h1, h2, h3, h4, h5, h6 {
+    margin: 1.5rem 0 1rem 0;
+    font-family: inherit;
+    font-weight: 500;
+    line-height: 1.2;
+    color: #fffcfc;
+}
+
+
+.p-button{
+
+    border: none;
+    border-radius: 5px;
+    padding: 0.5rem 0.25rem;
+}
+.p.p-button.p1{
+    background-color: #da7621;
+    border: none;
+    border-radius: 5px;
+    margin-top:10px;
+    padding: 0.5rem 0.25rem;
+}
+.p-button:hover{
+    background-color: #da7621;
+}
+
+.p-button-text[_ngcontent-ng-c2739546288] {
+    text-decoration: underline;
+    color: #da7621;
+}
+
+
+.p-button-text[_ngcontent-ng-c2739546288]:hover{
+    color: #da7621;
+    text-decoration: underline;
 }

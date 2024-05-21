@@ -14,16 +14,37 @@ import {LayoutService} from 'src/app/layout/service/app.layout.service';
 export class ActivateAccountCollaboratorComponent implements OnInit {
 
 
-  messages: Message[] = [];
+    messages: Message[] = [];
 
-  constructor(private authService: AuthService,public layoutService: LayoutService, private router: Router) { }
-
-  ngOnInit(): void {
-    this.messages = [];
-  }
+    constructor(private authService: AuthService, public layoutService: LayoutService, private router: Router) {
+    }
 
 
-    register(){
-    this.router.navigate(['']);
-  }
+    loginForm = new FormGroup({
+        username: new FormControl('', Validators.required),
+        password: new FormControl('', Validators.required)
+    });
+
+
+    ngOnInit(): void {
+        this.messages = [];
+    }
+
+    submit() {
+        const formValues = this.loginForm.value;
+        const username = formValues.username;
+        const passowrd = formValues.password;
+        this.authService.login(username, passowrd);
+
+    }
+
+    register() {
+        this.router.navigate(['/register']);
+    }
+
+    forget() {
+        this.router.navigate(['/changePassword']);
+    }
+
+
 }

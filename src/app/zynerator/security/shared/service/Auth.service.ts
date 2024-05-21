@@ -135,7 +135,7 @@ export class AuthService {
             console.log(this.user)
             this.http.post<any>(this.API + 'register', this.user, { observe: 'response' }).subscribe(
                 resp => {
-                    // this.router.navigate(['/app/collaborator/acceuil/home/contact-list']);
+                    // this.router.navigate(['/app/collaborator/acceuil/home/home-list']);
                     resolve(resp.body);
                 },
                 error => {

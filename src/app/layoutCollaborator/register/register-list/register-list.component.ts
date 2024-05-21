@@ -16,7 +16,6 @@ import {AuthService} from "../../../zynerator/security/shared/service/Auth.servi
   styleUrls: ['./register-list.component.scss']
 })
 export class RegisterListComponent  implements OnInit {
-
     messages: Message[] = [];
     successMessage: string = '';
     errorMessage: string = '';
