@@ -35,6 +35,7 @@ import {
 } from "./activateAccount-collaborator/activateAccount-collaborator.component";
 import {ChangePasswordCollaboratorComponent} from "./changePassword-collaborator/changePassword-collaborator.component";
 import {ToastModule} from "primeng/toast";
+import {AccordionModule} from "primeng/accordion";
 
 
 @NgModule({
@@ -77,6 +78,7 @@ import {ToastModule} from "primeng/toast";
         DividerModule,
         ReactiveFormsModule,
         ToastModule,
+        AccordionModule,
 
     ],
     exports: [
