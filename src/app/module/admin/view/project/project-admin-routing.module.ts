@@ -85,6 +85,11 @@ import { ProjectListAdminComponent } from './project/list/project-list-admin.com
                                 }
                             ]
                         },
+                        {
+                            path: '',
+                            redirectTo:'./view/project/project/list/',
+                            pathMatch:'full'
+                        },
 
 
                         {

@@ -8,6 +8,7 @@ import {AuthGuard} from 'src/app/zynerator/security/guards/auth.guard';
 import { LoginCollaboratorComponent } from './login-collaborator/login-collaborator.component';
 import { RegisterCollaboratorComponent } from './register-collaborator/register-collaborator.component';
 
+
 @NgModule({
     imports: [
         RouterModule.forChild(
@@ -35,6 +36,7 @@ import { RegisterCollaboratorComponent } from './register-collaborator/register-
                                 }
                               ]
                         },
+
                         {
                             path: 'template',
                             loadChildren: () => import('./view/template/template-collaborator-routing.module').then(x => x.TemplateCollaboratorRoutingModule),

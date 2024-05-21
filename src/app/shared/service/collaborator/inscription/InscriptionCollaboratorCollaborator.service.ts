@@ -9,6 +9,7 @@ import * as moment from 'moment/moment';
 import {InscriptionCollaboratorDto} from 'src/app/shared/model/inscription/InscriptionCollaborator.model';
 import {InscriptionCollaboratorCriteria} from 'src/app/shared/criteria/inscription/InscriptionCollaboratorCriteria.model';
 import {AbstractService} from 'src/app/zynerator/service/AbstractService';
+import {InscriptionMembreDto} from "../../../model/inscription/InscriptionMembre.model";
 
 
 @Injectable({
@@ -48,6 +49,13 @@ export class InscriptionCollaboratorCollaboratorService {
         this.API_PERMISSION = environment.apiUrl + 'modelPermissionUser/';
     }
 
+
+
+
+    public CalcultotalRestant(couponName :String, total:number):Observable<number>{
+        return this.http.get<number>(this.API +'couponName/'+couponName);
+
+    }
 
     public findAll() {
         return this.http.get<Array<InscriptionCollaboratorDto>>(this.API);

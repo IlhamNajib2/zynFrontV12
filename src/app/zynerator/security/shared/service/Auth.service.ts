@@ -38,7 +38,21 @@ export class AuthService {
                 jwt != null ? this.tokenService.saveToken(jwt) : false;
                 this.loadInfos();
                 console.log('you are logged in successfully');
-                this.router.navigate(['/' + environment.rootAppUrl + '/admin']);
+                this._authenticatedUser.roleUsers.forEach(item => {
+                    if (item.role.authority === "ROLE_ADMIN" ){
+                        this.router.navigate(['/' + environment.rootAppUrl + '/admin']);
+                    }
+                    if (item.role.authority === "ROLE_COLLABORATOR" ){
+                        this.router.navigate(['/' + environment.rootAppUrl + '/collaborator']);
+                    }
+                    if (item.role.authority === "ROLE_MEMBRE" ){
+                        this.router.navigate(['/' + environment.rootAppUrl + '/membre']);
+                    }
+                    if (item.role.authority === "ROLE_INFLUENCER" ){
+                        this.router.navigate(['/' + environment.rootAppUrl + '/influencer']);
+                    }
+
+                })
             }, (error: HttpErrorResponse) => {
                 this.error = error.error.message;
                 if (error.status === 401) {
@@ -68,6 +82,20 @@ export class AuthService {
                 }
             }
         );
+    }
+
+    public forgetPassword(email: string, password: string){
+        return new Promise((resolve, reject) => {
+            this.http.put<any>(this.API + 'forgetPassword', {email, password}, { observe: 'response' }).subscribe(
+                resp => {
+                    resolve(resp.body);
+                },
+                error => {
+                    console.log(error.error);
+                    reject(error.error);
+                }
+            );
+        });
     }
 
     public loadInfos() {
@@ -102,14 +130,20 @@ export class AuthService {
         return index > -1 ? true : false;
     }
 
-    public registerAdmin() {
-        this.http.post<any>(this.API + 'api/user/', this.user, {observe: 'response'}).subscribe(
-            resp => {
-                this.router.navigate(['admin/login']);
-            }, (error: HttpErrorResponse) => {
-                console.log(error.error);
-            }
-        );
+    public registerAdmin(): Promise<any> {
+        return new Promise((resolve, reject) => {
+            console.log(this.user)
+            this.http.post<any>(this.API + 'register', this.user, { observe: 'response' }).subscribe(
+                resp => {
+                    // this.router.navigate(['/app/collaborator/acceuil/home/home-list']);
+                    resolve(resp.body);
+                },
+                error => {
+                    console.log(error.error);
+                    reject(error.error);
+                }
+            );
+        });
     }
 
     public logout() {

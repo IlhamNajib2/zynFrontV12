@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ProjectAdminService} from 'src/app/shared/service/admin/project/ProjectAdmin.service';
 import {ProjectDto} from 'src/app/shared/model/project/Project.model';
 import {ProjectCriteria} from 'src/app/shared/criteria/project/ProjectCriteria.model';
-
+import { ChartModule } from 'primeng/chart';
 
 import {ConfirmationService, MessageService,MenuItem} from 'primeng/api';
 import {FileTempDto} from 'src/app/zynerator/dto/FileTempDto.model';
@@ -34,11 +34,13 @@ import {DomainTemplateAdminService} from 'src/app/shared/service/admin/template/
 import {ProjectTemplateDto} from 'src/app/shared/model/template/ProjectTemplate.model';
 import {ProjectTemplateAdminService} from 'src/app/shared/service/admin/template/ProjectTemplateAdmin.service';
 import {Subscription} from "rxjs";
-
+//import {dt} from "@fullcalendar/core/internal-common";
+//import "primeicons/primeicons.css";
 
 @Component({
   selector: 'app-project-list-admin',
-  templateUrl: './project-list-admin.component.html'
+  templateUrl: './project-list-admin.component.html',
+    styleUrls:['./project-list-admin.component.css']
 })
 export class ProjectListAdminComponent implements OnInit {
 
@@ -72,7 +74,12 @@ export class ProjectListAdminComponent implements OnInit {
     projectStates: Array<ProjectStateDto>;
     inscriptionMembres: Array<InscriptionMembreDto>;
     domainTemplates: Array<DomainTemplateDto>;
+    project: ({ generatedDate: string }) [];
     private countsSubscription: Subscription;
+    basicData: any;
+    basicOptions: any;
+    years: { label: string, value: number }[] = [];
+    selectedYear: number;
 
     constructor( private service: ProjectAdminService  , private inscriptionMembreService: InscriptionMembreAdminService, private projectStateService: ProjectStateAdminService, private templateService: TemplateAdminService, private domainTemplateService: DomainTemplateAdminService, private projectTemplateService: ProjectTemplateAdminService, @Inject(PLATFORM_ID) private platformId?) {
         this.datePipe = ServiceLocator.injector.get(DatePipe);
@@ -84,9 +91,14 @@ export class ProjectListAdminComponent implements OnInit {
         this.exportService = ServiceLocator.injector.get(ExportService);
     }
 
+    //
 
 
     ngOnInit(): void {
+        const currentYear = new Date().getFullYear();
+        this.generateYearsList();
+        this.selectedYear = currentYear;
+        this.getProjectData(this.selectedYear);
         this.findPaginatedByCriteria();
         this.initExport();
         this.initCol();
@@ -105,6 +117,98 @@ export class ProjectListAdminComponent implements OnInit {
 
 
     }
+
+    getProjectData(year: number): void {
+        this.service.getProjectsByMonth(year)
+            .subscribe(data => {
+
+
+                const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+                const projectData = months.map(month => data[month.toUpperCase()] || 0);
+
+                this.updateChart(projectData, months);
+            });
+    }
+
+
+    onYearChange(year: number): void {
+        this.selectedYear = year;
+        this.getProjectData(year);
+    }
+
+    generateYearsList(): void {
+        const currentYear = new Date().getFullYear();
+        for (let year = currentYear; year >= currentYear - 1; year--) {
+            this.years.push({ label: year.toString(), value: year });
+        }
+    }
+
+    updateChart(projectData: number[], months: string[]): void {
+        const backgroundColors = [];
+        const borderColors = [];
+        for (let i = 0; i < months.length; i++) {
+            const color = this.getRandomColor();
+            backgroundColors.push(`rgba(${color.r}, ${color.g}, ${color.b}, 0.2)`);
+            borderColors.push(`rgb(${color.r}, ${color.g}, ${color.b})`);
+        }
+
+        const chartData = {
+            labels: months,
+            datasets: [
+                {
+                    label: 'Generated Project',
+                    data: projectData,
+                    backgroundColor: backgroundColors,
+                    borderColor: borderColors,
+                    borderWidth: 1
+                }
+            ]
+        };
+
+        this.basicData = chartData;
+
+        this.basicOptions = {
+            plugins: {
+                legend: {
+                    labels: {
+                        color: getComputedStyle(document.documentElement).getPropertyValue('--text-color')
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    min: 0, // Set the minimum value for the y-axis
+                    max: 20, // Set the maximum value for the y-axis
+                    ticks: {
+                        color: getComputedStyle(document.documentElement).getPropertyValue('--text-color-secondary')
+                    },
+                    grid: {
+                        color: getComputedStyle(document.documentElement).getPropertyValue('--surface-border'),
+                        drawBorder: false
+                    }
+                },
+                x: {
+                    ticks: {
+                        color: getComputedStyle(document.documentElement).getPropertyValue('--text-color-secondary')
+                    },
+                    grid: {
+                        color: getComputedStyle(document.documentElement).getPropertyValue('--surface-border'),
+                        drawBorder: false
+                    }
+                }
+            }
+        };
+    }
+
+
+    getRandomColor(): { r: number, g: number, b: number } {
+        const r = Math.floor(Math.random() * 256);
+        const g = Math.floor(Math.random() * 256);
+        const b = Math.floor(Math.random() * 256);
+        return { r, g, b };
+    }
+
 
 
     ngOnDestroy(): void {
@@ -151,6 +255,9 @@ export class ProjectListAdminComponent implements OnInit {
             this.countByYear = count;
         });
     }
+
+
+
 
 
 
@@ -593,4 +700,5 @@ export class ProjectListAdminComponent implements OnInit {
     set entityName(value: string) {
         this.service.entityName = value;
     }
+
 }

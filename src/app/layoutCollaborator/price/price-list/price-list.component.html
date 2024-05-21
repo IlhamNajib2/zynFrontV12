@@ -1,0 +1,202 @@
+
+<div class="black pr-0 pl-0 min-w-min pb-8" style="width:100%">
+    <div class="cent black mt-0">
+        <div class="cent" style="display:flex;">
+            <h4 style="color:white;margin-top:8vh">Pricing</h4>
+        </div>
+        <div class="cent" style="display:flex;">
+            <h1 style="color:white;text-align: center;">Only pay for what you use</h1>
+        </div>
+        <div class="cent" style="display:flex;">
+            <p style="color:white;text-align: center;margin-bottom:25vh">Try free for 14 days. No credit cared required</p>
+        </div>
+    <div class="flex-wrap">
+        <div class="ml-8">
+        </div>
+
+    </div>
+
+        <div class="cent " style="display:flex;padding:20px;">
+            <p style="color:darkgray;text-align: center;">Trusted by leading teams to build automation at scal</p>
+        </div>
+
+        <div class="cent " style="display:flex;padding:20px;">
+            <img class="m-10 h-50" src="assets/layout/images/cerclelogo.png" alt="logo" style="border-radius:3px;width: 20%;"/>
+        </div>
+
+        <p-divider />
+
+
+
+
+        <div class="contain" style="width:100%">
+            <div class="colum">
+                <pre><h5 class="white font-bold">         Compare plans & features          </h5></pre>
+            </div>
+            <p-divider layout="vertical" />
+            <div class="colum">
+                    <p class="white text-base font-bold">Team</p>
+                    <p class="white text-xs">Starting from </p>
+                    <p class="white font-bold text-xl">$29/month</p>
+                <button class="p-tabview-nav-btn hh  m-1 pt-1 pb-1 " [routerLink]="['/login']">Get Started</button>
+            </div>
+
+                <p-divider layout="vertical" />
+
+            <div class="colum">
+                    <p class="white text-base font-bold">Business</p>
+                    <p class="white text-xs">Starting from </p>
+                    <p class="white font-bold text-xl">$99/month</p>
+                <button class="p-tabview-nav-btn hh  m-1 pt-1 pb-1 " [routerLink]="['/login']">Get Started</button>
+            </div>
+            <p-divider layout="vertical" />
+            <div class="colum">
+                    <p class="white text-base font-bold">Entreprise</p>
+                    <p class="white text-xs">Starting from </p>
+                    <pre><p class="white font-bold text-xl">Custom    </p></pre>
+                <button class="p-tabview-nav-btn hh  m-1 pt-1 pb-1 " [routerLink]="['/login']">Get Started</button>
+            </div>
+            <p-divider layout="vertical" />
+            <div class="colum">
+                <p></p>
+                <p></p>
+            </div>
+        </div>
+
+        <p-divider />
+        <p class="white font-bold text-xl">Essentials</p>
+
+        <table style="display:flex;justify-content:center">
+
+            <tbody>
+            <tr style="border:1px solid white">
+                <td class="lef">Workflow runs</td>
+                <td class="lef" *ngFor="let plan of pricingP">{{ plan.title }}</td>
+            </tr>
+
+            <tr style="border:1px solid white">
+                <td>Users</td>
+                <td *ngFor="let plan of pricingP">{{ plan.users }}</td>
+            </tr>
+
+            <tr style="border:1px solid white">
+                <td>Connections</td>
+                <td *ngFor="let plan of pricingP">{{ plan.connections }}</td>
+            </tr>
+            <tr style="border:1px solid white">
+                <td>New connection requests</td>
+                <td *ngFor="let plan of pricingP">{{ plan.newConnectionRequests }}</td>
+            </tr>
+            </tbody>
+        </table>
+
+
+
+        <p class="white font-bold text-xl mt-4 mb-2">Workflow builder</p>
+
+        <table style="display:flex;justify-content:center">
+
+            <tbody>
+            <tr style="border:1px solid white">
+                <td class="lef">Workflow runs</td>
+                <td class="lef" *ngFor="let plan of pricingPlans">{{ plan.title }}</td>
+            </tr>
+
+            <tr style="border:1px solid white">
+                <td>Users</td>
+                <td *ngFor="let plan of pricingPlans">{{ plan.users }}</td>
+            </tr>
+
+            <tr style="border:1px solid white">
+                <td>Connections</td>
+                <td *ngFor="let plan of pricingPlans">{{ plan.connections }}</td>
+            </tr>
+            <tr style="border:1px solid white">
+                <td>New connection requests</td>
+                <td *ngFor="let plan of pricingPlans">{{ plan.newConnectionRequests }}</td>
+            </tr>
+            <tr style="border:1px solid white">
+                <td>One-click deployement</td>
+                <td *ngFor="let plan of pricingPlans">{{ plan.aaa }}</td>
+            </tr>
+            <tr style="border:1px solid white">
+                <td>Secrets manager</td>
+                <td *ngFor="let plan of pricingPlans">{{ plan.bbb }}</td>
+            </tr>
+            <tr style="border:1px solid white">
+                <td>Log retention</td>
+                <td *ngFor="let plan of pricingPlans">{{ plan.ccc }}</td>
+            </tr>
+            <tr style="border:1px solid white">
+                <td>GitHub source control</td>
+                <td *ngFor="let plan of pricingPlans">{{ plan.ddd }}</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <p class="white font-bold text-xl">Security & suport</p>
+
+        <table style="display:flex;justify-content:center">
+
+            <tbody>
+            <tr style="border:1px solid white">
+                <td class="lef">Workflow runs</td>
+                <td class="lef" *ngFor="let plan of pricing">{{ plan.title }}</td>
+            </tr>
+
+            <tr style="border:1px solid white">
+                <td>Dedicated Stack support</td>
+                <td *ngFor="let plan of pricing">{{ plan.users }}</td>
+            </tr>
+
+            <tr style="border:1px solid white">
+                <td>Engineering support</td>
+                <td *ngFor="let plan of pricing">{{ plan.connections }}</td>
+            </tr>
+            <tr style="border:1px solid white">
+                <td>Security questionaires</td>
+                <td *ngFor="let plan of pricing">{{ plan.newConnectionRequests }}</td>
+            </tr>
+            </tbody>
+        </table>
+
+
+
+
+
+
+
+<!--
+        <table class="">
+            <tbody>
+            <tr class="top">
+                <td class="white">Workflow runs</td>
+                <td class="white">Stors from 2,OOO/month</td>
+                <td class="white">Starts from 5,000/month</td>
+                <td class="white">Custom</td>
+            </tr>
+            <tr>
+                <td class="white">Users</td>
+                <td class="white">Up to 3</td>
+                <td class="white">Unlimited</td>
+                <td class="white">Unlimited</td>
+            </tr>
+            <tr>
+                <td class="white">Connections</td>
+                <td class="white">Ulimited</td>
+                <td class="white">Ulimited</td>
+                <td class="white">Ulimited</td>
+            </tr>
+            <tr>
+                <td class="white">New connecting requests</td>
+                <td class="white"></td>
+                <td class="white">Avaitable</td>
+                <td class="white">Prioritized</td>
+            </tr>
+            </tbody>
+        </table>-->
+
+
+</div>
+</div>
+

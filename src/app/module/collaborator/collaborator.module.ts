@@ -50,10 +50,14 @@ import {SecurityModule} from 'src/app/module/security/security.module';
 import {SecurityRoutingModule} from 'src/app/module/security/security-routing.module';
 
 
+
+
 @NgModule({
   declarations: [
    LoginCollaboratorComponent,
-   RegisterCollaboratorComponent
+   RegisterCollaboratorComponent,
+
+
   ],
   imports: [
     CommonModule,

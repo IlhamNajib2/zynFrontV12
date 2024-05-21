@@ -43,12 +43,6 @@ import {ServiceLocator} from "./zynerator/service/ServiceLocator";
 import {JwtInterceptor} from "./zynerator/security/interceptors/jwt.interceptor";
 
 import {MenuService} from "./layout/app.menu.service";
-import {AppMenuitemComponent} from "./layout/app.menuitem.component";
-import {AppFooterComponent} from "./layout/app.footer.component";
-import {AppMenuComponent} from "./layout/app.menu.component";
-import {AppConfigComponent} from "./layout/config/app.config.component";
-import {AppTopBarComponent} from "./layout/app.topbar.component";
-import {AppLayoutComponent} from "./layout/app.layout.component";
 
 
 import {AdminModule} from './module/admin/admin.module';
@@ -59,6 +53,8 @@ import {MemberModule} from './module/member/member.module';
 import {MemberRoutingModule} from './module/member/member-routing.module';
 import {InfluencerModule} from './module/influencer/influencer.module';
 import {InfluencerRoutingModule} from './module/influencer/influencer-routing.module';
+import {AppLayoutCollaboratorModule} from "./layoutCollaborator/app.layoutCollaborator.module";
+import {AppLayoutCollaboratorComponent} from "./layoutCollaborator/app.layoutCollaborator.component";
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -67,6 +63,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 imports: [
     AppRoutingModule,
     AppLayoutModule,
+    AppLayoutCollaboratorModule,
     ButtonModule,
     PasswordModule,
     FormsModule,
@@ -105,6 +102,7 @@ imports: [
   InfluencerModule,
   InfluencerRoutingModule,
 
+
   TranslateModule.forRoot({
   loader: {
     provide: TranslateLoader,
@@ -116,6 +114,7 @@ imports: [
 declarations: [
     AppComponent,
     NotfoundComponent,
+
 
 ],
 providers: [
@@ -130,6 +129,7 @@ providers: [
 ],
 bootstrap: [AppComponent],
   exports: [
+
   ]
 })
 export class AppModule{

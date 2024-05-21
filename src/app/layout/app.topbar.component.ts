@@ -10,9 +10,10 @@ import {UserDto} from "../zynerator/security/shared/model/User.model";
 
 @Component({
     selector: 'app-topbar',
-    templateUrl: './app.topbar.component.html'
+    templateUrl: './app.topbar.component.html',
+    styleUrls:['./app.topbar.component.css']
 })
-export class AppTopBarComponent implements OnInit{
+export class AppTopbarComponent implements OnInit{
     roleAdmin = false;
     editDialog = false ;
     languageOptions: SelectItem[];
@@ -45,7 +46,7 @@ export class AppTopBarComponent implements OnInit{
 
 
 
-    constructor(public  layoutService:LayoutService ,public app: AppComponent, public appMain: AppLayoutComponent, private authService: AuthService, private translateService: TranslateService, private userService: UserService) {
+    constructor(public  layoutService:LayoutService , public app: AppComponent, public appMain: AppLayoutComponent, private authService: AuthService, private translateService: TranslateService, private userService: UserService) {
         this.languageOptions = [
             { label: 'English', value: 'en' },
             { label: 'Français', value: 'fr' },

@@ -1,0 +1,213 @@
+<!--<div class="layout-topbar">
+    <a class="layout-topbar-logo" routerLink="">
+        <img src="assets/layout/images/{{layoutService.config.colorScheme === 'light' ? 'logo-dark' : 'logo-white'}}.svg" alt="logo">
+        <span>SAKAI</span>
+    </a>
+
+    <button #menubutton class="p-link layout-menu-button layout-topbar-button" (click)="layoutService.onMenuToggle()">
+        <i class="pi pi-bars"></i>
+    </button>
+
+    <button #topbarmenubutton class="p-link layout-topbar-menu-button layout-topbar-button" (click)="layoutService.showProfileSidebar()">
+        <i class="pi pi-ellipsis-v"></i>
+    </button>
+
+    <div #topbarmenu class="layout-topbar-menu" [ngClass]="{'layout-topbar-menu-mobile-active': layoutService.state.profileSidebarVisible}">
+
+        <p-dropdown (onChange)="useLanguage(selectedLanguage)" [options]="languageOptions" [(ngModel)]="selectedLanguage"   [appendTo]="'body'"></p-dropdown>
+
+        <button  class="p-link layout-topbar-button" (click)="edit(authenticatedUser)">
+            <i class="pi pi-user"></i>
+            <span>Profile</span>
+        </button>
+
+        <button class="p-link layout-topbar-button" (click)="logout()">
+        <i class="pi pi-fw pi-sign-in"></i>
+        <span >signOut</span>
+    </button>
+    </div>
+</div>
+<p-dialog [(visible)]="editDialog" [style]="{width: '70vw'}" header="Edit profil"
+          [modal]="true" styleClass="p-fluid" [maximizable]="true" [draggable]="false" [resizable]="false">
+    <ng-template pTemplate="content">
+        <p-tabView>
+            <p-tabPanel header="{{'user.tabPan' | translate}}">
+                <div class="grid">
+
+                    <div class="field col-12 md:col-6">
+                        <label for="3">{{'user.email' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText
+                               placeholder="{{'user.email' | translate}}" id="3" [(ngModel)]="item.email"
+                        />
+
+                    </div>
+
+                    <div class="field col-12 md:col-6">
+                        <label for="6">{{'user.username' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText
+                               placeholder="{{'user.username' | translate}}" id="6" [(ngModel)]="item.username"
+                        />
+
+                    </div>
+
+                </div>
+            </p-tabPanel>
+            <p-tabPanel header="{{'user.password' | translate}}">
+                <div class="grid">
+
+                    <div class="field col-12 md:col-6">
+                        <label for="7">{{'user.password' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pPassword
+                               placeholder="{{'user.password' | translate}}" id="7" [(ngModel)]="item.password"
+                        />
+
+                    </div>
+
+                    <div class="field col-12 md:col-6">
+                        <label for="7">{{'user.password' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pPassword
+                               placeholder="{{'user.password' | translate}}" id="7" [(ngModel)]="item.password"
+                        />
+
+                    </div>
+                </div>
+            </p-tabPanel>
+        </p-tabView>
+    </ng-template>
+    <ng-template pTemplate="footer">
+        <div class="p-flexbox">
+            <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-outlined"
+                    (click)="hideEditDialog()"></button>
+            <button pButton pRipple label="Valider" icon="pi pi-check"
+                    (click)="editUser()"></button>
+        </div>
+    </ng-template>
+
+</p-dialog>
+
+
+
+
+<div class="layout-topbar flex  bg-bla justify-content-between flex-wrap border">
+        <div class="flex align-items-center justify-content-center   bg-bla ">
+            <div >
+                <img src="assets/layout/images/logo-white.svg" alt="My App Logo"/>
+            </div>
+            <ul class="navbar-links bg-bla">
+
+            </ul>
+            <div class="align-items-center justify-content-center ">
+                <button #menubutton class="p-link layout-menu-button layout-topbar-button" (click)="layoutService.onMenuToggle()">
+                    <i class="pi pi-bars"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="flex align-items-center justify-content-center  m-2 bg-bla">
+            <p-dropdown (onChange)="useLanguage(selectedLanguage)" [options]="languageOptions" [(ngModel)]="selectedLanguage"   [appendTo]="'body'"></p-dropdown>
+
+            <button  class="p-link layout-topbar-button" (click)="edit(authenticatedUser)">
+                <i class="pi pi-user"></i>
+                <span>Profile</span>
+            </button>
+
+            <button class="p-link layout-topbar-button" (click)="logout()">
+                <i class="pi pi-fw pi-sign-in"></i>
+                <span >signOut</span>
+            </button>
+        </div>
+
+</div>
+<p-dialog [(visible)]="editDialog" [style]="{width: '70vw'}" header="Edit profil"
+          [modal]="true" styleClass="p-fluid" [maximizable]="true" [draggable]="false" [resizable]="false">
+    <ng-template pTemplate="content">
+        <p-tabView>
+            <p-tabPanel header="{{'user.tabPan' | translate}}">
+                <div class="grid">
+
+                    <div class="field col-12 md:col-6">
+                        <label for="3">{{'user.email' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText
+                               placeholder="{{'user.email' | translate}}" id="3" [(ngModel)]="item.email"
+                        />
+
+                    </div>
+
+                    <div class="field col-12 md:col-6">
+                        <label for="6">{{'user.username' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText
+                               placeholder="{{'user.username' | translate}}" id="6" [(ngModel)]="item.username"
+                        />
+
+                    </div>
+
+                </div>
+            </p-tabPanel>
+            <p-tabPanel header="{{'user.password' | translate}}">
+                <div class="grid">
+
+                    <div class="field col-12 md:col-6">
+                        <label for="7">{{'user.password' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pPassword
+                               placeholder="{{'user.password' | translate}}" id="7" [(ngModel)]="item.password"
+                        />
+
+                    </div>
+
+                    <div class="field col-12 md:col-6">
+                        <label for="8">{{'user.password' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pPassword
+                               placeholder="{{'user.password' | translate}}" id="8" [(ngModel)]="item.password"
+                        />
+
+                    </div>
+                </div>
+            </p-tabPanel>
+        </p-tabView>
+    </ng-template>
+    <ng-template pTemplate="footer">
+        <div class="p-flexbox">
+            <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-outlined"
+                    (click)="hideEditDialog()"></button>
+            <button pButton pRipple label="Valider" icon="pi pi-check"
+                    (click)="editUser()"></button>
+        </div>
+    </ng-template>
+
+</p-dialog>
+
+-->
+
+
+
+
+
+
+
+<div class=" flex  bg-bla justify-content-between flex-wrap border">
+    <div class="flex align-items-center justify-content-center   bg-bla ">
+        <div class="navbar-logo">
+            <img src="assets/layout/images/logozenerator.png" alt="My App Logo"/>
+        </div>
+        <ul class="navbar-links bg-bla">
+            <li>
+                <a href="#features" class="home-button" >Features</a>
+            </li>
+            <li>
+                <a href="#demo" class="home-button">Demo</a>
+            </li>
+            <li>
+                <a href="#generate" class="home-button" >Generate</a>
+            </li>
+            <li>
+                <a href="/price" class="home-button" >Pricing</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="flex align-items-center justify-content-center  m-2 bg-bla">
+        <button class="p-tabview-nav-btn hh1 bg-black-alpha-60" (click)="navigate()" >contact <i class="pi pi-arrow-right"></i></button>
+        <button class="p-tabview-nav-btn hh  m-2 " [routerLink]="['/login']" >Get Started</button>
+    </div>
+
+</div>
