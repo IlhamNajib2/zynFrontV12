@@ -719,11 +719,25 @@ export class TemplateListCollaboratorComponent implements OnInit {
             case 'spring':
                 return 'assets/layout/images/spring.svg';
             case 'angular':
-                return 'assets/layout/images/angular.svg';
+                return 'assets/layout/images/Angular.svg';
+            case 'react':
+                return 'assets/layout/images/reactjs-ar21.svg';
+            case '.net':
+                return 'assets/layout/images/reactjs-ar21.svg';
+            case 'rectNative':
+                return 'assets/layout/images/reactjs-ar21.svg';
+            case 'laravel':
+                return 'assets/layout/images/reactjs-ar21.svg';
             // Add more cases for other technologies
             default:
                 return 'assets/layout/images/default-logo.svg'; // Default logo if technology is not recognized
         }
+    }
+
+    visible: boolean = false;
+
+    showDialog() {
+        this.visible = true;
     }
 }
 

@@ -1,4 +1,4 @@
-   <div class="grid"  *ngIf="listActionIsValid">
+    <div class="grid"  *ngIf="listActionIsValid">
         <div class="col-12">
             <p-toast></p-toast>
             <div class="card">
@@ -9,12 +9,10 @@
                         <a (click)="showDefault()" class="sidebar-link mr-4 ml-4">
                             <i style="font-size: 1rem" ></i><span class="link-label">Genery</span>
                         </a>
-
                         <a (click)="showProject()" class="sidebar-link mr-4 ml-4">
                             <i style="font-size: 1rem" ></i><span class="link-label">Project</span>
                         </a>
-
-                        <a (click)="toggleCodePart('part3')" class="sidebar-link mr-4 ml-4">
+                        <a class="sidebar-link mr-4 ml-4">
                             <i style="font-size: 1rem" ></i><span class="link-label">My Template</span>
                         </a>
                     </ng-template>
@@ -26,50 +24,50 @@
                     <app-project-view-collaborator  *ngIf="viewDialog  && viewActionIsValid"></app-project-view-collaborator>
                     <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
                 </div>
-                    <div *ngIf="showDefaultView">
-                <p-splitter [panelSizes]="[25, 75]" [style]="{ height: '500px', width: '60vw' }" styleClass="mb-5 mt-4">
-                    <ng-template pTemplate class="min-w-max">
-                        <h3 class="flex ml-3 mb-6 justify-content-center h3">History:</h3>
-                        <p-table #dt [value]="items" [columns]="cols" [rows]="8" [paginator]="false"
-                                 [globalFilterFields]="['code', 'name', 'generatedDate', 'projectStatecode', 'inscriptionMembreid', 'domainTemplatename']" [(selection)]="selections"
-                                 [rowHover]="true" dataKey="id" styleClass="p-datatable-customers"
-                                 currentPageReportTemplate="{{'les éléments de {first} à {last} sur {totalRecords} ' | translate}}"
-                                 [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" selectionMode="multiple" class="mt-6 flex ml-0 justify-content-center">
-                            <ng-template pTemplate="body" let-element>
-                                <div class=" justify-content-center mr-3">
-                                    <ul style="padding-left: 0;" class="flex justify-content-center">
-                                        <li class="container flex justify-content-center mt-2" style="list-style-type: none;padding-left: 0;" >
-                                            <a (click)="showw(element)"><p>{{ element.name }}</p></a>
-
-                                        </li>
-                                    </ul>
+                <div *ngIf="showDefaultView">
+                    <div class="grid">
+                        <div class="col-fixed" style="width:300px">
+                            <div class="text-center p-3 border-round-sm font-bold">
+                                <h3 class="flex ml-3 mb-6 justify-content-left h3">History:</h3>
+                                <div style="width: 250px; height: 300px; overflow: auto">
+                                    <p-table #dt [value]="items" [columns]="cols" [rows]="8" [paginator]="false"
+                                             [globalFilterFields]="['code', 'name', 'generatedDate', 'projectStatecode', 'inscriptionMembreid', 'domainTemplatename']" [(selection)]="selections"
+                                             [rowHover]="true" dataKey="id" styleClass="p-datatable-customers"
+                                             currentPageReportTemplate="{{'les éléments de {first} à {last} sur {totalRecords} ' | translate}}"
+                                             [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" selectionMode="multiple" class="mt-6 flex ml-0 justify-content-center">
+                                        <ng-template pTemplate="body" let-element>
+                                            <div class=" justify-content-center mr-3">
+                                                <ul style="padding-left: 0;" class="flex justify-content-center">
+                                                    <li class="container flex justify-content-center mt-2" style="list-style-type: none;padding-left: 0;" >
+                                                        <a (click)="showw(element)"><p>{{ element.name }}</p></a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </ng-template>
+                                    </p-table>
+                                    <p-scrollTop target="parent" styleClass="custom-scrolltop" [threshold]="150" icon="pi pi-arrow-up" />
                                 </div>
-                            </ng-template>
-                        </p-table>
-                    </ng-template>
-                    <ng-template pTemplate class="min-w-max">
-                        <div class="mt-3">
-                            <div class="top-right">
-                        <span class="vertical-align-baseline mt-2">
-                        <p-button (click)="showDialog()" icon="pi pi-external-link" icon="pi pi-eye" label="Template" class=" mt-2 ml-8 top-right  "></p-button>
-                            <button class="btn flex-end ml-8" (click)="toggleSidebar()">Toggle Sidebar</button>
-                        </span>
-                            </div>
-                            <span class="vertical-align-baseline">
-                            <div class="col flex align-items-center justify-content-center">
-                            <div class="col flex align-items-center min-w-max w-30rem justify-content-center">
-                                <textarea id="4" pInputTextarea rows="20" cols="70" placeholder="{{'project.yaml' | translate}}"  [(ngModel)]="item.yaml"></textarea>
-
                             </div>
                         </div>
-                        </span>
+                        <div class=" field col">
+                            <div class="text-center p-3 border-round-sm font-bold" [style]="{height: '400px'}">
+                                <span class="vertical-align-baseline mt-2">
+                                   <p-button style="background-color: orange;" (click)="showDialog()" icon="pi pi-external-link" icon="pi pi-eye" label="Template" class="top-right relative mr-4"></p-button>
+                                   <button class="btn flex-end relative" (click)="toggleSidebar()">Toggle Sidebar</button>
+                               </span>
+                                <div class="mb-2 mt-2 justify-content-left text-left">
+                                    <label class="text-surface-900 text-xl" for="3">{{'project.yaml' | translate}}</label>
+                                </div>
+                                <textarea [style]="{width: '100%', height:'300px'}" class="border-solid border-black-alpha-60 border-3" id="3" pInputTextarea rows="5" cols="46" placeholder="{{'project.yaml' | translate}}"  [(ngModel)]="item.yaml"></textarea>
+                                <div class="p-flexbox">
+                                    <button class="ml-8" pButton pRipple  label="{{'validate' | translate}}"  icon="pi pi-check"  (click)="save()" class="top"></button>
+                                </div>
+                            </div>
                         </div>
-                    </ng-template>
-                </p-splitter>
-                <div class="col flex align-items-center justify-content-center mr-8 right-0">
-                    <button pButton pRipple  label="{{'validate' | translate}}"  icon="pi pi-check"  (click)="save()" class="top"></button>
+                    </div>
                 </div>
-            </div>
+
+
                 <div *ngIf="showProjectView">
                     <p-toolbar styleClass="mb-4">
                         <ng-template pTemplate="left">
@@ -82,7 +80,7 @@
                                 <i style="font-size: 1rem" ></i><span class="link-label">Project</span>
                             </a>
 
-                            <a (click)="toggleCodePart('part3')" class="sidebar-link mr-4 ml-4">
+                            <a class="sidebar-link mr-4 ml-4">
                                 <i style="font-size: 1rem" ></i><span class="link-label">My Template</span>
                             </a>
                         </ng-template>
@@ -155,7 +153,31 @@
                     </p-table>
 
               </div>
-              </div>
+
+                <div *ngIf="showProjectDialogVisible">
+                    <p-toolbar styleClass="mb-4">
+                        <ng-template pTemplate="left">
+                            <a (click)="showDefault()" class="sidebar-link mr-4 ml-4">
+                                <i style="font-size: 1rem" ></i><span class="link-label">Genery</span>
+                            </a>
+                        </ng-template>
+                    </p-toolbar>
+                    <div *ngIf="selectedProject">
+                        <h2>Project Details</h2>
+                        <p><strong>Name:</strong> {{ selectedProject.name }}</p>
+                        <p><strong>Description:</strong> {{ selectedProject.code }}</p>
+                        <p><strong>Details:</strong> {{ selectedProject.yaml }}</p>
+                    </div>
+                </div>
+                <div *ngIf="showProjecttDialogVisible">
+                    <div *ngIf="selecteddProject">
+                        <h2>Project Details</h2>
+                        <p><strong>Name:</strong> {{ selecteddProject.name }}</p>
+                        <p><strong>Details:</strong> {{ selecteddProject.yaml }}</p>
+                    </div>
+                </div>
+
+            </div>
     </div>
 
     <p-card header="Permission not allowed" *ngIf="!listActionIsValid">
@@ -164,19 +186,6 @@
         </p>
     </p-card>
 </div>
-
-
-
-       <!--<div *ngIf="showYamlDialogVisible">
-           <textarea [(ngModel)]="separateContent" *ngIf="!isEditing"></textarea>
-           <div *ngIf="isEditing">{{ separateContent }}</div>
-           <div>
-              commentaire-- <button class="button" (click)="toggleEditMode()">{{ isEditing ? 'Modifier' : 'Terminer' }}</button>
-               <button class="but" (click)="copyYaml()">
-                   <i class="pi pi-clone" style="font-size: 1.5rem"></i>
-               </button>
-           </div>
-       </div>-->
    <div *ngIf="showYamlDialogVisible">
            <div *ngIf="selectedProject">
                <h2>Project Details</h2>
@@ -185,10 +194,6 @@
                <p><strong>Details:</strong> {{ selectedProject.yaml }}</p>
            </div>
    </div>
-
-
-
-
 
 
    <div *ngIf="showSidebar" class="sidebar bg-surface-100" style="width:60vh;">
@@ -211,14 +216,9 @@
    </div>
 
 
-
-
-
-
-
-
 <div *ngIf="showSidebar" class="sidebar bg-surface-100" style="width:60vh;">
-    <h4 style="margin-top:20vh">Yaml GPT</h4>
+    <button style="margin-top:10vh" class="btn flex-end relative" (click)="toggleSidebar()"><i class="pi pi-arrow-circle-left" style="font-size: 2rem"></i></button>
+    <h4 style="margin-top:1vh; margin-bottom:1vh">Yaml GPT</h4>
     <div class="card wiw flex justify-content-center bg-gray-400" style="width:47vh;margin:0vh;height: 68vh;padding:0vh;">
         <div style="width:47vh;margin:0vh;padding:2vh;">
             <form [formGroup]="queryFormGroup" (ngSubmit)="handleAskGPT()">
@@ -226,7 +226,7 @@
                     <label class="form-label text-black-alpha-90">Query:</label>
                 </div>
                 <div class="mb-3">
-                    <textarea formControlName="query" class="form-control bg-gray-400" style="width:40vh;height:15vh;"></textarea>
+                    <textarea formControlName="query" class="form-control bg-gray-400" style="width:40vh;height:11vh;"></textarea>
                 </div>
                 <div class="flex-end">
                     <button class="btn btn-success btn border-circle" ><i class="pi pi-send ml-0 mr-0 pl-0 pr-0" style="font-size: 1.4rem"></i></button>
@@ -243,59 +243,4 @@
         </div>
     </div>
 </div>
-
-
-
-
-<div *ngIf="showProjectDialogVisible">
-   <div *ngIf="selectedProject">
-       <h2>Project Details</h2>
-       <p><strong>Name:</strong> {{ selectedProject.name }}</p>
-       <p><strong>Description:</strong> {{ selectedProject.code }}</p>
-       <p><strong>Details:</strong> {{ selectedProject.yaml }}</p>
-   </div>
-</div>
-   <div *ngIf="showProjectDialogVisible">
-       <div *ngIf="selecteddProject">
-           <h2>Project Details</h2>
-           <p><strong>Name:</strong> {{ selecteddProject.name }}</p>
-           <p><strong>Details:</strong> {{ selecteddProject.yaml }}</p>
-       </div>
-   </div>
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- formatter.component.html
-
-<div>
-    <h2>Formatter</h2>
-
-    <div>
-        <label for="classNameInput">Class Name:</label>
-        <input id="classNameInput" type="text" [(ngModel)]="className">
-    </div>
-
-    <div>
-        <label for="attributesInput">Attributes:</label>
-        <input id="attributesInput" type="text" [(ngModel)]="attributes">
-    </div>
-
-    <button (click)="format()">Format Attributes</button>
-
-    <div *ngIf="result">
-        <h3>Result:</h3>
-        <pre>{{ result }}</pre>
-    </div>
-</div>
--->
-
 

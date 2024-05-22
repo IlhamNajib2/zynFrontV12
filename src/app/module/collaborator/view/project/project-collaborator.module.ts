@@ -50,6 +50,7 @@ import { MessageModule } from 'primeng/message';
 import {MessagesModule} from 'primeng/messages';
 import {PaginatorModule} from 'primeng/paginator';
 import {SplitterModule} from "primeng/splitter";
+import {ScrollTopModule} from "primeng/scrolltop";
 
 
 
@@ -106,6 +107,7 @@ import {SplitterModule} from "primeng/splitter";
         CardModule,
         EditorModule,
         SplitterModule,
+        ScrollTopModule,
 
 
     ],
