@@ -39,6 +39,8 @@ import {MemberDto} from 'src/app/shared/model/collaborator/Member.model';
 import {MemberCollaboratorService} from 'src/app/shared/service/collaborator/collaborator/MemberCollaborator.service';
 import {PaimentCollaboratorDto} from "../../../../../../shared/model/paiment/PaimentCollaborator.model";
 import {ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import {CouponDto} from "../../../../../../shared/model/coupon/Coupon.model";
+import { CouponDetailDto } from 'src/app/shared/model/coupon/CouponDetail.model';
 
 
 @Component({
@@ -57,6 +59,9 @@ export class InscriptionCollaboratorListCollaboratorComponent implements OnInit 
     protected criteriaData: any[] = [];
     protected _totalRecords = 0;
     private _pdfName: string;
+    private _email: string;
+
+
     protected _errorMessages = new Array<string>();
 
 
@@ -71,6 +76,7 @@ export class InscriptionCollaboratorListCollaboratorComponent implements OnInit 
     protected exportService: ExportService;
     protected excelFile: File | undefined;
     protected enableSecurity = false;
+    private _activeTab = 0;
 
     isIndividual: boolean = false;
     activeIndex: number = 0;
@@ -82,6 +88,7 @@ export class InscriptionCollaboratorListCollaboratorComponent implements OnInit 
     inscriptionCollaboratorStates: Array<InscriptionCollaboratorStateDto>;
     inscriptionCollaboratorTypes: Array<InscriptionCollaboratorTypeDto>;
     private _inscriptionCollaborator: InscriptionCollaboratorDto = new InscriptionCollaboratorDto();
+
 
 
 
@@ -128,9 +135,17 @@ export class InscriptionCollaboratorListCollaboratorComponent implements OnInit 
     }
 
     ngOnInit(): void {
-        this.inscription.collaborator =  new CollaboratorDto();
-        this.inscription.inscriptionCollaboratorType =  new InscriptionCollaboratorTypeDto();
-        this.inscriptionMembresElement.member = new MemberDto();
+        this.item=new InscriptionCollaboratorDto();
+        this.item.collaborator =  new CollaboratorDto();
+        this.item.inscriptionCollaboratorType =  new InscriptionCollaboratorTypeDto();
+
+        this.paiment=new  PaimentCollaboratorDto();
+        this.paiment.couponDetail=new CouponDetailDto();
+        this.paiment.couponDetail.coupon=new CouponDto();
+        this.inscriptionMembresElement= new InscriptionMembreDto();
+        this.inscriptionMembresElement.member= new MemberDto();
+
+
         this.memberService.findAll().subscribe((data) => this.members = data);
         this.inscriptionMembresElement.inscriptionMembreState = new InscriptionMembreStateDto();
         this.inscriptionMembreStateService.findAll().subscribe((data) => this.inscriptionMembreStates = data);
@@ -187,6 +202,18 @@ export class InscriptionCollaboratorListCollaboratorComponent implements OnInit 
 
     }
 
+
+    public addInscriptionMembres() {
+        if( this.item.inscriptionMembres == null )
+            this.item.inscriptionMembres = new Array<InscriptionMembreDto>();
+        if (this.errorMessages.length === 0) {
+            this.item.inscriptionMembres.push({... this.inscriptionMembresElement});
+            this.inscriptionMembresElement = new InscriptionMembreDto();
+        }else{
+            this.messageService.add({severity: 'error',summary: 'Erreurs',detail: 'Merci de corrigé les erreurs suivant : ' + this.errorMessages});
+        }
+    }
+
     public async edit1(dto: InscriptionMembreDto) {
         this.inscriptionMembreService.findByIdWithAssociatedList(dto).subscribe(res => {
             this.inscriptionMembresElement = res;
@@ -235,10 +262,12 @@ export class InscriptionCollaboratorListCollaboratorComponent implements OnInit 
         }
  */
     updateItemsMenu() {
-        if (!this.inscription|| !this.inscription.inscriptionCollaboratorType) {
-            this.inscription = new InscriptionCollaboratorDto();
-            this.inscription.inscriptionCollaboratorType= new InscriptionCollaboratorTypeDto();}
-        if (this.inscription.inscriptionCollaboratorType.name === 'company') {
+        if (!this.item || !this.item.inscriptionCollaboratorType) {
+
+            this.item = new InscriptionCollaboratorDto();
+            this.item.inscriptionCollaboratorType= new InscriptionCollaboratorTypeDto();
+        }
+        if (this.item.inscriptionCollaboratorType.name === 'company') {
             this.itemsMenu.splice(1, 0, {label: 'Member'});
         } else {
             this.removeItem('Member');
@@ -258,11 +287,13 @@ export class InscriptionCollaboratorListCollaboratorComponent implements OnInit 
     }
 
     action() {
-        if (!this.inscription|| !this.inscription.inscriptionCollaboratorType) {
-            this.inscription = new InscriptionCollaboratorDto();
-            this.inscription.inscriptionCollaboratorType= new InscriptionCollaboratorTypeDto();}
 
-        if (this.inscription.inscriptionCollaboratorType.name === 'company') {
+        if (!this.item || !this.item.inscriptionCollaboratorType) {
+
+            this.item = new InscriptionCollaboratorDto();
+            this.item.inscriptionCollaboratorType= new InscriptionCollaboratorTypeDto();
+        }
+        if (this.item.inscriptionCollaboratorType.name === 'company') {
             this.changeActiveIndexes();
             this.isIndividual = false;
         }
@@ -273,22 +304,24 @@ export class InscriptionCollaboratorListCollaboratorComponent implements OnInit 
         this.activeIndex1 = 0;
     }
     nextb() {
-        if (!this.inscription || !this.inscription.inscriptionCollaboratorType) {
-            this.inscription = new InscriptionCollaboratorDto();
-            this.inscription.inscriptionCollaboratorType= new InscriptionCollaboratorTypeDto();}
+        if (!this.item || !this.item.inscriptionCollaboratorType) {
+
+            this.item = new InscriptionCollaboratorDto();
+            this.item.inscriptionCollaboratorType= new InscriptionCollaboratorTypeDto();
+        }
         let validationPassed = false;
-        if (this.inscription.inscriptionCollaboratorType.name === 'Individual') {
+        if (this.item.inscriptionCollaboratorType.name === 'Individual') {
             validationPassed = this.validateStepMember(this.activeIndex);
-        } else if (this.inscription.inscriptionCollaboratorType.name === 'company') {
+        } else if (this.item.inscriptionCollaboratorType.name === 'company') {
             validationPassed = this.validateStepMember(this.activeIndex1);
         }
 
         if (validationPassed) {
-            if (this.inscription.inscriptionCollaboratorType.name === 'Individual') {
+            if (this.item.inscriptionCollaboratorType.name === 'Individual') {
                 if (this.activeIndex < 2) { // Assuming there are 3 steps in total for individual
                     this.activeIndex++;
                 }
-            } else if (this.inscription.inscriptionCollaboratorType.name === 'company') {
+            } else if (this.item.inscriptionCollaboratorType.name === 'company') {
                 if (this.activeIndex1 < 3) { // Assuming there are 4 steps in total for company
                     if (this.activeIndex1 === 0) {
                         this.activeIndex1 = 1;
@@ -351,7 +384,7 @@ export class InscriptionCollaboratorListCollaboratorComponent implements OnInit 
     }
 
     validateMembers(): boolean {
-        if (this.member.username && this.member.password) {
+        if (this.inscriptionMembresElement.member.username && this.inscriptionMembresElement.member.password) {
             return true;
         }
         return false;
@@ -369,16 +402,7 @@ export class InscriptionCollaboratorListCollaboratorComponent implements OnInit 
         return false;
     }
 
-    save2() {
-        if (!this.inscription ) {
-            this.inscription = new InscriptionCollaboratorDto();
-        }
-        this._b.inscriptionDate = new Date();
-        const newInscriptionMembre = {...this._b};
-        this.inscription.inscriptionMembres.push(newInscriptionMembre);
-        this.inscriptionMembresElements.push(newInscriptionMembre);
-        this._b = new InscriptionMembreDto();
-    }
+
 
 
 
@@ -577,6 +601,7 @@ export class InscriptionCollaboratorListCollaboratorComponent implements OnInit 
     }
 
     public save() {
+       this.item.packaging= this.packagingService.item;
         this.service.save().subscribe(item => {
             if (item != null) {
                 this.items.push({...item});
@@ -686,8 +711,22 @@ export class InscriptionCollaboratorListCollaboratorComponent implements OnInit 
     }
 
 
+    get email(): string {
+        return this._email;
+    }
+
+    set email(value: string) {
+        this._email = value;
+    }
 
 
+    get activeTab(): number {
+        return this._activeTab;
+    }
+
+    set activeTab(value: number) {
+        this._activeTab = value;
+    }
 
     get errorMessages(): string[] {
         if (this._errorMessages == null) {
@@ -761,13 +800,7 @@ export class InscriptionCollaboratorListCollaboratorComponent implements OnInit 
         this.inscriptionMembreStateService.items = value;
     }
 
-    get b(): InscriptionMembreDto {
-        return this._b;
-    }
 
-    set b(value: InscriptionMembreDto) {
-        this._b = value;
-    }
 
     get items(): Array<InscriptionCollaboratorDto> {
         return this.service.items;

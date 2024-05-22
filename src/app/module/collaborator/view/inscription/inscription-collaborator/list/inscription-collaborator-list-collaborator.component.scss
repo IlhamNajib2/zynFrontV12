@@ -1,3 +1,10 @@
+.grid.h11 {
+    display: flex;
+    justify-content: center; /* Change this line */
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
 .grid {
     display: flex;
     justify-content: space-between; /* Change this line */
@@ -137,7 +144,7 @@
 .col-md-2.d-flex.justify-content-end{
     margin-bottom: 20px;
     margin-right: 70px;
-    margin-left:900px;
+    margin-left:720px;
     width: 120px;
 }
 .p-ripple {

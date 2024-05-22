@@ -172,6 +172,22 @@ export class PackagingListCollaboratorComponent implements OnInit {
         }
     }
 
+    public submit(package1:PackagingDto){
+        //[routerLink]="['/inscription-collaborator/list']"
+        this.item=package1;
+        console.log(this.item);
+        this.router.navigate(['/app/collaborator/inscription/inscription-collaborator/list/']);
+
+    }
+    public submit1(package1:PackagingDto){
+        //[routerLink]="['/inscription-collaborator/list']"
+        this.item=package1;
+        console.log(this.item);
+        this.router.navigate(['/inscription/inscription-collaborator/list/']);
+
+    }
+
+
     public findPaginatedByCriteria() {
         this.packagingService.findPaginatedByCriteria(this.criteria).subscribe(paginatedItems => {
             this.items = paginatedItems.list;

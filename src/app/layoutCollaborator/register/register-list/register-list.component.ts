@@ -48,7 +48,7 @@ export class RegisterListComponent  implements OnInit {
         firstName : new FormControl('', Validators.required),
         lastName : new FormControl('', Validators.required),
         email : new FormControl('', Validators.required),
-        userName : new FormControl('', Validators.required),
+        username : new FormControl('', Validators.required),
         password : new FormControl('', Validators.required)
     });
     clicked:Boolean=false;
@@ -61,7 +61,7 @@ export class RegisterListComponent  implements OnInit {
 
     submit(){
         const formValues = this.registerForm.value
-        const {phone,firstName, lastName, email ,userName, password } = formValues;
+        const {phone,firstName, lastName, email ,username, password } = formValues;
         const role = new RoleDto();
         role.authority = 'ROLE_COLLABORATOR' ;
         const roleUser = new RoleUserDto();
@@ -74,7 +74,7 @@ export class RegisterListComponent  implements OnInit {
         this.user.firstName = firstName;
         this.user.lastName = lastName;
         this.user.phone = phone;
-        this.user.username = userName;
+        this.user.username = username;
         this.user.password = password;
         this.user.email = email;
         this.user.roleUsers = new Array<RoleUserDto>();

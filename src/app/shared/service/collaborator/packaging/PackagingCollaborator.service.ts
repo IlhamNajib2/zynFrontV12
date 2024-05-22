@@ -41,6 +41,7 @@ export class PackagingCollaboratorService {
     private _duplicateAction = 'duplicate';
     private _entityName: string;
 
+
     protected API_PERMISSION: string ;
 
 

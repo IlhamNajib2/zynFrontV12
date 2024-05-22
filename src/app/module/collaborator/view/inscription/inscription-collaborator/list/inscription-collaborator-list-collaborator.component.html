@@ -306,12 +306,12 @@
 
 
 <div class="grid h11" >
-    <div   style="display: flex; justify-content: center; align-items: center; height: 150vh;">
+    <div   style="display: flex; justify-content: center; align-items: center; height: 80vh; width:120vh">
         <p-card style="display: flex; justify-content: center;">
             <ng-template pTemplate="content" >
 
-                <div class="p-grid">
-                    <div class="p-col-12 ">
+                <div class="p-grid" style="width:120vh">
+                    <div class="p-col-12 " >
                         <p-toast></p-toast>
                         <div>
                             <p-steps [model]="itemsMenu" [readonly]="false" *ngIf="isIndividual" [(activeIndex)]="activeIndex"></p-steps>
@@ -321,29 +321,29 @@
                     </div>
                 </div>
 
-                <div [ngSwitch]="isIndividual ? activeIndex : activeIndex1">
+                <div [ngSwitch]="isIndividual ? activeIndex : activeIndex1" style="width:120vh">
                     <div *ngIf="(activeIndex === 0 && isIndividual) || (activeIndex1 === 0 && !isIndividual)" header="{{'inscriptionCollaborator.tabPan' | translate}}">
 
                         <div class="grid mt-4">
 
                         <div class="field col-11 md:col-6">
                             <label for="2">{{ 'collaborator.username' | translate }}</label>
-                            <input class=" input-grey bg-surface-100 mb-2 mr-2 mt-2 px-4" type="text" pInputText placeholder="{{'enter username' | translate}}" id="2" [(ngModel)]=" collaborator.username"/>
+                            <input class=" input-grey bg-surface-100 mb-2 mr-2 mt-2 px-4" type="text" pInputText placeholder="{{'enter username' | translate}}" id="2" [(ngModel)]=" item.collaborator.username"/>
                         </div>
 
                         <div class="field col-11 md:col-6">
-                            <label for="3">{{ 'collaborator.password' | translate }}</label>
-                            <input class=" input-grey bg-surface-100 mb-2 mr-2 mt-2 px-4" type="text" pInputText placeholder="{{'enter password' | translate}}" id="3" [(ngModel)]="collaborator.password"/>
+                            <label for="3">email</label>
+                            <input class=" input-grey bg-surface-100 mb-2 mr-2 mt-2 px-4" type="email" pInputText placeholder="{{'enter email' | translate}}" id="3" [(ngModel)]="email"/>
                         </div>
 
                         <div class="field col-11 md:col-6">
                             <label for="40">{{ 'collaborator.rib' | translate }}</label>
-                            <input class=" input-grey bg-surface-100 mb-2 mr-2 mt-2 px-4" type="text" pInputText placeholder="{{'enter rib' | translate}}" id="40" [(ngModel)]="collaborator.rib"/>
+                            <input class=" input-grey bg-surface-100 mb-2 mr-2 mt-2 px-4" type="text" pInputText placeholder="{{'enter rib' | translate}}" id="40" [(ngModel)]="item.collaborator.rib"/>
                         </div>
 
                             <div class="field col-11 md:col-6">
                                 <label for="1">{{ 'collaborator.description' | translate }}<span style="color: red;">*</span></label>
-                                <input class=" input-grey bg-surface-100 mb-2 mr-2 mt-2 px-4" type="text" pInputText placeholder="{{'enter discription' | translate}}" id="1" [(ngModel)]=" collaborator.description" />
+                                <input class=" input-grey bg-surface-100 mb-2 mr-2 mt-2 px-4" type="text" pInputText placeholder="{{'enter discription' | translate}}" id="1" [(ngModel)]="item.collaborator.description" />
 
                             </div>
 
@@ -351,14 +351,14 @@
                             <div class="field col-11 md:col-6">
                                 <div class="col-3 md:col-3">
                                     <div class="field-radiobutton">
-                                        <p-radioButton name="radio1" value="Individual" required (onClick)="action1()" [(ngModel)]="inscription.inscriptionCollaboratorType.name" id="radio1"></p-radioButton>
+                                        <p-radioButton name="radio1" value="Individual" required (onClick)="action1()" [(ngModel)]="item.inscriptionCollaboratorType.name" id="radio1"></p-radioButton>
                                         <label for="radio1">individual</label>
 
                                     </div>
                                 </div>
                                 <div class="col-3 md:3">
                                     <div class="field-radiobutton">
-                                        <p-radioButton name="radio2" value="company" required (onClick)="action()" [(ngModel)]="inscription.inscriptionCollaboratorType.name" id="radio2"></p-radioButton>
+                                        <p-radioButton name="radio2" value="company" required (onClick)="action()" [(ngModel)]="item.inscriptionCollaboratorType.name" id="radio2"></p-radioButton>
                                         <label for="radio2">company</label>
                                     </div>
                                 </div>
@@ -366,30 +366,30 @@
                         </div>
                     </div>
 
-                    <div *ngIf="activeIndex1===1&&!isIndividual" header="Inscription Member"  style="display: flex; justify-content: center; align-items: center; min-height: 90vh;min-width:150vh;">
+                    <div *ngIf="activeIndex1===1&&!isIndividual" header="Inscription Member"  style=" align-items: center; height: 90vh;width:120vh;">
                         <div>
                             <div class="p-col"  >
                                 <div class="grid mt-4">
                                     <div class="field col-11 md:col-6">
                                         <label for="4">{{ 'member.username' | translate }}</label>
-                                        <input class="input-grey bg-surface-100 mb-2 mr-2 mt-2 px-4" type="text" pInputText placeholder="{{'enter username' | translate}}" id="4" [(ngModel)]="b.member.username"/>
+                                        <input class="input-grey bg-surface-100 mb-2 mr-2 mt-2 px-4" type="text" pInputText placeholder="{{'enter username' | translate}}" id="4" [(ngModel)]="inscriptionMembresElement.member.username"/>
                                     </div>
 
                                     <div class="field col-11 md:col-6">
                                         <label for="5">{{ 'member.password' | translate }}</label>
-                                        <input class="input-grey bg-surface-100 mb-2 mr-2 mt-2 px-4" type="text" pInputText placeholder="{{'enter password' | translate}}" id="5" [(ngModel)]="b.member.password"/>
+                                        <input class="input-grey bg-surface-100 mb-2 mr-2 mt-2 px-4" type="text" pInputText placeholder="{{'enter password' | translate}}" id="5" [(ngModel)]="inscriptionMembresElement.member.password"/>
                                     </div>
                                     <div class="field col-11 md:col-6">
                                         <label for="10">{{ 'inscriptionMembres.maxEntity' | translate }}</label>
-                                        <input class="input-grey bg-surface-100 mb-2 mr-2 mt-2 px-4" type="text" pInputText placeholder="{{'enter maxEntity' | translate}}" id="10" [(ngModel)]="b.affectedEntity"/>
+                                        <input class="input-grey bg-surface-100 mb-2 mr-2 mt-2 px-4" type="text" pInputText placeholder="{{'enter maxEntity' | translate}}" id="10" [(ngModel)]="inscriptionMembresElement.affectedEntity"/>
                                     </div>
                                     <div class="field col-11 md:col-6">
                                         <label for="20">{{ 'inscriptionMembres.maxEntity' | translate }}</label>
-                                        <input class="input-grey bg-surface-100 mb-2 mr-2 mt-2 px-4" type="text" pInputText placeholder="{{'enter maxEntity' | translate}}" id="20" [(ngModel)]="b.affectedAttribut"/>
+                                        <input class="input-grey bg-surface-100 mb-2 mr-2 mt-2 px-4" type="text" pInputText placeholder="{{'enter maxEntity' | translate}}" id="20" [(ngModel)]="inscriptionMembresElement.affectedAttribut"/>
                                     </div>
                                     <div class="field col-11 md:col-6">
                                         <label for="21">{{ 'inscriptionMembres.maxEntity' | translate }}</label>
-                                        <input class="input-grey bg-surface-100 mb-2 mr-2 mt-2 px-4" type="text" pInputText placeholder="{{'enter maxEntity' | translate}}" id="21" [(ngModel)]="b.affectedProjet"/>
+                                        <input class="input-grey bg-surface-100 mb-2 mr-2 mt-2 px-4" type="text" pInputText placeholder="{{'enter maxEntity' | translate}}" id="21" [(ngModel)]="inscriptionMembresElement.affectedProjet"/>
                                     </div>
                                 </div>
                                 <div class="p-col">
@@ -397,7 +397,7 @@
                                         <div class="row mt-4">
                                             <div class="col-md-10"></div>
                                             <div class="col-md-2 d-flex justify-content-end">
-                                                <button pButton pRipple label="{{'save' | translate}}" icon="pi pi-check" class="btn button-purple" (click)="save2()"></button>
+                                                <button pButton pRipple label="{{'save' | translate}}" icon="pi pi-check" class="btn button-purple" (click)="addInscriptionMembres()"></button>
                                             </div>
                                         </div>
                                     </div>
@@ -407,7 +407,7 @@
                             <div class="p-col  " style=" overflow-y: auto; margin-bottom: 20px">
                                 <div class="card tabl ">
                                     <p-scrollPanel [style]="{ width: '100%', height: '150px'}" styleClass="custombar1">
-                                        <p-table [scrollable]="true"  [value]="inscriptionMembresElements"  scrollHeight="400px">
+                                        <p-table [value]="item.inscriptionMembres" [scrollable]="true" scrollHeight="200px">
 
                                             <ng-template pTemplate="header">
                                                 <tr>
@@ -420,7 +420,7 @@
                                                     <th>Actions</th>
                                                 </tr>
                                             </ng-template>
-                                            <ng-template pTemplate="body" *ngFor="let p of inscriptionMembresElements" >
+                                            <ng-template pTemplate="body" let-p>
                                                 <tr>
                                                     <td>{{p.inscriptionDate| date: dateFormatColumn}}</td>
                                                     <td>{{p.member.username}}</td>
@@ -442,8 +442,10 @@
                             </div>
                         </div>
 
+
+
                     </div>
-                    <div  *ngIf="(activeIndex === 1 && isIndividual) || (activeIndex1 === 2 && !isIndividual)" header="{{'paiment Collaborator' | translate}}">
+                    <div  *ngIf="(activeIndex === 1 && isIndividual) || (activeIndex1 === 2 && !isIndividual)" style="width:120vh"  header="{{'paiment Collaborator' | translate}}">
                         <div class="grid mt-4">
                             <div class="field col-11 md:col-6">
                                 <label for="6">{{'paimentCollaborator.name' | translate}}<span style="color: red;">*</span></label>
@@ -467,13 +469,13 @@
 
                             <div class="field col-11 md:col-6" *ngIf="!totalCalcule">
                                 <label for="13">{{'paimentCollaborator.Total' | translate}}</label>
-                                <input class=" input-grey mb-2 mr-2" type="text" pInputText  [readonly]="true" value="50Mad" placeholder="{{'paimentCollaborator.amountToPaid' | translate}}" id="13" [ngModel]="paiment.total"
+                                <input class=" input-grey mb-2 mr-2" type="text" pInputText  [readonly]="true" value="this.item.packaging.price" placeholder="{{'paimentCollaborator.amountToPaid' | translate}}" id="13" [ngModel]="paiment.total"
                                 />
 
                             </div>
                             <div class="field col-11 md:col-6" *ngIf="totalCalcule">
                                 <label for="15">{{'paimentCollaborator.totalRestant' | translate}}</label>
-                                <input class=" input-grey mb-2 mr-2" type="text" pInputText  [readonly]="true" value="50Mad"  id="15" [ngModel]="paiment.remaining"
+                                <input class=" input-grey mb-2 mr-2" type="text" pInputText  [readonly]="true" value=""  id="15" [ngModel]="paiment.remaining"
                                 />
                             </div>
 
@@ -484,7 +486,7 @@
                             </div>
                             <div class="field col-11 md:col-6">
                                 <label for="9">{{'paymentCollaborator.coupon.name' | translate}}</label>
-                                <input class="input-grey mb-2 mr-2" appendTo="body" pInputText   [(ngModel)]="paiment.name" id="9"
+                                <input class="input-grey mb-2 mr-2" appendTo="body" pInputText   [(ngModel)]="paiment.couponDetail.coupon.name" id="9"
                                        (ngModelChange)="CalcultotalRestant(this.paiment.name,paiment.total)"  placeholder="{{'paymentCollaborator.coupon.name' | translate}}"  />
                             </div>
                         </div>
@@ -492,7 +494,7 @@
 
 
 
-                    <div *ngIf="(activeIndex === 2 && isIndividual) || (activeIndex1 === 3 && !isIndividual)" header="{{'Confermation ' | translate}}"  style="min-height: 50vh;min-width:140vh;" >
+                    <div *ngIf="(activeIndex === 2 && isIndividual) || (activeIndex1 === 3 && !isIndividual)" header="{{'Confermation ' | translate}}"  style="min-height: 50vh;min-width:140vh;width:120vh" >
                         <div class="grid mt-80px">
                             <div style="min-height: 30vh;min-width:100vh;">
                                 <h4 style="margin-top:40px;"> <b>Please confirm your details:</b></h4>
