@@ -301,4 +301,11 @@ export class TemplateCollaboratorService {
         this._entityName = value;
     }
 
+
+
+
+
+    getTemplates(): Observable<TemplateDto[]> {
+        return this.http.get<TemplateDto[]>('http://localhost:8036/api/collaborator/template/');
+    }
 }

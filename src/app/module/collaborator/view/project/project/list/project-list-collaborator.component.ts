@@ -75,7 +75,7 @@ export class ProjectListCollaboratorComponent implements OnInit {
     domainTemplates: Array<DomainTemplateDto>;
 
 
-    constructor(private projectCollaboratorService:ProjectCollaboratorService,private httpClient :HttpClient,private fb:FormBuilder,private service: ProjectCollaboratorService, private inscriptionMembreService: InscriptionMembreCollaboratorService, private projectStateService: ProjectStateCollaboratorService, private domainTemplateService: DomainTemplateCollaboratorService, private projectTemplateService: ProjectTemplateCollaboratorService, @Inject(PLATFORM_ID) private platformId?) {
+    constructor(private templateService:TemplateCollaboratorService,private projectCollaboratorService:ProjectCollaboratorService,private httpClient :HttpClient,private fb:FormBuilder,private service: ProjectCollaboratorService, private inscriptionMembreService: InscriptionMembreCollaboratorService, private projectStateService: ProjectStateCollaboratorService, private domainTemplateService: DomainTemplateCollaboratorService, private projectTemplateService: ProjectTemplateCollaboratorService, @Inject(PLATFORM_ID) private platformId?) {
         this.datePipe = ServiceLocator.injector.get(DatePipe);
         this.messageService = ServiceLocator.injector.get(MessageService);
         this.confirmationService = ServiceLocator.injector.get(ConfirmationService);
@@ -102,6 +102,7 @@ export class ProjectListCollaboratorComponent implements OnInit {
             query:this.fb.control("")
         })
 
+        this.loadTemplates();
     }
 
 
@@ -280,21 +281,21 @@ export class ProjectListCollaboratorComponent implements OnInit {
         });
     }
 
-    public save() {
-        this.service.save().subscribe(item => {
-            if (item != null) {
-                this.items.push({...item});
-                this.createDialog = false;
-
-
-                this.item = new ProjectDto();
-            } else {
-                this.messageService.add({severity: 'error', summary: 'Erreurs', detail: 'Element existant'});
-            }
-        }, error => {
-            console.log(error);
-        });
-    }
+    //public save() {
+        //this.service.save().subscribe(item => {
+      //      if (item != null) {
+    //            this.items.push({...item});
+  //              this.createDialog = false;
+//
+//
+              //  this.item = new ProjectDto();
+            //} else {
+           //     this.messageService.add({severity: 'error', summary: 'Erreurs', detail: 'Element existant'});
+         //   }
+       // }, error => {
+         //   console.log(error);
+        //});
+    //}
 
 // add
 
@@ -581,16 +582,16 @@ export class ProjectListCollaboratorComponent implements OnInit {
         this.visible = true;
     }
     queryFormGroup!:FormGroup;
-    message=[{role:"system", content:"You are a helpful assistant."}];
+    messages=[{role:"system", content:"You are a helpful assistant."}];
     result:any;
     handleAskGPT() {
         let url='https://api.openai.com/v1/chat/completions';
-        let httpHeaders=new HttpHeaders().set("Authorization","");
+        let httpHeaders=new HttpHeaders().set("Authorization","Bearer sk-proj-BOM7Krc0ENi0UijiiUvNT3BlbkFJN4WansIvuuQ6y2inXZX4");
         let payload={
-            model:"gpt-3.5-turbo",
-            message:this.message
+            model:'gpt-3.5-turbo',
+            messages:this.messages
         }
-        this.message.push({
+        this.messages.push({
             role:"user" , content:this.queryFormGroup.value.query
         })
         this.httpClient.post(url,payload,{headers:httpHeaders})
@@ -599,7 +600,7 @@ export class ProjectListCollaboratorComponent implements OnInit {
                     this.result=resp;
                 },
                 error:(err)=>{
-
+                    prompt("error",err);
                 }
 
             })
@@ -645,10 +646,12 @@ export class ProjectListCollaboratorComponent implements OnInit {
     showDefaultView: boolean = true;
     showProjectView: boolean = false;
     showYmlView: boolean= false;
+    showPrjctView: boolean= false;
     setView(view: string) {
         this.showDefaultView = view === 'default';
         this.showProjectView = view === 'project';
         this.showYmlView= view==='yaml';
+        this.showPrjctView= view==='prjct';
         // Enregistrer l'état de la vue dans le stockage local
         localStorage.setItem('currentView', view);
     }
@@ -664,4 +667,103 @@ export class ProjectListCollaboratorComponent implements OnInit {
         this.setView('yaml')
     }
 
+
+
+
+
+    selectedTemplate: TemplateDto | null = null;
+    templates: TemplateDto[] = [];
+    displayDialog: boolean = false;
+    loadTemplates(): void {
+        this.templateService.getTemplates().subscribe((data: TemplateDto[]) => {
+            this.templates = data;
+        });
+    }
+
+    showTemplateDetails(template: TemplateDto): void {
+        this.selectedTemplate = template;
+        this.displayDialog = true;
+    }
+    projects: ProjectDto[] = [];
+    selectedProject: ProjectDto | null = null;
+    selecteddProject: ProjectDto | null = null;
+    showProjectDialogVisible: boolean = false;
+
+
+    showw(project: ProjectDto) {
+        this.selectedProject = project;
+        this.setView('prjct');
+        this.showProjectDialogVisible = true;
+
+    }
+    showYamllDialog(project: ProjectDto): void {
+        this.selecteddProject = project;
+        this.setView('prjct');
+        this.showProjectDialogVisible = true;// Show the dialog
+    }
+    //save
+    get submitted(): boolean {
+        return this._submitted;
+    }
+
+    set submitted(value: boolean) {
+        this._submitted = value;
+    }
+    protected _submitted = false;
+    protected _errorMessages = new Array<string>();
+    get errorMessages(): string[] {
+        if (this._errorMessages == null) {
+            this._errorMessages = new Array<string>();
+        }
+        return this._errorMessages;
+    }
+
+    set errorMessages(value: string[]) {
+        this._errorMessages = value;
+    }
+    public  validateForm(): void{
+        this.errorMessages = new Array<string>();
+        this.validateProjectCode();
+    }
+
+    public validateProjectCode(){
+        if (this.stringUtilService.isEmpty(this.item.code)) {
+            this.errorMessages.push('Code non valide');
+            this.validProjectCode = false;
+        } else {
+            this.validProjectCode = true;
+        }
+    }
+    get validProjectCode(): boolean {
+        return this._validProjectCode;
+    }
+
+    set validProjectCode(value: boolean) {
+        this._validProjectCode = value;
+    }
+    private _validProjectCode = true;
+    public saveWithShowOption(showList: boolean) {
+        this.service.save().subscribe(item => {
+            if (item != null) {
+                this.items.push({...item});
+                this.createDialog = false;
+                this.submitted = false;
+                this.item = new ProjectDto();
+            } else {
+                this.messageService.add({severity: 'error', summary: 'Erreurs', detail: 'Element existant'});
+            }
+
+        }, error => {
+            console.log(error);
+        });
+    }
+    public save(): void {
+        this.submitted = true;
+        this.validateForm();
+        if (this.errorMessages.length === 0) {
+            this.saveWithShowOption(false);
+        } else {
+            this.messageService.add({severity: 'error',summary: 'Erreurs',detail: 'Merci de corrigé les erreurs sur le formulaire'});
+        }
+    }
 }

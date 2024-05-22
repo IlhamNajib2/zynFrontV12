@@ -48,12 +48,8 @@
                             <div *ngIf="element.categoryTemplate.name===selectedProjectTemplate">
 
                                 <div  class="border-solid mt-4 mb-6 flex flex-wrap border-gray-300">
-                                    <div class=" left-100 ml-8 mr-8 text-left align-items-left"> <span class="vertical-align-baseline">
-                               <pre> <svg width="40" height="40" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                                    <circle cx="50" cy="50" r="50" fill="#dd1b16"/>
-                                    <circle cx="50" cy="50" r="30" fill="#f2f2f2"/>
-                                    <circle cx="50" cy="50" r="15" fill="#dd1b16"/>
-                                </svg>      {{ element.name }} :  {{ element.description }}           <p-rating class="ml-3" [(ngModel)]="value" [cancel]="false" /></pre>
+                                    <div class=" left-100 ml-4 mr-8 text-left align-items-left"> <span class="vertical-align-baseline">
+                               <pre>         <img [src]="getTechnologyLogo(element.technology?.name)" alt="Technology Logo" class="w-3rem h-2rem"/>{{ element.name }} :  {{ element.description }}           <p-rating class="ml-3" [(ngModel)]="value" [cancel]="false" /></pre>
                             </span>
                                 <span class="vertical-align-baseline"><pre><p class="text-left mt-0 mr-3 mb-0 ml-8"><b class="text-red-500">{{ element.price }}  $</b>                <u class="text-pink-900">technology:</u>  <b class="text-teal-600">{{ element.technology.name }}</b>                <u class="text-pink-900">domain:</u>  <b>{{ element.domainTemplate.name }}</b></p></pre></span>
                                 <div>
