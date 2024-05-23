@@ -51,6 +51,7 @@ import {MessagesModule} from 'primeng/messages';
 import {PaginatorModule} from 'primeng/paginator';
 import {SplitterModule} from "primeng/splitter";
 import {ScrollTopModule} from "primeng/scrolltop";
+import {FieldsetModule} from "primeng/fieldset";
 
 
 
@@ -108,6 +109,7 @@ import {ScrollTopModule} from "primeng/scrolltop";
         EditorModule,
         SplitterModule,
         ScrollTopModule,
+        FieldsetModule,
 
 
     ],

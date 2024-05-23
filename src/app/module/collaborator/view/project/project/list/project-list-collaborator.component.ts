@@ -560,17 +560,6 @@ export class ProjectListCollaboratorComponent implements OnInit {
     projectData: ProjectDto[] = [];
 
     protected readonly TemplateDto = TemplateDto;
-    isEditing: boolean = true;
-
-    copyYaml() {
-        const textField = document.createElement('textarea');
-        textField.value = this.separateContent; // Get the YAML content from the textarea
-        document.body.appendChild(textField);
-        textField.select();
-        document.execCommand('copy'); // Copy the selected text
-        textField.remove();
-        // Optional: Show a success message to the user
-    }
     visible: boolean = false;
 
     showDialog() {
@@ -759,4 +748,16 @@ export class ProjectListCollaboratorComponent implements OnInit {
     }
 
     protected readonly color = color;
+    copyToClipboard() {
+        const yamlText = document.getElementById('yamlText').innerText;
+        const textarea = document.createElement('textarea');
+        textarea.value = yamlText;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+        alert('Text copied to clipboard!');
+    }
+
+
 }
