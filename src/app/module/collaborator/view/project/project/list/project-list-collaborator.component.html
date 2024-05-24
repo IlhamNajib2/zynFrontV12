@@ -74,7 +74,6 @@
                 <div *ngIf="showProjectView">
                     <p-toolbar styleClass="mb-4">
                         <ng-template pTemplate="left">
-                            <button pButton pRipple label=" {{'new' | translate}}" icon="pi pi-plus" class="p-button-info mr-2 mb-2" (click)="openCreate('Project')" *ngIf="createActionIsValid"></button>
                             <a (click)="showDefault()" class="sidebar-link mr-4 ml-4 text-orange-500 underline font-bold hover:text-orange-700">
                                 <i style="font-size: 1rem" ></i><span class="link-label">Genery</span>
                             </a>
@@ -88,6 +87,7 @@
                             </a>
                         </ng-template>
                         <ng-template pTemplate="right">
+                            <button pButton pRipple label=" {{'new' | translate}}" icon="pi pi-plus" class="p-button-info mr-2 mb-2" (click)="openCreate('Project')" *ngIf="createActionIsValid"></button>
                         </ng-template>
                     </p-toolbar>
                     <app-project-create-collaborator  *ngIf="createDialog  && createActionIsValid"></app-project-create-collaborator>
@@ -107,29 +107,24 @@
                         </ng-template>
                         <ng-template pTemplate="header">
                             <tr>
-                                <th>Code</th>
                                 <th>Name</th>
-                                <th>Template</th>
                                 <th>Date</th>
                                 <th>domain</th>
                                 <th>Yaml</th>
-                                <th>Template</th>
                             </tr>
                         </ng-template>
                         <ng-template pTemplate="body" let-element>
-                            <tr>
-                                <td>{{element.code}}</td>
+                            <tr class="bg-">
                                 <td>{{element.name}}</td>
-                                <td>{{element.template}}</td>
                                 <td>{{element.generatedDate | date :'dd/MM/yyyy HH:mm' }}</td>
                                 <!--<td>{{element.projectState?.code}}</td>
                                 <td>{{element.inscriptionMembre?.id}}</td>-->
                                 <td>{{element.domainTemplate?.name}}</td>
                                 <!--<td><p-button  (click)="showYamlDialog(element.yaml)" label="Yaml" severity="warning" /></td>-->
                                 <td><p-button  (click)="showYamllDialog(element)" label="Yaml" severity="warning" /></td>
-                                <td>
+                                <!--<td>
                                     <p-button (click)="showTemplateDetails(element.template)" label="Yaml" severity="warning"></p-button>
-                                </td>
+                                </td>-->
                             </tr>
                             <p-dialog header="Template Details" [(visible)]="displayDialog" [modal]="true" [style]="{width: '50vw'}">
                                 <ng-template pTemplate="content">
@@ -238,14 +233,14 @@
 <div *ngIf="showSidebar" class="sidebar bg-surface-100" style="width:60vh;">
     <button style="margin-top:10vh" class="btn flex-end relative" (click)="toggleSidebar()"><i class="pi pi-arrow-circle-left" style="font-size: 2rem"></i></button>
     <h4 style="margin-top:1vh; margin-bottom:1vh">Yaml GPT</h4>
-    <div class="card wiw flex justify-content-center bg-gray-400" style="width:47vh;margin:0vh;height: 68vh;padding:0vh;">
+    <div class="card wiw flex justify-content-center bg-surface-100" style="width:47vh;margin:0vh;height: 68vh;padding:0vh;">
         <div style="width:47vh;margin:0vh;padding:2vh;">
             <form [formGroup]="queryFormGroup" (ngSubmit)="handleAskGPT()">
                 <div>
                     <label class="form-label text-black-alpha-90">Query:</label>
                 </div>
                 <div class="mb-3">
-                    <textarea formControlName="query" class="form-control bg-gray-400" style="width:40vh;height:11vh;"></textarea>
+                    <textarea formControlName="query" class="form-control bg-surface-100" style="width:40vh;height:11vh;"></textarea>
                 </div>
                 <div class="flex-end">
                     <button class="btn btn-success btn border-circle" ><i class="pi pi-send ml-0 mr-0 pl-0 pr-0" style="font-size: 1.4rem"></i></button>

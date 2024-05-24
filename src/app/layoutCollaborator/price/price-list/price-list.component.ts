@@ -31,34 +31,34 @@ export class PriceListComponent implements OnInit{
     pricingPlans = [
 
         {
-            title: 'Starts from 2,000/month',
-            users: 'Up to 3',
-            connections: 'Unlimited',
-            newConnectionRequests: '',
+            title: '✓',
+            users: '✓',
+            connections: '✓',
+            newConnectionRequests: '✓',
             aaa:'✓',
             bbb:'✓',
-            ccc:'✓',
-            ddd:'✓',
-        },
-        {
-            title: 'Starts from 5,000/month',
-            users: 'Unlimited',
-            connections: 'Unlimited',
-            newConnectionRequests: 'Available',
-            aaa:'✓',
-            bbb:'✓',
-            ccc:'✓',
-            ddd:'✓',
-        },
-        {
-            title: 'Custom',
-            users: 'Unlimited',
-            connections: 'Unlimited',
-            newConnectionRequests: 'Prioritized',
-            aaa:'',
-            bbb:'',
-            ccc:'',
+            ccc:'7 Days',
             ddd:'',
+        },
+        {
+            title: '✓',
+            users: '✓',
+            connections: '✓',
+            newConnectionRequests: '✓',
+            aaa:'✓',
+            bbb:'✓',
+            ccc:'30 Days',
+            ddd:'',
+        },
+        {
+            title: '✓',
+            users: '✓',
+            connections: '✓',
+            newConnectionRequests: '✓',
+            aaa:'✓',
+            bbb:'✓',
+            ccc:'Custom',
+            ddd:'✓',
 
         },
     ];
@@ -88,26 +88,19 @@ export class PriceListComponent implements OnInit{
     pricing = [
 
         {
-            title: 'Starts from 2,000/month',
-            users: 'Up to 3',
-            connections: 'Unlimited',
+            title: '✓',
+            users: '✓',
+            connections: '',
             newConnectionRequests: '',
 
         },
         {
-            title: 'Starts from 5,000/month',
-            users: 'Unlimited',
-            connections: 'Unlimited',
-            newConnectionRequests: 'Available',
+            title: '✓',
+            users: '✓',
+            connections: '✓',
+            newConnectionRequests: '✓',
 
         },
-        {
-            title: 'Custom',
-            users: 'Unlimited',
-            connections: 'Unlimited',
-            newConnectionRequests: 'Prioritized',
 
-
-        },
     ];
 }

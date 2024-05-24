@@ -60,7 +60,7 @@
                                 <pre><h4>{{ element.name }}</h4>       <img [src]="getTechnologyLogo(element.technology?.name)" alt="Technology Logo" class="w-3rem h-2rem"/></pre>
                                 <p>{{ element.price }}$</p>
                                 <p>{{ element.description }}</p>
-                                <button>Continue To Ckeckout</button>
+                                <button>Continue To Ckeckout</button><i class="pi pi-cart-minus" style="font-size: 2rem"></i>
                             </p-dialog>
                     </ng-template>
                 </p-table>
@@ -68,18 +68,18 @@
             <div *ngIf="showTemplateView">
                 <p-toolbar styleClass="mb-4">
                     <ng-template pTemplate="left">
-                        <button pButton pRipple label="{{'new' | translate}}" icon="pi pi-plus" class="p-button-info mr-2 mb-2" (click)="openCreate('Template')" *ngIf="createActionIsValid"></button>
-                        <a class="sidebar-link mr-4 ml-4" (click)="showDefault()">
+                        <a class="sidebar-link mr-4 ml-4 text-orange-500 underline font-bold hover:text-orange-700" (click)="showDefault()">
                             <i style="font-size: 1rem"></i><span class="link-label">Template</span>
                         </a>
-                        <a class="sidebar-link mr-4 ml-4" (click)="showTemplate()">
+                        <a class="sidebar-link mr-4 ml-4 text-orange-500 underline font-bold hover:text-orange-700" (click)="showTemplate()">
                             <i style="font-size: 1rem"></i><span class="link-label">New</span>
                         </a>
-                        <a class="sidebar-link mr-4 ml-4">
+                        <a class="sidebar-link mr-4 ml-4 text-orange-500 underline font-bold hover:text-orange-700">
                             <i style="font-size: 1rem"></i><span class="link-label">My Template</span>
                         </a>
                     </ng-template>
                     <ng-template pTemplate="right">
+                        <button pButton pRipple label="{{'new' | translate}}" icon="pi pi-plus" class="p-button-info mr-2 mb-2" (click)="openCreate('Template')" *ngIf="createActionIsValid"></button>
                     </ng-template>
                 </p-toolbar>
                 <app-template-create-collaborator *ngIf="createDialog && createActionIsValid"></app-template-create-collaborator>
@@ -115,7 +115,7 @@
                             <div class="mb-2">
                                 <label class="text-orange-400 text-xl" for="11">{{'template.price' | translate}}</label>
                             </div>
-                            <p-inputNumber [style.width.%]="80" class="border-solid border-black-alpha-60" [style]="{width: '100%'}"  id="12" placeholder="{{'template.price' | translate}}" [(ngModel)]="item.price"  >
+                            <p-inputNumber [style.width.%]="80" class="border-solid border-round border-black-alpha-60" [style]="{width: '100%'}"  id="12" placeholder="{{'template.price' | translate}}" [(ngModel)]="item.price"  >
                             </p-inputNumber>
                         </div>
                         <div class="field col-11 md:col-6">
