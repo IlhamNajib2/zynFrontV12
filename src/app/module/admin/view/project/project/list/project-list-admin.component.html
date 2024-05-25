@@ -5,7 +5,7 @@
         <div class="card">
             <p-toolbar styleClass="mb-4">
                 <ng-template pTemplate="left">
-                                        <button pButton pRipple label=" {{'new' | translate}}" icon="pi pi-plus" class="p-button-info mr-2 mb-2" (click)="openCreate('Project')" *ngIf="createActionIsValid"></button>
+                                        <button pButton pRipple label=" {{'new' | translate}}" icon="pi pi-plus" class="p-button-info mr-2 mb-2" (click)="openCreate()" *ngIf="createActionIsValid"></button>
                     <button [disabled]="isSelectionDisabled()" pButton pRipple label=" {{'delete' | translate}}" icon="pi pi-trash" class="p-button-danger mr-2 mb-2" (click)=deleteMultiple()  *ngIf="deleteActionIsValid"></button>
                     <button pButton pRipple label=" {{'search' | translate}}" icon="pi pi-{{findByCriteriaShow?'angle-down':'angle-right'}}" class="p-button-secondary mr-2 mb-2" (click)="this.showSearch()"></button>
                 </ng-template>
@@ -42,19 +42,19 @@
                         </div>
 
                         <div class="lg:col-3 md:col-6 sm:col-12 mb-4">
-                            <label  class="font-bold block mb-2" for="5-2">{{'project.projectState' | translate}}</label>
+                            <label  class="font-bold block mb-2" for="5">{{'project.projectState' | translate}}</label>
                             <p-dropdown [options]="projectStates" [(ngModel)]="criteria.projectState" id="5" [filter]="true" class="p-fluid"
                                         [showClear]="true"  placeholder="{{'project.projectState' | translate}}" optionLabel="code">
                             </p-dropdown>
                         </div>
                         <div class="lg:col-3 md:col-6 sm:col-12 mb-4">
-                            <label  class="font-bold block mb-2" for="6-2">{{'project.inscriptionMembre' | translate}}</label>
+                            <label  class="font-bold block mb-2" for="6">{{'project.inscriptionMembre' | translate}}</label>
                             <p-dropdown [options]="inscriptionMembres" [(ngModel)]="criteria.inscriptionMembre" id="6" [filter]="true" class="p-fluid"
                                         [showClear]="true"  placeholder="{{'project.inscriptionMembre' | translate}}" optionLabel="id">
                             </p-dropdown>
                         </div>
                         <div class="lg:col-3 md:col-6 sm:col-12 mb-4">
-                            <label  class="font-bold block mb-2" for="7-2">{{'project.domainTemplate' | translate}}</label>
+                            <label  class="font-bold block mb-2" for="7">{{'project.domainTemplate' | translate}}</label>
                             <p-dropdown [options]="domainTemplates" [(ngModel)]="criteria.domainTemplate" id="7" [filter]="true" class="p-fluid"
                                         [showClear]="true"  placeholder="{{'project.domainTemplate' | translate}}" optionLabel="name">
                             </p-dropdown>
