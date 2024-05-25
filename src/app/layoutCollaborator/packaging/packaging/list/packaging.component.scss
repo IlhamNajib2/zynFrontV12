@@ -290,14 +290,10 @@ body {
 }
 
 .nav {
-    border-radius:15px;
+    border-radius: 15px;
     margin-bottom: 8px;
     font-family: sans-serif;
-    // display: block;
     width: 100%;
-   // background-color: white;
-    //padding: $padding-medium;
-   // color: white;
     flex-wrap: wrap;
     align-items: center;
     padding: 20px;
@@ -308,13 +304,13 @@ body {
         margin: 0;
         display: flex;
         justify-content: center;
+
         li {
             display: inline-block;
             position: relative;
             padding: 2px;
-            margin: 0 50px $padding-medium;
-            font-size:21px;
-
+            margin: 0 50px;
+            font-size: 21px;
 
             a {
                 text-decoration: none;
@@ -326,13 +322,16 @@ body {
                 &:hover {
                     color: $secondary-color;
                 }
+                &.active {
+                    color: $secondary-color;
+                }
             }
 
             &::after {
                 content: '';
                 height: 3px;
                 width: 0;
-                background: $secondary-color;
+                background:  $secondary-color;
                 position: absolute;
                 left: 0;
                 bottom: -10px;
@@ -344,6 +343,17 @@ body {
             }
         }
     }
+}
+
+
+
+.con.ng-star-inserted{
+    justify-content:center;
+}
+
+.swiper-pagination{
+    width:10px;
+
 }
 .con.ng-star-inserted{
     justify-content:center;

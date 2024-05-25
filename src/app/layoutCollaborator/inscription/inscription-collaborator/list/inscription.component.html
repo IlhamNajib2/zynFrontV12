@@ -327,7 +327,7 @@
                         <div class="grid mt-4">
 
                         <div class="field col-11 md:col-6">
-                            <label for="2">{{ 'collaborator.username' | translate }}</label>
+                            <label for="2">username</label>
                             <input class=" input-grey bg-surface-100 mb-2 mr-2 mt-2 px-4" type="text" pInputText placeholder="{{'enter username' | translate}}" id="2" [(ngModel)]=" item.collaborator.username"/>
                         </div>
 
@@ -337,12 +337,12 @@
                         </div>
 
                         <div class="field col-11 md:col-6">
-                            <label for="40">{{ 'collaborator.rib' | translate }}</label>
+                            <label for="40">rib</label>
                             <input class=" input-grey bg-surface-100 mb-2 mr-2 mt-2 px-4" type="text" pInputText placeholder="{{'enter rib' | translate}}" id="40" [(ngModel)]="item.collaborator.rib"/>
                         </div>
 
                             <div class="field col-11 md:col-6">
-                                <label for="1">{{ 'collaborator.description' | translate }}<span style="color: red;">*</span></label>
+                                <label for="1">description<span style="color: red;">*</span></label>
                                 <input class=" input-grey bg-surface-100 mb-2 mr-2 mt-2 px-4" type="text" pInputText placeholder="{{'enter discription' | translate}}" id="1" [(ngModel)]="item.collaborator.description" />
 
                             </div>
@@ -371,24 +371,24 @@
                             <div class="p-col"  >
                                 <div class="grid mt-4">
                                     <div class="field col-11 md:col-6">
-                                        <label for="4">{{ 'member.username' | translate }}</label>
+                                        <label for="4">username</label>
                                         <input class="input-grey bg-surface-100 mb-2 mr-2 mt-2 px-4" type="text" pInputText placeholder="{{'enter username' | translate}}" id="4" [(ngModel)]="inscriptionMembresElement.member.username"/>
                                     </div>
 
                                     <div class="field col-11 md:col-6">
-                                        <label for="5">{{ 'member.password' | translate }}</label>
+                                        <label for="5">password</label>
                                         <input class="input-grey bg-surface-100 mb-2 mr-2 mt-2 px-4" type="text" pInputText placeholder="{{'enter password' | translate}}" id="5" [(ngModel)]="inscriptionMembresElement.member.password"/>
                                     </div>
                                     <div class="field col-11 md:col-6">
-                                        <label for="10">{{ 'inscriptionMembres.maxEntity' | translate }}</label>
+                                        <label for="10">maxEntity</label>
                                         <input class="input-grey bg-surface-100 mb-2 mr-2 mt-2 px-4" type="text" pInputText placeholder="{{'enter maxEntity' | translate}}" id="10" [(ngModel)]="inscriptionMembresElement.affectedEntity"/>
                                     </div>
                                     <div class="field col-11 md:col-6">
-                                        <label for="20">{{ 'inscriptionMembres.maxEntity' | translate }}</label>
+                                        <label for="20">maxAttribut</label>
                                         <input class="input-grey bg-surface-100 mb-2 mr-2 mt-2 px-4" type="text" pInputText placeholder="{{'enter maxEntity' | translate}}" id="20" [(ngModel)]="inscriptionMembresElement.affectedAttribut"/>
                                     </div>
                                     <div class="field col-11 md:col-6">
-                                        <label for="21">{{ 'inscriptionMembres.maxEntity' | translate }}</label>
+                                        <label for="21">maxProjects</label>
                                         <input class="input-grey bg-surface-100 mb-2 mr-2 mt-2 px-4" type="text" pInputText placeholder="{{'enter maxEntity' | translate}}" id="21" [(ngModel)]="inscriptionMembresElement.affectedProjet"/>
                                     </div>
                                 </div>
@@ -422,7 +422,7 @@
                                             </ng-template>
                                             <ng-template pTemplate="body" let-p>
                                                 <tr>
-                                                    <td>{{p.inscriptionDate| date: dateFormatColumn}}</td>
+                                                    <td>{{p.inscriptionDate.now| date: dateFormatColumn}}</td>
                                                     <td>{{p.member.username}}</td>
                                                     <td>{{p.member.password}}</td>
                                                     <td>{{p.affectedEntity}}</td>
@@ -448,28 +448,29 @@
                     <div  *ngIf="(activeIndex === 1 && isIndividual) || (activeIndex1 === 2 && !isIndividual)" style="width:120vh"  header="{{'paiment Collaborator' | translate}}">
                         <div class="grid mt-4">
                             <div class="field col-11 md:col-6">
-                                <label for="6">{{'paimentCollaborator.name' | translate}}<span style="color: red;">*</span></label>
+                                <label for="6">name<span style="color: red;">*</span></label>
                                 <input class=" input-grey mb-2 mr-2" type="text" pInputText  placeholder="{{'paimentCollaborator.name' | translate}}" id="6" [(ngModel)]=" paiment.name"
                                        [ngClass]="{'ng-invalid ng-dirty' : !_validPaimentCollaboratorName}"  />
                                 <small class='p-error' *ngIf='!_validPaimentCollaboratorName'>Name est obligatoire.</small>
                             </div>
-
                             <div class="field col-11 md:col-6">
-                                <label for="7">{{'paimentCollaborator.description' | translate}}</label>
-                                <textarea id="7"  class="input-grey" pInputTextarea rows="5" cols="30" placeholder="{{'paimentCollaborator.description' | translate}}"  [(ngModel)]=" paiment.description"
-                                ></textarea>
-                            </div>
-
-                            <div class="field col-11 md:col-6">
-                                <label for="8">{{'paimentCollaborator.code' | translate}}<span style="color: red;">*</span></label>
+                                <label for="8">code<span style="color: red;">*</span></label>
                                 <input class=" input-grey mb-2 mr-2" type="text" pInputText  placeholder="{{'paimentCollaborator.code' | translate}}" id="8" [(ngModel)]=" paiment.code"
                                        [ngClass]="{'ng-invalid ng-dirty' : !_validPaimentCollaboratorCode}"  />
                                 <small class='p-error' *ngIf='!_validPaimentCollaboratorCode'>Code est obligatoire.</small>
                             </div>
 
+                            <div class="field col-11 md:col-6">
+                                <label for="7">description</label>
+                                <textarea id="7"  class="input-grey" pInputTextarea rows="5" cols="30" placeholder="{{'paimentCollaborator.description' | translate}}"  [(ngModel)]=" paiment.description"
+                                ></textarea>
+                            </div>
+
+
+
                             <div class="field col-11 md:col-6" *ngIf="!totalCalcule">
-                                <label for="13">{{'paimentCollaborator.Total' | translate}}</label>
-                                <input class=" input-grey mb-2 mr-2" type="text" pInputText  [readonly]="true" value="this.item.packaging.price" placeholder="{{'paimentCollaborator.amountToPaid' | translate}}" id="13" [ngModel]="paiment.total"
+                                <label for="13">Total</label>
+                                <input class=" input-grey mb-2 mr-2" type="text" pInputText  [readonly]="true" value="this.item.packaging.price" placeholder="{{'paimentCollaborator.amountToPaid' | translate}}" id="13" [ngModel]="item.packaging.price"
                                 />
 
                             </div>

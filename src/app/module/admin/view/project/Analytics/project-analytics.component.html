@@ -210,7 +210,7 @@
         </div>
 
 
--->
+
 
 
 <h2>Inscription Collaborator Statistics</h2>
@@ -224,83 +224,97 @@
 <p>Payments Sum This Week: {{ paymentSums.week }}</p>
 <p>Payments Sum This Month: {{ paymentSums.month }}</p>
 <p>Payments Sum This Year: {{ paymentSums.year }}</p>
-
+-->
 
 <div class="main">
-<div class="cards">
-    <div class="card" style="background-color: #f5f5f5;">
+    <div class="cards">
+        <div class="card" style="background-color: #f5f5f5;">
 
-        <div class="grid">
-            <div class="col-6">
-                <div class="text-center p-3 border-round-sm  font-bold number">{{ countByDay }}</div>
-            </div>
-            <div class="col-6">
-                <div class="text-center p-3 border-round-sm  font-bold card-name">Projects <br> Generated <br><span style="font-size:xx-large;color: black;">Today</span></div>
-            </div>
-            <div class="col-6">
-                <div class="text-center p-3 border-round-sm font-bold number">{{ inscriptionCounts.day }}</div>
-            </div>
-            <div class="col-6">
-                <div class="text-center p-3 border-round-sm font-bold card-name">Inscriptions <br><span style="font-size:xx-large;color: black;">Today</span></div>
-            </div>
-            <div class="col-6">
-                <div class="text-center p-3 border-round-sm  font-bold number">{{ paymentSums.day }}</div>
-            </div>
-            <div class="col-6">
-                <div class="text-center p-3 border-round-sm font-bold card-name">Payments <br> Sum <br><span style="font-size:xx-large;color: black;">Today</span></div>
-            </div>
-        </div>
-        <div class="icon-box">
-            <i class="pi-ethereum"></i>
-        </div>
-    </div>
-    <div class="card" style="background-color: #e0f7fa;">
+            <div class="grid">
 
-        <div class="grid">
-            <div class="col-6">
-                <div class="text-center p-3 border-round-sm  font-bold number">{{ countByWeek }}</div>
+                <div class="text-center p-3 border-round-sm  font-bold card-name"><span
+                    style="font-size:xx-large;color:deeppink;">Today</span></div>
+
+                <div class="col-12 flex">
+                    <div class="text-center p-3 border-round-sm  font-bold number">{{ countByDay }}</div>
+                    <div class="text-center p-3 border-round-sm  font-bold card-name">Projects <br> Generated</div>
+                </div>
+
+                <div class="col-12 flex">
+                    <div class="text-center p-3 border-round-sm font-bold number">{{ inscriptionCounts.day }}</div>
+                    <div class="text-center p-3 border-round-sm font-bold card-name">Inscriptions</div>
+                </div>
+
+                <div class="col-12 flex">
+                    <div class="text-center p-3 border-round-sm  font-bold number">{{ paymentSums.day||0 }}</div>
+                    <div class="text-center p-3 border-round-sm font-bold card-name">Payments <br> Sum</div>
+
+                </div>
             </div>
-            <div class="col-6">
-                <div class="text-center p-3 border-round-sm  font-bold card-name">Projects <br> Generated<br><span style="font-size:xx-large;color: black;">This Week</span></div>
-            </div>
-            <div class="col-6">
-                <div class="text-center p-3 border-round-sm font-bold number">{{ inscriptionCounts.week }}</div>
-            </div>
-            <div class="col-6">
-                <div class="text-center p-3 border-round-sm font-bold card-name">Inscriptions <br><span style="font-size:xx-large;color: black;">This Week</span></div>
-            </div>
-            <div class="col-6">
-                <div class="text-center p-3 border-round-sm  font-bold number">{{ paymentSums.week }}</div>
-            </div>
-            <div class="col-6">
-                <div class="text-center p-3 border-round-sm font-bold card-name">Payments <br> Sum <br><span style="font-size:xx-large;color: black;">This Week</span></div>
-            </div>
-        </div>
-        <div class="icon-box">
-            <i class="pi-ethereum"></i>
-        </div>
-    </div>
-    <div class="card" style="background-color: #ffe0b2;">
-        <div class="card-content">
-            <div class="number">{{ countByMonth }}</div>
-            <div class="card-name">Projects <br> Generated <br> This Month</div>
 
         </div>
-        <div class="icon-box">
-            <i class="pi-ethereum"></i>
+        <div class="card" style="background-color: #e0f7fa;">
+            <div class="grid">
+                <div class="text-center p-3 border-round-sm  font-bold card-name"><span
+                    style="font-size:xx-large;color:darkblue;">This Week</span></div>
+                <div class="col-12 flex">
+                    <div class="text-center p-3 border-round-sm  font-bold number">{{ countByWeek }}</div>
+                    <div class="text-center p-3 border-round-sm  font-bold card-name">Projects <br> Generated</div>
+                </div>
+                <div class="col-12 flex">
+                    <div class="text-center p-3 border-round-sm font-bold number">{{ inscriptionCounts.week }}</div>
+                    <div class="text-center p-3 border-round-sm font-bold card-name">Inscriptions</div>
+                </div>
+                <div class="col-12 flex">
+                    <div class="text-center p-3 border-round-sm  font-bold number">{{ paymentSums.week ||0}}</div>
+                    <div class="text-center p-3 border-round-sm font-bold card-name">Payments <br> Sum</div>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="card" style="background-color: #d1c4e9;">
-        <div class="card-content">
-            <div class="number">{{ countByYear }}</div>
-            <div class="card-name">Projects<br>Generated <br>This Year</div>
+        <div class="card" style="background-color: #ffe0b2;">
+            <div class="grid">
+                <div class="text-center p-3 border-round-sm  font-bold card-name"><span
+                    style="font-size:xx-large;color:coral;">This Month</span></div>
+                <div class="col-12 flex">
+                    <div class="text-center p-3 border-round-sm  font-bold number">{{ countByMonth }}</div>
+                    <div class="text-center p-3 border-round-sm  font-bold card-name">Projects <br> Generated</div>
+                </div>
+                <div class="col-12 flex">
+                    <div class="text-center p-3 border-round-sm font-bold number">{{ inscriptionCounts.month }}</div>
+                    <div class="text-center p-3 border-round-sm font-bold card-name">Inscriptions</div>
+                </div>
+                <div class="col-12 flex">
+                    <div class="text-center p-3 border-round-sm  font-bold number">{{ paymentSums.month||0 }}</div>
+                    <div class="text-center p-3 border-round-sm font-bold card-name">Payments <br> Sum</div>
 
+                </div>
+            </div>
         </div>
-        <div class="icon-box">
-            <i class="pi-ethereum"></i>
+        <div class="card" style="background-color: #d1c4e9;">
+
+            <div class="grid">
+
+                <div class="text-center p-3 border-round-sm  font-bold card-name"><span
+                    style="font-size:xx-large;color:blueviolet;">This Year</span></div>
+
+                <div class="col-12 flex">
+                    <div class="text-center p-3 border-round-sm  font-bold number">{{ countByYear }}</div>
+                    <div class="text-center p-3 border-round-sm  font-bold card-name">Projects <br> Generated</div>
+                </div>
+
+                <div class="col-12 flex">
+                    <div class="text-center p-3 border-round-sm font-bold number">{{ inscriptionCounts.year }}</div>
+                    <div class="text-center p-3 border-round-sm font-bold card-name">Inscriptions</div>
+                </div>
+
+                <div class="col-12 flex">
+                    <div class="text-center p-3 border-round-sm  font-bold number">{{ paymentSums.year||0 }}</div>
+                    <div class="text-center p-3 border-round-sm font-bold card-name">Payments <br> Sum</div>
+
+                </div>
+            </div>
         </div>
     </div>
-</div>
 </div>
 
 

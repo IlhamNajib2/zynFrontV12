@@ -1,7 +1,7 @@
 .layout-sidebar {
     position: fixed;
     width: 300px;
-    height: calc(100vh - 9rem);
+    height: 100%;
     z-index: 999;
     overflow-y: auto;
     user-select: none;
@@ -10,7 +10,7 @@
     transition: transform $transitionDuration, left $transitionDuration;
     background-color: black;
     color:white;
-    border-radius: $borderRadius;
+    //border-radius: $borderRadius;
     padding: 0.5rem 1.5rem;
     box-shadow: 0px 3px 5px rgba(0, 0, 0, .02), 0px 0px 2px rgba(0, 0, 0, .05), 0px 1px 4px rgba(0, 0, 0, .08);
 }
@@ -19,7 +19,9 @@
     margin: 0;
     padding: 0;
     list-style-type: none;
-
+    .text-base {
+        font-size: 1.4rem !important;
+    }
     .layout-root-menuitem {
         >.layout-menuitem-root-text {
             font-size: .857rem;
@@ -134,3 +136,4 @@
         }
     }
 }
+
