@@ -5594,9 +5594,9 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
   background: transparent;
 }
 .p-steps .p-steps-item .p-menuitem-link .p-steps-number {
-  color: rgba(255, 255, 255, 0.87);
+  color: black;
   border: 0 none;
-  background: transparent;
+  background: orange;
   min-width: 2rem;
   height: 2rem;
   line-height: 2rem;

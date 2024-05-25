@@ -125,6 +125,16 @@
 
 </div>
 
+
+<!
+<div *ngIf="successMessage" class="alert alert-success text-3xl">
+    {{ successMessage }}
+    <p> * check your email to activate your account * </p>
+</div>
+<div *ngIf="errorMessage" class="alert alert-danger text-3xl">
+    {{ errorMessage }}
+</div>
+
 -->
 <div class="login-container">
 
@@ -156,6 +166,8 @@
         <div class="go"><button type="submit" pButton label="Register" class="p p-button p1 text-surface-900" (click)="submit()"></button></div>
     </form>
 </div>
+<p-toast></p-toast>
+<!--
 <div class="overflow-hidden md:overflow-auto md:left-50 text-center" style="display: flex;justify-content: center;height: 100px;color:black;font-size:20px;font-weight: bold" *ngIf="successMessage||errorMessage">
     <div *ngIf="successMessage" class="success-message">
         <p>{{ successMessage }}</p>
@@ -165,3 +177,4 @@
         <p>{{ errorMessage }}</p>
     </div>
 </div>
+-->

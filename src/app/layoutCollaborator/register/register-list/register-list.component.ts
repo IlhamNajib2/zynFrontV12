@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {Message} from "primeng/api";
+import {Message, MessageService} from "primeng/api";
 
 import {ActivatedRoute, Router} from "@angular/router";
 import {UserDto} from "../../../zynerator/security/shared/model/User.model";
@@ -20,7 +20,7 @@ export class RegisterListComponent  implements OnInit {
     successMessage: string = '';
     errorMessage: string = '';
 
-    constructor(private authService: AuthService,private route: ActivatedRoute) { }
+    constructor(private authService: AuthService,private route: ActivatedRoute,protected router: Router,private messageService: MessageService) { }
 
     role: string;
 
@@ -79,19 +79,45 @@ export class RegisterListComponent  implements OnInit {
         this.user.email = email;
         this.user.roleUsers = new Array<RoleUserDto>();
         this.user.roleUsers.push(roleUser);
-        console.log(this.user)
-
         this.authService.registerAdmin().then(
-            response => {
+
+
+        response => {
+            this.messageService.add({
+                severity: 'success',
+                summary: 'Success',
+                detail: response.message + ' *** Check your email to activate your account ***'
+            });
+            setTimeout(() => {
+                this.clearMessages();
+            }, 60000);
+
+
+        },
+            error => {
+                this.messageService.add({ severity: 'error', summary: 'Error', detail: error.error || 'An error occurred' });
+            }
+    );
+    }
+    clearMessages() {
+        this.messageService.clear();
+    }
+
+    /*
+       response => {
                 this.successMessage = response.message;
                 this.errorMessage = '';
             },
             error => {
-                this.errorMessage = error.error.message;
+                if (error) {
+                    this.errorMessage = error.error;
+                } else {
+                    this.errorMessage = 'An error occurred';
+                }
                 this.successMessage = '';
             }
         );
-    }
+     */
 
     get user(): UserDto {
         return this.authService.user;

@@ -1,0 +1,225 @@
+.grid.h11 {
+    display: flex;
+    justify-content: center; /* Change this line */
+    align-items: center;
+    margin-top: 6rem;
+    padding: 0;
+}
+
+
+.p-steps .p-steps-item.p-highlight .p-steps-number {
+    background: orange;
+    color: black;
+}
+
+.p-ripple{
+    position: relative;
+    margin-left: 20px;
+    background-color: orange;
+    border: 1px solid orange;
+    color: black;
+    margin-bottom: 20px;
+}
+.p-ripple:hover{
+    position: relative;
+    margin-left: 20px;
+    background-color: orange;
+    border: 1px solid orange;
+    color: black;
+    margin-bottom: 20px;
+}
+
+.grid {
+    display: flex;
+    justify-content: space-between; /* Change this line */
+    align-items: center;
+    margin: 0;
+    padding: 0;
+
+
+    .p-card {
+        min-height: 100%;
+        min-width: 100%;
+        //width: 80%;
+        // margin:0px 10px 0 30px;
+        margin-right: 20px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        z-index: 1; /* Add this line */
+        .p-steps {
+            margin-top: 20px;
+        }
+
+        .p-inputtext,
+        .p-inputtextarea,
+        .p-radiobutton {
+            width: 100%;
+            padding: 12px;
+            border-bottom: 1px solid #e5e5e5;
+            background-color: transparent;
+            font-size: 16px;
+            color: #333;
+
+            &:focus {
+                box-shadow: none;
+                border:2px solid orange;
+            }
+        }
+
+        .p-button {
+            width: 100%;
+            margin-top: 10px;
+            padding: 12px;
+            background-color: orange;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            margin-right: 20px;
+
+            &.p-button-outlined {
+                width: auto;
+                margin-left: auto;
+                background-color: transparent;
+                border: 1px solid black;
+                color: black;
+            }
+
+            &:hover {
+                background-color: orange;
+            }
+        }
+
+        .p-checkbox {
+            margin-top: 10px;
+            padding: 12px;
+            font-size: 16px;
+            color: #333;
+        }
+
+        .p-table {
+            width: 100%;
+            margin-top: 20px;
+
+            .p-datatable-thead > tr > th {
+                text-align: left;
+                padding: 12px;
+                border-bottom: 1px solid #e5e5e5;
+                background-color: #f5f5f5;
+                font-size: 16px;
+                color: #333;
+            }
+
+            .p-datatable-tbody > tr > td {
+                text-align: left;
+                padding: 12px;
+                border-bottom: 1px solid #e5e5e5;
+                font-size: 16px;
+                color: #333;
+            }
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 20px;
+        }
+    }
+}
+
+.input-grey {
+    background-color: #e5e5e5;
+    border: none;
+    border-radius: 4px;
+    padding: 8px;
+    margin-bottom: 10px;
+    width: 100%;
+
+    &.bg-surface-100 {
+        background-color: #f5f5f5;
+    }
+    &.bg-surface-100:hover{
+        background-color: #f5f5f5;
+        border:1px solid black;
+        box-shadow: 3px 4px 5px;
+    }
+
+    &.coupon {
+        width: 50%;
+    }
+}
+.p-radiobutton .p-radiobutton-box.p-highlight {
+    border-color: black;
+    background: black;
+}
+
+.p-radiobutton .p-radiobutton-box {
+    border: 2px solid black;
+    background: #ffffff;
+    width: 22px;
+    height: 22px;
+    color: #495057;
+    border-radius: 50%;
+    transition: black 0.2s, color 0.2s,black 0.2s, box-shadow 0.2s;
+}
+
+.field-radiobutton {
+    margin-top: 10px;
+}
+
+.button-container.p-flexbox.ng-star-inserted {
+    margin-left: 56%;
+    margin-top: 2rem;
+}
+.button-container.p-flexbox.button-purple{
+    margin-right: 20px;
+}
+
+.button-container.p-flexbox.p-button-outlined{
+    margin-left: 10px;
+}
+.grid[_ngcontent-ng-c2951012798] {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+.col-md-2.d-flex.justify-content-end{
+    margin-bottom: 20px;
+    margin-right: 70px;
+    margin-left:720px;
+    width: 120px;
+}
+
+.p-ripple{
+    width: 120px;
+}
+.card.tabl{
+    position: relative;
+    overflow-y:auto;
+}
+
+
+
+p-button-outlined{
+    background-color: white;
+    border: 1px solid black;
+    color: black;
+}
+p-button-outlined:hover{
+    background-color: white;
+    border: 1px solid black;
+    color: black;
+}
+
+
+::-webkit-scrollbar{
+    width:5px;
+}
+::-webkit-scrollbar-thumb{
+    border-radius: 10px;
+}
+.button-purple.hh{
+    padding-right:18px;
+}

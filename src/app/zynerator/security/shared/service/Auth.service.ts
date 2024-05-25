@@ -4,7 +4,7 @@ import {Router} from '@angular/router';
 
 import {environment} from 'src/environments/environment';
 
-import {BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 
 
 import {TokenService} from './Token.service';
@@ -37,7 +37,6 @@ export class AuthService {
                 const jwt = 'Bearer '+resp.body.accessToken;
                 jwt != null ? this.tokenService.saveToken(jwt) : false;
                 this.loadInfos();
-                console.log('you are logged in successfully');
                 this._authenticatedUser.roleUsers.forEach(item => {
                     if (item.role.authority === "ROLE_ADMIN" ){
                         this.router.navigate(['/' + environment.rootAppUrl + '/admin']);
@@ -98,6 +97,14 @@ export class AuthService {
         });
     }
 
+
+    saveCollaborator(email: string, paiement: any): Observable<any> {
+        const payload = { email, ...paiement };
+        return this.http.post(this.API+'saveCollaborator', payload);
+    }
+
+
+
     public loadInfos() {
         const tokenDecoded = this.tokenService.decode();
         const username = tokenDecoded.sub;
@@ -132,7 +139,6 @@ export class AuthService {
 
     public registerAdmin(): Promise<any> {
         return new Promise((resolve, reject) => {
-            console.log(this.user)
             this.http.post<any>(this.API + 'register', this.user, { observe: 'response' }).subscribe(
                 resp => {
                     // this.router.navigate(['/app/collaborator/acceuil/home/home-list']);
@@ -152,7 +158,7 @@ export class AuthService {
         this.authenticated = false;
         this._loggedIn.next(false);
         this._authenticatedUser = new UserDto();
-        this.router.navigate(['']);
+        this.router.navigate(['/login']);
     }
 
     get user(): UserDto {

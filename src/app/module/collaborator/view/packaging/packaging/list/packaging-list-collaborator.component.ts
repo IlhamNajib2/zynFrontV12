@@ -183,7 +183,7 @@ export class PackagingListCollaboratorComponent implements OnInit {
         //[routerLink]="['/inscription-collaborator/list']"
         this.item=package1;
         console.log(this.item);
-        this.router.navigate(['/inscription/inscription-collaborator/list/']);
+        this.router.navigate(['/app/collaborator/project/project/list/']);
 
     }
 

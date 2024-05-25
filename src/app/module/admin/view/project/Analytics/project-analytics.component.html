@@ -1,4 +1,4 @@
-
+<!--
 <div class="grid"  *ngIf="listActionIsValid">
     <div class="col-12">
         <p-toast></p-toast>
@@ -194,25 +194,87 @@
 
 
 
+<div class="card-content" >
+            <div style="display:flex">
+                <div class="number">{{ countByDay }}</div>
+                <div class="card-name">Projects <br> Generated <br><span style="font-size:xx-large;">Today</span></div>
+            </div>
+            <div style="display:flex">
+                <div class="number">{{ inscriptionCounts.day }}</div>
+                <div class="card-name">Inscriptions <br><span style="font-size:xx-large;">Today</span></div>
+            </div>
+            <div style="display:flex">
+                <div class="number">{{ paymentSums.day }}</div>
+                <div class="card-name">Payments <br> Sum <br><span style="font-size:xx-large;">Today</span></div>
+            </div>
+        </div>
 
-<!--
+
+-->
+
+
+<h2>Inscription Collaborator Statistics</h2>
+<p>Inscriptions Today: {{ inscriptionCounts.day }}</p>
+<p>Inscriptions This Week: {{ inscriptionCounts.week }}</p>
+<p>Inscriptions This Month: {{ inscriptionCounts.month }}</p>
+<p>Inscriptions This Year: {{ inscriptionCounts.year }}</p>
+
+<h2>Payment Collaborator Statistics</h2>
+<p>Payments Sum Today: {{ paymentSums.day }}</p>
+<p>Payments Sum This Week: {{ paymentSums.week }}</p>
+<p>Payments Sum This Month: {{ paymentSums.month }}</p>
+<p>Payments Sum This Year: {{ paymentSums.year }}</p>
+
+
 <div class="main">
 <div class="cards">
     <div class="card" style="background-color: #f5f5f5;">
-        <div class="card-content" >
-            <div class="number">{{ countByDay }}</div>
-            <div class="card-name">Projects <br> Generated <br>Today</div>
 
+        <div class="grid">
+            <div class="col-6">
+                <div class="text-center p-3 border-round-sm  font-bold number">{{ countByDay }}</div>
+            </div>
+            <div class="col-6">
+                <div class="text-center p-3 border-round-sm  font-bold card-name">Projects <br> Generated <br><span style="font-size:xx-large;color: black;">Today</span></div>
+            </div>
+            <div class="col-6">
+                <div class="text-center p-3 border-round-sm font-bold number">{{ inscriptionCounts.day }}</div>
+            </div>
+            <div class="col-6">
+                <div class="text-center p-3 border-round-sm font-bold card-name">Inscriptions <br><span style="font-size:xx-large;color: black;">Today</span></div>
+            </div>
+            <div class="col-6">
+                <div class="text-center p-3 border-round-sm  font-bold number">{{ paymentSums.day }}</div>
+            </div>
+            <div class="col-6">
+                <div class="text-center p-3 border-round-sm font-bold card-name">Payments <br> Sum <br><span style="font-size:xx-large;color: black;">Today</span></div>
+            </div>
         </div>
         <div class="icon-box">
             <i class="pi-ethereum"></i>
         </div>
     </div>
     <div class="card" style="background-color: #e0f7fa;">
-        <div class="card-content">
-            <div class="number">{{ countByWeek }}</div>
-            <div class="card-name">Projects <br> Generated<br> This Week</div>
 
+        <div class="grid">
+            <div class="col-6">
+                <div class="text-center p-3 border-round-sm  font-bold number">{{ countByWeek }}</div>
+            </div>
+            <div class="col-6">
+                <div class="text-center p-3 border-round-sm  font-bold card-name">Projects <br> Generated<br><span style="font-size:xx-large;color: black;">This Week</span></div>
+            </div>
+            <div class="col-6">
+                <div class="text-center p-3 border-round-sm font-bold number">{{ inscriptionCounts.week }}</div>
+            </div>
+            <div class="col-6">
+                <div class="text-center p-3 border-round-sm font-bold card-name">Inscriptions <br><span style="font-size:xx-large;color: black;">This Week</span></div>
+            </div>
+            <div class="col-6">
+                <div class="text-center p-3 border-round-sm  font-bold number">{{ paymentSums.week }}</div>
+            </div>
+            <div class="col-6">
+                <div class="text-center p-3 border-round-sm font-bold card-name">Payments <br> Sum <br><span style="font-size:xx-large;color: black;">This Week</span></div>
+            </div>
         </div>
         <div class="icon-box">
             <i class="pi-ethereum"></i>
@@ -269,95 +331,3 @@
     </div>
 </div>
 
-
-<h3 style="margin-left:10px; margin-bottom:40px; margin-top:70px">Projets List:</h3>
-
-<p-table styleClass="p-datatable-gridlines custom-table" [tableStyle]="{ 'max-width': '100rem' }"
-         #dt
-         [value]="items"
-         [columns]="cols"
-         [paginator]="false"
-         [paginatorPosition]="'bottom'"
-         [responsive]="true"
-         [(selection)]="selections"
-         [scrollable]="true"
-         [rowHover]="true"
-         dataKey="id"
-         styleClass="p-datatable-customers"
-         [globalFilterFields]="['code', 'name', 'generatedDate', 'projectStatecode', 'inscriptionMembreid', 'domainTemplatename']"
-         currentPageReportTemplate="{{'les éléments de {first} à {last} sur {totalRecords} ' | translate}}"
-         [rows]="6">
-         [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" selectionMode="multiple">
-
-
-
-
-
-
-    <ng-template pTemplate="caption">
-
-
-
-
-
-
-
-        <div style="display: flex; align-items: center; ; margin-bottom: 17px;">
-        <span class="p-input-icon-left  " style="justify-content:flex-start;">
-
-                            <button pButton pRipple label=" {{'new' | translate}}" icon="pi pi-plus" class="p-button-info mr-2 mb-2"
-                                    (click)="openCreate('Project')" *ngIf="createActionIsValid"></button>
-                        </span>
-        <span class="p-input-icon-left ml-auto" style="display: flex;justify-content:flex-end">
-                            <i class="pi pi-search"></i>
-                            <input pInputText type="text" placeholder="recherche"
-                                   (input)="dt.filterGlobal($event.target.value, 'contains')"/>
-                        </span>
-        </div>
-
-
-    </ng-template>
-    <ng-template pTemplate="header">
-        <tr>
-            <th class="custom-header text-center" style="width: 12%; height: 40px; background-color: #d39edc;"> N° Project</th>
-            <th class="custom-header text-center" style="width: 12%;   background-color: #d39edc;"> Name</th>
-            <th class="custom-header text-center" style="width: 14%;  background-color: #d39edc;">Genrated Date</th>
-            <th class="custom-header text-center" style="width: 15%;   background-color: #d39edc;">State</th>
-            <th class="custom-header text-center" style="width: 14%;   background-color: #d39edc;">InscriptionMembre</th>
-            <th class="custom-header text-center" style="width: 14%;   background-color: #d39edc;">DomainTemplate</th>
-            <th class="custom-header text-center" style="width: 14%;   background-color: #d39edc;">Actions</th>
-
-        </tr>
-    </ng-template>
-
-    <ng-template pTemplate="body" let-element let-rowIndex="rowIndex">
-        <tr [ngClass]="rowIndex % 2 === 0 ? 'even-row' : 'odd-row'">
-            <td class="text-center"
-                style="  align-items: center; justify-content: center;">{{ element.code }}
-            </td>
-            <td class="text-center">{{element.name}}</td>
-            <td class="text-center">{{element.generatedDate| date:'yyyy-MM-dd'    }}</td>
-            <td class="text-center">{{element.projectState?.code}}</td>
-            <td class="text-center">{{element.inscriptionMembre?.id}}</td>
-            <td class="text-center">{{element.domainTemplate?.name}}</td>
-            <td>
-                <button pButton pRipple icon="pi pi-pencil"  class="p-button-rounded p-button-info mr-2" (click)="edit(element)"  *ngIf="editActionIsValid"></button>
-                <button pButton pRipple icon="pi pi-list" class="p-button-rounded p-button-secondary mr-2" (click)="view(element)"  *ngIf="viewActionIsValid"></button>
-                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger mr-2" (click)="delete(element)"  *ngIf="deleteActionIsValid"></button>
-                <button pButton pRipple icon="pi pi-copy" class="p-button-rounded p-button-raised p-button-warning mr-2" (click)="duplicate(element)"  *ngIf="duplicateActionIsValid"></button>
-            </td>
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="summary">
-        <p-paginator  [rows]="10" [totalRecords]="totalRecords" (onPageChange)="onPage($event)"></p-paginator>
-        <div class="p-d-flex p-ai-center p-jc-between">
-            En totale il {{items ? totalRecords == 1 ? 'y a' : 'y a' : 'y a' }} {{items ? totalRecords : 0 }} {{items ? totalRecords == 1 ? 'project' : 'projects' : 0 }}.
-        </div>
-    </ng-template>
-</p-table>
-<app-project-create-admin  *ngIf="createDialog  && createActionIsValid"></app-project-create-admin>
-        <app-project-edit-admin  *ngIf="editDialog  && editActionIsValid"></app-project-edit-admin>
-        <app-project-view-admin  *ngIf="viewDialog  && viewActionIsValid"></app-project-view-admin>
-        <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
-
--->

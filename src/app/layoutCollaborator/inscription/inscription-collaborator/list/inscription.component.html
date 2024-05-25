@@ -306,8 +306,8 @@
 
 
 <div class="grid h11" >
-    <div   style="justify-content: center;align-items: center;height: 120vh;width: 120vh;justify-items: flex-start;">
-        <p-card style="display: flex; justify-content: center;">
+    <div   style="justify-content: center;align-items: center;height: 120vh;width: 126vh;justify-items: flex-start;">
+        <p-card >
             <ng-template pTemplate="content" >
 
                 <div class="p-grid" style="width:120vh">
@@ -429,8 +429,8 @@
                                                     <td>{{p.affectedProjet}}</td>
                                                     <td>{{p.affectedAttribut}}</td>
                                                     <td>
-                                                        <button (click)="delete1(p)" pButton type="button" icon="pi pi-times"  class="p-button-rounded p-button-danger"></button>
-                                                        <button (click)="edit1(p)" pButton type="button" icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2"></button>
+                                                        <button (click)="delete1(p)" pButton type="button" icon="pi pi-times"  class="p-button-rounded p-button-outlined p-button-danger"></button>
+                                                        <button (click)="edit1(p)" pButton type="button" icon="pi pi-pencil" class="p-button-rounded p-button-outlined p-button-success mr-2"></button>
                                                     </td>
                                                 </tr>
                                             </ng-template>
@@ -518,7 +518,7 @@
                     <button  pButton pRipple  label="{{'next' | translate}}"  icon="pi pi-check" class="button-purple hh  " *ngIf="(activeIndex!=2&&isIndividual)||(activeIndex1!=3&&!isIndividual)" (click)="nextb()"></button>
                     <button pButton pRipple  label="{{'previous' | translate}}"  icon="pi pi-check" class="button-purple"  *ngIf="(activeIndex!=0&&isIndividual)||(activeIndex1!=0&&!isIndividual)" (click)="prev()"></button>
                     <button pButton pRipple  label="{{'cancel' | translate}}" icon="pi pi-times"  class="p-button-outlined" (click)="hideCreateDialog()"></button>
-                    <button pButton pRipple  label="{{'validate' | translate}}"  icon="pi pi-check" class="button-purple"   *ngIf="(activeIndex==2&&isIndividual)||(activeIndex1==3&&!isIndividual)" (click)="save()" [routerLink]="['/admin/project/project/list']"></button>
+                    <button pButton pRipple  label="{{'validate' | translate}}"  icon="pi pi-check" class="button-purple"   *ngIf="(activeIndex==2&&isIndividual)||(activeIndex1==3&&!isIndividual)" (click)=" saveCollaborator()" [routerLink]="['/admin/project/project/list']"></button>
                 </div>
             </ng-template>
         </p-card>

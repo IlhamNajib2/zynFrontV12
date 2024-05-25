@@ -21,6 +21,7 @@ import { PaimentCollaboratorStateListAdminComponent } from './paiment-collaborat
 import { ProjectStateListAdminComponent } from './project-state/list/project-state-list-admin.component';
 import { PaimentInfluencerStateListAdminComponent } from './paiment-influencer-state/list/paiment-influencer-state-list-admin.component';
 import { ProjectListAdminComponent } from './project/list/project-list-admin.component';
+import {AnalyticsAdminComponent} from "./Analytics/project-analytics.component";
 @NgModule({
     imports: [
         RouterModule.forChild(
@@ -87,7 +88,7 @@ import { ProjectListAdminComponent } from './project/list/project-list-admin.com
                         },
                         {
                             path: '',
-                            redirectTo:'./view/project/project/list/',
+                            redirectTo:'./view/project/Analytics/',
                             pathMatch:'full'
                         },
 
@@ -138,6 +139,13 @@ import { ProjectListAdminComponent } from './project/list/project-list-admin.com
                                     canActivate: [AuthGuard]
                                 }
                             ]
+                        },
+                        {
+
+                            path: 'Analytics',
+                            component: AnalyticsAdminComponent ,
+                            canActivate: [AuthGuard]
+
                         },
 
                     ]
