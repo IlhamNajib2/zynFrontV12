@@ -30,15 +30,81 @@
                     <ng-template pTemplate="caption">
                         <span class="p-input-icon-left ml-auto mr-4">
                             <i class="pi pi-search"></i>
-                            <input class="text-orange-700" (click)="findPaginatedByCriteria()" pInputText type="text" placeholder="{{'searchInput' | translate}}" (input)="dt.filterGlobal($event.target.value, 'contains')"/>
+                            <input class="text-orange-700" [style]="{width:'500px'}" (click)="findPaginatedByCriteria()" pInputText type="text" placeholder="{{'searchInput' | translate}}" (input)="dt.filterGlobal($event.target.value, 'contains')"/>
                         </span>
-                        <a (click)="selecteProjectTemplate('private')"  class="mr-6 ml-6 text-orange-700 underline">private</a>
-                        <a (click)="selecteProjectTemplate('public')" class="mr-6 ml-6 text-orange-700 underline">public</a>
+                        <a (click)="selecteProjectTemplate('private')"  class="mr-6 ml-6 aswad underline">private</a>
+                        <a (click)="selecteProjectTemplate('public')" class="mr-6 ml-6 aswad underline">public</a>
                     </ng-template>
                     <ng-template style="width:1000px; height:300px" pTemplate="body" let-element>
                         <div *ngIf="showDefaultView">
                         <div *ngIf="showProjectTemplateDetails">
                             <div *ngIf="element.categoryTemplate.name===selectedProjectTemplate">
+
+
+
+
+
+
+                                <div class="flex border-solid w-auto border-gray-300 mt-4 mb-4">
+                                    <div class="col-fixed" style="width:100px">
+                                    </div>
+                                    <div class="col-fixed" style="width:100px">
+                                        <img [src]="getTechnologyLogo(element.technology?.name)" alt="Technology Logo" class="w-8rem h-10rem mr-6"/>
+                                    </div>
+                                    <div class="flex-1 h-10srem w-auto font-bold text-left pl-8 pt-3 pb-3 border-round">
+                                        <p-rating class="ml-3 mt-0 pt-0" [(ngModel)]="value" [cancel]="false" /><br>
+                                        <p class="mt-4"><b class="text-red-500">{{ element.name }} :</b>  {{ element.description }}</p><br>
+                                        <p-button class=" text-blue-300 background-blue-200 button" label="Tag" (click)="showYamlDialog(element.templateTags)" severity="secondary" />
+                                    </div>
+                                    <div class="col-fixed font-bold" style="width:200px">
+                                        <p><u class="text-pink-900 mr-4">domain:</u><b class="text-teal-600">{{ element.domainTemplate.name }}</b></p>
+                                        <p><b class="text-red-500">{{ element.categoryTemplate.name }}</b></p>
+                                        <p><b class="text-red-500 text-4lg">{{ element.price }}$</b> </p><i class="pi pi-cart-minus" style="color: green"></i>
+                                        <p-button class=" text-blue-300 background-blue-200 button" label="shop" (click)="showDialog()" severity="secondary" />
+                                        <i class="pi pi-cart-minus" style="color: green"></i>
+                                    </div>
+                                    <div class="col-fixed font-bold" style="width:200px">
+                                        <p><u class="text-pink-900 mr-4">technology: </u><b class="text-teal-600">{{ element.technology.name }}</b></p>
+                                        <p><u class="text-pink-900 mr-4">type: </u><b class="text-teal-600">{{ element.typeTemplate.name }}</b></p>
+                                        <p><u class="text-pink-900 mr-4">level:</u>  <b class="text-teal-600">{{ element.levelTemplate.name }}</b></p>
+                                        <p-button class=" text-blue-300 background-blue-200 button" label="use"  severity="secondary" />
+                                    </div>
+                                    <div class="col-fixed" style="width:200px">
+                                         </div>
+                                </div>
+
+
+
+
+
+                                <div class="flex border-solid w-auto border-gray-300">
+                                    <div class="flex-1 h-10srem w-auto font-bold text-left pl-8 pt-3 border-round">
+                                        <img [src]="getTechnologyLogo(element.technology?.name)" alt="Technology Logo" class="w-5rem h-4rem mr-6"/><p-rating class="ml-3 mt-0 pt-0" [(ngModel)]="value" [cancel]="false" /><br>
+                                        <p class="mt-4">{{ element.name }} :  {{ element.description }}</p><br>
+                                        <p-button class=" text-blue-300 background-blue-200 button" label="Tag" (click)="showYamlDialog(element.templateTags)" severity="secondary" />
+                                    </div>
+                                    <div class="flex-1 h-10rem w-auto font-bold text-center pt-4 border-round mx-4">
+                                        <p><u class="text-pink-900 m-4">domain:</u><b>{{ element.domainTemplate.name }}</b></p>
+                                        <p class="mt-4"><b class="text-red-500">{{ element.categoryTemplate.name }}</b></p>
+                                        <p><b class="text-red-500">{{ element.price }}$</b> </p>
+                                        <p-button class=" text-blue-300 background-blue-200 button" label="shop" (click)="showDialog()" severity="secondary" />
+                                    </div>
+                                    <div class="flex-1 h-10rem font-bold w-auto text-left p-4 border-round">
+                                        <p><u class="text-pink-900 mr-4">technology: </u><b class="text-teal-600">{{ element.technology.name }}</b></p>
+                                        <p><u class="text-pink-900 mr-4">type: </u><b class="text-teal-600">{{ element.typeTemplate.name }}</b></p>
+                                        <p><u class="text-pink-900 mr-4">level:</u>  <b class="text-teal-600">{{ element.levelTemplate.name }}</b></p>
+                                        <p-button class=" text-blue-300 background-blue-200 button" label="use"  severity="secondary" />
+                                    </div>
+                                </div>
+
+
+
+
+
+
+
+
+
 
                                 <div  class="border-solid mt-4 mb-6 flex flex-wrap border-gray-300">
                                     <div class=" left-100 ml-4 mr-8 text-left align-items-left"> <span class="vertical-align-baseline">

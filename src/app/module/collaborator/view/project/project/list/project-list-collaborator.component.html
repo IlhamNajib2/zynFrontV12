@@ -1,7 +1,7 @@
-    <div class="grid"  *ngIf="listActionIsValid">
-        <div class="col-12">
+    <div class="grid border-primary-900"  *ngIf="listActionIsValid">
+        <div class="col-12 border-primary-900">
             <p-toast></p-toast>
-            <div class="card">
+            <div class="card border">
                 <div *ngIf="showDefaultView">
                 <p-toolbar styleClass="mb-4">
                     <ng-template pTemplate="left">
@@ -39,7 +39,7 @@
                                             <div class=" justify-content-center mr-3">
                                                 <ul style="padding-left: 0;" class="flex justify-content-center">
                                                     <li class="container flex justify-content-center mt-0" style="list-style-type: none;padding-left: 0;" >
-                                                        <div class="block bg-bluegray-50 text-left text-primary-900 p-1 border-round m-0" [style]="{width:'32vh',textcolor:'black'}">
+                                                        <div class="block bg-bluegray-50 text-left text-primary-900 p-1 border-round m-0" [style]="{width:'20vh',textcolor:'black'}">
                                                             <a class="text-primary-900" (click)="showw(element)"><p class="text-primary-900 hover:text-orange-600">{{ element.name }}</p></a>
                                                         </div>
 
@@ -55,8 +55,8 @@
                         <div class=" field col">
                             <div class="text-center p-3 border-round-sm font-bold" [style]="{height: '400px'}">
                                 <span class="vertical-align-baseline mt-2">
-                                   <p-button style="background-color: orange;" (click)="showDialog()" icon="pi pi-external-link" icon="pi pi-eye" label="Template" class="top-right relative mr-4"></p-button>
-                                   <button class="btn flex-end relative" (click)="toggleSidebar()">Toggle Sidebar</button>
+                                   <p-button (click)="showDialog()" icon="pi pi-external-link" icon="pi pi-eye" label="Template" class="top-right relative mr-4"></p-button>
+                                   <button class="btn flex-end relative p-2" (click)="toggleSidebar()">YamlGPT</button>
                                </span>
                                 <div class="mb-2 mt-2 justify-content-left text-left">
                                     <label class="text-surface-900 text-3xl text-bold" for="3">{{'project.yaml' | translate}}</label>
@@ -160,8 +160,8 @@
                             </a>
                             <p class="text-center"><strong>Name:</strong> {{ selectedProject.name }}</p>
                             <pre><p class="text-left"><strong>Name:</strong> {{ selectedProject.domainTemplate.name }}</p><p class="text-right"><strong>Name:</strong> {{ selectedProject.projectTemplates }}</p></pre>
-                            <div [style]="{width:'100%',heigth:'600px'}" class="card flex justify-content-left mb-4 p-0">
-                                <p-fieldset legend="Yaml" class="ml-4 mb-4 mt-4 w-full">
+                            <div [style]="{width:'100%',heigth:'600px'}" class="card flex justify-content-left mb-4 p-0 bg-gray-100">
+                                <p-fieldset legend="Yaml" class="ml-4 mb-4 mt-4 mr-4 w-full bg-gray-100">
                                     <div class="but">
                                         <button (click)="copyToClipboard()"><i class="pi pi-clone" style="font-size: 1.5rem"></i></button>
                                     </div>
@@ -179,8 +179,8 @@
                                 </a>
                                 <p class="text-center"><strong>Name:</strong> {{ selecteddProject.name }}</p>
                                 <pre><p class="text-left"><strong>Name:</strong> {{ selecteddProject.domainTemplate.name }}</p><p class="text-right"><strong>Name:</strong> {{ selecteddProject.projectTemplates }}</p></pre>
-                                <div [style]="{width:'100%',heigth:'600px'}" class="card flex justify-content-left mb-4 p-0">
-                                    <p-fieldset legend="Yaml" class="ml-4 mb-4 mt-4 w-full">
+                                <div [style]="{width:'100%',heigth:'600px'}" class="card flex justify-content-left mb-4 p-0 bg-gray-100">
+                                    <p-fieldset legend="Yaml" class="ml-4 mb-4 mt-4 mr-4 w-full bg-gray-100">
                                         <div class="but">
                                             <button (click)="copyToClipboard()"><i class="pi pi-clone" style="font-size: 1.5rem"></i></button>
                                         </div>
@@ -230,20 +230,20 @@
    </div>
 
 
-<div *ngIf="showSidebar" class="sidebar bg-surface-100" style="width:60vh;">
-    <button style="margin-top:10vh" class="btn flex-end relative" (click)="toggleSidebar()"><i class="pi pi-arrow-circle-left" style="font-size: 2rem"></i></button>
+<div *ngIf="showSidebar" class="sidebar bg-gray-100" style="width:60vh;">
+    <button style="margin-top:10vh" class="btn flex-end relative bg-gray-400 p-1" (click)="toggleSidebar()"><i class="pi pi-arrow-circle-left text-black-alpha-60" style="font-size: 2rem"></i></button>
     <h4 style="margin-top:1vh; margin-bottom:1vh">Yaml GPT</h4>
-    <div class="card wiw flex justify-content-center bg-surface-100" style="width:47vh;margin:0vh;height: 68vh;padding:0vh;">
+    <div class="card wiw flex justify-content-center bg-gray-200" style="width:47vh;margin:0vh;height: 68vh;padding:0vh;">
         <div style="width:47vh;margin:0vh;padding:2vh;">
             <form [formGroup]="queryFormGroup" (ngSubmit)="handleAskGPT()">
                 <div>
                     <label class="form-label text-black-alpha-90">Query:</label>
                 </div>
                 <div class="mb-3">
-                    <textarea formControlName="query" class="form-control bg-surface-100" style="width:40vh;height:11vh;"></textarea>
+                    <textarea formControlName="query" class="form-control bg-gray-200" style="width:40vh;height:11vh;"></textarea>
                 </div>
                 <div class="flex-end">
-                    <button class="btn btn-success btn border-circle" ><i class="pi pi-send ml-0 mr-0 pl-0 pr-0" style="font-size: 1.4rem"></i></button>
+                    <button class="btn btn-success btn border-circle bg-gray-400 p-2" ><i class="pi pi-send ml-0 mr-0 pl-0 pr-0 text-black-alpha-60" style="font-size: 1.4rem"></i></button>
                 </div>
                 <div class="alert alert-success" *ngIf="result">
                     <!--<pre>{{result|json}}</pre>-->

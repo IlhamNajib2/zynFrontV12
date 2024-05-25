@@ -58,6 +58,7 @@ import { MessageModule } from 'primeng/message';
 import {MessagesModule} from 'primeng/messages';
 import {PaginatorModule} from 'primeng/paginator';
 import {RatingModule} from "primeng/rating";
+import {DividerModule} from "primeng/divider";
 
 
 
@@ -122,6 +123,7 @@ import {RatingModule} from "primeng/rating";
         CardModule,
         EditorModule,
         RatingModule,
+        DividerModule,
 
 
     ],

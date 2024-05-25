@@ -721,9 +721,9 @@ export class TemplateListCollaboratorComponent implements OnInit {
             case 'angular':
                 return 'assets/layout/images/Angular.svg';
             case 'react':
-                return 'assets/layout/images/reactjs-ar21.svg';
+                return 'assets/layout/images/tcaer.svg';
             case '.net':
-                return 'assets/layout/images/reactjs-ar21.svg';
+                return 'assets/layout/images/tcaer-ar21.svg';
             case 'rectNative':
                 return 'assets/layout/images/reactjs-ar21.svg';
             case 'laravel':
