@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {Message} from "primeng/api";
+import {Message, MessageService} from "primeng/api";
 
 import {ActivatedRoute, Router} from "@angular/router";
 import {UserDto} from "../../../zynerator/security/shared/model/User.model";
@@ -20,7 +20,7 @@ export class RegisterListComponent  implements OnInit {
     successMessage: string = '';
     errorMessage: string = '';
 
-    constructor(private authService: AuthService,private route: ActivatedRoute) { }
+    constructor(private authService: AuthService,private route: ActivatedRoute,protected router: Router,private messageService: MessageService) { }
 
     role: string;
 
@@ -48,7 +48,7 @@ export class RegisterListComponent  implements OnInit {
         firstName : new FormControl('', Validators.required),
         lastName : new FormControl('', Validators.required),
         email : new FormControl('', Validators.required),
-        userName : new FormControl('', Validators.required),
+        username : new FormControl('', Validators.required),
         password : new FormControl('', Validators.required)
     });
     clicked:Boolean=false;
@@ -61,7 +61,7 @@ export class RegisterListComponent  implements OnInit {
 
     submit(){
         const formValues = this.registerForm.value
-        const {phone,firstName, lastName, email ,userName, password } = formValues;
+        const {phone,firstName, lastName, email ,username, password } = formValues;
         const role = new RoleDto();
         role.authority = 'ROLE_COLLABORATOR' ;
         const roleUser = new RoleUserDto();
@@ -74,24 +74,50 @@ export class RegisterListComponent  implements OnInit {
         this.user.firstName = firstName;
         this.user.lastName = lastName;
         this.user.phone = phone;
-        this.user.username = userName;
+        this.user.username = username;
         this.user.password = password;
         this.user.email = email;
         this.user.roleUsers = new Array<RoleUserDto>();
         this.user.roleUsers.push(roleUser);
-        console.log(this.user)
-
         this.authService.registerAdmin().then(
-            response => {
+
+
+        response => {
+            this.messageService.add({
+                severity: 'success',
+                summary: 'Success',
+                detail: response.message + ' *** Check your email to activate your account ***'
+            });
+            setTimeout(() => {
+                this.clearMessages();
+            }, 60000);
+
+
+        },
+            error => {
+                this.messageService.add({ severity: 'error', summary: 'Error', detail: error.error || 'An error occurred' });
+            }
+    );
+    }
+    clearMessages() {
+        this.messageService.clear();
+    }
+
+    /*
+       response => {
                 this.successMessage = response.message;
                 this.errorMessage = '';
             },
             error => {
-                this.errorMessage = error.error.message;
+                if (error) {
+                    this.errorMessage = error.error;
+                } else {
+                    this.errorMessage = 'An error occurred';
+                }
                 this.successMessage = '';
             }
         );
-    }
+     */
 
     get user(): UserDto {
         return this.authService.user;

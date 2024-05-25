@@ -1,0 +1,118 @@
+
+
+<div class="nav">
+    <h3 class="categ">Which category would you like to choose? </h3>
+    <ul>
+        <li><a (click)="selectCategory('Free')"><b>Free</b></a></li>
+        <li><a (click)="selectCategory('Silver')"><b>Silver</b></a></li>
+        <li><a (click)="selectCategory('Gold')"><b>Gold</b></a></li>
+    </ul>
+</div>
+
+<div class="con" style="display: flex; flex-wrap: wrap;" *ngIf="showPackageDetailsFlag ">
+    <div class="col-sm-4 " style="margin-left:17px;">
+        <div class="sc-c343fd9e-1 kzWcek " *ngFor="let packageData of packagesData" style="margin-right:20px;">
+            <div class="sc-6b6ebfe6-0 bkJqdi " style="width:270px;" *ngIf="packageData.categoryPackaging.name === selectedCategory && selectedCategory==='Free' ">
+                <div class="sc-6b6ebfe6-1 ebuwbc">
+                    <h2 class="sc-c28ad4e3-0 btSSme sc-6b6ebfe6-2 bOFRtB">{{ packageData.name }}</h2>
+                    <h2 class="sc-c28ad4e3-0 btSSme sc-6b6ebfe6-3 canIag"> {{ packageData.price }} MAD<span> /year</span></h2>
+                    <button type="button" class="sc-215d0611-0 gDroBN sc-6b6ebfe6-6 kMEmwo" (click)=" submit1(packageData)">
+                        <span>Get it now</span>
+                        <div></div>
+                    </button>
+                </div>
+                <div class="sc-6b6ebfe6-1 ebuwbc">
+                    <ul class="sc-e295270d-0 jYwgeB">
+                        <li class="sc-e295270d-2 descrip">
+                            <svg width="15" height="16" fill="none" viewBox="0 0 15 16" class="sc-e295270d-1 fXzwXw">
+                                <path stroke="#4F4F4F" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.811"
+                                      d="m4.058 7.956 2.308 2.478 4.183-4.868"></path>
+                            </svg>
+                            {{ packageData.description }}
+                        </li>
+                        <li class="sc-e295270d-2 kmLmMX">
+                            <svg width="15" height="16" fill="none" viewBox="0 0 15 16" class="sc-e295270d-1 fXzwXw">
+                                <path stroke="#4F4F4F" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.811"
+                                      d="m4.058 7.956 2.308 2.478 4.183-4.868"></path>
+                            </svg>
+                            You benefit from  {{ packageData.maxProjet}} Projet to generate!
+
+                        </li>
+                        <li class="sc-e295270d-2 kmLmMX">
+                            <svg width="15" height="16" fill="none" viewBox="0 0 15 16" class="sc-e295270d-1 fXzwXw">
+                                <path stroke="#4F4F4F" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.811"
+                                      d="m4.058 7.956 2.308 2.478 4.183-4.868"></path>
+                            </svg>
+                            You benefit from  {{ packageData.maxEntity }} Entity to generate!
+
+
+                        </li>
+                        <li class="sc-e295270d-2 kmLmMX">
+                            <svg width="15" height="16" fill="none" viewBox="0 0 15 16" class="sc-e295270d-1 fXzwXw">
+                                <path stroke="#4F4F4F" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.811"
+                                      d="m4.058 7.956 2.308 2.478 4.183-4.868"></path>
+                            </svg>
+                            You benefit from  {{ packageData.maxAttribut }} Attribut to generate!
+
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+            <div class="swiper-pagination m-20 p-10"></div>
+        </div>
+
+        <div class="sc-c343fd9e-1 kzWcek " *ngFor="let packageData of packagesData" style="margin-right:20px;">
+            <div class="sc-6b6ebfe6-0 bkJqdi " style="width:270px;" *ngIf="packageData.categoryPackaging.name === selectedCategory && selectedCategory!='Free'">
+                <div class="sc-6b6ebfe6-1 ebuwbc">
+                    <h2 class="sc-c28ad4e3-0 btSSme sc-6b6ebfe6-2 bOFRtB">{{ packageData.name }}</h2>
+                    <h2 class="sc-c28ad4e3-0 btSSme sc-6b6ebfe6-3 canIag"> {{ packageData.price }} MAD<span> /year</span></h2>
+                    <button type="button" class="sc-215d0611-0 gDroBN sc-6b6ebfe6-6 kMEmwo" (click)="submit(packageData)">
+                        <span>Get it now</span>
+                        <div></div>
+                    </button>
+                </div>
+                <div class="sc-6b6ebfe6-1 ebuwbc">
+                    <ul class="sc-e295270d-0 jYwgeB">
+                        <li class="sc-e295270d-2 descrip">
+                            <svg width="15" height="16" fill="none" viewBox="0 0 15 16" class="sc-e295270d-1 fXzwXw">
+                                <path stroke="#4F4F4F" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.811"
+                                      d="m4.058 7.956 2.308 2.478 4.183-4.868"></path>
+                            </svg>
+                            {{ packageData.description }}
+                        </li>
+                        <li class="sc-e295270d-2 kmLmMX">
+                            <svg width="15" height="16" fill="none" viewBox="0 0 15 16" class="sc-e295270d-1 fXzwXw">
+                                <path stroke="#4F4F4F" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.811"
+                                      d="m4.058 7.956 2.308 2.478 4.183-4.868"></path>
+                            </svg>
+                            You benefit from  {{ packageData.maxProjet}} Projet to generate!
+
+                        </li>
+                        <li class="sc-e295270d-2 kmLmMX">
+                            <svg width="15" height="16" fill="none" viewBox="0 0 15 16" class="sc-e295270d-1 fXzwXw">
+                                <path stroke="#4F4F4F" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.811"
+                                      d="m4.058 7.956 2.308 2.478 4.183-4.868"></path>
+                            </svg>
+                            You benefit from  {{ packageData.maxEntity }} Entity to generate!
+
+
+                        </li>
+                        <li class="sc-e295270d-2 kmLmMX">
+                            <svg width="15" height="16" fill="none" viewBox="0 0 15 16" class="sc-e295270d-1 fXzwXw">
+                                <path stroke="#4F4F4F" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.811"
+                                      d="m4.058 7.956 2.308 2.478 4.183-4.868"></path>
+                            </svg>
+                            You benefit from  {{ packageData.maxAttribut }} Attribut to generate!
+
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+            <div class="swiper-pagination m-20 p-10"></div>
+        </div>
+
+    </div>
+
+</div>

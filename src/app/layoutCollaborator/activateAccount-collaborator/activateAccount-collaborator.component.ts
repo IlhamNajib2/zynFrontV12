@@ -29,12 +29,19 @@ export class ActivateAccountCollaboratorComponent implements OnInit {
     ngOnInit(): void {
         this.messages = [];
     }
-
+/*
     submit() {
         const formValues = this.loginForm.value;
         const username = formValues.username;
         const passowrd = formValues.password;
         this.authService.login(username, passowrd);
+
+    }
+
+ */
+
+    submit() {
+        this.router.navigate(['/packaging']);
 
     }
 

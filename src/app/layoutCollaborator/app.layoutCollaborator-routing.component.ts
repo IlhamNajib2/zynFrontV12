@@ -26,6 +26,8 @@ import {
     ActivateAccountCollaboratorComponent
 } from "./activateAccount-collaborator/activateAccount-collaborator.component";
 import {ChangePasswordCollaboratorComponent} from "./changePassword-collaborator/changePassword-collaborator.component";
+import {PackaginComponent} from "./packaging/packaging/list/packaging.component";
+import {InscriptionComponent} from "./inscription/inscription-collaborator/list/inscription.component";
 
 
 
@@ -90,9 +92,18 @@ import {ChangePasswordCollaboratorComponent} from "./changePassword-collaborator
                         {
                             path: 'activateAccount',
                             component: ActivateAccountCollaboratorComponent ,
-                        },  {
+                        },
+                        {
                             path: 'changePassword',
                             component: ChangePasswordCollaboratorComponent ,
+                        },
+                         {
+                            path: 'packaging',
+                            component: PackaginComponent,
+                        },
+                        {
+                            path: 'inscription',
+                            component: InscriptionComponent,
                         },
 
                     ]

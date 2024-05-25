@@ -50,6 +50,7 @@ import { MessageModule } from 'primeng/message';
 import {MessagesModule} from 'primeng/messages';
 import {PaginatorModule} from 'primeng/paginator';
 import {ChartModule} from "primeng/chart";
+import {AnalyticsAdminComponent} from "./Analytics/project-analytics.component";
 
 
 
@@ -72,6 +73,7 @@ import {ChartModule} from "primeng/chart";
     ProjectListAdminComponent,
     ProjectViewAdminComponent,
     ProjectEditAdminComponent,
+    AnalyticsAdminComponent,
   ],
     imports: [
         CommonModule,
@@ -126,6 +128,7 @@ import {ChartModule} from "primeng/chart";
   ProjectListAdminComponent,
   ProjectViewAdminComponent,
   ProjectEditAdminComponent,
+  AnalyticsAdminComponent
   ],
 })
 export class ProjectAdminModule { }

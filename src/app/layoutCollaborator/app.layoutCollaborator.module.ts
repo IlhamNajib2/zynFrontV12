@@ -36,6 +36,13 @@ import {
 import {ChangePasswordCollaboratorComponent} from "./changePassword-collaborator/changePassword-collaborator.component";
 import {ToastModule} from "primeng/toast";
 import {AccordionModule} from "primeng/accordion";
+import {PackaginComponent} from "./packaging/packaging/list/packaging.component";
+import {InscriptionComponent} from "./inscription/inscription-collaborator/list/inscription.component";
+import {CardModule} from "primeng/card";
+import {StepsModule} from "primeng/steps";
+import {ScrollPanelModule} from "primeng/scrollpanel";
+import {TableModule} from "primeng/table";
+import {CheckboxModule} from "primeng/checkbox";
 
 
 @NgModule({
@@ -50,7 +57,9 @@ import {AccordionModule} from "primeng/accordion";
         RegisterListComponent,
         PriceListComponent,
         ActivateAccountCollaboratorComponent,
-        ChangePasswordCollaboratorComponent
+        ChangePasswordCollaboratorComponent,
+        PackaginComponent,
+        InscriptionComponent
 
     ],
     imports: [
@@ -79,6 +88,11 @@ import {AccordionModule} from "primeng/accordion";
         ReactiveFormsModule,
         ToastModule,
         AccordionModule,
+        CardModule,
+        StepsModule,
+        ScrollPanelModule,
+        TableModule,
+        CheckboxModule,
 
     ],
     exports: [
@@ -89,7 +103,9 @@ import {AccordionModule} from "primeng/accordion";
         RegisterListComponent,
         PriceListComponent,
         ActivateAccountCollaboratorComponent,
-        ChangePasswordCollaboratorComponent
+        ChangePasswordCollaboratorComponent,
+        PackaginComponent,
+        InscriptionComponent
 
     ]
 })

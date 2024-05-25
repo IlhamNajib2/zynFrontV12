@@ -37,18 +37,19 @@ import {InscriptionCollaboratorStateDto} from 'src/app/shared/model/inscription/
 import {InscriptionCollaboratorStateCollaboratorService} from 'src/app/shared/service/collaborator/inscription/InscriptionCollaboratorStateCollaborator.service';
 import {MemberDto} from 'src/app/shared/model/collaborator/Member.model';
 import {MemberCollaboratorService} from 'src/app/shared/service/collaborator/collaborator/MemberCollaborator.service';
-import {PaimentCollaboratorDto} from "../../../../../../shared/model/paiment/PaimentCollaborator.model";
 import {ViewChild, ElementRef, AfterViewInit } from '@angular/core';
-import {CouponDto} from "../../../../../../shared/model/coupon/Coupon.model";
 import { CouponDetailDto } from 'src/app/shared/model/coupon/CouponDetail.model';
+import {PaimentCollaboratorDto} from "../../../../shared/model/paiment/PaimentCollaborator.model";
+import {CouponDto} from "../../../../shared/model/coupon/Coupon.model";
+import {CategoryPackagingDto} from "../../../../shared/model/category/CategoryPackaging.model";
 
 
 @Component({
-  selector: 'app-inscription-collaborator-list-collaborator',
-  templateUrl: './inscription-collaborator-list-collaborator.component.html',
-    styleUrls: ['./inscription-collaborator-list-collaborator.component.scss']
+  selector: 'app-inscription-collaborator',
+  templateUrl: './inscription.component.html',
+    styleUrls: ['./inscription.component.scss']
 })
-export class InscriptionCollaboratorListCollaboratorComponent implements OnInit {
+export class InscriptionComponent implements OnInit {
 
     protected fileName = 'InscriptionCollaborator';
 
@@ -144,8 +145,7 @@ export class InscriptionCollaboratorListCollaboratorComponent implements OnInit 
         this.paiment.couponDetail.coupon=new CouponDto();
         this.inscriptionMembresElement= new InscriptionMembreDto();
         this.inscriptionMembresElement.member= new MemberDto();
-
-
+        this.inscriptionMembresElements= new Array<InscriptionMembreDto>;
         this.memberService.findAll().subscribe((data) => this.members = data);
         this.inscriptionMembresElement.inscriptionMembreState = new InscriptionMembreStateDto();
         this.inscriptionMembreStateService.findAll().subscribe((data) => this.inscriptionMembreStates = data);
@@ -162,10 +162,10 @@ export class InscriptionCollaboratorListCollaboratorComponent implements OnInit 
         this.loadInscriptionCollaboratorState();
         this.loadInscriptionCollaboratorType();
         this.isIndividual = true;
-        console.log("haad"+this.item.inscriptionCollaboratorType.name);
+        console.log(this.packagingService.item);
     }
 
-//start
+
 
     itemsMenu = [
         {label: 'Collaborator'},
@@ -204,8 +204,6 @@ export class InscriptionCollaboratorListCollaboratorComponent implements OnInit 
 
 
     public addInscriptionMembres() {
-        if( this.item.inscriptionMembres == null )
-            this.item.inscriptionMembres = new Array<InscriptionMembreDto>();
         if (this.errorMessages.length === 0) {
             this.item.inscriptionMembres.push({... this.inscriptionMembresElement});
             this.inscriptionMembresElement = new InscriptionMembreDto();
@@ -221,6 +219,27 @@ export class InscriptionCollaboratorListCollaboratorComponent implements OnInit 
         });
 
     }
+
+
+    saveCollaborator(): void {
+        const email: string = this.email;
+        this.item.packaging=this.packagingService.item;
+        this.paiment.inscriptionCollaborator=this.item;
+        console.log("paiemnt"+this.paiment.name)
+        console.log("paiemnt"+this.paiment.inscriptionCollaborator.packaging.name)
+        console.log("paiemnt"+this.paiment.amountToPaid)
+        console.log("paiemnt"+this.paiment.couponDetail.coupon.name)
+        this.authService.saveCollaborator(email,this.paiment).subscribe(
+            response => {
+                console.log('Inscription réussie :', response);
+            },
+            error => {
+                console.error('Erreur lors de l\'inscription :', error);
+
+            }
+        );
+    }
+
 
     action1() {
         this.updateItemsMenu();

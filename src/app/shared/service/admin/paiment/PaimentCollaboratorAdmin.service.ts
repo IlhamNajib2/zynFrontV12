@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs';
 
 import {environment} from 'src/environments/environment';
@@ -46,6 +46,27 @@ export class PaimentCollaboratorAdminService {
 
     constructor(private http: HttpClient) {
         this.API_PERMISSION = environment.apiUrl + 'modelPermissionUser/';
+    }
+
+
+    sumPaymentsByDay(date: string): Observable<number> {
+        const params = new HttpParams().set('date', date);
+        return this.http.get<number>(this.API + 'sumPaymentsByDay', { params });
+    }
+
+    sumPaymentsByWeek(date: string): Observable<number> {
+        const params = new HttpParams().set('date', date);
+        return this.http.get<number>(this.API + 'sumPaymentsByWeek', { params });
+    }
+
+    sumPaymentsByMonth(date: string): Observable<number> {
+        const params = new HttpParams().set('date', date);
+        return this.http.get<number>(this.API + 'sumPaymentsByMonth', { params });
+    }
+
+    sumPaymentsByYear(date: string): Observable<number> {
+        const params = new HttpParams().set('date', date);
+        return this.http.get<number>(this.API + 'sumPaymentsByYear', { params });
     }
 
 

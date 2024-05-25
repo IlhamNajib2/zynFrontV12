@@ -57,6 +57,7 @@ import {CheckboxModule} from "primeng/checkbox";
 import {StepsModule} from "primeng/steps";
 import {RadioButtonModule} from "primeng/radiobutton";
 import {ScrollPanelModule} from "primeng/scrollpanel";
+import {RippleModule} from "primeng/ripple";
 
 
 
@@ -120,6 +121,7 @@ import {ScrollPanelModule} from "primeng/scrollpanel";
         StepsModule,
         RadioButtonModule,
         ScrollPanelModule,
+        RippleModule,
 
 
     ],

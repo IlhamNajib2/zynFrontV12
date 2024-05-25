@@ -25,6 +25,10 @@ import {
 import {
     ChangePasswordCollaboratorComponent
 } from "./layoutCollaborator/changePassword-collaborator/changePassword-collaborator.component";
+import {PackaginComponent} from "./layoutCollaborator/packaging/packaging/list/packaging.component";
+import {
+    InscriptionComponent
+} from "./layoutCollaborator/inscription/inscription-collaborator/list/inscription.component";
 
 const routes: Routes = [
     {
@@ -37,9 +41,12 @@ const routes: Routes = [
             },
             {path:'contact',component:ContactListComponent},
             {path:'price',component:PriceListComponent},
+
         ]
     },
     {path:'login',component:LoginListComponent},
+    {path:'packaging',component:PackaginComponent},
+    {path:'inscription',component:InscriptionComponent},
     {path:'register',component:RegisterListComponent},
     {path: 'admin/login', component: LoginAdminComponent },
     {path: 'activateAccount', component: ActivateAccountCollaboratorComponent},

@@ -29,8 +29,13 @@ constructor(public layoutService: LayoutService, public app: AppComponent, publi
                     items: [
 
                         {
-                            label: 'Project Analytics ',
+                            label: 'Analytics ',
                             icon: 'pi pi-chart-bar',
+                            routerLink: ['/app/admin/project/Analytics']
+                        },
+                        {
+                            label: 'Projects ',
+                            icon: 'pi pi-server',
                             routerLink: ['/app/admin/project/project/list']
                         },
                         {

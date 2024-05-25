@@ -8,6 +8,7 @@ import {AuthGuard} from 'src/app/zynerator/security/guards/auth.guard';
 import { LoginAdminComponent } from './login-admin/login-admin.component';
 import { RegisterAdminComponent } from './register-admin/register-admin.component';
 import {ProjectListAdminComponent} from "./view/project/project/list/project-list-admin.component";
+import {AnalyticsAdminComponent} from "./view/project/Analytics/project-analytics.component";
 
 @NgModule({
     imports: [
@@ -18,7 +19,7 @@ import {ProjectListAdminComponent} from "./view/project/project/list/project-lis
                     children: [
                         {
                             path: '',
-                            component: ProjectListAdminComponent,
+                            component: AnalyticsAdminComponent,
                             pathMatch:'full'
                         },
                         {

@@ -1,3 +1,34 @@
+.grid.h11 {
+    display: flex;
+    justify-content: center; /* Change this line */
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+
+.p-steps .p-steps-item.p-highlight .p-steps-number {
+    background: orange;
+    color: black;
+}
+
+.p-ripple{
+    position: relative;
+    margin-left: 20px;
+    background-color: orange;
+    border: 1px solid orange;
+    color: black;
+    margin-bottom: 20px;
+}
+.p-ripple:hover{
+    position: relative;
+    margin-left: 20px;
+    background-color: orange;
+    border: 1px solid orange;
+    color: black;
+    margin-bottom: 20px;
+}
+
 .grid {
     display: flex;
     justify-content: space-between; /* Change this line */
@@ -31,7 +62,7 @@
 
             &:focus {
                 box-shadow: none;
-                border:2px solid #ff9900;
+                border:2px solid orange;
             }
         }
 
@@ -39,7 +70,7 @@
             width: 100%;
             margin-top: 10px;
             padding: 12px;
-            background-color: #3b5998;
+            background-color: orange;
             color: white;
             border: none;
             border-radius: 8px;
@@ -50,12 +81,12 @@
                 width: auto;
                 margin-left: auto;
                 background-color: transparent;
-                border: 1px solid #ff9900;
-                color: #3b5998;
+                border: 1px solid black;
+                color: black;
             }
 
             &:hover {
-                background-color: #3b5998;
+                background-color: orange;
             }
         }
 
@@ -106,11 +137,31 @@
 
     &.bg-surface-100 {
         background-color: #f5f5f5;
+        border:1px solid black;
+    }
+    &.bg-surface-100:hover{
+        background-color: #f5f5f5;
+        border:1px solid black;
+        box-shadow: 3px 4px 5px;
     }
 
     &.coupon {
         width: 50%;
     }
+}
+.p-radiobutton .p-radiobutton-box.p-highlight {
+    border-color: black;
+    background: black;
+}
+
+.p-radiobutton .p-radiobutton-box {
+    border: 2px solid black;
+    background: #ffffff;
+    width: 22px;
+    height: 22px;
+    color: #495057;
+    border-radius: 50%;
+    transition: black 0.2s, color 0.2s,black 0.2s, box-shadow 0.2s;
 }
 
 .field-radiobutton {
@@ -118,7 +169,8 @@
 }
 
 .button-container.p-flexbox.ng-star-inserted {
-    margin-left: 60%;
+    margin-left: 56%;
+    margin-top: 2rem;
 }
 .button-container.p-flexbox.button-purple{
     margin-right: 20px;
@@ -137,14 +189,11 @@
 .col-md-2.d-flex.justify-content-end{
     margin-bottom: 20px;
     margin-right: 70px;
-    margin-left:900px;
+    margin-left:720px;
     width: 120px;
 }
-.p-ripple {
-    position: relative;
-    margin-left: 20px;
-}
-.p-ripple[_ngcontent-ng-c2951012798] {
+
+.p-ripple{
     width: 120px;
 }
 .card.tabl{
@@ -153,10 +202,16 @@
 }
 
 
-.p-ripple[_ngcontent-ng-c4069545181] {
-    position: relative;
-    margin-left: 20px;
-    padding-right: 20px;
+
+p-button-outlined{
+    background-color: white;
+    border: 1px solid black;
+    color: black;
+}
+p-button-outlined:hover{
+    background-color: white;
+    border: 1px solid black;
+    color: black;
 }
 
 
@@ -167,5 +222,5 @@
     border-radius: 10px;
 }
 .button-purple.hh{
-    padding-right:16px;
+    padding-right:18px;
 }
