@@ -11,7 +11,7 @@
     padding: 20px;
 }
 .btn {
-    background-color: darkslategray; /* Couleur de fond */
+    background-color: orange; /* Couleur de fond */
     color: white; /* Couleur du texte */
     padding: 8px 15px; /* Espacement à l'intérieur du bouton */
     font-size: 16px; /* Taille de la police */
@@ -24,3 +24,7 @@
     background-color: grey; /* Change la couleur de fond au survol */
 }
 
+.but{
+    display: flex;
+    justify-content: flex-end; /* Align content to the right */
+}

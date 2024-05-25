@@ -34,6 +34,7 @@ import {ProjectTemplateDto} from 'src/app/shared/model/template/ProjectTemplate.
 import {ProjectTemplateCollaboratorService} from 'src/app/shared/service/collaborator/template/ProjectTemplateCollaborator.service';
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {HttpClient, HttpClientModule, HttpHeaders} from "@angular/common/http";
+import {color} from "chart.js/helpers";
 
 
 
@@ -559,17 +560,6 @@ export class ProjectListCollaboratorComponent implements OnInit {
     projectData: ProjectDto[] = [];
 
     protected readonly TemplateDto = TemplateDto;
-    isEditing: boolean = true;
-
-    copyYaml() {
-        const textField = document.createElement('textarea');
-        textField.value = this.separateContent; // Get the YAML content from the textarea
-        document.body.appendChild(textField);
-        textField.select();
-        document.execCommand('copy'); // Copy the selected text
-        textField.remove();
-        // Optional: Show a success message to the user
-    }
     visible: boolean = false;
 
     showDialog() {
@@ -606,19 +596,13 @@ export class ProjectListCollaboratorComponent implements OnInit {
             })
     }
 
-
-
-
-
     showSidebar: boolean = false;
 
     toggleSidebar() {
         this.showSidebar = !this.showSidebar;
     }
 
-    className: string = '';
     attributes: string = '';
-    resultt: string = '';
 
 
 
@@ -633,16 +617,6 @@ export class ProjectListCollaboratorComponent implements OnInit {
     // Dans votre composant TypeScript
 
     showContentDefault: boolean = true;
-
-    toggleCodePart(part: string) {
-        if (part === 'part1' || part === 'part2' || part === 'part3' || part === 'part4' || part === 'part5' || part === 'part6' || part === 'part7') {
-            this.showContentDefault = false;
-            this.showCodePart = part;
-        }
-    }
-
-
-
     showDefaultView: boolean = true;
     showProjectView: boolean = false;
     showYmlView: boolean= false;
@@ -658,10 +632,14 @@ export class ProjectListCollaboratorComponent implements OnInit {
 
     showDefault() {
         this.setView('default');
+        !this.selectedProject;
+        this.showProjectDialogVisible = false;
     }
 
     showProject() {
         this.setView('project');
+        !this.selecteddProject;
+        this.showProjecttDialogVisible = false;
     }
     showYmll(){
         this.setView('yaml')
@@ -688,19 +666,21 @@ export class ProjectListCollaboratorComponent implements OnInit {
     selectedProject: ProjectDto | null = null;
     selecteddProject: ProjectDto | null = null;
     showProjectDialogVisible: boolean = false;
+    showProjecttDialogVisible: boolean = false;
 
 
     showw(project: ProjectDto) {
         this.selectedProject = project;
         this.setView('prjct');
         this.showProjectDialogVisible = true;
-
     }
     showYamllDialog(project: ProjectDto): void {
         this.selecteddProject = project;
         this.setView('prjct');
-        this.showProjectDialogVisible = true;// Show the dialog
+        this.showProjecttDialogVisible = true;// Show the dialog
     }
+
+
     //save
     get submitted(): boolean {
         return this._submitted;
@@ -766,4 +746,18 @@ export class ProjectListCollaboratorComponent implements OnInit {
             this.messageService.add({severity: 'error',summary: 'Erreurs',detail: 'Merci de corrigé les erreurs sur le formulaire'});
         }
     }
+
+    protected readonly color = color;
+    copyToClipboard() {
+        const yamlText = document.getElementById('yamlText').innerText;
+        const textarea = document.createElement('textarea');
+        textarea.value = yamlText;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+        alert('Text copied to clipboard!');
+    }
+
+
 }
