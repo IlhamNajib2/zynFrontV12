@@ -159,6 +159,7 @@
                         </ng-template>
                     </p-table>
 
+
               </div>
 
                 <div *ngIf="showProjectDialogVisible">
@@ -167,15 +168,99 @@
                             <a (click)="showDefault()" class="sidebar-link mr-4 ml-4 text-blue-300 underline font-bold hover:text-orange-700">
                                 <i style="font-size: 1rem" ></i><span class="link-label"><i class="pi pi-arrow-left" style="font-size: 2rem"></i></span>
                             </a>
-                            <p class="text-center"><strong>Name:</strong> {{ selectedProject.name }}</p>
-                            <pre><p class="text-left"><strong>Name:</strong> {{ selectedProject.domainTemplate.name }}</p><p class="text-right"><strong>Name:</strong> {{ selectedProject.projectTemplates }}</p></pre>
-                            <div [style]="{width:'100%',heigth:'600px'}" class="card flex justify-content-left mb-4 p-0 bg-gray-100">
+                            <p class="text-center"><u class="text-red-400 font-bold text-5xl mr-4"><strong>Name:</strong></u> {{ selectedProject.name }}</p>
+                            <pre><p class="text-left"><u class="text-red-400 font-bold text-5xl mr-4"><strong>Name:</strong></u> {{ selectedProject.domainTemplate.name }}</p><!--<p class="text-right"><strong>Name:</strong> {{ selectedProject.projectTemplates }}</p>--></pre>
+                            <!--<div [style]="{width:'100%',heigth:'600px'}" class="card flex justify-content-left mb-4 p-0 bg-gray-100">
                                 <p-fieldset legend="Yaml" class="ml-4 mb-4 mt-4 mr-4 w-full bg-gray-100">
                                     <div class="but">
                                         <button (click)="copyToClipboard()"><i class="pi pi-clone" style="font-size: 1.5rem"></i></button>
                                     </div>
                                     <p id="yamlText"> {{ selectedProject.yaml }}</p>
                                 </p-fieldset>
+                            </div>-->
+                            <div class="border-bold border-black-alpha-50">
+                            <div>
+                            <div class="but">
+                                <button (click)="copyToClipboard()"><i class="pi pi-clone" style="font-size: 1.5rem"></i></button>
+                            </div>
+                            <pre id="yamlText" class="w-auto">
+<u class="text-orange-700 font-bold mr-4">Diplome_MS(ms1)_ROLES(admin)_SUB-MODULE(commun)_MENU(Gestion Diplome):</u>
+  id: Long ID
+  ref: String  REF_REQ
+  libelle: String LABEL_REQ
+  echelon_depart: Echelon
+
+<u class="text-orange-700 font-bold mr-4">Avancement_MS(ms1)_ROLES(admin)_SUB-MODULE(avancement)_MENU(Gestion Echelle):</u>
+  id: Long ID
+  ref: String REF_REQ
+  employe: Employe
+  echelon: Echelon
+  salaireAjoute: BigDecimal
+
+<u class="text-orange-700 font-bold mr-4">Employe_MS(ms1)_ROLES(admin)_SUB-MODULE(commun)_MENU(Ressource humain):</u>
+  id: Long ID
+  ref: String REF_REQ
+  username: String LABEL_REQ
+  nom: String LABEL_REQ
+  password: String
+  salaire: BigDecimal
+  diplome: Diplome
+  entiteAdmin: EntiteAdmin
+
+<u class="text-orange-700 font-bold mr-4">Echelon_MS(ms1)_ROLES(admin)_SUB-MODULE(avancement)_MENU(Gestion Echelle):</u>
+  id: Long ID
+  ref: String  REF_REQ
+  libelle: String LABEL_REQ
+  salaire: BigDecimal
+  echelle: Echelle
+
+<u class="text-orange-700 font-bold mr-4">EntiteAdmin_MS(ms1)_ROLES(admin)_SUB-MODULE(commun)_MENU(Gestion entite):</u>
+  id: Long ID
+  ref: String  REF_REQ
+  libelle: String LABEL_REQ
+
+<u class="text-orange-700 font-bold mr-4">TemplateDocument_MS(ms1)_ROLES(admin)_SUB-MODULE(demande)_MENU(Gestion Template Document):</u>
+  id: Long ID
+  ref: String  REF_REQ
+  contenu: String  CONTENU_REQ
+  typeDocument: TypeDocument
+
+<u class="text-orange-700 font-bold mr-4">TypeDocument_MS(ms1)_ROLES(admin)_SUB-MODULE(demande)_MENU(Gestion Type Document):</u>
+  id: Long ID
+  code: String  CODE_REQ
+  libelle: String  LABEL_REQ
+
+<u class="text-orange-700 font-bold mr-4">Mandat_MS(ms1)_ROLES(admin)_SUB-MODULE(mandat)_MENU(Gestion des Mandats):</u>
+  id: Long ID
+  ref: String  REF_REQ
+  dateDebut: LocalDateTime
+  dateFin: LocalDateTime
+  salaire: BigDecimal
+  employe: Employe LABEL_REQ
+  responsabilite: Responsabilite
+
+<u class="text-orange-700 font-bold mr-4">Responsabilite_MS(ms1)_ROLES(admin)_SUB-MODULE(mandat)_MENU(Gestion des Responsabilites):</u>
+  id: Long ID
+  ref: String REF_REQ
+  nom: String LABEL_REQ
+  echelonMin: Echelon
+
+<u class="text-orange-700 font-bold mr-4">ResponsabiliteDetail_MS(ms1)_ROLES(admin)_SUB-MODULE(mandat)_MENU(Gestion des Responsabilites):</u>
+  id: Long ID
+  ref: String REF_REQ
+  dateAplicationMin: LocalDateTime
+  dateAplicationMax: LocalDateTime
+  salaire: BigDecimal
+  responsabilite: Responsabilite
+
+<u class="text-orange-700 font-bold mr-4">DemandeDocument(ms1)_ROLES(admin)_SUB-MODULE(demande)_MENU(Gestion documents):</u>
+  id: Long ID
+  ref: String REF_REQ
+  employe: Employe
+  typeDocument: TypeDocument
+
+                           </pre>
+                            </div>
                             </div>
                         </div>
                     </div>
@@ -183,18 +268,103 @@
                 <div *ngIf="showProjecttDialogVisible">
                     <div *ngIf="selecteddProject">
                             <div class="surface-overlay border-round border-1 shadow-1 p-5 py-0 m-3">
-                                <a (click)="showProject()" class="sidebar-link mr-4 ml-4 text-blue-300 underline font-bold hover:text-orange-700">
+                                <a (click)="showProject()" class="sidebar-link mr-4 ml-2 text-blue-300 underline font-bold hover:text-orange-700">
                                     <i style="font-size: 1rem" ></i><span class="link-label"><i class="pi pi-arrow-left" style="font-size: 2rem"></i></span>
                                 </a>
-                                <p class="text-center"><strong>Name:</strong> {{ selecteddProject.name }}</p>
-                                <pre><p class="text-left"><strong>Name:</strong> {{ selecteddProject.domainTemplate.name }}</p><p class="text-right"><strong>Name:</strong> {{ selecteddProject.projectTemplates }}</p></pre>
-                                <div [style]="{width:'100%',heigth:'600px'}" class="card flex justify-content-left mb-4 p-0 bg-gray-100">
+                                <p class="text-center"><u class="text-blue-400 font-bold text-5xl mr-4"><strong>Name:</strong></u> {{ selecteddProject.name }}</p>
+                                <pre><p class="text-left"><u class="text-blue-400 font-bold text-5xl mr-4"><strong>Name:</strong></u> {{ selecteddProject.domainTemplate.name }}</p><!--<p class="text-right"><strong>Name:</strong> {{ selecteddProject.projectTemplates }}</p>--></pre>
+                                <!--<div [style]="{width:'100%',heigth:'600px'}" class="card flex justify-content-left mb-4 p-0 bg-gray-100">
                                     <p-fieldset legend="Yaml" class="ml-4 mb-4 mt-4 mr-4 w-full bg-gray-100">
                                         <div class="but">
                                             <button (click)="copyToClipboard()"><i class="pi pi-clone" style="font-size: 1.5rem"></i></button>
                                         </div>
                                         <p id="yamlText"> {{ selecteddProject.yaml }}</p>
+
                                     </p-fieldset>
+                                </div>-->
+                                <div class="border-bold border-black-alpha-50">
+                                    <div>
+                                        <div class="but">
+                                            <button (click)="copyToClipboard()"><i class="pi pi-clone" style="font-size: 1.5rem"></i></button>
+                                        </div>
+                                        <pre id="yamlText" class="w-auto">
+Diplome_MS(ms1)_ROLES(admin)_SUB-MODULE(commun)_MENU(Gestion Diplome):
+  id: Long ID
+  ref: String  REF_REQ
+  libelle: String LABEL_REQ
+  echelon_depart: Echelon
+
+Avancement_MS(ms1)_ROLES(admin)_SUB-MODULE(avancement)_MENU(Gestion Echelle):
+  id: Long ID
+  ref: String REF_REQ
+  employe: Employe
+  echelon: Echelon
+  salaireAjoute: BigDecimal
+
+Employe_MS(ms1)_ROLES(admin)_SUB-MODULE(commun)_MENU(Ressource humain):
+  id: Long ID
+  ref: String REF_REQ
+  username: String LABEL_REQ
+  nom: String LABEL_REQ
+  password: String
+  salaire: BigDecimal
+  diplome: Diplome
+  entiteAdmin: EntiteAdmin
+
+Echelon_MS(ms1)_ROLES(admin)_SUB-MODULE(avancement)_MENU(Gestion Echelle):
+  id: Long ID
+  ref: String  REF_REQ
+  libelle: String LABEL_REQ
+  salaire: BigDecimal
+  echelle: Echelle
+
+EntiteAdmin_MS(ms1)_ROLES(admin)_SUB-MODULE(commun)_MENU(Gestion entite):
+  id: Long ID
+  ref: String  REF_REQ
+  libelle: String LABEL_REQ
+
+TemplateDocument_MS(ms1)_ROLES(admin)_SUB-MODULE(demande)_MENU(Gestion Template Document):
+  id: Long ID
+  ref: String  REF_REQ
+  contenu: String  CONTENU_REQ
+  typeDocument: TypeDocument
+
+TypeDocument_MS(ms1)_ROLES(admin)_SUB-MODULE(demande)_MENU(Gestion Type Document):
+  id: Long ID
+  code: String  CODE_REQ
+  libelle: String  LABEL_REQ
+
+Mandat_MS(ms1)_ROLES(admin)_SUB-MODULE(mandat)_MENU(Gestion des Mandats):
+  id: Long ID
+  ref: String  REF_REQ
+  dateDebut: LocalDateTime
+  dateFin: LocalDateTime
+  salaire: BigDecimal
+  employe: Employe LABEL_REQ
+  responsabilite: Responsabilite
+
+Responsabilite_MS(ms1)_ROLES(admin)_SUB-MODULE(mandat)_MENU(Gestion des Responsabilites):
+  id: Long ID
+  ref: String REF_REQ
+  nom: String LABEL_REQ
+  echelonMin: Echelon
+
+ResponsabiliteDetail_MS(ms1)_ROLES(admin)_SUB-MODULE(mandat)_MENU(Gestion des Responsabilites):
+  id: Long ID
+  ref: String REF_REQ
+  dateAplicationMin: LocalDateTime
+  dateAplicationMax: LocalDateTime
+  salaire: BigDecimal
+  responsabilite: Responsabilite
+
+DemandeDocument(ms1)_ROLES(admin)_SUB-MODULE(demande)_MENU(Gestion documents):
+  id: Long ID
+  ref: String REF_REQ
+  employe: Employe
+  typeDocument: TypeDocument
+
+                           </pre>
+                                    </div>
                                 </div>
                             </div>
                     </div>

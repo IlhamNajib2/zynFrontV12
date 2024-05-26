@@ -52,6 +52,7 @@ import {PaginatorModule} from 'primeng/paginator';
 import {SplitterModule} from "primeng/splitter";
 import {ScrollTopModule} from "primeng/scrolltop";
 import {FieldsetModule} from "primeng/fieldset";
+import {RatingModule} from "primeng/rating";
 
 
 
@@ -110,6 +111,7 @@ import {FieldsetModule} from "primeng/fieldset";
         SplitterModule,
         ScrollTopModule,
         FieldsetModule,
+        RatingModule,
 
 
     ],

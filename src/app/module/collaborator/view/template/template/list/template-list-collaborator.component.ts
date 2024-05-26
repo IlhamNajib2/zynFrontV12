@@ -675,7 +675,7 @@ export class TemplateListCollaboratorComponent implements OnInit {
         }
     }
 //ajouter
-    selectedProjectTemplate:string='public';
+    selectedProjectTemplate:string='Public';
     showProjectTemplateDetails : boolean=false;
     selecteProjectTemplate(category:string):void{
         this.showDefault();

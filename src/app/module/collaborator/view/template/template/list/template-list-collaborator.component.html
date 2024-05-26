@@ -32,14 +32,13 @@
                             <i class="pi pi-search"></i>
                             <input class="text-orange-700" [style]="{width:'500px'}" (click)="findPaginatedByCriteria()" pInputText type="text" placeholder="{{'searchInput' | translate}}" (input)="dt.filterGlobal($event.target.value, 'contains')"/>
                         </span>
-                        <a (click)="selecteProjectTemplate('private')"  class="mr-6 ml-6 text-2xl aswad underline">Private</a>
-                        <a (click)="selecteProjectTemplate('public')" class="mr-6 ml-6 text-2xl  aswad underline">Public</a>
+                        <a (click)="selecteProjectTemplate('Public')" class="mr-6 ml-6 text-2xl  aswad underline">Public</a>
+                        <a (click)="selecteProjectTemplate('Private')"  class="mr-6 ml-6 text-2xl aswad underline">Private</a>
                     </ng-template>
                     <ng-template style="width:1000px; height:300px" pTemplate="body" let-element>
                         <div *ngIf="showDefaultView">
                         <div *ngIf="showProjectTemplateDetails">
                             <div *ngIf="element.categoryTemplate.name===selectedProjectTemplate">
-
                                 <div class="flex border-solid w-auto border-gray-300 mt-4 mb-4">
                                     <div class="col-fixed" style="width:100px">
                                     </div>
@@ -57,7 +56,8 @@
                                         <p><u class="text-pink-900 mr-4">domain:</u><b class="text-teal-600">{{ element.domainTemplate.name }}</b></p>
                                         <p><b class="text-red-500">{{ element.categoryTemplate.name }}</b></p>
                                         <p><b class="text-red-500 text-4lg">{{ element.price }}$</b></p>
-                                        <p-button class=" text-blue-300 background-blue-200 button" label="shop" (click)="showDialog()" severity="secondary" />
+                                        <p-button *ngIf="element.categoryTemplate.name==='Private'" class=" text-blue-300 background-blue-200 button" label="shop" (click)="showDialog()" severity="secondary" />
+                                        <p-button *ngIf="element.categoryTemplate.name==='Public'" class=" text-blue-300 background-blue-200 button" label="apload" severity="secondary" />
                                         <i class="pi pi-cart-minus" style="color: green"></i>
                                     </div>
                                     <div class="col-fixed font-bold" style="width:200px">
@@ -69,7 +69,6 @@
                                     <div class="col-fixed" style="width:200px">
                                          </div>
                                 </div>
-
                         </div>
                         </div>
                         </div>
@@ -87,13 +86,13 @@
             <div *ngIf="showTemplateView">
                 <p-toolbar styleClass="mb-4">
                     <ng-template pTemplate="left">
-                        <a class="sidebar-link mr-4 ml-4 text-orange-500 underline font-bold hover:text-orange-700 text-2xl" (click)="showDefault()">
+                        <a class="sidebar-link mr-4 ml-4 text-orange-500 underline font-bold text-2xl" (click)="showDefault()">
                             <i style="font-size: 1rem"></i><span class="link-label">Template</span>
                         </a>
-                        <a class="sidebar-link mr-4 ml-4 text-orange-500 underline font-bold hover:text-orange-700 text-2xl" (click)="showTemplate()">
+                        <a class="sidebar-link mr-4 ml-4 text-orange-500 underline font-bold text-2xl" (click)="showTemplate()">
                             <i style="font-size: 1rem"></i><span class="link-label">New</span>
                         </a>
-                        <a class="sidebar-link mr-4 ml-4 text-orange-500 underline font-bold hover:text-orange-700 text-2xl" (click)="showMy()">
+                        <a class="sidebar-link mr-4 ml-4 text-orange-500 underline font-bold text-2xl" (click)="showMy()">
                             <i style="font-size: 1rem"></i><span class="link-label">My Template</span>
                         </a>
                     </ng-template>
@@ -185,13 +184,13 @@
             <div *ngIf="showMyView">
                 <p-toolbar styleClass="mb-4">
                     <ng-template pTemplate="left">
-                        <a class="sidebar-link mr-4 ml-4 text-orange-500 underline font-bold hover:text-orange-700 text-2xl" (click)="showDefault()">
+                        <a class="sidebar-link mr-4 ml-4 text-orange-500 underline font-bold text-2xl" (click)="showDefault()">
                             <i style="font-size: 1rem"></i><span class="link-label">Template</span>
                         </a>
-                        <a class="sidebar-link mr-4 ml-4 text-orange-500 underline font-bold hover:text-orange-700 text-2xl" (click)="showTemplate()">
+                        <a class="sidebar-link mr-4 ml-4 text-orange-500 underline font-bold text-2xl" (click)="showTemplate()">
                             <i style="font-size: 1rem"></i><span class="link-label">New</span>
                         </a>
-                        <a class="sidebar-link mr-4 ml-4 text-orange-500 underline font-bold hover:text-orange-700 text-2xl" (click)="showMy()">
+                        <a class="sidebar-link mr-4 ml-4 text-orange-500 underline font-bold text-2xl" (click)="showMy()">
                             <i style="font-size: 1rem"></i><span class="link-label">My Template</span>
                         </a>
                     </ng-template>
@@ -226,7 +225,8 @@
                         <p><u class="text-pink-900 mr-4">domain:</u><b class="text-teal-600">{{ element.domainTemplate.name }}</b></p>
                         <p><b class="text-red-500">{{ element.categoryTemplate.name }}</b></p>
                         <p><b class="text-red-500 text-4lg">{{ element.price }}$</b> </p><i class="pi pi-cart-minus" style="color: green"></i>
-                        <p-button class=" text-blue-300 background-blue-200 button" label="shop" (click)="showDialog()" severity="secondary" />
+                        <p-button *ngIf="element.categoryTemplate.name==='Private'" class=" text-blue-300 background-blue-200 button" label="shop" (click)="showDialog()" severity="secondary" />
+                        <p-button *ngIf="element.categoryTemplate.name==='Public'" class=" text-blue-300 background-blue-200 button" label="apload" (click)="showDialog()" severity="secondary" />
                         <i class="pi pi-cart-minus" style="color: green"></i>
                     </div>
                     <div class="col-fixed font-bold" style="width:200px">
