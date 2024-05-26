@@ -5,14 +5,11 @@
                 <div *ngIf="showDefaultView">
                 <p-toolbar styleClass="mb-4">
                     <ng-template pTemplate="left">
-                        <a (click)="showDefault()" class="sidebar-link mr-4 ml-4 text-orange-500 underline font-bold hover:text-orange-700">
+                        <a (click)="showDefault()" class="sidebar-link mr-4 ml-4 text-orange-500 underline font-bold text-2xl">
                             <i style="font-size: 1rem" ></i><span class="link-label">Genery</span>
                         </a>
-                        <a (click)="showProject()" class="sidebar-link mr-4 ml-4 text-orange-500 underline font-bold hover:text-orange-700">
+                        <a (click)="showProject()" class="sidebar-link mr-4 ml-4 text-orange-500 underline font-bold text-2xl">
                             <i style="font-size: 1rem" ></i><span class="link-label">Projects</span>
-                        </a>
-                        <a class="sidebar-link mr-4 ml-4 text-orange-500 underline font-bold hover:text-orange-700">
-                            <i style="font-size: 1rem" ></i><span class="link-label">My Template</span>
                         </a>
                     </ng-template>
                     <ng-template pTemplate="right">
@@ -27,15 +24,15 @@
                 <div *ngIf="showDefaultView">
                     <div class="grid">
                         <div class="col-fixed" style="width:300px">
-                            <div class="text-center p-1 border-round-sm font-bold">
+                            <div class="text-center p-1 border-round-sm font-bold border-solid border-gray-200">
                                 <h3 class="flex ml-6 mb-6 justify-content-left h3 text-surface-900 text-3xl text-bold">History:</h3>
-                                <div style="width: 250px; height: 300px; overflow: auto; margin:0px; padding:0px">
+                                <div style="width: 250px; height: 380px; overflow: auto; margin:0px; padding:0px">
                                     <p-table #dt [value]="items" [columns]="cols" [rows]="8" [paginator]="false"
                                              [globalFilterFields]="['code', 'name', 'generatedDate', 'projectStatecode', 'inscriptionMembreid', 'domainTemplatename']" [(selection)]="selections"
                                              [rowHover]="true" dataKey="id" styleClass="p-datatable-customers"
                                              currentPageReportTemplate="{{'les éléments de {first} à {last} sur {totalRecords} ' | translate}}"
                                              [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" selectionMode="multiple" class="mt-6 flex ml-0 justify-content-center">
-                                        <ng-template pTemplate="body" let-element>
+                                        <ng-template style="height: 400px;" pTemplate="body" let-element>
                                             <div class=" justify-content-center mr-3">
                                                 <ul style="padding-left: 0;" class="flex justify-content-center">
                                                     <li class="container flex justify-content-center mt-0" style="list-style-type: none;padding-left: 0;" >
@@ -58,7 +55,23 @@
                                    <p-button (click)="showDialog()" icon="pi pi-external-link" icon="pi pi-eye" label="Template" class="top-right relative mr-4"></p-button>
                                    <button class="btn flex-end relative p-2" (click)="toggleSidebar()">YamlGPT</button>
                                </span>
-                                <div class="mb-2 mt-2 justify-content-left text-left">
+                                <div class="grid p-0 m-0" [style]="{width:'100%'}">
+                                    <!--<div class="field col-11 md:col-6">
+                                    </div>
+                                    <div class="field col-11  md:col-6">
+                                        <p-button (click)="showDialog()" icon="pi pi-external-link" icon="pi pi-eye" label="Template" class="top-right relative mr-4"></p-button>
+                                        <button class="btn flex-end relative p-2" (click)="toggleSidebar()">YamlGPT</button>
+                                    </div>-->
+                                    <div class="field col-11 md:col-6 mt-2">
+                                        <input [style]="{width:'100%'}" class="mb-2 mr-2" type="text" pInputText  placeholder="{{'Enter Name Of Project' | translate}}" id="2" [(ngModel)]="item.name"/>
+                                    </div>
+                                        <div class="field col-11 md:col-6 mt-2">
+                                        <p-dropdown [style]="{width:'100%'}"  appendTo="body"  [options]="domainTemplates" [(ngModel)]="item.domainTemplate" id="7" [filter]="true" filterMatchMode="contains"
+                                                     [showClear]="true" optionLabel="name" placeholder="{{'Select Domain' | translate}}"  >
+                                        </p-dropdown>
+                                        </div>
+                                </div>
+                                <div class="mb-2 justify-content-left text-left">
                                     <label class="text-surface-900 text-3xl text-bold" for="3">{{'project.yaml' | translate}}</label>
                                 </div>
                                 <textarea [style]="{width: '100%', height:'300px'}" class="border-solid border-black-alpha-60 border-3" id="3" pInputTextarea rows="5" cols="46" placeholder="{{'project.yaml' | translate}}"  [(ngModel)]="item.yaml"></textarea>
@@ -74,16 +87,12 @@
                 <div *ngIf="showProjectView">
                     <p-toolbar styleClass="mb-4">
                         <ng-template pTemplate="left">
-                            <a (click)="showDefault()" class="sidebar-link mr-4 ml-4 text-orange-500 underline font-bold hover:text-orange-700">
+                            <a (click)="showDefault()" class="sidebar-link mr-4 ml-4 text-orange-500 underline font-bold  text-2xl">
                                 <i style="font-size: 1rem" ></i><span class="link-label">Genery</span>
                             </a>
 
-                            <a (click)="showProject()" class="sidebar-link mr-4 ml-4 text-orange-500 underline font-bold hover:text-orange-700">
+                            <a (click)="showProject()" class="sidebar-link mr-4 ml-4 text-orange-500 underline font-bold text-2xl">
                                 <i style="font-size: 1rem" ></i><span class="link-label">Projects</span>
-                            </a>
-
-                            <a class="sidebar-link mr-4 ml-4 text-orange-500 underline font-bold hover:text-orange-700">
-                                <i style="font-size: 1rem" ></i><span class="link-label">My Template</span>
                             </a>
                         </ng-template>
                         <ng-template pTemplate="right">
@@ -99,10 +108,10 @@
                              [rowHover]="true" dataKey="id" styleClass="p-datatable-customers"
                              currentPageReportTemplate="{{'les éléments de {first} à {last} sur {totalRecords} ' | translate}}"
                              [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" selectionMode="multiple">
-                        <ng-template pTemplate="caption">
+                        <ng-template pTemplate="caption" class="mb-4">
                         <span class="p-input-icon-left ml-auto">
                             <i class="pi pi-search"></i>
-                            <input pInputText type="text" placeholder="{{'searchInput' | translate}}" (input)="dt.filterGlobal($event.target.value, 'contains')"/>
+                            <input [style]="{width:'70vh' , height:'7vh'}" pInputText type="text" placeholder="{{'searchInput' | translate}}" (input)="dt.filterGlobal($event.target.value, 'contains')"/>
                         </span>
                         </ng-template>
                         <ng-template pTemplate="header">
@@ -232,17 +241,17 @@
 
 <div *ngIf="showSidebar" class="sidebar bg-gray-100" style="width:60vh;">
     <button style="margin-top:10vh" class="btn flex-end relative bg-gray-400 p-1" (click)="toggleSidebar()"><i class="pi pi-arrow-circle-left text-black-alpha-60" style="font-size: 2rem"></i></button>
-    <h4 style="margin-top:1vh; margin-bottom:1vh">Yaml GPT</h4>
+    <h4 class="text-3xl font-bold" style="margin-top:1vh; margin-bottom:1vh">Yaml GPT</h4>
     <div class="card wiw flex justify-content-center bg-gray-200" style="width:47vh;margin:0vh;height: 68vh;padding:0vh;">
         <div style="width:47vh;margin:0vh;padding:2vh;">
             <form [formGroup]="queryFormGroup" (ngSubmit)="handleAskGPT()">
-                <div>
-                    <label class="form-label text-black-alpha-90">Query:</label>
+                <div class="mb-4 mt-4">
+                    <label class="form-label text-black-alpha-90 font-bold text-3xl">ASK:</label>
                 </div>
-                <div class="mb-3">
-                    <textarea formControlName="query" class="form-control bg-gray-200" style="width:40vh;height:11vh;"></textarea>
+                <div class="mb-3 border-round">
+                    <textarea placeholder="{{'What do you need?' | translate}}" formControlName="query" class="form-control bg-gray-200 border-round" style="width:40vh;height:11vh;"></textarea>
                 </div>
-                <div class="flex-end">
+                <div class="but">
                     <button class="btn btn-success btn border-circle bg-gray-400 p-2" ><i class="pi pi-send ml-0 mr-0 pl-0 pr-0 text-black-alpha-60" style="font-size: 1.4rem"></i></button>
                 </div>
                 <div class="alert alert-success" *ngIf="result">
