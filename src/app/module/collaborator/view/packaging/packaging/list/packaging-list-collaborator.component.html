@@ -3,9 +3,9 @@
 <div class="nav">
     <h3 class="categ">Which category would you like to choose? </h3>
     <ul>
-        <li><a (click)="selectCategory('Free')"><b>Free</b></a></li>
-        <li><a (click)="selectCategory('Silver')"><b>Silver</b></a></li>
-        <li><a (click)="selectCategory('Gold')"><b>Gold</b></a></li>
+        <li><a  data-category="Free" (click)="selectCategory('Free')"><b>Free</b></a></li>
+        <li><a data-category="Silver" (click)="selectCategory('Silver')"><b>Silver</b></a></li>
+        <li><a  data-category="Gold" (click)="selectCategory('Gold')"><b>Gold</b></a></li>
     </ul>
 </div>
 

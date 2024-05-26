@@ -135,7 +135,6 @@ export class AnalyticsAdminComponent implements OnInit {
         this.service.getProjectsByMonth(year)
             .subscribe(data => {
 
-
                 const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
                 const projectData = months.map(month => data[month.toUpperCase()] || 0);
 

@@ -36,7 +36,6 @@ import {catchError, forkJoin, of, tap} from "rxjs";
 export class PackagingListCollaboratorComponent implements OnInit {
 
 
-
     showPackageDetailsFlag: boolean = false;
     selectedCategory: string = 'Free';
     fileName = 'Packaging';
@@ -71,7 +70,7 @@ export class PackagingListCollaboratorComponent implements OnInit {
     categoryPackagings: Array<CategoryPackagingDto>;
 
 
-    constructor( private packagingService: PackagingCollaboratorService, private categoryPackagingService: CategoryPackagingCollaboratorService, @Inject(PLATFORM_ID) private platformId?) {
+    constructor(private packagingService: PackagingCollaboratorService, private categoryPackagingService: CategoryPackagingCollaboratorService, @Inject(PLATFORM_ID) private platformId?) {
         this.datePipe = ServiceLocator.injector.get(DatePipe);
         this.messageService = ServiceLocator.injector.get(MessageService);
         this.confirmationService = ServiceLocator.injector.get(ConfirmationService);
@@ -122,9 +121,21 @@ export class PackagingListCollaboratorComponent implements OnInit {
         });
         this.selectedCategory === 'Free';
         this.showPackageDetailsFlag = true;
+
+
+
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const links = document.querySelectorAll('.nav ul li a');
+
+            links.forEach(link => {
+                link.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    links.forEach(l => l.classList.remove('active'));
+                    (event.currentTarget as HTMLElement).classList.add('active');
+                });
+            });
+        });
     }
-
-
 
 
     onSearchInput(event: any) {
@@ -134,22 +145,15 @@ export class PackagingListCollaboratorComponent implements OnInit {
     }
 
 
-
     packagesData: PackagingDto[];
     visible: boolean = false;
 
 
+    login: boolean = false;
 
-
-
-    login: boolean=false;
-
-    public async loadCategoryPackaging(){
+    public async loadCategoryPackaging() {
         this.categoryPackagingService.findAllOptimized().subscribe(categoryPackagings => this.categoryPackagings = categoryPackagings, error => console.log(error))
     }
-
-
-
 
 
     public onExcelFileSelected(event: any): void {
@@ -172,20 +176,25 @@ export class PackagingListCollaboratorComponent implements OnInit {
         }
     }
 
-    public submit(package1:PackagingDto){
+    public submit(package1: PackagingDto) {
         //[routerLink]="['/inscription-collaborator/list']"
-        this.item=package1;
+        this.item = package1;
         console.log(this.item);
         this.router.navigate(['/app/collaborator/inscription/inscription-collaborator/list/']);
 
     }
-    public submit1(package1:PackagingDto){
+
+    public submit1(package1: PackagingDto) {
         //[routerLink]="['/inscription-collaborator/list']"
-        this.item=package1;
+        this.item = package1;
         console.log(this.item);
         this.router.navigate(['/app/collaborator/project/project/list/']);
 
     }
+
+
+
+
 
 
     public findPaginatedByCriteria() {

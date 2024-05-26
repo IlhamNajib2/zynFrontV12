@@ -122,6 +122,19 @@ export class PackaginComponent implements OnInit {
         });
         this.selectedCategory === 'Free';
         this.showPackageDetailsFlag = true;
+
+
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const links = document.querySelectorAll('.nav ul li a');
+
+            links.forEach(link => {
+                link.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    links.forEach(l => l.classList.remove('active'));
+                    (event.currentTarget as HTMLElement).classList.add('active');
+                });
+            });
+        });
     }
 
 
