@@ -188,14 +188,12 @@ export class PackaginComponent implements OnInit {
     public submit(package1:PackagingDto){
         //[routerLink]="['/inscription-collaborator/list']"
         this.item=package1;
-        console.log(this.item);
         this.router.navigate(['/inscription']);
 
     }
     public submit1(package1:PackagingDto){
         //[routerLink]="['/inscription-collaborator/list']"
         this.item=package1;
-        console.log(this.item);
         this.router.navigate(['/login']);
 
     }

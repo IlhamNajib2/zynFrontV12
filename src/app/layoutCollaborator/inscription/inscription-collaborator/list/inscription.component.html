@@ -422,7 +422,7 @@
                                             </ng-template>
                                             <ng-template pTemplate="body" let-p>
                                                 <tr>
-                                                    <td>{{p.inscriptionDate.now| date: dateFormatColumn}}</td>
+                                                    <td>{{p.inscriptionDate| date: dateFormatColumn}}</td>
                                                     <td>{{p.member.username}}</td>
                                                     <td>{{p.member.password}}</td>
                                                     <td>{{p.affectedEntity}}</td>
@@ -470,25 +470,25 @@
 
                             <div class="field col-11 md:col-6" *ngIf="!totalCalcule">
                                 <label for="13">Total</label>
-                                <input class=" input-grey mb-2 mr-2" type="text" pInputText  [readonly]="true" value="this.item.packaging.price" placeholder="{{'paimentCollaborator.amountToPaid' | translate}}" id="13" [ngModel]="item.packaging.price"
+                                <input class=" input-grey mb-2 mr-2" type="text" pInputText  [readonly]="true" value="this.item.packaging.price" placeholder="amountToPaid" id="13" [ngModel]="this.packagingService.item.price"
                                 />
 
                             </div>
                             <div class="field col-11 md:col-6" *ngIf="totalCalcule">
-                                <label for="15">{{'paimentCollaborator.totalRestant' | translate}}</label>
+                                <label for="15">totalRestant</label>
                                 <input class=" input-grey mb-2 mr-2" type="text" pInputText  [readonly]="true" value=""  id="15" [ngModel]="paiment.remaining"
                                 />
                             </div>
 
                             <div class="field col-11 md:col-6">
-                                <label for="14">{{'paymentCollaborator.amountToPaid' | translate}}</label>
-                                <input class=" input-grey mb-2 mr-2" type="text" pInputText  [readonly]="false"  placeholder="{{'paymentCollaborator.amountToPaid' | translate}}" id="14" [ngModel]="paiment.amountToPaid"
+                                <label for="14">amountToPaid</label>
+                                <input class=" input-grey mb-2 mr-2" type="text" pInputText  [readonly]="false"  placeholder="amountToPaid" id="14" [ngModel]="paiment.amountToPaid"
                                 />
                             </div>
                             <div class="field col-11 md:col-6">
-                                <label for="9">{{'paymentCollaborator.coupon.name' | translate}}</label>
+                                <label for="9">coupon</label>
                                 <input class="input-grey mb-2 mr-2" appendTo="body" pInputText   [(ngModel)]="paiment.couponDetail.coupon.name" id="9"
-                                       (ngModelChange)="CalcultotalRestant(this.paiment.name,paiment.total)"  placeholder="{{'paymentCollaborator.coupon.name' | translate}}"  />
+                                       (ngModelChange)="CalcultotalRestant(this.paiment.name,paiment.total)"  placeholder="couponName"  />
                             </div>
                         </div>
                     </div>

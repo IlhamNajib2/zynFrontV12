@@ -39,9 +39,11 @@ h5 {
     display: flex;
     flex-wrap: wrap;
     width: 27vh;
+    min-width: 27vh;
     margin-right: 1rem;
     margin-left: 1rem;
     height: 36vh;
+    min-height: 36vh;
 
 }
 .cards {

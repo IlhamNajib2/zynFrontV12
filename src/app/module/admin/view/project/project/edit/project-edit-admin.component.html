@@ -1,3 +1,5 @@
+
+
     <p-dialog [(visible)]="editDialog" [style]="{width: '70vw'}" header="{{'project.tabPan' | translate}}" [modal]="true" styleClass="p-fluid" [maximizable]="true" [draggable]="false" [resizable]="false">
         <ng-template pTemplate="content" >
                 <p-tabView>
@@ -17,7 +19,7 @@
                                             <label for="2">{{'project.name' | translate}}</label>
                                             <input class="mb-2 mr-2" type="text" pInputText  placeholder="{{'project.name' | translate}}" id="2" [(ngModel)]="item.name"
                                                     />
-                                            
+
                                         </div>
 
 
@@ -27,14 +29,14 @@
                                             <p-calendar appendTo="body" id="3"  [showTime]="true" [showSeconds]="false" placeholder="{{'project.generatedDate' | translate}}"  [(ngModel)]="item.generatedDate"
                                                         dateFormat="{{dateFormat}}"  >
                                             </p-calendar>
-                                            
+
                                         </div>
 
                                         <div class="field col-12 md:col-6">
                                             <label for="4">{{'project.yaml' | translate}}</label>
                                             <textarea id="4" pInputTextarea rows="5" cols="30" placeholder="{{'project.yaml' | translate}}"  [(ngModel)]="item.yaml"
                                                        ></textarea>
-                                            
+
                                         </div>
 
                                     <div class="field col-11 md:col-6">
@@ -42,7 +44,7 @@
                                         <p-dropdown  appendTo="body"  [options]="projectStates" [(ngModel)]="item.projectState" id="5" [filter]="true" filterMatchMode="contains"
                                                      [showClear]="true" optionLabel="code" placeholder="{{'project.projectState' | translate}}"  >
                                         </p-dropdown>
-                                        
+
                                     </div>
 
                                     <div class="field col-11 md:col-6">
@@ -50,7 +52,7 @@
                                         <p-dropdown  appendTo="body"  [options]="inscriptionMembres" [(ngModel)]="item.inscriptionMembre" id="6" [filter]="true" filterMatchMode="contains"
                                                      [showClear]="true" optionLabel="id" placeholder="{{'project.inscriptionMembre' | translate}}"  >
                                         </p-dropdown>
-                                        
+
                                     </div>
 
                                     <div class="field col-11 md:col-6">
@@ -58,7 +60,7 @@
                                         <p-dropdown  appendTo="body"  [options]="domainTemplates" [(ngModel)]="item.domainTemplate" id="7" [filter]="true" filterMatchMode="contains"
                                                      [showClear]="true" optionLabel="name" placeholder="{{'project.domainTemplate' | translate}}"  >
                                         </p-dropdown>
-                                        
+
                                     </div>
 
                                     <div class="field col-12  md:col-6">

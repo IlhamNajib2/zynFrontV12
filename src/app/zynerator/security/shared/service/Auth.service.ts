@@ -1,4 +1,4 @@
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpParams} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 
@@ -12,6 +12,7 @@ import {UserDto} from '../model/User.model';
 import {RoleDto} from '../model/Role.model';
 import {RoleUserDto} from '../model/RoleUser.model';
 import {MessageService} from 'primeng/api';
+import {PaimentCollaboratorDto} from "../../../../shared/model/paiment/PaimentCollaborator.model";
 
 @Injectable({
     providedIn: 'root'
@@ -98,11 +99,11 @@ export class AuthService {
     }
 
 
-    saveCollaborator(email: string, paiement: any): Observable<any> {
-        const payload = { email, ...paiement };
-        return this.http.post(this.API+'saveCollaborator', payload);
-    }
 
+    saveCollaborator(email: string, paimentCollaborator: PaimentCollaboratorDto): Observable<any> {
+        const params = new HttpParams().set('email', email);
+        return this.http.post<any>(this.API + 'saveCollaborator', paimentCollaborator, { params });
+    }
 
 
     public loadInfos() {
