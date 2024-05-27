@@ -108,6 +108,7 @@ export class InscriptionComponent implements OnInit {
     private _validInscriptionCollaboratorTypeName = true;
     validCollaboratorDescription: any;
     dateFormatColumn: string;
+    currentDate:Date;
     inscriptionCollaboratorType:InscriptionCollaboratorTypeDto=new InscriptionCollaboratorTypeDto();
     inscriptionCollaboratorState:InscriptionCollaboratorStateDto=new InscriptionCollaboratorStateDto();
 
@@ -124,7 +125,7 @@ export class InscriptionComponent implements OnInit {
     }
 
 
-    constructor( private service: InscriptionCollaboratorCollaboratorService  , private collaboratorService: CollaboratorCollaboratorService, private inscriptionMembreService: InscriptionMembreCollaboratorService, private inscriptionCollaboratorTypeService: InscriptionCollaboratorTypeCollaboratorService, private inscriptionMembreStateService: InscriptionMembreStateCollaboratorService, private packagingService: PackagingCollaboratorService, private inscriptionCollaboratorStateService: InscriptionCollaboratorStateCollaboratorService, private memberService: MemberCollaboratorService, @Inject(PLATFORM_ID) private platformId?) {
+    constructor(private service: InscriptionCollaboratorCollaboratorService  , private collaboratorService: CollaboratorCollaboratorService, private inscriptionMembreService: InscriptionMembreCollaboratorService, private inscriptionCollaboratorTypeService: InscriptionCollaboratorTypeCollaboratorService, private inscriptionMembreStateService: InscriptionMembreStateCollaboratorService, protected packagingService: PackagingCollaboratorService, private inscriptionCollaboratorStateService: InscriptionCollaboratorStateCollaboratorService, private memberService: MemberCollaboratorService, @Inject(PLATFORM_ID) private platformId?) {
         this.datePipe = ServiceLocator.injector.get(DatePipe);
         this.messageService = ServiceLocator.injector.get(MessageService);
         this.confirmationService = ServiceLocator.injector.get(ConfirmationService);
@@ -163,6 +164,7 @@ export class InscriptionComponent implements OnInit {
         this.loadInscriptionCollaboratorType();
         this.isIndividual = true;
         console.log(this.packagingService.item);
+        this.currentDate = new Date();
     }
 
 
@@ -205,6 +207,7 @@ export class InscriptionComponent implements OnInit {
 
     public addInscriptionMembres() {
         if (this.errorMessages.length === 0) {
+            this.inscriptionMembresElement.inscriptionDate=this.currentDate;
             this.item.inscriptionMembres.push({... this.inscriptionMembresElement});
             this.inscriptionMembresElement = new InscriptionMembreDto();
         }else{

@@ -181,7 +181,10 @@
                 </ng-template>
             </p-table>
         </div>
-
+        <app-project-create-admin  *ngIf="createDialog  && createActionIsValid"></app-project-create-admin>
+        <app-project-edit-admin  *ngIf="editDialog  && editActionIsValid"></app-project-edit-admin>
+        <app-project-view-admin  *ngIf="viewDialog  && viewActionIsValid"></app-project-view-admin>
+        <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
 
     </div>
 </div>
