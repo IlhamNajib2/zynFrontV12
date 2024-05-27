@@ -1,17 +1,17 @@
 <div class="grid" *ngIf="listActionIsValid">
     <div class="col-12">
         <p-toast></p-toast>
-        <div class="card">
+        <div class="card border">
             <div *ngIf="showDefaultView">
             <p-toolbar styleClass="mb-4">
                 <ng-template pTemplate="left">
-                    <a class="sidebar-link mr-4 ml-4 text-orange-500 underline font-bold hover:text-orange-700" (click)="showDefault()">
+                    <a class="sidebar-link mr-4 ml-4 text-orange-500 underline font-bold hover:text-orange-500 text-2xl " (click)="showDefault()">
                         <i style="font-size: 1rem"></i><span class="link-label">Template</span>
                     </a>
-                    <a class="sidebar-link mr-4 ml-4 text-orange-500 underline font-bold hover:text-orange-700" (click)="showTemplate()">
+                    <a class="sidebar-link mr-4 ml-4 text-orange-500 underline font-bold hover:text-orange-500 text-2xl " (click)="showTemplate()">
                         <i style="font-size: 1rem"></i><span class="link-label">New</span>
                     </a>
-                    <a class="sidebar-link mr-4 ml-4 text-orange-500 underline font-bold hover:text-orange-700">
+                    <a class="sidebar-link mr-4 ml-4 text-orange-500 underline font-bold hover:text-orange-500 text-2xl " (click)="showMy()">
                         <i style="font-size: 1rem"></i><span class="link-label">My Template</span>
                     </a>
                 </ng-template>
@@ -30,37 +30,55 @@
                     <ng-template pTemplate="caption">
                         <span class="p-input-icon-left ml-auto mr-4">
                             <i class="pi pi-search"></i>
-                            <input class="text-orange-700" (click)="findPaginatedByCriteria()" pInputText type="text" placeholder="{{'searchInput' | translate}}" (input)="dt.filterGlobal($event.target.value, 'contains')"/>
+                            <input class="text-orange-700" [style]="{width:'500px'}" (click)="findPaginatedByCriteria()" pInputText type="text" placeholder="{{'searchInput' | translate}}" (input)="dt.filterGlobal($event.target.value, 'contains')"/>
                         </span>
-                        <a (click)="selecteProjectTemplate('private')"  class="mr-6 ml-6 text-orange-700 underline">private</a>
-                        <a (click)="selecteProjectTemplate('public')" class="mr-6 ml-6 text-orange-700 underline">public</a>
+                        <a (click)="selecteProjectTemplate('Public')" class="mr-6 ml-6 text-2xl  aswad underline">Public</a>
+                        <a (click)="selecteProjectTemplate('Private')"  class="mr-6 ml-6 text-2xl aswad underline">Private</a>
                     </ng-template>
                     <ng-template style="width:1000px; height:300px" pTemplate="body" let-element>
                         <div *ngIf="showDefaultView">
                         <div *ngIf="showProjectTemplateDetails">
                             <div *ngIf="element.categoryTemplate.name===selectedProjectTemplate">
-
-                                <div  class="border-solid mt-4 mb-6 flex flex-wrap border-gray-300">
-                                    <div class=" left-100 ml-4 mr-8 text-left align-items-left"> <span class="vertical-align-baseline">
-                                        <pre>         <img [src]="getTechnologyLogo(element.technology?.name)" alt="Technology Logo" class="w-3rem h-2rem"/>{{ element.name }} :  {{ element.description }}           <p-rating class="ml-3" [(ngModel)]="value" [cancel]="false" /></pre>
-                            </span>
-                                <span class="vertical-align-baseline"><pre><p class="text-left mt-0 mr-3 mb-0 ml-8"><b class="text-red-500">{{ element.price }}  $</b>                <u class="text-pink-900">technology:</u>  <b class="text-teal-600">{{ element.technology.name }}</b>                <u class="text-pink-900">domain:</u>  <b>{{ element.domainTemplate.name }}</b></p></pre></span>
-                                <div>
-                                    <span class="vertical-align-baseline"><pre><p class="text-left mt-0 mr-3 ml-8"><b class="text-red-500">{{ element.categoryTemplate.name }}</b>                <u class="text-pink-900">type:</u>  <b class="text-teal-600">{{ element.typeTemplate.name }}</b>                    <u class="text-pink-900">level:</u>  <b>{{ element.levelTemplate.name }}</b></p></pre></span>
+                                <div class="flex border-solid w-auto border-gray-300 mt-4 mb-4">
+                                    <div class="col-fixed" style="width:100px">
+                                    </div>
+                                    <div class="col-fixed" style="width:100px">
+                                        <img [src]="getTechnologyLogo(element.technology?.name)" alt="Technology Logo" class="w-8rem h-10rem mr-6"/>
+                                    </div>
+                                    <div class="flex-1 h-10srem w-auto font-bold text-left pl-8 pt-3 pb-3 border-round">
+                                        <p-rating class="ml-3 mt-0 pt-0" [(ngModel)]="value" [cancel]="false" /><br>
+                                        <p class="mt-4"><b class="text-red-500">{{ element.name }} </b></p>
+                                        <p><u class="text-pink-900 mr-4">tag:</u><b class="text-black-500 font-normal">{{ element.templateTags}}</b></p>
+                                        <!--<p-button class=" text-blue-300 background-blue-200 button" label="tag" (click)="showYamlDialog(element.templateTags)" severity="secondary" />-->
+                                        <p><u class="text-pink-900 mr-4">description:</u><b class="text-black-500 font-normal">{{ element.description }}</b></p>
+                                    </div>
+                                    <div class="col-fixed font-bold" style="width:200px">
+                                        <p><u class="text-pink-900 mr-4">domain:</u><b class="text-teal-600">{{ element.domainTemplate.name }}</b></p>
+                                        <p><b class="text-red-500">{{ element.categoryTemplate.name }}</b></p>
+                                        <p><b class="text-red-500 text-4lg">{{ element.price }}$</b></p>
+                                        <p-button *ngIf="element.categoryTemplate.name==='Private'" class=" text-blue-300 background-blue-200 button" label="shop" (click)="showDialog()" severity="secondary" />
+                                        <p-button *ngIf="element.categoryTemplate.name==='Public'" class=" text-blue-300 background-blue-200 button" label="apload" severity="secondary" />
+                                        <i class="pi pi-cart-minus" style="color: green"></i>
+                                    </div>
+                                    <div class="col-fixed font-bold" style="width:200px">
+                                        <p><u class="text-pink-900 mr-4">technology: </u><b class="text-teal-600">{{ element.technology.name }}</b></p>
+                                        <p><u class="text-pink-900 mr-4">type: </u><b class="text-teal-600">{{ element.typeTemplate.name }}</b></p>
+                                        <p><u class="text-pink-900 mr-4">level:</u>  <b class="text-teal-600">{{ element.levelTemplate.name }}</b></p>
+                                        <p-button class=" text-blue-300 background-blue-200 button" label="use" (click)="use()"   severity="secondary" />
+                                    </div>
+                                    <div class="col-fixed" style="width:200px">
+                                         </div>
                                 </div>
-                                <span class=" flex align-items-left justify-content-left vertical-align-baseline"><p-button class=" text-blue-300 background-blue-200 button mr-7 mb-3 ml-8" label="shop" (click)="showDialog()" severity="secondary" /><p-button class=" text-blue-300 background-blue-200 button mr-8 mb-3 ml-8" label="Tag" (click)="showYamlDialog(element.templateTags)" severity="secondary" /><p-button class=" text-blue-300 background-blue-200 button mr-4 mb-3 ml-8" label="use"  severity="secondary" />
-                                    <!--<button class=" text-blue-300 background-blue-200 border-1 button mr-4 mb-3 ml-8" (click)="showYamlDialog(element.description)">description</button><button class="button text-blue-300 background-surface-0 border-50 ml-6 mb-3" (click)="showYamlDialog(element.templateTags)">Tag</button> <button class="button mr-4 mb-3 ml-8 text-blue-300 background-surface-0 border-none border-white-alpha-30">use</button>-->
-                            </span>
-                            </div>
                         </div>
                         </div>
                         </div>
-                        </div>
-                            <p-dialog [modal]="true" [(visible)]="visible" [style]="{ width: '20rem' }" [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }">
-                                <pre><h4>{{ element.name }}</h4>       <img [src]="getTechnologyLogo(element.technology?.name)" alt="Technology Logo" class="w-3rem h-2rem"/></pre>
-                                <p>{{ element.price }}$</p>
-                                <p>{{ element.description }}</p>
-                                <button>Continue To Ckeckout</button><i class="pi pi-cart-minus" style="font-size: 2rem"></i>
+                            <p-dialog [modal]="true" [(visible)]="visible" [style]="{ width: '25rem' }" [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }">
+                                <div class="col-fixed">
+                                <pre><img [src]="getTechnologyLogo(element.technology?.name)" alt="Technology Logo" class="w-6rem h-4rem text-center ml-8"/></pre>
+                                <p class="font-bold text-red-500 ml-7 text-5xl">{{ element.price }}$ <i class="pi pi-cart-plus text-yellow-500 ml-2" style="font-size: 3rem"></i></p>
+                                <p class="ml-4 text-xl">{{ element.description }}</p>
+                                <button class="ml-7 border-round p-1 mt-4 black" style="width:50%">Continue To Ckeckout</button>
+                                </div>
                             </p-dialog>
                     </ng-template>
                 </p-table>
@@ -68,13 +86,13 @@
             <div *ngIf="showTemplateView">
                 <p-toolbar styleClass="mb-4">
                     <ng-template pTemplate="left">
-                        <a class="sidebar-link mr-4 ml-4 text-orange-500 underline font-bold hover:text-orange-700" (click)="showDefault()">
+                        <a class="sidebar-link mr-4 ml-4 text-orange-500 underline font-bold text-2xl" (click)="showDefault()">
                             <i style="font-size: 1rem"></i><span class="link-label">Template</span>
                         </a>
-                        <a class="sidebar-link mr-4 ml-4 text-orange-500 underline font-bold hover:text-orange-700" (click)="showTemplate()">
+                        <a class="sidebar-link mr-4 ml-4 text-orange-500 underline font-bold text-2xl" (click)="showTemplate()">
                             <i style="font-size: 1rem"></i><span class="link-label">New</span>
                         </a>
-                        <a class="sidebar-link mr-4 ml-4 text-orange-500 underline font-bold hover:text-orange-700">
+                        <a class="sidebar-link mr-4 ml-4 text-orange-500 underline font-bold text-2xl" (click)="showMy()">
                             <i style="font-size: 1rem"></i><span class="link-label">My Template</span>
                         </a>
                     </ng-template>
@@ -162,6 +180,74 @@
                     <button class="ml-4 mr-8 p-button-warning" pButton pRipple  label="{{'validate' | translate}}"  icon="pi pi-check"  (click)="save()"></button>
                     <button class="p-button-warning" pButton pRipple  label="{{'cancel' | translate}}" icon="pi pi-times" class="p-button-outlined" (click)="hideCreateDialog()"></button>
                 </div>
+            </div>
+            <div *ngIf="showMyView">
+                <p-toolbar styleClass="mb-4">
+                    <ng-template pTemplate="left">
+                        <a class="sidebar-link mr-4 ml-4 text-orange-500 underline font-bold text-2xl" (click)="showDefault()">
+                            <i style="font-size: 1rem"></i><span class="link-label">Template</span>
+                        </a>
+                        <a class="sidebar-link mr-4 ml-4 text-orange-500 underline font-bold text-2xl" (click)="showTemplate()">
+                            <i style="font-size: 1rem"></i><span class="link-label">New</span>
+                        </a>
+                        <a class="sidebar-link mr-4 ml-4 text-orange-500 underline font-bold text-2xl" (click)="showMy()">
+                            <i style="font-size: 1rem"></i><span class="link-label">My Template</span>
+                        </a>
+                    </ng-template>
+                    <ng-template pTemplate="right">
+                        <button pButton pRipple label="{{'new' | translate}}" icon="pi pi-plus" class="p-button-info mr-2 mb-2" (click)="openCreate('Template')" *ngIf="createActionIsValid"></button>
+                    </ng-template>
+                </p-toolbar>
+                <app-template-create-collaborator *ngIf="createDialog && createActionIsValid"></app-template-create-collaborator>
+                <app-template-edit-collaborator *ngIf="editDialog && editActionIsValid"></app-template-edit-collaborator>
+
+                <p-table #dt [value]="items" [columns]="cols" [rows]="8" [paginator]="false"
+                         [globalFilterFields]="['code', 'name', 'addingDate', 'lastUpdateDate', 'categoryTemplatename', 'typeTemplatename', 'levelTemplatename', 'templateTags', 'domainTemplatename', 'price', 'memberid', 'technologyname']" [(selection)]="selections"
+                         [rowHover]="true" dataKey="id" styleClass="p-datatable-customers"
+                         currentPageReportTemplate="{{'les éléments de {first} à {last} sur {totalRecords} ' | translate}}"
+                         [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" selectionMode="multiple">
+
+                <ng-template style="width:1000px; height:300px" pTemplate="body" let-element>
+                    <div class="flex border-solid w-auto border-gray-300 mt-4 mb-4">
+                    <div class="col-fixed" style="width:100px">
+                    </div>
+                    <div class="col-fixed" style="width:100px">
+                        <img [src]="getTechnologyLogo(element.technology?.name)" alt="Technology Logo" class="w-8rem h-10rem mr-6"/>
+                    </div>
+                    <div class="flex-1 h-10srem w-auto font-bold text-left pl-8 pt-3 pb-3 border-round">
+                        <p-rating class="ml-3 mt-0 pt-0" [(ngModel)]="value" [cancel]="false" /><br>
+                        <p class="mt-4"><b class="text-red-500">{{ element.name }} </b></p>
+                        <p><u class="text-pink-900 mr-4">tag:</u><b class="text-black-500 font-normal">{{ element.templateTags}}</b></p>
+                        <!--<p-button class=" text-blue-300 background-blue-200 button" label="tag" (click)="showYamlDialog(element.templateTags)" severity="secondary" />-->
+                        <p><u class="text-pink-900 mr-4">description:</u><b class="text-black-500 font-normal">{{ element.description }}</b></p>
+                    </div>
+                    <div class="col-fixed font-bold" style="width:200px">
+                        <p><u class="text-pink-900 mr-4">domain:</u><b class="text-teal-600">{{ element.domainTemplate.name }}</b></p>
+                        <p><b class="text-red-500">{{ element.categoryTemplate.name }}</b></p>
+                        <p><b class="text-red-500 text-4lg">{{ element.price }}$</b> </p><i class="pi pi-cart-minus" style="color: green"></i>
+                        <p-button *ngIf="element.categoryTemplate.name==='Private'" class=" text-blue-300 background-blue-200 button" label="shop" (click)="showDialog()" severity="secondary" />
+                        <p-button *ngIf="element.categoryTemplate.name==='Public'" class=" text-blue-300 background-blue-200 button" label="apload" (click)="showDialog()" severity="secondary" />
+                        <i class="pi pi-cart-minus" style="color: green"></i>
+                    </div>
+                    <div class="col-fixed font-bold" style="width:200px">
+                        <p><u class="text-pink-900 mr-4">technology: </u><b class="text-teal-600">{{ element.technology.name }}</b></p>
+                        <p><u class="text-pink-900 mr-4">type: </u><b class="text-teal-600">{{ element.typeTemplate.name }}</b></p>
+                        <p><u class="text-pink-900 mr-4">level:</u>  <b class="text-teal-600">{{ element.levelTemplate.name }}</b></p>
+                        <p-button class=" text-blue-300 background-blue-200 button" label="use" (click)="use()"   severity="secondary" />
+                    </div>
+                    <div class="col-fixed" style="width:200px">
+                    </div>
+                    </div>
+                    <p-dialog [modal]="true" [(visible)]="visible" [style]="{ width: '25rem' }" [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }">
+                        <div class="col-fixed">
+                            <pre><img [src]="getTechnologyLogo(element.technology?.name)" alt="Technology Logo" class="w-6rem h-4rem text-center ml-8"/></pre>
+                            <p class="font-bold text-red-500 ml-7 text-5xl">{{ element.price }}$ <i class="pi pi-cart-plus text-yellow-500 ml-2" style="font-size: 3rem"></i></p>
+                            <p class="ml-4 text-xl">{{ element.description }}</p>
+                            <button class="ml-7 border-round p-1 mt-4 black" style="width:50%">Continue To Ckeckout</button>
+                        </div>
+                    </p-dialog>
+                </ng-template>
+                </p-table>
             </div>
         </div>
     </div>

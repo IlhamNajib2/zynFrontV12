@@ -675,7 +675,7 @@ export class TemplateListCollaboratorComponent implements OnInit {
         }
     }
 //ajouter
-    selectedProjectTemplate:string='public';
+    selectedProjectTemplate:string='Public';
     showProjectTemplateDetails : boolean=false;
     selecteProjectTemplate(category:string):void{
         this.showDefault();
@@ -689,9 +689,11 @@ export class TemplateListCollaboratorComponent implements OnInit {
 
     showDefaultView: boolean = true;
     showTemplateView: boolean = false;
+    showMyView: boolean = false;
     setView(view: string) {
         this.showDefaultView = view === 'default';
         this.showTemplateView = view === 'template';
+        this.showMyView = view === 'my';
         // Enregistrer l'état de la vue dans le stockage local
         localStorage.setItem('currentView', view);
     }
@@ -702,6 +704,9 @@ export class TemplateListCollaboratorComponent implements OnInit {
 
     showTemplate() {
         this.setView('template');
+    }
+    showMy() {
+        this.setView('my');
     }
 
 
@@ -721,13 +726,17 @@ export class TemplateListCollaboratorComponent implements OnInit {
             case 'angular':
                 return 'assets/layout/images/Angular.svg';
             case 'react':
-                return 'assets/layout/images/reactjs-ar21.svg';
-            case '.net':
-                return 'assets/layout/images/reactjs-ar21.svg';
-            case 'rectNative':
+                return 'assets/layout/images/tcaer.svg';
+            case 'dotnet':
+                return 'assets/layout/images/dotnet.svg';
+            case 'r-native':
                 return 'assets/layout/images/reactjs-ar21.svg';
             case 'laravel':
-                return 'assets/layout/images/reactjs-ar21.svg';
+                return 'assets/layout/images/Laravel.svg';
+            case 'next-js':
+                return 'assets/layout/images/nextjs.svg';
+            case 'nestjs':
+                return 'assets/layout/images/nestjs.svg';
             // Add more cases for other technologies
             default:
                 return 'assets/layout/images/default-logo.svg'; // Default logo if technology is not recognized
@@ -738,6 +747,11 @@ export class TemplateListCollaboratorComponent implements OnInit {
 
     showDialog() {
         this.visible = true;
+    }
+
+    use() {
+        // Vous pouvez ajouter ici la logique supplémentaire avant de naviguer, si nécessaire
+        this.router.navigate(['/app/collaborator/project/project/list']);
     }
 }
 

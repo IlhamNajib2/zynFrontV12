@@ -1,18 +1,15 @@
-    <div class="grid"  *ngIf="listActionIsValid">
-        <div class="col-12">
+    <div class="grid border-primary-900"  *ngIf="listActionIsValid">
+        <div class="col-12 border-primary-900">
             <p-toast></p-toast>
-            <div class="card">
+            <div class="card border">
                 <div *ngIf="showDefaultView">
                 <p-toolbar styleClass="mb-4">
                     <ng-template pTemplate="left">
-                        <a (click)="showDefault()" class="sidebar-link mr-4 ml-4 text-orange-500 underline font-bold hover:text-orange-700">
+                        <a (click)="showDefault()" class="sidebar-link mr-4 ml-4 text-orange-500 underline font-bold text-2xl">
                             <i style="font-size: 1rem" ></i><span class="link-label">Genery</span>
                         </a>
-                        <a (click)="showProject()" class="sidebar-link mr-4 ml-4 text-orange-500 underline font-bold hover:text-orange-700">
+                        <a (click)="showProject()" class="sidebar-link mr-4 ml-4 text-orange-500 underline font-bold text-2xl">
                             <i style="font-size: 1rem" ></i><span class="link-label">Projects</span>
-                        </a>
-                        <a class="sidebar-link mr-4 ml-4 text-orange-500 underline font-bold hover:text-orange-700">
-                            <i style="font-size: 1rem" ></i><span class="link-label">My Template</span>
                         </a>
                     </ng-template>
                     <ng-template pTemplate="right">
@@ -27,19 +24,19 @@
                 <div *ngIf="showDefaultView">
                     <div class="grid">
                         <div class="col-fixed" style="width:300px">
-                            <div class="text-center p-1 border-round-sm font-bold">
+                            <div class="text-center p-1 border-round-sm font-bold border-solid border-gray-200">
                                 <h3 class="flex ml-6 mb-6 justify-content-left h3 text-surface-900 text-3xl text-bold">History:</h3>
-                                <div style="width: 250px; height: 300px; overflow: auto; margin:0px; padding:0px">
+                                <div style="width: 250px; height: 380px; overflow: auto; margin:0px; padding:0px">
                                     <p-table #dt [value]="items" [columns]="cols" [rows]="8" [paginator]="false"
                                              [globalFilterFields]="['code', 'name', 'generatedDate', 'projectStatecode', 'inscriptionMembreid', 'domainTemplatename']" [(selection)]="selections"
                                              [rowHover]="true" dataKey="id" styleClass="p-datatable-customers"
                                              currentPageReportTemplate="{{'les éléments de {first} à {last} sur {totalRecords} ' | translate}}"
                                              [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" selectionMode="multiple" class="mt-6 flex ml-0 justify-content-center">
-                                        <ng-template pTemplate="body" let-element>
+                                        <ng-template style="height: 400px;" pTemplate="body" let-element>
                                             <div class=" justify-content-center mr-3">
                                                 <ul style="padding-left: 0;" class="flex justify-content-center">
                                                     <li class="container flex justify-content-center mt-0" style="list-style-type: none;padding-left: 0;" >
-                                                        <div class="block bg-bluegray-50 text-left text-primary-900 p-1 border-round m-0" [style]="{width:'32vh',textcolor:'black'}">
+                                                        <div class="block bg-bluegray-50 text-left text-primary-900 p-1 border-round m-0" [style]="{width:'20vh',textcolor:'black'}">
                                                             <a class="text-primary-900" (click)="showw(element)"><p class="text-primary-900 hover:text-orange-600">{{ element.name }}</p></a>
                                                         </div>
 
@@ -55,10 +52,26 @@
                         <div class=" field col">
                             <div class="text-center p-3 border-round-sm font-bold" [style]="{height: '400px'}">
                                 <span class="vertical-align-baseline mt-2">
-                                   <p-button style="background-color: orange;" (click)="showDialog()" icon="pi pi-external-link" icon="pi pi-eye" label="Template" class="top-right relative mr-4"></p-button>
-                                   <button class="btn flex-end relative" (click)="toggleSidebar()">Toggle Sidebar</button>
+                                   <p-button (click)="showDialog()" icon="pi pi-external-link" icon="pi pi-eye" label="Template" class="top-right relative mr-4"></p-button>
+                                   <button class="btn flex-end relative p-2" (click)="toggleSidebar()">YamlGPT</button>
                                </span>
-                                <div class="mb-2 mt-2 justify-content-left text-left">
+                                <div class="grid p-0 m-0" [style]="{width:'100%'}">
+                                    <!--<div class="field col-11 md:col-6">
+                                    </div>
+                                    <div class="field col-11  md:col-6">
+                                        <p-button (click)="showDialog()" icon="pi pi-external-link" icon="pi pi-eye" label="Template" class="top-right relative mr-4"></p-button>
+                                        <button class="btn flex-end relative p-2" (click)="toggleSidebar()">YamlGPT</button>
+                                    </div>-->
+                                    <div class="field col-11 md:col-6 mt-2">
+                                        <input [style]="{width:'100%'}" class="mb-2 mr-2" type="text" pInputText  placeholder="{{'Enter Name Of Project' | translate}}" id="2" [(ngModel)]="item.name"/>
+                                    </div>
+                                        <div class="field col-11 md:col-6 mt-2">
+                                        <p-dropdown [style]="{width:'100%'}"  appendTo="body"  [options]="domainTemplates" [(ngModel)]="item.domainTemplate" id="7" [filter]="true" filterMatchMode="contains"
+                                                     [showClear]="true" optionLabel="name" placeholder="{{'Select Domain' | translate}}"  >
+                                        </p-dropdown>
+                                        </div>
+                                </div>
+                                <div class="mb-2 justify-content-left text-left">
                                     <label class="text-surface-900 text-3xl text-bold" for="3">{{'project.yaml' | translate}}</label>
                                 </div>
                                 <textarea [style]="{width: '100%', height:'300px'}" class="border-solid border-black-alpha-60 border-3" id="3" pInputTextarea rows="5" cols="46" placeholder="{{'project.yaml' | translate}}"  [(ngModel)]="item.yaml"></textarea>
@@ -74,16 +87,12 @@
                 <div *ngIf="showProjectView">
                     <p-toolbar styleClass="mb-4">
                         <ng-template pTemplate="left">
-                            <a (click)="showDefault()" class="sidebar-link mr-4 ml-4 text-orange-500 underline font-bold hover:text-orange-700">
+                            <a (click)="showDefault()" class="sidebar-link mr-4 ml-4 text-orange-500 underline font-bold  text-2xl">
                                 <i style="font-size: 1rem" ></i><span class="link-label">Genery</span>
                             </a>
 
-                            <a (click)="showProject()" class="sidebar-link mr-4 ml-4 text-orange-500 underline font-bold hover:text-orange-700">
+                            <a (click)="showProject()" class="sidebar-link mr-4 ml-4 text-orange-500 underline font-bold text-2xl">
                                 <i style="font-size: 1rem" ></i><span class="link-label">Projects</span>
-                            </a>
-
-                            <a class="sidebar-link mr-4 ml-4 text-orange-500 underline font-bold hover:text-orange-700">
-                                <i style="font-size: 1rem" ></i><span class="link-label">My Template</span>
                             </a>
                         </ng-template>
                         <ng-template pTemplate="right">
@@ -99,10 +108,10 @@
                              [rowHover]="true" dataKey="id" styleClass="p-datatable-customers"
                              currentPageReportTemplate="{{'les éléments de {first} à {last} sur {totalRecords} ' | translate}}"
                              [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" selectionMode="multiple">
-                        <ng-template pTemplate="caption">
+                        <ng-template pTemplate="caption" class="mb-4">
                         <span class="p-input-icon-left ml-auto">
                             <i class="pi pi-search"></i>
-                            <input pInputText type="text" placeholder="{{'searchInput' | translate}}" (input)="dt.filterGlobal($event.target.value, 'contains')"/>
+                            <input [style]="{width:'70vh' , height:'7vh'}" pInputText type="text" placeholder="{{'searchInput' | translate}}" (input)="dt.filterGlobal($event.target.value, 'contains')"/>
                         </span>
                         </ng-template>
                         <ng-template pTemplate="header">
@@ -150,6 +159,7 @@
                         </ng-template>
                     </p-table>
 
+
               </div>
 
                 <div *ngIf="showProjectDialogVisible">
@@ -158,15 +168,99 @@
                             <a (click)="showDefault()" class="sidebar-link mr-4 ml-4 text-blue-300 underline font-bold hover:text-orange-700">
                                 <i style="font-size: 1rem" ></i><span class="link-label"><i class="pi pi-arrow-left" style="font-size: 2rem"></i></span>
                             </a>
-                            <p class="text-center"><strong>Name:</strong> {{ selectedProject.name }}</p>
-                            <pre><p class="text-left"><strong>Name:</strong> {{ selectedProject.domainTemplate.name }}</p><p class="text-right"><strong>Name:</strong> {{ selectedProject.projectTemplates }}</p></pre>
-                            <div [style]="{width:'100%',heigth:'600px'}" class="card flex justify-content-left mb-4 p-0">
-                                <p-fieldset legend="Yaml" class="ml-4 mb-4 mt-4 w-full">
+                            <p class="text-center"><u class="text-red-400 font-bold text-5xl mr-4"><strong>Name:</strong></u> {{ selectedProject.name }}</p>
+                            <pre><p class="text-left"><u class="text-red-400 font-bold text-5xl mr-4"><strong>Name:</strong></u> {{ selectedProject.domainTemplate.name }}</p><!--<p class="text-right"><strong>Name:</strong> {{ selectedProject.projectTemplates }}</p>--></pre>
+                            <!--<div [style]="{width:'100%',heigth:'600px'}" class="card flex justify-content-left mb-4 p-0 bg-gray-100">
+                                <p-fieldset legend="Yaml" class="ml-4 mb-4 mt-4 mr-4 w-full bg-gray-100">
                                     <div class="but">
                                         <button (click)="copyToClipboard()"><i class="pi pi-clone" style="font-size: 1.5rem"></i></button>
                                     </div>
                                     <p id="yamlText"> {{ selectedProject.yaml }}</p>
                                 </p-fieldset>
+                            </div>-->
+                            <div class="border-bold border-black-alpha-50">
+                            <div>
+                            <div class="but">
+                                <button (click)="copyToClipboard()"><i class="pi pi-clone" style="font-size: 1.5rem"></i></button>
+                            </div>
+                            <pre id="yamlText" class="w-auto">
+<u class="text-orange-700 font-bold mr-4">Diplome_MS(ms1)_ROLES(admin)_SUB-MODULE(commun)_MENU(Gestion Diplome):</u>
+  id: Long ID
+  ref: String  REF_REQ
+  libelle: String LABEL_REQ
+  echelon_depart: Echelon
+
+<u class="text-orange-700 font-bold mr-4">Avancement_MS(ms1)_ROLES(admin)_SUB-MODULE(avancement)_MENU(Gestion Echelle):</u>
+  id: Long ID
+  ref: String REF_REQ
+  employe: Employe
+  echelon: Echelon
+  salaireAjoute: BigDecimal
+
+<u class="text-orange-700 font-bold mr-4">Employe_MS(ms1)_ROLES(admin)_SUB-MODULE(commun)_MENU(Ressource humain):</u>
+  id: Long ID
+  ref: String REF_REQ
+  username: String LABEL_REQ
+  nom: String LABEL_REQ
+  password: String
+  salaire: BigDecimal
+  diplome: Diplome
+  entiteAdmin: EntiteAdmin
+
+<u class="text-orange-700 font-bold mr-4">Echelon_MS(ms1)_ROLES(admin)_SUB-MODULE(avancement)_MENU(Gestion Echelle):</u>
+  id: Long ID
+  ref: String  REF_REQ
+  libelle: String LABEL_REQ
+  salaire: BigDecimal
+  echelle: Echelle
+
+<u class="text-orange-700 font-bold mr-4">EntiteAdmin_MS(ms1)_ROLES(admin)_SUB-MODULE(commun)_MENU(Gestion entite):</u>
+  id: Long ID
+  ref: String  REF_REQ
+  libelle: String LABEL_REQ
+
+<u class="text-orange-700 font-bold mr-4">TemplateDocument_MS(ms1)_ROLES(admin)_SUB-MODULE(demande)_MENU(Gestion Template Document):</u>
+  id: Long ID
+  ref: String  REF_REQ
+  contenu: String  CONTENU_REQ
+  typeDocument: TypeDocument
+
+<u class="text-orange-700 font-bold mr-4">TypeDocument_MS(ms1)_ROLES(admin)_SUB-MODULE(demande)_MENU(Gestion Type Document):</u>
+  id: Long ID
+  code: String  CODE_REQ
+  libelle: String  LABEL_REQ
+
+<u class="text-orange-700 font-bold mr-4">Mandat_MS(ms1)_ROLES(admin)_SUB-MODULE(mandat)_MENU(Gestion des Mandats):</u>
+  id: Long ID
+  ref: String  REF_REQ
+  dateDebut: LocalDateTime
+  dateFin: LocalDateTime
+  salaire: BigDecimal
+  employe: Employe LABEL_REQ
+  responsabilite: Responsabilite
+
+<u class="text-orange-700 font-bold mr-4">Responsabilite_MS(ms1)_ROLES(admin)_SUB-MODULE(mandat)_MENU(Gestion des Responsabilites):</u>
+  id: Long ID
+  ref: String REF_REQ
+  nom: String LABEL_REQ
+  echelonMin: Echelon
+
+<u class="text-orange-700 font-bold mr-4">ResponsabiliteDetail_MS(ms1)_ROLES(admin)_SUB-MODULE(mandat)_MENU(Gestion des Responsabilites):</u>
+  id: Long ID
+  ref: String REF_REQ
+  dateAplicationMin: LocalDateTime
+  dateAplicationMax: LocalDateTime
+  salaire: BigDecimal
+  responsabilite: Responsabilite
+
+<u class="text-orange-700 font-bold mr-4">DemandeDocument(ms1)_ROLES(admin)_SUB-MODULE(demande)_MENU(Gestion documents):</u>
+  id: Long ID
+  ref: String REF_REQ
+  employe: Employe
+  typeDocument: TypeDocument
+
+                           </pre>
+                            </div>
                             </div>
                         </div>
                     </div>
@@ -174,18 +268,103 @@
                 <div *ngIf="showProjecttDialogVisible">
                     <div *ngIf="selecteddProject">
                             <div class="surface-overlay border-round border-1 shadow-1 p-5 py-0 m-3">
-                                <a (click)="showProject()" class="sidebar-link mr-4 ml-4 text-blue-300 underline font-bold hover:text-orange-700">
+                                <a (click)="showProject()" class="sidebar-link mr-4 ml-2 text-blue-300 underline font-bold hover:text-orange-700">
                                     <i style="font-size: 1rem" ></i><span class="link-label"><i class="pi pi-arrow-left" style="font-size: 2rem"></i></span>
                                 </a>
-                                <p class="text-center"><strong>Name:</strong> {{ selecteddProject.name }}</p>
-                                <pre><p class="text-left"><strong>Name:</strong> {{ selecteddProject.domainTemplate.name }}</p><p class="text-right"><strong>Name:</strong> {{ selecteddProject.projectTemplates }}</p></pre>
-                                <div [style]="{width:'100%',heigth:'600px'}" class="card flex justify-content-left mb-4 p-0">
-                                    <p-fieldset legend="Yaml" class="ml-4 mb-4 mt-4 w-full">
+                                <p class="text-center"><u class="text-blue-400 font-bold text-5xl mr-4"><strong>Name:</strong></u> {{ selecteddProject.name }}</p>
+                                <pre><p class="text-left"><u class="text-blue-400 font-bold text-5xl mr-4"><strong>Name:</strong></u> {{ selecteddProject.domainTemplate.name }}</p><!--<p class="text-right"><strong>Name:</strong> {{ selecteddProject.projectTemplates }}</p>--></pre>
+                                <!--<div [style]="{width:'100%',heigth:'600px'}" class="card flex justify-content-left mb-4 p-0 bg-gray-100">
+                                    <p-fieldset legend="Yaml" class="ml-4 mb-4 mt-4 mr-4 w-full bg-gray-100">
                                         <div class="but">
                                             <button (click)="copyToClipboard()"><i class="pi pi-clone" style="font-size: 1.5rem"></i></button>
                                         </div>
                                         <p id="yamlText"> {{ selecteddProject.yaml }}</p>
+
                                     </p-fieldset>
+                                </div>-->
+                                <div class="border-bold border-black-alpha-50">
+                                    <div>
+                                        <div class="but">
+                                            <button (click)="copyToClipboard()"><i class="pi pi-clone" style="font-size: 1.5rem"></i></button>
+                                        </div>
+                                        <pre id="yamlText" class="w-auto">
+Diplome_MS(ms1)_ROLES(admin)_SUB-MODULE(commun)_MENU(Gestion Diplome):
+  id: Long ID
+  ref: String  REF_REQ
+  libelle: String LABEL_REQ
+  echelon_depart: Echelon
+
+Avancement_MS(ms1)_ROLES(admin)_SUB-MODULE(avancement)_MENU(Gestion Echelle):
+  id: Long ID
+  ref: String REF_REQ
+  employe: Employe
+  echelon: Echelon
+  salaireAjoute: BigDecimal
+
+Employe_MS(ms1)_ROLES(admin)_SUB-MODULE(commun)_MENU(Ressource humain):
+  id: Long ID
+  ref: String REF_REQ
+  username: String LABEL_REQ
+  nom: String LABEL_REQ
+  password: String
+  salaire: BigDecimal
+  diplome: Diplome
+  entiteAdmin: EntiteAdmin
+
+Echelon_MS(ms1)_ROLES(admin)_SUB-MODULE(avancement)_MENU(Gestion Echelle):
+  id: Long ID
+  ref: String  REF_REQ
+  libelle: String LABEL_REQ
+  salaire: BigDecimal
+  echelle: Echelle
+
+EntiteAdmin_MS(ms1)_ROLES(admin)_SUB-MODULE(commun)_MENU(Gestion entite):
+  id: Long ID
+  ref: String  REF_REQ
+  libelle: String LABEL_REQ
+
+TemplateDocument_MS(ms1)_ROLES(admin)_SUB-MODULE(demande)_MENU(Gestion Template Document):
+  id: Long ID
+  ref: String  REF_REQ
+  contenu: String  CONTENU_REQ
+  typeDocument: TypeDocument
+
+TypeDocument_MS(ms1)_ROLES(admin)_SUB-MODULE(demande)_MENU(Gestion Type Document):
+  id: Long ID
+  code: String  CODE_REQ
+  libelle: String  LABEL_REQ
+
+Mandat_MS(ms1)_ROLES(admin)_SUB-MODULE(mandat)_MENU(Gestion des Mandats):
+  id: Long ID
+  ref: String  REF_REQ
+  dateDebut: LocalDateTime
+  dateFin: LocalDateTime
+  salaire: BigDecimal
+  employe: Employe LABEL_REQ
+  responsabilite: Responsabilite
+
+Responsabilite_MS(ms1)_ROLES(admin)_SUB-MODULE(mandat)_MENU(Gestion des Responsabilites):
+  id: Long ID
+  ref: String REF_REQ
+  nom: String LABEL_REQ
+  echelonMin: Echelon
+
+ResponsabiliteDetail_MS(ms1)_ROLES(admin)_SUB-MODULE(mandat)_MENU(Gestion des Responsabilites):
+  id: Long ID
+  ref: String REF_REQ
+  dateAplicationMin: LocalDateTime
+  dateAplicationMax: LocalDateTime
+  salaire: BigDecimal
+  responsabilite: Responsabilite
+
+DemandeDocument(ms1)_ROLES(admin)_SUB-MODULE(demande)_MENU(Gestion documents):
+  id: Long ID
+  ref: String REF_REQ
+  employe: Employe
+  typeDocument: TypeDocument
+
+                           </pre>
+                                    </div>
                                 </div>
                             </div>
                     </div>
@@ -230,20 +409,20 @@
    </div>
 
 
-<div *ngIf="showSidebar" class="sidebar bg-surface-100" style="width:60vh;">
-    <button style="margin-top:10vh" class="btn flex-end relative" (click)="toggleSidebar()"><i class="pi pi-arrow-circle-left" style="font-size: 2rem"></i></button>
-    <h4 style="margin-top:1vh; margin-bottom:1vh">Yaml GPT</h4>
-    <div class="card wiw flex justify-content-center bg-surface-100" style="width:47vh;margin:0vh;height: 68vh;padding:0vh;">
+<div *ngIf="showSidebar" class="sidebar bg-gray-100" style="width:60vh;">
+    <button style="margin-top:10vh" class="btn flex-end relative bg-gray-400 p-1" (click)="toggleSidebar()"><i class="pi pi-arrow-circle-left text-black-alpha-60" style="font-size: 2rem"></i></button>
+    <h4 class="text-3xl font-bold" style="margin-top:1vh; margin-bottom:1vh">Yaml GPT</h4>
+    <div class="card wiw flex justify-content-center bg-gray-200" style="width:47vh;margin:0vh;height: 68vh;padding:0vh;">
         <div style="width:47vh;margin:0vh;padding:2vh;">
             <form [formGroup]="queryFormGroup" (ngSubmit)="handleAskGPT()">
-                <div>
-                    <label class="form-label text-black-alpha-90">Query:</label>
+                <div class="mb-4 mt-4">
+                    <label class="form-label text-black-alpha-90 font-bold text-3xl">ASK:</label>
                 </div>
-                <div class="mb-3">
-                    <textarea formControlName="query" class="form-control bg-surface-100" style="width:40vh;height:11vh;"></textarea>
+                <div class="mb-3 border-round">
+                    <textarea placeholder="{{'What do you need?' | translate}}" formControlName="query" class="form-control bg-gray-200 border-round" style="width:40vh;height:11vh;"></textarea>
                 </div>
-                <div class="flex-end">
-                    <button class="btn btn-success btn border-circle" ><i class="pi pi-send ml-0 mr-0 pl-0 pr-0" style="font-size: 1.4rem"></i></button>
+                <div class="but">
+                    <button class="btn btn-success btn border-circle bg-gray-400 p-2" ><i class="pi pi-send ml-0 mr-0 pl-0 pr-0 text-black-alpha-60" style="font-size: 1.4rem"></i></button>
                 </div>
                 <div class="alert alert-success" *ngIf="result">
                     <!--<pre>{{result|json}}</pre>-->

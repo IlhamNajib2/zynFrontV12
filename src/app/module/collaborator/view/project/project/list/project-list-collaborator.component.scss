@@ -5,14 +5,14 @@
     height: 100%;
     position: fixed;
     top: 0;
-    right: 0; /* Pour positionner la barre latérale à droite */
-    background-color: gray;
+    right: 0; /* Pour positionner la barre latérale à droite    lightgrey */
+    background-color: ghostwhite;
     color: white;
     padding: 20px;
 }
 .btn {
     background-color: orange; /* Couleur de fond */
-    color: white; /* Couleur du texte */
+    color: white; /* Couleur du texte *
     padding: 8px 15px; /* Espacement à l'intérieur du bouton */
     font-size: 16px; /* Taille de la police */
     border: none; /* Supprime la bordure */
@@ -27,4 +27,11 @@
 .but{
     display: flex;
     justify-content: flex-end; /* Align content to the right */
+}
+
+.aswad{
+    background:black;
+}
+.border{
+    border:white;
 }
