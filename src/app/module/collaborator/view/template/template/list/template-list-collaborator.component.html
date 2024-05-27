@@ -72,9 +72,9 @@
                         </div>
                         </div>
                         </div>
-                            <p-dialog [modal]="true" [(visible)]="visible" [style]="{ width: '25rem' }" [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }">
-                                <div class="col-fixed">
-                                <pre><img [src]="getTechnologyLogo(element.technology?.name)" alt="Technology Logo" class="w-6rem h-4rem text-center ml-8"/></pre>
+                            <p-dialog class="pt-0" *ngIf="element.categoryTemplate.name==='Private'" [modal]="true" [(visible)]="visible" [style]="{ width: '25rem' }" [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }">
+                                <div class="col-fixed pt-0">
+                                <pre><img [src]="getTechnologyLogo(element.technology?.name)" alt="Technology Logo" class="w-10rem h-8rem text-center ml-8"/></pre>
                                 <p class="font-bold text-red-500 ml-7 text-5xl">{{ element.price }}$ <i class="pi pi-cart-plus text-yellow-500 ml-2" style="font-size: 3rem"></i></p>
                                 <p class="ml-4 text-xl">{{ element.description }}</p>
                                 <button class="ml-7 border-round p-1 mt-4 black" style="width:50%">Continue To Ckeckout</button>
@@ -110,8 +110,7 @@
                                 <label class="text-orange-400 text-xl" for="2">{{'template.name' | translate}}<span style="color: red;">*</span></label>
                             </div>
                             <input [style]="{width: '80%', border:'solid'}" class="mb-2 mr-2" type="text" pInputText  placeholder="{{'template.name' | translate}}" id="2" [(ngModel)]="item.name"
-                                   [ngClass]="{'ng-invalid ng-dirty' : !validTemplateName}"  />
-                            <small class='p-error' *ngIf='!validTemplateName'>Name est obligatoire.</small>
+                                     />
                         </div>
                         <div class="field col-12 md:col-6">
                             <div class="mb-2">

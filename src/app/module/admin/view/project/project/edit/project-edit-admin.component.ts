@@ -306,6 +306,7 @@ export class ProjectEditAdminComponent implements OnInit {
 
     get editDialog(): boolean {
         return this.service.editDialog;
+        console.log(this.service.editDialog)
     }
 
     set editDialog(value: boolean) {

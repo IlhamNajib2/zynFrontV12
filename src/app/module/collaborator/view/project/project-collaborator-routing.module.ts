@@ -85,6 +85,11 @@ import { ProjectListCollaboratorComponent } from './project/list/project-list-co
                                 }
                             ]
                         },
+                        {
+                            path: '',
+                            redirectTo:'./view/project/project/list/',
+                            pathMatch:'full'
+                        },
 
 
                         {

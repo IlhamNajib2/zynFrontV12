@@ -7,6 +7,7 @@ import {AuthGuard} from 'src/app/zynerator/security/guards/auth.guard';
 
 import { LoginCollaboratorComponent } from './login-collaborator/login-collaborator.component';
 import { RegisterCollaboratorComponent } from './register-collaborator/register-collaborator.component';
+import {ProjectListCollaboratorComponent} from "./view/project/project/list/project-list-collaborator.component";
 
 
 @NgModule({
@@ -16,6 +17,12 @@ import { RegisterCollaboratorComponent } from './register-collaborator/register-
                 {
                     path: '',
                     children: [
+                        {
+                            path: '',
+                            component: ProjectListCollaboratorComponent ,
+                            pathMatch:'full'
+
+                        },
                         {
                             path: 'login',
                             children: [

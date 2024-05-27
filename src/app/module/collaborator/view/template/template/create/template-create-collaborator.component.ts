@@ -66,6 +66,7 @@ export class TemplateCreateCollaboratorComponent  implements OnInit {
     private _validDomainTemplateName = true;
     private _validTechnologyCode = true;
     private _validTechnologyName = true;
+    currentDate: Date;
 
 	constructor(private service: TemplateCollaboratorService , private categoryTemplateService: CategoryTemplateCollaboratorService, private technologyService: TechnologyCollaboratorService, private levelTemplateService: LevelTemplateCollaboratorService, private typeTemplateService: TypeTemplateCollaboratorService, private domainTemplateService: DomainTemplateCollaboratorService, private memberService: MemberCollaboratorService, @Inject(PLATFORM_ID) private platformId? ) {
         this.datePipe = ServiceLocator.injector.get(DatePipe);
@@ -83,11 +84,13 @@ export class TemplateCreateCollaboratorComponent  implements OnInit {
         this.domainTemplateService.findAll().subscribe((data) => this.domainTemplates = data);
         this.memberService.findAll().subscribe((data) => this.members = data);
         this.technologyService.findAll().subscribe((data) => this.technologys = data);
+        this.currentDate=new Date();
     }
 
 
     public save(): void {
         this.submitted = true;
+        this.item.addingDate=this.currentDate;
         this.validateForm();
         if (this.errorMessages.length === 0) {
             this.saveWithShowOption(false);

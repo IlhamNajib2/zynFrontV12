@@ -160,205 +160,30 @@ constructor(public layoutService: LayoutService, public app: AppComponent, publi
       [
 
 				{
-                    label: 'Pages',
-                    icon: 'pi pi-fw pi-briefcase',
-                    items: [
-					  {
-						label: 'Category Management',
-						icon: 'pi pi-wallet',
-						items: [
-								  {
-									label: 'Liste category packaging',
-									icon: 'pi pi-fw pi-plus-circle',
-									routerLink: ['/app/collaborator/category/category-packaging/list']
-								  },
-						]
-					  },
-					  {
-						label: 'Template Management',
-						icon: 'pi pi-wallet',
-						items: [
-								  {
-									label: 'Liste category template',
-									icon: 'pi pi-fw pi-plus-circle',
-									routerLink: ['/app/collaborator/template/category-template/list']
-								  },
-								  {
-									label: 'Liste type template',
-									icon: 'pi pi-fw pi-plus-circle',
-									routerLink: ['/app/collaborator/template/type-template/list']
-								  },
-								  {
-									label: 'Liste domain template',
-									icon: 'pi pi-fw pi-plus-circle',
-									routerLink: ['/app/collaborator/template/domain-template/list']
-								  },
-								  {
-									label: 'Liste level template',
-									icon: 'pi pi-fw pi-plus-circle',
-									routerLink: ['/app/collaborator/template/level-template/list']
-								  },
-								  {
-									label: 'Liste technology',
-									icon: 'pi pi-fw pi-plus-circle',
-									routerLink: ['/app/collaborator/template/technology/list']
-								  },
-								  {
-									label: 'Liste template',
-									icon: 'pi pi-fw pi-plus-circle',
-									routerLink: ['/app/collaborator/template/template/list']
-								  },
-						]
-					  },
-					  {
-						label: 'Paiment Management',
-						icon: 'pi pi-wallet',
-						items: [
-								  {
-									label: 'Liste paiment influencer',
-									icon: 'pi pi-fw pi-plus-circle',
-									routerLink: ['/app/collaborator/paiment/paiment-influencer/list']
-								  },
-								  {
-									label: 'Liste paiment collaborator',
-									icon: 'pi pi-fw pi-plus-circle',
-									routerLink: ['/app/collaborator/paiment/paiment-collaborator/list']
-								  },
-						]
-					  },
-					  {
-						label: 'Project Management',
-						icon: 'pi pi-wallet',
-						items: [
-								  {
-									label: 'Liste paiment collaborator state',
-									icon: 'pi pi-fw pi-plus-circle',
-									routerLink: ['/app/collaborator/project/paiment-collaborator-state/list']
-								  },
-								  {
-									label: 'Liste project state',
-									icon: 'pi pi-fw pi-plus-circle',
-									routerLink: ['/app/collaborator/project/project-state/list']
-								  },
-								  {
-									label: 'Liste paiment influencer state',
-									icon: 'pi pi-fw pi-plus-circle',
-									routerLink: ['/app/collaborator/project/paiment-influencer-state/list']
-								  },
-								  {
-									label: 'Liste project',
-									icon: 'pi pi-fw pi-plus-circle',
-									routerLink: ['/app/collaborator/project/project/list']
-								  },
-						]
-					  },
-					  {
-						label: 'Packaging Management',
-						icon: 'pi pi-wallet',
-						items: [
-								  {
-									label: 'Liste packaging',
-									icon: 'pi pi-fw pi-plus-circle',
-									routerLink: ['/app/collaborator/packaging/packaging/list']
-								  },
-						]
-					  },
-					  {
-						label: 'Inscription Management',
-						icon: 'pi pi-wallet',
-						items: [
-								  {
-									label: 'Liste inscription collaborator',
-									icon: 'pi pi-fw pi-plus-circle',
-									routerLink: ['/app/collaborator/inscription/inscription-collaborator/list']
-								  },
-								  {
-									label: 'Liste inscription membre state',
-									icon: 'pi pi-fw pi-plus-circle',
-									routerLink: ['/app/collaborator/inscription/inscription-membre-state/list']
-								  },
-								  {
-									label: 'Liste inscription collaborator state',
-									icon: 'pi pi-fw pi-plus-circle',
-									routerLink: ['/app/collaborator/inscription/inscription-collaborator-state/list']
-								  },
-								  {
-									label: 'Liste inscription membre',
-									icon: 'pi pi-fw pi-plus-circle',
-									routerLink: ['/app/collaborator/inscription/inscription-membre/list']
-								  },
-								  {
-									label: 'Liste inscription collaborator type',
-									icon: 'pi pi-fw pi-plus-circle',
-									routerLink: ['/app/collaborator/inscription/inscription-collaborator-type/list']
-								  },
-						]
-					  },
-					  {
-						label: 'Collaborator Management',
-						icon: 'pi pi-wallet',
-						items: [
-								  {
-									label: 'Liste collaborator',
-									icon: 'pi pi-fw pi-plus-circle',
-									routerLink: ['/app/collaborator/collaborator/collaborator/list']
-								  },
-						]
-					  },
-					  {
-						label: 'Member Management',
-						icon: 'pi pi-wallet',
-						items: [
-								  {
-									label: 'Liste member',
-									icon: 'pi pi-fw pi-plus-circle',
-									routerLink: ['/app/collaborator/collaborator/member/list']
-								  },
-						]
-					  },
-					  {
-						label: 'Coupon Management',
-						icon: 'pi pi-wallet',
-						items: [
-								  {
-									label: 'Liste influencer',
-									icon: 'pi pi-fw pi-plus-circle',
-									routerLink: ['/app/collaborator/coupon/influencer/list']
-								  },
-								  {
-									label: 'Liste coupon',
-									icon: 'pi pi-fw pi-plus-circle',
-									routerLink: ['/app/collaborator/coupon/coupon/list']
-								  },
-								  {
-									label: 'Liste coupon detail',
-									icon: 'pi pi-fw pi-plus-circle',
-									routerLink: ['/app/collaborator/coupon/coupon-detail/list']
-								  },
-						]
-					  },
 
-				   {
-					  label: 'Security Management',
-					  icon: 'pi pi-wallet',
-					  items: [
-						  {
-							  label: 'List User',
-							  icon: 'pi pi-fw pi-plus-circle',
-							  routerLink: ['/app/admin/security/user/list']
-						  },
-						  {
-							  label: 'List Model',
-							  icon: 'pi pi-fw pi-plus-circle',
-							  routerLink: ['/app/admin/security/model-permission/list']
-						  },
-						  {
-							  label: 'List Action Permission',
-							  icon: 'pi pi-fw pi-plus-circle',
-							  routerLink: ['/app/admin/security/action-permission/list']
-						  },
-					  ]
-				  }
+                    items: [
+
+
+					  {
+						label: 'Projects',
+						icon: 'pi pi-server',
+                          routerLink: ['/app/collaborator/project/project/list'],
+					  },
+                        {
+                            label: 'Templates',
+                            icon: 'pi pi-images',
+                            routerLink: ['/app/collaborator/template/template/list'],
+                        },
+					  {
+						label: 'Packaging',
+						icon: 'pi pi-wallet',
+                          routerLink: ['/app/collaborator/packaging/packaging/list']
+					  },
+					  {
+						label: 'Membres Inscription ',
+						icon: 'pi pi-bookmark-fill',
+                          routerLink: ['/app/collaborator/inscription/inscription-membre/list'],
+					  },
 			]
 	    }
     ];

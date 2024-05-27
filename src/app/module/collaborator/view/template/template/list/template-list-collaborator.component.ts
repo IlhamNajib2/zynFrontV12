@@ -35,6 +35,7 @@ import {DomainTemplateCollaboratorService} from 'src/app/shared/service/collabor
 import {MemberDto} from 'src/app/shared/model/collaborator/Member.model';
 import {MemberCollaboratorService} from 'src/app/shared/service/collaborator/collaborator/MemberCollaborator.service';
 import {ChartType} from "chart.js";
+import {ProjectDto} from "../../../../../../shared/model/project/Project.model";
 
 
 @Component({
@@ -43,7 +44,20 @@ import {ChartType} from "chart.js";
     styleUrls:['./template-list-collaborator.component.scss']
 })
 export class TemplateListCollaboratorComponent implements OnInit {
+    visible: boolean = false;
+    showYamlDialogVisible: boolean = false;
+    separateContent: string = '';
+    value!: number;
+    protected _submitted = false;
+    protected _errorMessages = new Array<string>();
+    public domainTemplate: DomainTemplateDto ;
+    public member: MemberDto ;
+    selectedProjectTemplate:string='Public';
+    showProjectTemplateDetails : boolean=false;
 
+    showDefaultView: boolean = true;
+    showTemplateView: boolean = false;
+    showMyView: boolean = false;
     protected fileName = 'Template';
 
     protected findByCriteriaShow = false;
@@ -316,6 +330,111 @@ export class TemplateListCollaboratorComponent implements OnInit {
     }
 
 
+
+
+
+
+    public saveWithShowOption(showList: boolean) {
+        this.service.save().subscribe(item => {
+            if (item != null) {
+                this.items.push({...item});
+                this.createDialog = false;
+                this.submitted = false;
+                this.item = new TemplateDto();
+            } else {
+                this.messageService.add({severity: 'error', summary: 'Erreurs', detail: 'Element existant'});
+            }
+        }, error => {
+            console.log(error);
+        });
+    }
+    public save(): void {
+        this.submitted = true;
+        this.validateForm();
+
+        console.log(this.errorMessages)
+        if (this.errorMessages.length === 0) {
+            this.saveWithShowOption(false);
+        } else {
+            this.messageService.add({severity: 'error',summary: 'Erreurs',detail: 'Merci de corrigé les erreurs sur le formulaire'});
+        }
+    }
+
+    selecteProjectTemplate(category:string):void{
+        this.showDefault();
+        this.selectedProjectTemplate=category;
+        this.showProjectTemplateDetails=true;
+    }
+
+    setView(view: string) {
+        this.showDefaultView = view === 'default';
+        this.showTemplateView = view === 'template';
+        this.showMyView = view === 'my';
+        // Enregistrer l'état de la vue dans le stockage local
+        localStorage.setItem('currentView', view);
+    }
+
+    showDefault() {
+        this.setView('default');
+    }
+
+    showTemplate() {
+        this.setView('template');
+    }
+    showMy() {
+        this.setView('my');
+    }
+
+
+    getTechnologyLogo(technologyName: string | undefined): string {
+        if (!technologyName) {
+            return 'assets/layout/images/default-logo.svg'; // Default logo if no technology is selected
+        }
+
+        switch (technologyName.toLowerCase()) {
+            case 'spring':
+                return 'assets/layout/images/spring.svg';
+            case 'angular':
+                return 'assets/layout/images/Angular.svg';
+            case 'react':
+                return 'assets/layout/images/tcaer.svg';
+            case 'dotnet':
+                return 'assets/layout/images/dotnet.svg';
+            case 'r-native':
+                return 'assets/layout/images/reactjs-ar21.svg';
+            case 'laravel':
+                return 'assets/layout/images/Laravel.svg';
+            case 'next-js':
+                return 'assets/layout/images/nextjs.svg';
+            case 'nestjs':
+                return 'assets/layout/images/nestjs.svg';
+            // Add more cases for other technologies
+            default:
+                return 'assets/layout/images/default-logo.svg'; // Default logo if technology is not recognized
+        }
+    }
+
+    showDialog() {
+        this.visible = true;
+    }
+
+    use() {
+        // Vous pouvez ajouter ici la logique supplémentaire avant de naviguer, si nécessaire
+        this.router.navigate(['/app/collaborator/project/project/list']);
+    }
+    showYamlDialog(yamlContent: string): void {
+        this.separateContent = yamlContent;
+        this.showYamlDialogVisible = true;
+    }
+    copyYaml() {
+        const textField = document.createElement('textarea');
+        textField.value = this.separateContent;
+        document.body.appendChild(textField);
+        textField.select();
+        document.execCommand('copy');
+        textField.remove();
+    }
+
     public async loadCategoryTemplate(){
         this.categoryTemplateService.findAllOptimized().subscribe(categoryTemplates => this.categoryTemplates = categoryTemplates, error => console.log(error))
     }
@@ -565,29 +684,9 @@ export class TemplateListCollaboratorComponent implements OnInit {
         this.service.entityName = value;
     }
 
-    showYamlDialogVisible: boolean = false;
-    separateContent: string = '';
 
-    showYamlDialog(yamlContent: string): void {
-        this.separateContent = yamlContent; // Set content for the dialog
-        this.showYamlDialogVisible = true; // Show the dialog
-    }
-    isEditing: boolean = true;
-    copyYaml() {
-        const textField = document.createElement('textarea');
-        textField.value = this.separateContent; // Get the YAML content from the textarea
-        document.body.appendChild(textField);
-        textField.select();
-        document.execCommand('copy'); // Copy the selected text
-        textField.remove();
-        // Optional: Show a success message to the user
-    }
-    searchValue: string = '';
-    filteredTemplates: any[] = []; // contient les templates filtrés
-    value!: number;
-    showCodePart: string = '';
-    // Dans votre composant TypeScript
-    showContentDefault: boolean = true;
+
+
 
 
     get validTemplateCode(): boolean {
@@ -613,25 +712,18 @@ export class TemplateListCollaboratorComponent implements OnInit {
     }
     public  validateForm(): void{
         this.errorMessages = new Array<string>();
-        this.validateTemplateCode();
-        this.validateTemplateName();
+        //this.validateTemplateName();
     }
-    public validateTemplateCode(){
-        if (this.stringUtilService.isEmpty(this.item.code)) {
-            this.errorMessages.push('Code non valide');
-            this.validTemplateCode = false;
-        } else {
-            this.validTemplateCode = true;
-        }
-    }
+
     public validateTemplateName(){
-        if (this.stringUtilService.isEmpty(this.item.name)) {
+        if (this.item.name!=null) {
             this.errorMessages.push('Name non valide');
             this.validTemplateName = false;
         } else {
             this.validTemplateName = true;
         }
     }
+
     get submitted(): boolean {
         return this._submitted;
     }
@@ -645,114 +737,11 @@ export class TemplateListCollaboratorComponent implements OnInit {
         }
         return this._errorMessages;
     }
-    protected _submitted = false;
-    protected _errorMessages = new Array<string>();
 
     set errorMessages(value: string[]) {
         this._errorMessages = value;
     }
-    public saveWithShowOption(showList: boolean) {
-        this.service.save().subscribe(item => {
-            if (item != null) {
-                this.items.push({...item});
-                this.createDialog = false;
-                this.submitted = false;
-                this.item = new TemplateDto();
-            } else {
-                this.messageService.add({severity: 'error', summary: 'Erreurs', detail: 'Element existant'});
-            }
-        }, error => {
-            console.log(error);
-        });
-    }
-    public save(): void {
-        this.submitted = true;
-        this.validateForm();
-        if (this.errorMessages.length === 0) {
-            this.saveWithShowOption(false);
-        } else {
-            this.messageService.add({severity: 'error',summary: 'Erreurs',detail: 'Merci de corrigé les erreurs sur le formulaire'});
-        }
-    }
-//ajouter
-    selectedProjectTemplate:string='Public';
-    showProjectTemplateDetails : boolean=false;
-    selecteProjectTemplate(category:string):void{
-        this.showDefault();
-        this.selectedProjectTemplate=category;
-        this.showProjectTemplateDetails=true;
-    }
-    public categoryProjectTemplate: CategoryTemplateDto ;
-    public domainTemplate: DomainTemplateDto ;
-    public member: MemberDto ;
-// Variables pour gérer l'affichage des vues
 
-    showDefaultView: boolean = true;
-    showTemplateView: boolean = false;
-    showMyView: boolean = false;
-    setView(view: string) {
-        this.showDefaultView = view === 'default';
-        this.showTemplateView = view === 'template';
-        this.showMyView = view === 'my';
-        // Enregistrer l'état de la vue dans le stockage local
-        localStorage.setItem('currentView', view);
-    }
-
-    showDefault() {
-        this.setView('default');
-    }
-
-    showTemplate() {
-        this.setView('template');
-    }
-    showMy() {
-        this.setView('my');
-    }
-
-
-
-
-
-
-
-    getTechnologyLogo(technologyName: string | undefined): string {
-        if (!technologyName) {
-            return 'assets/layout/images/default-logo.svg'; // Default logo if no technology is selected
-        }
-
-        switch (technologyName.toLowerCase()) {
-            case 'spring':
-                return 'assets/layout/images/spring.svg';
-            case 'angular':
-                return 'assets/layout/images/Angular.svg';
-            case 'react':
-                return 'assets/layout/images/tcaer.svg';
-            case 'dotnet':
-                return 'assets/layout/images/dotnet.svg';
-            case 'r-native':
-                return 'assets/layout/images/reactjs-ar21.svg';
-            case 'laravel':
-                return 'assets/layout/images/Laravel.svg';
-            case 'next-js':
-                return 'assets/layout/images/nextjs.svg';
-            case 'nestjs':
-                return 'assets/layout/images/nestjs.svg';
-            // Add more cases for other technologies
-            default:
-                return 'assets/layout/images/default-logo.svg'; // Default logo if technology is not recognized
-        }
-    }
-
-    visible: boolean = false;
-
-    showDialog() {
-        this.visible = true;
-    }
-
-    use() {
-        // Vous pouvez ajouter ici la logique supplémentaire avant de naviguer, si nécessaire
-        this.router.navigate(['/app/collaborator/project/project/list']);
-    }
 }
 
 

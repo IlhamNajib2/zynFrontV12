@@ -23,23 +23,22 @@
                 </div>
                 <div *ngIf="showDefaultView">
                     <div class="grid">
-                        <div class="col-fixed" style="width:300px">
+                        <div class="col-fixed" style="width:320px">
                             <div class="text-center p-1 border-round-sm font-bold border-solid border-gray-200">
                                 <h3 class="flex ml-6 mb-6 justify-content-left h3 text-surface-900 text-3xl text-bold">History:</h3>
-                                <div style="width: 250px; height: 380px; overflow: auto; margin:0px; padding:0px">
+                                <div style="width: 250px; height: 400px; overflow: auto; margin:0px; padding:0px">
                                     <p-table #dt [value]="items" [columns]="cols" [rows]="8" [paginator]="false"
                                              [globalFilterFields]="['code', 'name', 'generatedDate', 'projectStatecode', 'inscriptionMembreid', 'domainTemplatename']" [(selection)]="selections"
                                              [rowHover]="true" dataKey="id" styleClass="p-datatable-customers"
                                              currentPageReportTemplate="{{'les éléments de {first} à {last} sur {totalRecords} ' | translate}}"
                                              [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" selectionMode="multiple" class="mt-6 flex ml-0 justify-content-center">
-                                        <ng-template style="height: 400px;" pTemplate="body" let-element>
+                                        <ng-template style="height: 360px;" pTemplate="body" let-element>
                                             <div class=" justify-content-center mr-3">
                                                 <ul style="padding-left: 0;" class="flex justify-content-center">
                                                     <li class="container flex justify-content-center mt-0" style="list-style-type: none;padding-left: 0;" >
                                                         <div class="block bg-bluegray-50 text-left text-primary-900 p-1 border-round m-0" [style]="{width:'20vh',textcolor:'black'}">
                                                             <a class="text-primary-900" (click)="showw(element)"><p class="text-primary-900 hover:text-orange-600">{{ element.name }}</p></a>
                                                         </div>
-
                                                     </li>
                                                 </ul>
                                             </div>
@@ -52,7 +51,7 @@
                         <div class=" field col">
                             <div class="text-center p-3 border-round-sm font-bold" [style]="{height: '400px'}">
                                 <span class="vertical-align-baseline mt-2">
-                                   <p-button (click)="showDialog()" icon="pi pi-external-link" icon="pi pi-eye" label="Template" class="top-right relative mr-4"></p-button>
+                                   <p-button (click)="showDialog()" icon="pi pi-external-link" icon="pi pi-eye" label="Choose Template" class="top-right relative mr-4"></p-button>
                                    <button class="btn flex-end relative p-2" (click)="toggleSidebar()">YamlGPT</button>
                                </span>
                                 <div class="grid p-0 m-0" [style]="{width:'100%'}">
@@ -76,7 +75,7 @@
                                 </div>
                                 <textarea [style]="{width: '100%', height:'300px'}" class="border-solid border-black-alpha-60 border-3" id="3" pInputTextarea rows="5" cols="46" placeholder="{{'project.yaml' | translate}}"  [(ngModel)]="item.yaml"></textarea>
                                 <div class="p-flexbox">
-                                    <button class="ml-8" pButton pRipple  label="{{'validate' | translate}}"  icon="pi pi-check"  (click)="save()" class="top"></button>
+                                    <button class="ml-8" pButton pRipple  label="{{'Generat' | translate}}"  icon="pi pi-check"  (click)="save()" class="top"></button>
                                 </div>
                             </div>
                         </div>
@@ -117,7 +116,6 @@
                         <ng-template pTemplate="header">
                             <tr>
                                 <th>Name</th>
-                                <th>Date</th>
                                 <th>domain</th>
                                 <th>Yaml</th>
                             </tr>
@@ -125,7 +123,7 @@
                         <ng-template pTemplate="body" let-element>
                             <tr class="bg-">
                                 <td>{{element.name}}</td>
-                                <td>{{element.generatedDate | date :'dd/MM/yyyy HH:mm' }}</td>
+                               <!-- <td>{{element.generatedDate | date :'dd/MM/yyyy HH:mm' }}</td>-->
                                 <!--<td>{{element.projectState?.code}}</td>
                                 <td>{{element.inscriptionMembre?.id}}</td>-->
                                 <td>{{element.domainTemplate?.name}}</td>
@@ -168,16 +166,16 @@
                             <a (click)="showDefault()" class="sidebar-link mr-4 ml-4 text-blue-300 underline font-bold hover:text-orange-700">
                                 <i style="font-size: 1rem" ></i><span class="link-label"><i class="pi pi-arrow-left" style="font-size: 2rem"></i></span>
                             </a>
-                            <p class="text-center"><u class="text-red-400 font-bold text-5xl mr-4"><strong>Name:</strong></u> {{ selectedProject.name }}</p>
-                            <pre><p class="text-left"><u class="text-red-400 font-bold text-5xl mr-4"><strong>Name:</strong></u> {{ selectedProject.domainTemplate.name }}</p><!--<p class="text-right"><strong>Name:</strong> {{ selectedProject.projectTemplates }}</p>--></pre>
+                            <p class="text-center text-red-500 font-bold text-5xl mr-4">{{ selectedProject.name }}</p>
+                            <pre><p class="text-left "><u class="text-black-500 font-bold text-5xl mr-4">Domain:</u><b class="text-red-500 font-bold text-5xl mr-4">{{ selectedProject.domainTemplate.name }}</b></p><!--<p class="text-right"><strong>Name:</strong> {{ selecteddProject.projectTemplates }}</p>--></pre>
                             <!--<div [style]="{width:'100%',heigth:'600px'}" class="card flex justify-content-left mb-4 p-0 bg-gray-100">
-                                <p-fieldset legend="Yaml" class="ml-4 mb-4 mt-4 mr-4 w-full bg-gray-100">
-                                    <div class="but">
-                                        <button (click)="copyToClipboard()"><i class="pi pi-clone" style="font-size: 1.5rem"></i></button>
-                                    </div>
-                                    <p id="yamlText"> {{ selectedProject.yaml }}</p>
-                                </p-fieldset>
-                            </div>-->
+                             <p-fieldset legend="Yaml" class="ml-4 mb-4 mt-4 mr-4 w-full bg-gray-100">
+                                 <div class="but">
+                                     <button (click)="copyToClipboard()"><i class="pi pi-clone" style="font-size: 1.5rem"></i></button>
+                                 </div>
+                                 <p id="yamlText"> {{ selectedProject.yaml }}</p>
+                             </p-fieldset>
+                         </div>-->
                             <div class="border-bold border-black-alpha-50">
                             <div>
                             <div class="but">
@@ -271,37 +269,37 @@
                                 <a (click)="showProject()" class="sidebar-link mr-4 ml-2 text-blue-300 underline font-bold hover:text-orange-700">
                                     <i style="font-size: 1rem" ></i><span class="link-label"><i class="pi pi-arrow-left" style="font-size: 2rem"></i></span>
                                 </a>
-                                <p class="text-center"><u class="text-blue-400 font-bold text-5xl mr-4"><strong>Name:</strong></u> {{ selecteddProject.name }}</p>
-                                <pre><p class="text-left"><u class="text-blue-400 font-bold text-5xl mr-4"><strong>Name:</strong></u> {{ selecteddProject.domainTemplate.name }}</p><!--<p class="text-right"><strong>Name:</strong> {{ selecteddProject.projectTemplates }}</p>--></pre>
+                                <p class="text-center text-red-500 font-bold text-5xl mr-4">{{ selecteddProject.name }}</p>
+                                <pre><p class="text-left "><u class="text-black-500 font-bold text-5xl mr-4">Domain:</u><b class="text-red-500 font-bold text-5xl mr-4">{{ selecteddProject.domainTemplate.name }}</b></p><!--<p class="text-right"><strong>Name:</strong> {{ selecteddProject.projectTemplates }}</p>--></pre>
                                 <!--<div [style]="{width:'100%',heigth:'600px'}" class="card flex justify-content-left mb-4 p-0 bg-gray-100">
-                                    <p-fieldset legend="Yaml" class="ml-4 mb-4 mt-4 mr-4 w-full bg-gray-100">
-                                        <div class="but">
-                                            <button (click)="copyToClipboard()"><i class="pi pi-clone" style="font-size: 1.5rem"></i></button>
-                                        </div>
-                                        <p id="yamlText"> {{ selecteddProject.yaml }}</p>
+                                             <p-fieldset legend="Yaml" class="ml-4 mb-4 mt-4 mr-4 w-full bg-gray-100">
+                                                 <div class="but">
+                                                     <button (click)="copyToClipboard()"><i class="pi pi-clone" style="font-size: 1.5rem"></i></button>
+                                                 </div>
+                                                 <p id="yamlText"> {{ selecteddProject.yaml }}</p>
 
-                                    </p-fieldset>
-                                </div>-->
+                                             </p-fieldset>
+                                         </div>-->
                                 <div class="border-bold border-black-alpha-50">
                                     <div>
                                         <div class="but">
                                             <button (click)="copyToClipboard()"><i class="pi pi-clone" style="font-size: 1.5rem"></i></button>
                                         </div>
                                         <pre id="yamlText" class="w-auto">
-Diplome_MS(ms1)_ROLES(admin)_SUB-MODULE(commun)_MENU(Gestion Diplome):
+<u class="text-orange-700 font-bold mr-4">Diplome_MS(ms1)_ROLES(admin)_SUB-MODULE(commun)_MENU(Gestion Diplome):</u>
   id: Long ID
   ref: String  REF_REQ
   libelle: String LABEL_REQ
   echelon_depart: Echelon
 
-Avancement_MS(ms1)_ROLES(admin)_SUB-MODULE(avancement)_MENU(Gestion Echelle):
+<u class="text-orange-700 font-bold mr-4">Avancement_MS(ms1)_ROLES(admin)_SUB-MODULE(avancement)_MENU(Gestion Echelle):</u>
   id: Long ID
   ref: String REF_REQ
   employe: Employe
   echelon: Echelon
   salaireAjoute: BigDecimal
 
-Employe_MS(ms1)_ROLES(admin)_SUB-MODULE(commun)_MENU(Ressource humain):
+<u class="text-orange-700 font-bold mr-4">Employe_MS(ms1)_ROLES(admin)_SUB-MODULE(commun)_MENU(Ressource humain):</u>
   id: Long ID
   ref: String REF_REQ
   username: String LABEL_REQ
@@ -311,30 +309,30 @@ Employe_MS(ms1)_ROLES(admin)_SUB-MODULE(commun)_MENU(Ressource humain):
   diplome: Diplome
   entiteAdmin: EntiteAdmin
 
-Echelon_MS(ms1)_ROLES(admin)_SUB-MODULE(avancement)_MENU(Gestion Echelle):
+<u class="text-orange-700 font-bold mr-4">Echelon_MS(ms1)_ROLES(admin)_SUB-MODULE(avancement)_MENU(Gestion Echelle):</u>
   id: Long ID
   ref: String  REF_REQ
   libelle: String LABEL_REQ
   salaire: BigDecimal
   echelle: Echelle
 
-EntiteAdmin_MS(ms1)_ROLES(admin)_SUB-MODULE(commun)_MENU(Gestion entite):
+<u class="text-orange-700 font-bold mr-4">EntiteAdmin_MS(ms1)_ROLES(admin)_SUB-MODULE(commun)_MENU(Gestion entite):</u>
   id: Long ID
   ref: String  REF_REQ
   libelle: String LABEL_REQ
 
-TemplateDocument_MS(ms1)_ROLES(admin)_SUB-MODULE(demande)_MENU(Gestion Template Document):
+<u class="text-orange-700 font-bold mr-4">TemplateDocument_MS(ms1)_ROLES(admin)_SUB-MODULE(demande)_MENU(Gestion Template Document):</u>
   id: Long ID
   ref: String  REF_REQ
   contenu: String  CONTENU_REQ
   typeDocument: TypeDocument
 
-TypeDocument_MS(ms1)_ROLES(admin)_SUB-MODULE(demande)_MENU(Gestion Type Document):
+<u class="text-orange-700 font-bold mr-4">TypeDocument_MS(ms1)_ROLES(admin)_SUB-MODULE(demande)_MENU(Gestion Type Document):</u>
   id: Long ID
   code: String  CODE_REQ
   libelle: String  LABEL_REQ
 
-Mandat_MS(ms1)_ROLES(admin)_SUB-MODULE(mandat)_MENU(Gestion des Mandats):
+<u class="text-orange-700 font-bold mr-4">Mandat_MS(ms1)_ROLES(admin)_SUB-MODULE(mandat)_MENU(Gestion des Mandats):</u>
   id: Long ID
   ref: String  REF_REQ
   dateDebut: LocalDateTime
@@ -343,13 +341,13 @@ Mandat_MS(ms1)_ROLES(admin)_SUB-MODULE(mandat)_MENU(Gestion des Mandats):
   employe: Employe LABEL_REQ
   responsabilite: Responsabilite
 
-Responsabilite_MS(ms1)_ROLES(admin)_SUB-MODULE(mandat)_MENU(Gestion des Responsabilites):
+<u class="text-orange-700 font-bold mr-4">Responsabilite_MS(ms1)_ROLES(admin)_SUB-MODULE(mandat)_MENU(Gestion des Responsabilites):</u>
   id: Long ID
   ref: String REF_REQ
   nom: String LABEL_REQ
   echelonMin: Echelon
 
-ResponsabiliteDetail_MS(ms1)_ROLES(admin)_SUB-MODULE(mandat)_MENU(Gestion des Responsabilites):
+<u class="text-orange-700 font-bold mr-4">ResponsabiliteDetail_MS(ms1)_ROLES(admin)_SUB-MODULE(mandat)_MENU(Gestion des Responsabilites):</u>
   id: Long ID
   ref: String REF_REQ
   dateAplicationMin: LocalDateTime
@@ -357,7 +355,7 @@ ResponsabiliteDetail_MS(ms1)_ROLES(admin)_SUB-MODULE(mandat)_MENU(Gestion des Re
   salaire: BigDecimal
   responsabilite: Responsabilite
 
-DemandeDocument(ms1)_ROLES(admin)_SUB-MODULE(demande)_MENU(Gestion documents):
+<u class="text-orange-700 font-bold mr-4">DemandeDocument(ms1)_ROLES(admin)_SUB-MODULE(demande)_MENU(Gestion documents):</u>
   id: Long ID
   ref: String REF_REQ
   employe: Employe

@@ -200,6 +200,7 @@ export class ProjectAdminService {
 
     public set editDialog(value: boolean) {
         this._editDialog = value;
+
     }
 
     public get viewDialog(): boolean {
