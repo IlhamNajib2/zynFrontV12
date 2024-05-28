@@ -23,8 +23,8 @@
                 </div>
                 <div *ngIf="showDefaultView">
                     <div class="grid">
-                        <div class="col-fixed" style="width:320px">
-                            <div class="text-center p-1 border-round-sm font-bold border-solid border-gray-200">
+                        <div class="col-fixed border-round" style="width:320px">
+                            <div class="text-center p-1 border-round font-bold border-solid border-gray-200">
                                 <h3 class="flex ml-6 mb-6 justify-content-left h3 text-surface-900 text-3xl text-bold">History:</h3>
                                 <div style="width: 250px; height: 400px; overflow: auto; margin:0px; padding:0px">
                                     <p-table #dt [value]="items" [columns]="cols" [rows]="8" [paginator]="false"
@@ -62,10 +62,10 @@
                                         <button class="btn flex-end relative p-2" (click)="toggleSidebar()">YamlGPT</button>
                                     </div>-->
                                     <div class="field col-11 md:col-6 mt-2">
-                                        <input [style]="{width:'100%', background:'#ffffff',borderRadius: '0'}" class="mb-2 mr-2" type="text" pInputText  placeholder="{{'Enter Name Of Project' | translate}}" id="2" [(ngModel)]="item.name"/>
+                                        <input [style]="{width:'100%', background:'rgba(0, 0, 0, 0.06)'}" class="mb-2 mr-2 border-round border-gray-300" type="text" pInputText  placeholder="{{'Enter Name Of Project' | translate}}" id="2" [(ngModel)]="item.name"/>
                                     </div>
                                         <div class="field col-11 md:col-6 mt-2">
-                                        <p-dropdown [style]="{width:'100%', background:'#ffffff',borderRadius: '0'}"  appendTo="body"  [options]="domainTemplates" [(ngModel)]="item.domainTemplate" id="7" [filter]="true" filterMatchMode="contains"
+                                        <p-dropdown [style]="{borderRadius: '0.25rem', text:'left'}"  appendTo="body"  [options]="domainTemplates" [(ngModel)]="item.domainTemplate" id="7" [filter]="true" filterMatchMode="contains"
                                                      [showClear]="true" optionLabel="name" placeholder="{{'Select Domain' | translate}}"  >
                                         </p-dropdown>
                                         </div>
@@ -73,7 +73,7 @@
                                 <div class="mb-2 justify-content-left text-left">
                                     <label class="text-surface-900 text-3xl text-bold" for="3">{{'project.yaml' | translate}}</label>
                                 </div>
-                                <textarea [style]="{width: '100%', height:'300px',background:'#ffffff',borderRadius:'0'}" class="border-solid border-black-alpha-60 border-3" id="3" pInputTextarea rows="5" cols="46" placeholder="{{'project.yaml' | translate}}"  [(ngModel)]="item.yaml"></textarea>
+                                <textarea [style]="{width: '100%', height:'300px',background:'#ffffff'}" class="border-solid border-black-alpha-60 border-round border-3" id="3" pInputTextarea rows="5" cols="46" placeholder="{{'project.yaml' | translate}}"  [(ngModel)]="item.yaml"></textarea>
                                 <div class="p-flexbox">
                                     <button style="background:#0e88b3; border-color:#0e88b3" class="ml-8" pButton pRipple  label="{{'Generat' | translate}}"  icon="pi pi-check"  (click)="save()" class="top"></button>
                                 </div>
@@ -110,7 +110,7 @@
                         <ng-template pTemplate="caption" class="mb-4">
                         <span class="p-input-icon-left ml-auto">
                             <i class="pi pi-search"></i>
-                            <input [style]="{width:'70vh' , height:'7vh'}" pInputText type="text" placeholder="{{'searchInput' | translate}}" (input)="dt.filterGlobal($event.target.value, 'contains')"/>
+                            <input [style]="{width:'70vh' , height:'7vh', background:'#ffffff'}" pInputText type="text" placeholder="{{'searchInput' | translate}}" (input)="dt.filterGlobal($event.target.value, 'contains')"/>
                         </span>
                         </ng-template>
                         <ng-template pTemplate="header">
@@ -128,7 +128,7 @@
                                 <td>{{element.inscriptionMembre?.id}}</td>-->
                                 <td>{{element.domainTemplate?.name}}</td>
                                 <!--<td><p-button  (click)="showYamlDialog(element.yaml)" label="Yaml" severity="warning" /></td>-->
-                                <td><p-button style="background:#0e88b3; border-color:#0e88b3"  (click)="showYamllDialog(element)" label="Yaml" severity="warning" /></td>
+                                <td><p-button [style]="{background:'#0e88b3', borderColor:'#0e88b3'}"  (click)="showYamllDialog(element)" label="Yaml" severity="warning" /></td>
                                 <!--<td>
                                     <p-button (click)="showTemplateDetails(element.template)" label="Yaml" severity="warning"></p-button>
                                 </td>-->
@@ -182,80 +182,8 @@
                                 <button (click)="copyToClipboard()"><i class="pi pi-clone" style="font-size: 1.5rem"></i></button>
                             </div>
                             <pre id="yamlText" class="w-auto">
-<u class="text-orange-700 font-bold mr-4">Diplome_MS(ms1)_ROLES(admin)_SUB-MODULE(commun)_MENU(Gestion Diplome):</u>
-  id: Long ID
-  ref: String  REF_REQ
-  libelle: String LABEL_REQ
-  echelon_depart: Echelon
 
-<u class="text-orange-700 font-bold mr-4">Avancement_MS(ms1)_ROLES(admin)_SUB-MODULE(avancement)_MENU(Gestion Echelle):</u>
-  id: Long ID
-  ref: String REF_REQ
-  employe: Employe
-  echelon: Echelon
-  salaireAjoute: BigDecimal
-
-<u class="text-orange-700 font-bold mr-4">Employe_MS(ms1)_ROLES(admin)_SUB-MODULE(commun)_MENU(Ressource humain):</u>
-  id: Long ID
-  ref: String REF_REQ
-  username: String LABEL_REQ
-  nom: String LABEL_REQ
-  password: String
-  salaire: BigDecimal
-  diplome: Diplome
-  entiteAdmin: EntiteAdmin
-
-<u class="text-orange-700 font-bold mr-4">Echelon_MS(ms1)_ROLES(admin)_SUB-MODULE(avancement)_MENU(Gestion Echelle):</u>
-  id: Long ID
-  ref: String  REF_REQ
-  libelle: String LABEL_REQ
-  salaire: BigDecimal
-  echelle: Echelle
-
-<u class="text-orange-700 font-bold mr-4">EntiteAdmin_MS(ms1)_ROLES(admin)_SUB-MODULE(commun)_MENU(Gestion entite):</u>
-  id: Long ID
-  ref: String  REF_REQ
-  libelle: String LABEL_REQ
-
-<u class="text-orange-700 font-bold mr-4">TemplateDocument_MS(ms1)_ROLES(admin)_SUB-MODULE(demande)_MENU(Gestion Template Document):</u>
-  id: Long ID
-  ref: String  REF_REQ
-  contenu: String  CONTENU_REQ
-  typeDocument: TypeDocument
-
-<u class="text-orange-700 font-bold mr-4">TypeDocument_MS(ms1)_ROLES(admin)_SUB-MODULE(demande)_MENU(Gestion Type Document):</u>
-  id: Long ID
-  code: String  CODE_REQ
-  libelle: String  LABEL_REQ
-
-<u class="text-orange-700 font-bold mr-4">Mandat_MS(ms1)_ROLES(admin)_SUB-MODULE(mandat)_MENU(Gestion des Mandats):</u>
-  id: Long ID
-  ref: String  REF_REQ
-  dateDebut: LocalDateTime
-  dateFin: LocalDateTime
-  salaire: BigDecimal
-  employe: Employe LABEL_REQ
-  responsabilite: Responsabilite
-
-<u class="text-orange-700 font-bold mr-4">Responsabilite_MS(ms1)_ROLES(admin)_SUB-MODULE(mandat)_MENU(Gestion des Responsabilites):</u>
-  id: Long ID
-  ref: String REF_REQ
-  nom: String LABEL_REQ
-  echelonMin: Echelon
-
-<u class="text-orange-700 font-bold mr-4">ResponsabiliteDetail_MS(ms1)_ROLES(admin)_SUB-MODULE(mandat)_MENU(Gestion des Responsabilites):</u>
-  id: Long ID
-  ref: String REF_REQ
-  dateAplicationMin: LocalDateTime
-  dateAplicationMax: LocalDateTime
-  salaire: BigDecimal
-  responsabilite: Responsabilite
-
-<u class="text-orange-700 font-bold mr-4">DemandeDocument(ms1)_ROLES(admin)_SUB-MODULE(demande)_MENU(Gestion documents):</u>
-  id: Long ID
-  ref: String REF_REQ
-  employe: Employe
-  typeDocument: TypeDocument
+                                 <p id="yamlText" class="text-xl"> {{ selectedProject.yaml }}</p>
 
                            </pre>
                             </div>
@@ -286,81 +214,6 @@
                                             <button (click)="copyToClipboard()"><i class="pi pi-clone" style="font-size: 1.5rem"></i></button>
                                         </div>
                                         <pre id="yamlText" class="w-auto">
-<u class="text-orange-700 font-bold mr-4">Diplome_MS(ms1)_ROLES(admin)_SUB-MODULE(commun)_MENU(Gestion Diplome):</u>
-  id: Long ID
-  ref: String  REF_REQ
-  libelle: String LABEL_REQ
-  echelon_depart: Echelon
-
-<u class="text-orange-700 font-bold mr-4">Avancement_MS(ms1)_ROLES(admin)_SUB-MODULE(avancement)_MENU(Gestion Echelle):</u>
-  id: Long ID
-  ref: String REF_REQ
-  employe: Employe
-  echelon: Echelon
-  salaireAjoute: BigDecimal
-
-<u class="text-orange-700 font-bold mr-4">Employe_MS(ms1)_ROLES(admin)_SUB-MODULE(commun)_MENU(Ressource humain):</u>
-  id: Long ID
-  ref: String REF_REQ
-  username: String LABEL_REQ
-  nom: String LABEL_REQ
-  password: String
-  salaire: BigDecimal
-  diplome: Diplome
-  entiteAdmin: EntiteAdmin
-
-<u class="text-orange-700 font-bold mr-4">Echelon_MS(ms1)_ROLES(admin)_SUB-MODULE(avancement)_MENU(Gestion Echelle):</u>
-  id: Long ID
-  ref: String  REF_REQ
-  libelle: String LABEL_REQ
-  salaire: BigDecimal
-  echelle: Echelle
-
-<u class="text-orange-700 font-bold mr-4">EntiteAdmin_MS(ms1)_ROLES(admin)_SUB-MODULE(commun)_MENU(Gestion entite):</u>
-  id: Long ID
-  ref: String  REF_REQ
-  libelle: String LABEL_REQ
-
-<u class="text-orange-700 font-bold mr-4">TemplateDocument_MS(ms1)_ROLES(admin)_SUB-MODULE(demande)_MENU(Gestion Template Document):</u>
-  id: Long ID
-  ref: String  REF_REQ
-  contenu: String  CONTENU_REQ
-  typeDocument: TypeDocument
-
-<u class="text-orange-700 font-bold mr-4">TypeDocument_MS(ms1)_ROLES(admin)_SUB-MODULE(demande)_MENU(Gestion Type Document):</u>
-  id: Long ID
-  code: String  CODE_REQ
-  libelle: String  LABEL_REQ
-
-<u class="text-orange-700 font-bold mr-4">Mandat_MS(ms1)_ROLES(admin)_SUB-MODULE(mandat)_MENU(Gestion des Mandats):</u>
-  id: Long ID
-  ref: String  REF_REQ
-  dateDebut: LocalDateTime
-  dateFin: LocalDateTime
-  salaire: BigDecimal
-  employe: Employe LABEL_REQ
-  responsabilite: Responsabilite
-
-<u class="text-orange-700 font-bold mr-4">Responsabilite_MS(ms1)_ROLES(admin)_SUB-MODULE(mandat)_MENU(Gestion des Responsabilites):</u>
-  id: Long ID
-  ref: String REF_REQ
-  nom: String LABEL_REQ
-  echelonMin: Echelon
-
-<u class="text-orange-700 font-bold mr-4">ResponsabiliteDetail_MS(ms1)_ROLES(admin)_SUB-MODULE(mandat)_MENU(Gestion des Responsabilites):</u>
-  id: Long ID
-  ref: String REF_REQ
-  dateAplicationMin: LocalDateTime
-  dateAplicationMax: LocalDateTime
-  salaire: BigDecimal
-  responsabilite: Responsabilite
-
-<u class="text-orange-700 font-bold mr-4">DemandeDocument(ms1)_ROLES(admin)_SUB-MODULE(demande)_MENU(Gestion documents):</u>
-  id: Long ID
-  ref: String REF_REQ
-  employe: Employe
-  typeDocument: TypeDocument
-
                            </pre>
                                     </div>
                                 </div>
