@@ -58,6 +58,7 @@ import {StepsModule} from "primeng/steps";
 import {RadioButtonModule} from "primeng/radiobutton";
 import {ScrollPanelModule} from "primeng/scrollpanel";
 import {RippleModule} from "primeng/ripple";
+import {ProjectAdminModule} from "../../../admin/view/project/project-admin.module";
 
 
 
@@ -122,6 +123,7 @@ import {RippleModule} from "primeng/ripple";
         RadioButtonModule,
         ScrollPanelModule,
         RippleModule,
+        ProjectAdminModule,
 
 
     ],
