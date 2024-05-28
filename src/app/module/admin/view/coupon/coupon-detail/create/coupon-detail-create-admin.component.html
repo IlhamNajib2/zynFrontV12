@@ -1,43 +1,43 @@
-        <p-dialog [(visible)]="createDialog" [style]="{width: '70vw'}" header="{{'couponDetail.tabPan' | translate}}" [modal]="true" styleClass="p-fluid" [maximizable]="true" [draggable]="false" [resizable]="false">
+        <p-dialog [(visible)]="createDialog" [style]="{width: '70vw'}"  [modal]="true" styleClass="p-fluid" [maximizable]="true" [draggable]="false" [resizable]="false">
             <ng-template pTemplate="content" >
-                        <p-tabView>
-                            <p-tabPanel header="{{'couponDetail.tabPan' | translate}}">
-                                <div class="grid">
+                <div>
+                    <h2>Coupon Detail</h2>
+                    <div class="grid">
 
                                             <div class="field col-11 md:col-6">
                                                 <label for="1">{{'couponDetail.packaging' | translate}}</label>
                                                 <p-dropdown  appendTo="body"  [options]="packagings" [(ngModel)]="item.packaging" id="1" [filter]="true" filterMatchMode="contains"
                                                         [showClear]="true" optionLabel="id" placeholder="{{'couponDetail.packaging' | translate}}"  >
                                                 </p-dropdown>
-                                                
+
                                             </div>
 
                                                 <div class="field col-12 md:col-6">
                                                     <label for="2">{{'couponDetail.discount' | translate}}</label>
                                                     <p-inputNumber class="mb-2 mr-2" id="2" placeholder="{{'couponDetail.discount' | translate}}" [(ngModel)]="item.discount"  >
                                                     </p-inputNumber>
-                                                    
+
                                                 </div>
 
                                                 <div class="field col-12 md:col-6">
                                                     <label for="3">{{'couponDetail.amountGivenInfluencer' | translate}}</label>
                                                     <p-inputNumber class="mb-2 mr-2" id="3" placeholder="{{'couponDetail.amountGivenInfluencer' | translate}}" [(ngModel)]="item.amountGivenInfluencer"  >
                                                     </p-inputNumber>
-                                                    
+
                                                 </div>
 
                                                 <div class="field col-12 md:col-6">
                                                     <label for="4">{{'couponDetail.usingNumber' | translate}}</label>
                                                     <p-inputNumber class="mb-2 mr-2" id="4" placeholder="{{'couponDetail.usingNumber' | translate}}" [(ngModel)]="item.usingNumber"  >
                                                     </p-inputNumber>
-                                                    
+
                                                 </div>
 
                                                 <div class="field col-12 md:col-6">
                                                     <label for="5">{{'couponDetail.maxUsingNumber' | translate}}</label>
                                                     <p-inputNumber class="mb-2 mr-2" id="5" placeholder="{{'couponDetail.maxUsingNumber' | translate}}" [(ngModel)]="item.maxUsingNumber"  >
                                                     </p-inputNumber>
-                                                    
+
                                                 </div>
 
                                             <div class="field col-11 md:col-6">
@@ -45,13 +45,11 @@
                                                 <p-dropdown  appendTo="body"  [options]="coupons" [(ngModel)]="item.coupon" id="6" [filter]="true" filterMatchMode="contains"
                                                         [showClear]="true" optionLabel="name" placeholder="{{'couponDetail.coupon' | translate}}"  >
                                                 </p-dropdown>
-                                                
+
                                             </div>
 
                                 </div>
-                            </p-tabPanel>
-
-                        </p-tabView>
+                                </div>
 
             </ng-template>
 

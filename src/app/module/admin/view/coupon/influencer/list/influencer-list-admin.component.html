@@ -5,13 +5,8 @@
             <p-toolbar styleClass="mb-4">
                 <ng-template pTemplate="left">
                                         <button pButton pRipple label=" {{'new' | translate}}" icon="pi pi-plus" class="p-button-info mr-2 mb-2" (click)="openCreate('Influencer')" *ngIf="createActionIsValid"></button>
-                    <button [disabled]="isSelectionDisabled()" pButton pRipple label=" {{'delete' | translate}}" icon="pi pi-trash" class="p-button-danger mr-2 mb-2" (click)=deleteMultiple()  *ngIf="deleteActionIsValid"></button>
-                    <button pButton pRipple label=" {{'search' | translate}}" icon="pi pi-{{findByCriteriaShow?'angle-down':'angle-right'}}" class="p-button-secondary mr-2 mb-2" (click)="this.showSearch()"></button>
                 </ng-template>
                 <ng-template pTemplate="right">
-                    <div class="flex">
-                        <p-splitButton label=" {{'export' | translate}}" icon="pi pi-download" styleClass="p-button-secondary" [model]="excelPdfButons"></p-splitButton>
-                    </div>
                 </ng-template>
 
             </p-toolbar>
@@ -90,7 +85,7 @@
                         <th style="width: 3rem">
                             <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
                         </th>
-                                
+
                         <th pSortableColumn="nickName">
                             <div class="p-d-flex p-jc-between p-ai-center">
                                 <span>{{'influencer.nickName' | translate}}</span>
@@ -98,8 +93,8 @@
                                 <p-columnFilter type="text" field="element.nickName" display="menu" class="ml-auto"></p-columnFilter>
                             </div>
                         </th>
-                                
-                                
+
+
                         <th pSortableColumn="rib">
                             <div class="p-d-flex p-jc-between p-ai-center">
                                 <span>{{'influencer.rib' | translate}}</span>
@@ -107,48 +102,48 @@
                                 <p-columnFilter type="text" field="element.rib" display="menu" class="ml-auto"></p-columnFilter>
                             </div>
                         </th>
-                                
-                                
+
+
                         <th pSortableColumn="credentialsNonExpired">
                             <div class="p-d-flex p-jc-between p-ai-center">
                                 <span>{{'influencer.credentialsNonExpired' | translate}}</span>
                                 <p-sortIcon field="credentialsNonExpired"></p-sortIcon>
                             </div>
                         </th>
-                                
-                                
+
+
                         <th pSortableColumn="enabled">
                             <div class="p-d-flex p-jc-between p-ai-center">
                                 <span>{{'influencer.enabled' | translate}}</span>
                                 <p-sortIcon field="enabled"></p-sortIcon>
                             </div>
                         </th>
-                                
-                                
+
+
                         <th pSortableColumn="accountNonExpired">
                             <div class="p-d-flex p-jc-between p-ai-center">
                                 <span>{{'influencer.accountNonExpired' | translate}}</span>
                                 <p-sortIcon field="accountNonExpired"></p-sortIcon>
                             </div>
                         </th>
-                                
-                                
+
+
                         <th pSortableColumn="accountNonLocked">
                             <div class="p-d-flex p-jc-between p-ai-center">
                                 <span>{{'influencer.accountNonLocked' | translate}}</span>
                                 <p-sortIcon field="accountNonLocked"></p-sortIcon>
                             </div>
                         </th>
-                                
-                                
+
+
                         <th pSortableColumn="passwordChanged">
                             <div class="p-d-flex p-jc-between p-ai-center">
                                 <span>{{'influencer.passwordChanged' | translate}}</span>
                                 <p-sortIcon field="passwordChanged"></p-sortIcon>
                             </div>
                         </th>
-                                
-                                
+
+
                         <th pSortableColumn="username">
                             <div class="p-d-flex p-jc-between p-ai-center">
                                 <span>{{'influencer.username' | translate}}</span>
@@ -156,8 +151,8 @@
                                 <p-columnFilter type="text" field="element.username" display="menu" class="ml-auto"></p-columnFilter>
                             </div>
                         </th>
-                                
-                                
+
+
                         <th pSortableColumn="password">
                             <div class="p-d-flex p-jc-between p-ai-center">
                                 <span>{{'influencer.password' | translate}}</span>
@@ -165,7 +160,7 @@
                                 <p-columnFilter type="text" field="element.password" display="menu" class="ml-auto"></p-columnFilter>
                             </div>
                         </th>
-                                
+
                         <th>Actions</th>
                     </tr>
                 </ng-template>
@@ -174,42 +169,42 @@
                         <td>
                             <p-tableCheckbox [value]="element"></p-tableCheckbox>
                         </td>
-                            
+
                         <td>{{element.nickName}}</td>
-                            
-                            
+
+
                         <td>{{element.rib}}</td>
-                            
-                            
+
+
                         <td><i *ngIf="element.credentialsNonExpired" class="pi pi-check checked-toogle"></i>
                             <i *ngIf="!element.credentialsNonExpired" class="pi pi-times unchecked-toogle"></i>
                         </td>
-                            
-                            
+
+
                         <td><i *ngIf="element.enabled" class="pi pi-check checked-toogle"></i>
                             <i *ngIf="!element.enabled" class="pi pi-times unchecked-toogle"></i>
                         </td>
-                            
-                            
+
+
                         <td><i *ngIf="element.accountNonExpired" class="pi pi-check checked-toogle"></i>
                             <i *ngIf="!element.accountNonExpired" class="pi pi-times unchecked-toogle"></i>
                         </td>
-                            
-                            
+
+
                         <td><i *ngIf="element.accountNonLocked" class="pi pi-check checked-toogle"></i>
                             <i *ngIf="!element.accountNonLocked" class="pi pi-times unchecked-toogle"></i>
                         </td>
-                            
-                            
+
+
                         <td><i *ngIf="element.passwordChanged" class="pi pi-check checked-toogle"></i>
                             <i *ngIf="!element.passwordChanged" class="pi pi-times unchecked-toogle"></i>
                         </td>
-                            
-                            
+
+
                         <td>{{element.username}}</td>
-                            
-                            
-                            
+
+
+
                         <td>
                             <button pButton pRipple icon="pi pi-pencil"  class="p-button-rounded p-button-info mr-2" (click)="edit(element)"  *ngIf="editActionIsValid"></button>
                             <button pButton pRipple icon="pi pi-list" class="p-button-rounded p-button-secondary mr-2" (click)="view(element)"  *ngIf="viewActionIsValid"></button>

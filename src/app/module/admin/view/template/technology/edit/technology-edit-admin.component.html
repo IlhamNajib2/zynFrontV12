@@ -1,8 +1,8 @@
-    <p-dialog [(visible)]="editDialog" [style]="{width: '70vw'}" header="{{'technology.tabPan' | translate}}" [modal]="true" styleClass="p-fluid" [maximizable]="true" [draggable]="false" [resizable]="false">
-        <ng-template pTemplate="content" >
-                <p-tabView>
-                    <p-tabPanel header="{{'technology.tabPan' | translate}}">
-                        <div class="grid">
+<p-dialog [(visible)]="editDialog" [style]="{width: '70vw'}" [modal]="true" styleClass="p-fluid" [maximizable]="true" [draggable]="false" [resizable]="false">
+    <ng-template pTemplate="content" >
+        <div>
+            <h2>Technology</h2>
+            <div class="grid">
 
                                         <div class="field col-12 md:col-6">
                                             <label for="1">{{'technology.code' | translate}}<span style="color: red;">*</span></label>
@@ -26,7 +26,7 @@
                                             <label for="3">{{'technology.logo' | translate}}</label>
                                             <input class="mb-2 mr-2" type="text" pInputText  placeholder="{{'technology.logo' | translate}}" id="3" [(ngModel)]="item.logo"
                                                     />
-                                            
+
                                         </div>
 
 
@@ -36,13 +36,11 @@
                                         <p-dropdown  appendTo="body"  [options]="typeTemplates" [(ngModel)]="item.typeTemplate" id="4" [filter]="true" filterMatchMode="contains"
                                                      [showClear]="true" optionLabel="name" placeholder="{{'technology.typeTemplate' | translate}}"  >
                                         </p-dropdown>
-                                        
+
                                     </div>
 
                         </div>
-                    </p-tabPanel>
-
-                </p-tabView>
+                        </div>
 
         </ng-template>
 

@@ -1,10 +1,10 @@
 
 
-    <p-dialog [(visible)]="editDialog" [style]="{width: '70vw'}" header="{{'project.tabPan' | translate}}" [modal]="true" styleClass="p-fluid" [maximizable]="true" [draggable]="false" [resizable]="false">
-        <ng-template pTemplate="content" >
-                <p-tabView>
-                    <p-tabPanel header="{{'project.tabPan' | translate}}">
-                        <div class="grid">
+<p-dialog [(visible)]="editDialog" [style]="{width: '70vw'}" [modal]="true" styleClass="p-fluid" [maximizable]="true" [draggable]="false" [resizable]="false">
+    <ng-template pTemplate="content" >
+        <div>
+            <h2>Project</h2>
+            <div class="grid">
 
                                         <div class="field col-12 md:col-6">
                                             <label for="1">{{'project.code' | translate}}<span style="color: red;">*</span></label>
@@ -69,9 +69,7 @@
                                                        defaultLabel="Select un template" optionLabel="template.name"  display="chip"></p-multiSelect>
                                     </div>
                         </div>
-                    </p-tabPanel>
-
-                </p-tabView>
+                        </div>
 
         </ng-template>
 

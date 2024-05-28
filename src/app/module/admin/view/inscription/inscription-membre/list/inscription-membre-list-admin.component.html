@@ -5,13 +5,8 @@
             <p-toolbar styleClass="mb-4">
                 <ng-template pTemplate="left">
                                         <button pButton pRipple label=" {{'new' | translate}}" icon="pi pi-plus" class="p-button-info mr-2 mb-2" (click)="openCreate('InscriptionMembre')" *ngIf="createActionIsValid"></button>
-                    <button [disabled]="isSelectionDisabled()" pButton pRipple label=" {{'delete' | translate}}" icon="pi pi-trash" class="p-button-danger mr-2 mb-2" (click)=deleteMultiple()  *ngIf="deleteActionIsValid"></button>
-                    <button pButton pRipple label=" {{'search' | translate}}" icon="pi pi-{{findByCriteriaShow?'angle-down':'angle-right'}}" class="p-button-secondary mr-2 mb-2" (click)="this.showSearch()"></button>
                 </ng-template>
                 <ng-template pTemplate="right">
-                    <div class="flex">
-                        <p-splitButton label=" {{'export' | translate}}" icon="pi pi-download" styleClass="p-button-secondary" [model]="excelPdfButons"></p-splitButton>
-                    </div>
                 </ng-template>
 
             </p-toolbar>
@@ -143,102 +138,102 @@
                         <th style="width: 3rem">
                             <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
                         </th>
-                                
+
                         <th pSortableColumn="inscriptionDate">
                             <div class="p-d-flex p-jc-between p-ai-center">
                                 <span>{{'inscriptionMembre.inscriptionDate' | translate}}</span>
                                 <p-sortIcon field="inscriptionDate"></p-sortIcon>
                             </div>
                         </th>
-                                
-                                
+
+
                         <th pSortableColumn="member">
                             <div class="p-d-flex p-jc-between p-ai-center">
                                 <span>{{'inscriptionMembre.member' | translate}}</span>
                                 <p-sortIcon field="member"></p-sortIcon>
                             </div>
                         </th>
-                                
-                                
+
+
                         <th pSortableColumn="inscriptionMembreState">
                             <div class="p-d-flex p-jc-between p-ai-center">
                                 <span>{{'inscriptionMembre.inscriptionMembreState' | translate}}</span>
                                 <p-sortIcon field="inscriptionMembreState"></p-sortIcon>
                             </div>
                         </th>
-                                
-                                
+
+
                         <th pSortableColumn="inscriptionCollaborator">
                             <div class="p-d-flex p-jc-between p-ai-center">
                                 <span>{{'inscriptionMembre.inscriptionCollaborator' | translate}}</span>
                                 <p-sortIcon field="inscriptionCollaborator"></p-sortIcon>
                             </div>
                         </th>
-                                
-                                
+
+
                         <th pSortableColumn="consumedEntity">
                             <div class="p-d-flex p-jc-between p-ai-center">
                                 <span>{{'inscriptionMembre.consumedEntity' | translate}}</span>
                                 <p-sortIcon field="consumedEntity"></p-sortIcon>
                             </div>
                         </th>
-                                
-                                
+
+
                         <th pSortableColumn="consumedProjet">
                             <div class="p-d-flex p-jc-between p-ai-center">
                                 <span>{{'inscriptionMembre.consumedProjet' | translate}}</span>
                                 <p-sortIcon field="consumedProjet"></p-sortIcon>
                             </div>
                         </th>
-                                
-                                
+
+
                         <th pSortableColumn="consumedAttribut">
                             <div class="p-d-flex p-jc-between p-ai-center">
                                 <span>{{'inscriptionMembre.consumedAttribut' | translate}}</span>
                                 <p-sortIcon field="consumedAttribut"></p-sortIcon>
                             </div>
                         </th>
-                                
-                                
+
+
                         <th pSortableColumn="consumedIndicator">
                             <div class="p-d-flex p-jc-between p-ai-center">
                                 <span>{{'inscriptionMembre.consumedIndicator' | translate}}</span>
                                 <p-sortIcon field="consumedIndicator"></p-sortIcon>
                             </div>
                         </th>
-                                
-                                
+
+
                         <th pSortableColumn="affectedEntity">
                             <div class="p-d-flex p-jc-between p-ai-center">
                                 <span>{{'inscriptionMembre.affectedEntity' | translate}}</span>
                                 <p-sortIcon field="affectedEntity"></p-sortIcon>
                             </div>
                         </th>
-                                
-                                <!-- 
+
+                                <!--
                         <th pSortableColumn="affectedProjet">
                             <div class="p-d-flex p-jc-between p-ai-center">
                                 <span>{{'inscriptionMembre.affectedProjet' | translate}}</span>
                                 <p-sortIcon field="affectedProjet"></p-sortIcon>
                             </div>
                         </th>
-                                --> 
-                                <!-- 
+                                -->
+                                <!--
                         <th pSortableColumn="affectedAttribut">
                             <div class="p-d-flex p-jc-between p-ai-center">
                                 <span>{{'inscriptionMembre.affectedAttribut' | translate}}</span>
                                 <p-sortIcon field="affectedAttribut"></p-sortIcon>
                             </div>
                         </th>
-                                --> 
-                                <!-- 
+                                -->
+                                <!--
                         <th pSortableColumn="affectedIndicator">
                             <div class="p-d-flex p-jc-between p-ai-center">
                                 <span>{{'inscriptionMembre.affectedIndicator' | translate}}</span>
                                 <p-sortIcon field="affectedIndicator"></p-sortIcon>
                             </div>
                         </th>
-                                --> 
+                                -->
                         <th>Actions</th>
                     </tr>
                 </ng-template>
@@ -247,42 +242,42 @@
                         <td>
                             <p-tableCheckbox [value]="element"></p-tableCheckbox>
                         </td>
-                            
+
                         <td>{{element.inscriptionDate | date :'dd/MM/yyyy HH:mm' }}</td>
-                            
-                            
+
+
                         <td>{{element.member?.id}}</td>
-                            
-                            
+
+
                         <td>{{element.inscriptionMembreState?.name}}</td>
-                            
-                            
+
+
                         <td>{{element.inscriptionCollaborator?.id}}</td>
-                            
-                            
+
+
                         <td>{{element.consumedEntity}}</td>
-                            
-                            
+
+
                         <td>{{element.consumedProjet}}</td>
-                            
-                            
+
+
                         <td>{{element.consumedAttribut}}</td>
-                            
-                            
+
+
                         <td>{{element.consumedIndicator}}</td>
-                            
-                            
+
+
                         <td>{{element.affectedEntity}}</td>
-                            
-                             <!-- 
+
+                             <!--
                         <td>{{element.affectedProjet}}</td>
-                             --> 
-                             <!-- 
+                             -->
+                             <!--
                         <td>{{element.affectedAttribut}}</td>
-                             --> 
-                             <!-- 
+                             -->
+                             <!--
                         <td>{{element.affectedIndicator}}</td>
-                             --> 
+                             -->
                         <td>
                             <button pButton pRipple icon="pi pi-pencil"  class="p-button-rounded p-button-info mr-2" (click)="edit(element)"  *ngIf="editActionIsValid"></button>
                             <button pButton pRipple icon="pi pi-list" class="p-button-rounded p-button-secondary mr-2" (click)="view(element)"  *ngIf="viewActionIsValid"></button>

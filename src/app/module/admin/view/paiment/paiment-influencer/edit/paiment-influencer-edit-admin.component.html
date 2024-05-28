@@ -1,8 +1,8 @@
-    <p-dialog [(visible)]="editDialog" [style]="{width: '70vw'}" header="{{'paimentInfluencer.tabPan' | translate}}" [modal]="true" styleClass="p-fluid" [maximizable]="true" [draggable]="false" [resizable]="false">
-        <ng-template pTemplate="content" >
-                <p-tabView>
-                    <p-tabPanel header="{{'paimentInfluencer.tabPan' | translate}}">
-                        <div class="grid">
+<p-dialog [(visible)]="editDialog" [style]="{width: '70vw'}" [modal]="true" styleClass="p-fluid" [maximizable]="true" [draggable]="false" [resizable]="false">
+    <ng-template pTemplate="content" >
+        <div>
+            <h2>Paiment Influencer</h2>
+            <div class="grid">
 
                                         <div class="field col-12 md:col-6">
                                             <label for="1">{{'paimentInfluencer.name' | translate}}<span style="color: red;">*</span></label>
@@ -17,7 +17,7 @@
                                             <label for="2">{{'paimentInfluencer.description' | translate}}</label>
                                             <textarea id="2" pInputTextarea rows="5" cols="30" placeholder="{{'paimentInfluencer.description' | translate}}"  [(ngModel)]="item.description"
                                                        ></textarea>
-                                            
+
                                         </div>
 
                                         <div class="field col-12 md:col-6">
@@ -34,7 +34,7 @@
                                         <p-dropdown  appendTo="body"  [options]="influencers" [(ngModel)]="item.influencer" id="4" [filter]="true" filterMatchMode="contains"
                                                      [showClear]="true" optionLabel="id" placeholder="{{'paimentInfluencer.influencer' | translate}}"  >
                                         </p-dropdown>
-                                        
+
                                     </div>
 
                                     <div class="field col-11 md:col-6">
@@ -42,21 +42,21 @@
                                         <p-dropdown  appendTo="body"  [options]="coupons" [(ngModel)]="item.coupon" id="5" [filter]="true" filterMatchMode="contains"
                                                      [showClear]="true" optionLabel="name" placeholder="{{'paimentInfluencer.coupon' | translate}}"  >
                                         </p-dropdown>
-                                        
+
                                     </div>
 
                                         <div class="field col-12 md:col-6">
                                             <label for="6">{{'paimentInfluencer.total' | translate}}</label>
                                             <p-inputNumber class="mb-2 mr-2" id="6" placeholder="{{'paimentInfluencer.total' | translate}}" [(ngModel)]="item.total"  >
                                             </p-inputNumber>
-                                            
+
                                         </div>
 
                                         <div class="field col-12 md:col-6">
                                             <label for="7">{{'paimentInfluencer.nbrUtilisation' | translate}}</label>
                                             <p-inputNumber class="mb-2 mr-2" id="7" placeholder="{{'paimentInfluencer.nbrUtilisation' | translate}}" [(ngModel)]="item.nbrUtilisation"  >
                                             </p-inputNumber>
-                                            
+
                                         </div>
 
                                         <div class="field col-12 md:col-6">
@@ -64,7 +64,7 @@
                                             <p-calendar appendTo="body" id="8"  [showTime]="true" [showSeconds]="false" placeholder="{{'paimentInfluencer.datePaiement' | translate}}"  [(ngModel)]="item.datePaiement"
                                                         dateFormat="{{dateFormat}}"  >
                                             </p-calendar>
-                                            
+
                                         </div>
 
                                     <div class="field col-11 md:col-6">
@@ -72,13 +72,11 @@
                                         <p-dropdown  appendTo="body"  [options]="paimentInfluencerStates" [(ngModel)]="item.paimentInfluencerState" id="9" [filter]="true" filterMatchMode="contains"
                                                      [showClear]="true" optionLabel="code" placeholder="{{'paimentInfluencer.paimentInfluencerState' | translate}}"  >
                                         </p-dropdown>
-                                        
+
                                     </div>
 
                         </div>
-                    </p-tabPanel>
-
-                </p-tabView>
+                        </div>
 
         </ng-template>
 

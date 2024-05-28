@@ -1,15 +1,15 @@
-    <p-dialog [(visible)]="editDialog" [style]="{width: '70vw'}" header="{{'inscriptionCollaborator.tabPan' | translate}}" [modal]="true" styleClass="p-fluid" [maximizable]="true" [draggable]="false" [resizable]="false">
-        <ng-template pTemplate="content" >
-                <p-tabView>
-                    <p-tabPanel header="{{'inscriptionCollaborator.tabPan' | translate}}">
-                        <div class="grid">
+<p-dialog [(visible)]="editDialog" [style]="{width: '70vw'}" [modal]="true" styleClass="p-fluid" [maximizable]="true" [draggable]="false" [resizable]="false">
+    <ng-template pTemplate="content" >
+        <div>
+            <h2>Inscription Collaborator</h2>
+            <div class="grid">
 
                                         <div class="field col-12 md:col-6">
                                             <label for="1">{{'inscriptionCollaborator.startDate' | translate}}</label>
                                             <p-calendar appendTo="body" id="1"  [showTime]="true" [showSeconds]="false" placeholder="{{'inscriptionCollaborator.startDate' | translate}}"  [(ngModel)]="item.startDate"
                                                         dateFormat="{{dateFormat}}"  >
                                             </p-calendar>
-                                            
+
                                         </div>
 
                                         <div class="field col-12 md:col-6">
@@ -17,7 +17,7 @@
                                             <p-calendar appendTo="body" id="2"  [showTime]="true" [showSeconds]="false" placeholder="{{'inscriptionCollaborator.endDate' | translate}}"  [(ngModel)]="item.endDate"
                                                         dateFormat="{{dateFormat}}"  >
                                             </p-calendar>
-                                            
+
                                         </div>
 
                                         <div class="field col-12 md:col-6">
@@ -25,7 +25,7 @@
                                             <p-calendar appendTo="body" id="3"  [showTime]="true" [showSeconds]="false" placeholder="{{'inscriptionCollaborator.renewDate' | translate}}"  [(ngModel)]="item.renewDate"
                                                         dateFormat="{{dateFormat}}"  >
                                             </p-calendar>
-                                            
+
                                         </div>
 
                                     <div class="field col-11 md:col-6">
@@ -33,35 +33,35 @@
                                         <p-dropdown  appendTo="body"  [options]="packagings" [(ngModel)]="item.packaging" id="4" [filter]="true" filterMatchMode="contains"
                                                      [showClear]="true" optionLabel="id" placeholder="{{'inscriptionCollaborator.packaging' | translate}}"  >
                                         </p-dropdown>
-                                        
+
                                     </div>
 
                                         <div class="field col-12 md:col-6">
                                             <label for="5">{{'inscriptionCollaborator.consumedEntity' | translate}}</label>
                                             <p-inputNumber class="mb-2 mr-2" id="5" placeholder="{{'inscriptionCollaborator.consumedEntity' | translate}}" [(ngModel)]="item.consumedEntity"  >
                                             </p-inputNumber>
-                                            
+
                                         </div>
 
                                         <div class="field col-12 md:col-6">
                                             <label for="6">{{'inscriptionCollaborator.consumedProjet' | translate}}</label>
                                             <p-inputNumber class="mb-2 mr-2" id="6" placeholder="{{'inscriptionCollaborator.consumedProjet' | translate}}" [(ngModel)]="item.consumedProjet"  >
                                             </p-inputNumber>
-                                            
+
                                         </div>
 
                                         <div class="field col-12 md:col-6">
                                             <label for="7">{{'inscriptionCollaborator.consumedAttribut' | translate}}</label>
                                             <p-inputNumber class="mb-2 mr-2" id="7" placeholder="{{'inscriptionCollaborator.consumedAttribut' | translate}}" [(ngModel)]="item.consumedAttribut"  >
                                             </p-inputNumber>
-                                            
+
                                         </div>
 
                                         <div class="field col-12 md:col-6">
                                             <label for="8">{{'inscriptionCollaborator.consumedIndicator' | translate}}</label>
                                             <p-inputNumber class="mb-2 mr-2" id="8" placeholder="{{'inscriptionCollaborator.consumedIndicator' | translate}}" [(ngModel)]="item.consumedIndicator"  >
                                             </p-inputNumber>
-                                            
+
                                         </div>
 
                                     <div class="field col-11 md:col-6">
@@ -69,7 +69,7 @@
                                         <p-dropdown  appendTo="body"  [options]="collaborators" [(ngModel)]="item.collaborator" id="9" [filter]="true" filterMatchMode="contains"
                                                      [showClear]="true" optionLabel="description" placeholder="{{'inscriptionCollaborator.collaborator' | translate}}"  >
                                         </p-dropdown>
-                                        
+
                                     </div>
 
                                     <div class="field col-11 md:col-6">
@@ -77,7 +77,7 @@
                                         <p-dropdown  appendTo="body"  [options]="inscriptionCollaboratorStates" [(ngModel)]="item.inscriptionCollaboratorState" id="10" [filter]="true" filterMatchMode="contains"
                                                      [showClear]="true" optionLabel="name" placeholder="{{'inscriptionCollaborator.inscriptionCollaboratorState' | translate}}"  >
                                         </p-dropdown>
-                                        
+
                                     </div>
 
                                     <div class="field col-11 md:col-6">
@@ -85,11 +85,10 @@
                                         <p-dropdown  appendTo="body"  [options]="inscriptionCollaboratorTypes" [(ngModel)]="item.inscriptionCollaboratorType" id="11" [filter]="true" filterMatchMode="contains"
                                                      [showClear]="true" optionLabel="name" placeholder="{{'inscriptionCollaborator.inscriptionCollaboratorType' | translate}}"  >
                                         </p-dropdown>
-                                        
+
                                     </div>
 
                         </div>
-                    </p-tabPanel>
                             <p-tabPanel header="{{'inscriptionCollaborator.inscriptionMembres' | translate}}">
                                 <p-tabView [(activeIndex)]="activeTab">
                                     <p-tabPanel header="Création">
@@ -98,7 +97,7 @@
                                                                 <label for="1">Inscription date</label>
                                                                 <p-calendar appendTo="body" id="1"  [showTime]="true" [showSeconds]="false" placeholder="Inscription date" [(ngModel)]="inscriptionMembresElement.inscriptionDate"
                                                                             dateFormat="{{dateFormat}}" [showIcon]="true"  ></p-calendar>
-                                                                
+
                                                             </div>
                                                             <div class="field col-11 md:col-6">
                                                                 <label>Member</label>
@@ -106,7 +105,7 @@
                                                                              id="2"  [filter]="true" filterMatchMode="contains" [showClear]="true" optionLabel="id"
                                                                              placeholder="Member"  >
                                                                 </p-dropdown>
-                                                                
+
                                                             </div>
 
                                                             <div class="field col-11 md:col-6">
@@ -115,48 +114,48 @@
                                                                              id="3"  [filter]="true" filterMatchMode="contains" [showClear]="true" optionLabel="name"
                                                                              placeholder="Inscription membre state"  >
                                                                 </p-dropdown>
-                                                                
+
                                                             </div>
 
                                                             <div class="field col-12 md:col-6">
                                                                 <label for="5">Consumed entity</label>
                                                                 <p-inputNumber class="mb-2 mr-2" id="consumedEntity" placeholder="Consumed entity"  [(ngModel)]="inscriptionMembresElement.consumedEntity"></p-inputNumber>
-                                                                
+
                                                             </div>
                                                             <div class="field col-12 md:col-6">
                                                                 <label for="6">Consumed projet</label>
                                                                 <p-inputNumber class="mb-2 mr-2" id="consumedProjet" placeholder="Consumed projet"  [(ngModel)]="inscriptionMembresElement.consumedProjet"></p-inputNumber>
-                                                                
+
                                                             </div>
                                                             <div class="field col-12 md:col-6">
                                                                 <label for="7">Consumed attribut</label>
                                                                 <p-inputNumber class="mb-2 mr-2" id="consumedAttribut" placeholder="Consumed attribut"  [(ngModel)]="inscriptionMembresElement.consumedAttribut"></p-inputNumber>
-                                                                
+
                                                             </div>
                                                             <div class="field col-12 md:col-6">
                                                                 <label for="8">Consumed indicator</label>
                                                                 <p-inputNumber class="mb-2 mr-2" id="consumedIndicator" placeholder="Consumed indicator"  [(ngModel)]="inscriptionMembresElement.consumedIndicator"></p-inputNumber>
-                                                                
+
                                                             </div>
                                                             <div class="field col-12 md:col-6">
                                                                 <label for="9">Affected entity</label>
                                                                 <p-inputNumber class="mb-2 mr-2" id="affectedEntity" placeholder="Affected entity"  [(ngModel)]="inscriptionMembresElement.affectedEntity"></p-inputNumber>
-                                                                
+
                                                             </div>
                                                             <div class="field col-12 md:col-6">
                                                                 <label for="10">Affected projet</label>
                                                                 <p-inputNumber class="mb-2 mr-2" id="affectedProjet" placeholder="Affected projet"  [(ngModel)]="inscriptionMembresElement.affectedProjet"></p-inputNumber>
-                                                                
+
                                                             </div>
                                                             <div class="field col-12 md:col-6">
                                                                 <label for="11">Affected attribut</label>
                                                                 <p-inputNumber class="mb-2 mr-2" id="affectedAttribut" placeholder="Affected attribut"  [(ngModel)]="inscriptionMembresElement.affectedAttribut"></p-inputNumber>
-                                                                
+
                                                             </div>
                                                             <div class="field col-12 md:col-6">
                                                                 <label for="12">Affected indicator</label>
                                                                 <p-inputNumber class="mb-2 mr-2" id="affectedIndicator" placeholder="Affected indicator"  [(ngModel)]="inscriptionMembresElement.affectedIndicator"></p-inputNumber>
-                                                                
+
                                                             </div>
                                                 <div class="field col-12 md:col-1">
                                                     <button pButton pRipple type="button" icon="pi pi-plus" class="mt-4" label="OK" (click)="addInscriptionMembres()"></button>
@@ -210,8 +209,7 @@
                             </p-tabPanel>
 
 
-                </p-tabView>
-
+</div>
         </ng-template>
 
         <ng-template pTemplate="footer" >

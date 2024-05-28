@@ -1,8 +1,8 @@
-        <p-dialog [(visible)]="createDialog" [style]="{width: '70vw'}" header="{{'paimentCollaboratorState.tabPan' | translate}}" [modal]="true" styleClass="p-fluid" [maximizable]="true" [draggable]="false" [resizable]="false">
+        <p-dialog [(visible)]="createDialog" [style]="{width: '70vw'}" [modal]="true" styleClass="p-fluid" [maximizable]="true" [draggable]="false" [resizable]="false">
             <ng-template pTemplate="content" >
-                        <p-tabView>
-                            <p-tabPanel header="{{'paimentCollaboratorState.tabPan' | translate}}">
-                                <div class="grid">
+                <div>
+                    <h2>Paiment Collaborator State</h2>
+                    <div class="grid">
 
                                                 <div class="field col-12 md:col-6">
                                                     <label for="1">{{'paimentCollaboratorState.code' | translate}}<span style="color: red;">*</span></label>
@@ -17,15 +17,13 @@
                                                     <label for="2">{{'paimentCollaboratorState.libelle' | translate}}</label>
                                                     <input class="mb-2 mr-2" type="text" pInputText  placeholder="{{'paimentCollaboratorState.libelle' | translate}}" id="2" [(ngModel)]="item.libelle"
                                                              />
-                                                    
+
                                                 </div>
 
 
 
                                 </div>
-                            </p-tabPanel>
-
-                        </p-tabView>
+                                </div>
 
             </ng-template>
 
