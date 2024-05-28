@@ -5,13 +5,8 @@
             <p-toolbar styleClass="mb-4">
                 <ng-template pTemplate="left">
                                         <button pButton pRipple label=" {{'new' | translate}}" icon="pi pi-plus" class="p-button-info mr-2 mb-2" (click)="openCreate('Template')" *ngIf="createActionIsValid"></button>
-                    <button [disabled]="isSelectionDisabled()" pButton pRipple label=" {{'delete' | translate}}" icon="pi pi-trash" class="p-button-danger mr-2 mb-2" (click)=deleteMultiple()  *ngIf="deleteActionIsValid"></button>
-                    <button pButton pRipple label=" {{'search' | translate}}" icon="pi pi-{{findByCriteriaShow?'angle-down':'angle-right'}}" class="p-button-secondary mr-2 mb-2" (click)="this.showSearch()"></button>
                 </ng-template>
                 <ng-template pTemplate="right">
-                    <div class="flex">
-                        <p-splitButton label=" {{'export' | translate}}" icon="pi pi-download" styleClass="p-button-secondary" [model]="excelPdfButons"></p-splitButton>
-                    </div>
                 </ng-template>
 
             </p-toolbar>
@@ -130,7 +125,7 @@
                         <th style="width: 3rem">
                             <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
                         </th>
-                                
+
                         <th pSortableColumn="code">
                             <div class="p-d-flex p-jc-between p-ai-center">
                                 <span>{{'template.code' | translate}}</span>
@@ -138,8 +133,8 @@
                                 <p-columnFilter type="text" field="element.code" display="menu" class="ml-auto"></p-columnFilter>
                             </div>
                         </th>
-                                
-                                
+
+
                         <th pSortableColumn="name">
                             <div class="p-d-flex p-jc-between p-ai-center">
                                 <span>{{'template.name' | translate}}</span>
@@ -147,48 +142,48 @@
                                 <p-columnFilter type="text" field="element.name" display="menu" class="ml-auto"></p-columnFilter>
                             </div>
                         </th>
-                                
-                                
+
+
                         <th pSortableColumn="addingDate">
                             <div class="p-d-flex p-jc-between p-ai-center">
                                 <span>{{'template.addingDate' | translate}}</span>
                                 <p-sortIcon field="addingDate"></p-sortIcon>
                             </div>
                         </th>
-                                
-                                
+
+
                         <th pSortableColumn="lastUpdateDate">
                             <div class="p-d-flex p-jc-between p-ai-center">
                                 <span>{{'template.lastUpdateDate' | translate}}</span>
                                 <p-sortIcon field="lastUpdateDate"></p-sortIcon>
                             </div>
                         </th>
-                                
-                                
+
+
                         <th pSortableColumn="categoryTemplate">
                             <div class="p-d-flex p-jc-between p-ai-center">
                                 <span>{{'template.categoryTemplate' | translate}}</span>
                                 <p-sortIcon field="categoryTemplate"></p-sortIcon>
                             </div>
                         </th>
-                                
-                                
+
+
                         <th pSortableColumn="typeTemplate">
                             <div class="p-d-flex p-jc-between p-ai-center">
                                 <span>{{'template.typeTemplate' | translate}}</span>
                                 <p-sortIcon field="typeTemplate"></p-sortIcon>
                             </div>
                         </th>
-                                
-                                
+
+
                         <th pSortableColumn="levelTemplate">
                             <div class="p-d-flex p-jc-between p-ai-center">
                                 <span>{{'template.levelTemplate' | translate}}</span>
                                 <p-sortIcon field="levelTemplate"></p-sortIcon>
                             </div>
                         </th>
-                                
-                                
+
+
                         <th pSortableColumn="templateTags">
                             <div class="p-d-flex p-jc-between p-ai-center">
                                 <span>{{'template.templateTags' | translate}}</span>
@@ -196,39 +191,39 @@
                                 <p-columnFilter type="text" field="element.templateTags" display="menu" class="ml-auto"></p-columnFilter>
                             </div>
                         </th>
-                                
-                                
+
+
                         <th pSortableColumn="domainTemplate">
                             <div class="p-d-flex p-jc-between p-ai-center">
                                 <span>{{'template.domainTemplate' | translate}}</span>
                                 <p-sortIcon field="domainTemplate"></p-sortIcon>
                             </div>
                         </th>
-                                
-                                <!-- 
+
+                                <!--
                         <th pSortableColumn="price">
                             <div class="p-d-flex p-jc-between p-ai-center">
                                 <span>{{'template.price' | translate}}</span>
                                 <p-sortIcon field="price"></p-sortIcon>
                             </div>
                         </th>
-                                --> 
-                                <!-- 
+                                -->
+                                <!--
                         <th pSortableColumn="member">
                             <div class="p-d-flex p-jc-between p-ai-center">
                                 <span>{{'template.member' | translate}}</span>
                                 <p-sortIcon field="member"></p-sortIcon>
                             </div>
                         </th>
-                                --> 
-                                <!-- 
+                                -->
+                                <!--
                         <th pSortableColumn="technology">
                             <div class="p-d-flex p-jc-between p-ai-center">
                                 <span>{{'template.technology' | translate}}</span>
                                 <p-sortIcon field="technology"></p-sortIcon>
                             </div>
                         </th>
-                                --> 
+                                -->
                         <th>Actions</th>
                     </tr>
                 </ng-template>
@@ -237,42 +232,42 @@
                         <td>
                             <p-tableCheckbox [value]="element"></p-tableCheckbox>
                         </td>
-                            
+
                         <td>{{element.code}}</td>
-                            
-                            
+
+
                         <td>{{element.name}}</td>
-                            
-                            
+
+
                         <td>{{element.addingDate | date :'dd/MM/yyyy HH:mm' }}</td>
-                            
-                            
+
+
                         <td>{{element.lastUpdateDate | date :'dd/MM/yyyy HH:mm' }}</td>
-                            
-                            
+
+
                         <td>{{element.categoryTemplate?.name}}</td>
-                            
-                            
+
+
                         <td>{{element.typeTemplate?.name}}</td>
-                            
-                            
+
+
                         <td>{{element.levelTemplate?.name}}</td>
-                            
-                            
+
+
                         <td>{{element.templateTags}}</td>
-                            
-                            
+
+
                         <td>{{element.domainTemplate?.name}}</td>
-                            
-                             <!-- 
+
+                             <!--
                         <td>{{element.price}}</td>
-                             --> 
-                             <!-- 
+                             -->
+                             <!--
                         <td>{{element.member?.id}}</td>
-                             --> 
-                             <!-- 
+                             -->
+                             <!--
                         <td>{{element.technology?.name}}</td>
-                             --> 
+                             -->
                         <td>
                             <button pButton pRipple icon="pi pi-pencil"  class="p-button-rounded p-button-info mr-2" (click)="edit(element)"  *ngIf="editActionIsValid"></button>
                             <button pButton pRipple icon="pi pi-list" class="p-button-rounded p-button-secondary mr-2" (click)="view(element)"  *ngIf="viewActionIsValid"></button>

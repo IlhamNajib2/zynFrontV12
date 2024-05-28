@@ -1,8 +1,8 @@
-    <p-dialog [(visible)]="editDialog" [style]="{width: '70vw'}" header="{{'typeTemplate.tabPan' | translate}}" [modal]="true" styleClass="p-fluid" [maximizable]="true" [draggable]="false" [resizable]="false">
-        <ng-template pTemplate="content" >
-                <p-tabView>
-                    <p-tabPanel header="{{'typeTemplate.tabPan' | translate}}">
-                        <div class="grid">
+<p-dialog [(visible)]="editDialog" [style]="{width: '70vw'}" [modal]="true" styleClass="p-fluid" [maximizable]="true" [draggable]="false" [resizable]="false">
+    <ng-template pTemplate="content" >
+        <div>
+            <h2>Type</h2>
+            <div class="grid">
 
                                         <div class="field col-12 md:col-6">
                                             <label for="1">{{'typeTemplate.code' | translate}}<span style="color: red;">*</span></label>
@@ -23,9 +23,7 @@
 
 
                         </div>
-                    </p-tabPanel>
-
-                </p-tabView>
+                        </div>
 
         </ng-template>
 

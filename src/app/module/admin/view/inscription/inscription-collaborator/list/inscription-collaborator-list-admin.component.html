@@ -5,13 +5,9 @@
             <p-toolbar styleClass="mb-4">
                 <ng-template pTemplate="left">
                                         <button pButton pRipple label=" {{'new' | translate}}" icon="pi pi-plus" class="p-button-info mr-2 mb-2" (click)="openCreate('InscriptionCollaborator')" *ngIf="createActionIsValid"></button>
-                    <button [disabled]="isSelectionDisabled()" pButton pRipple label=" {{'delete' | translate}}" icon="pi pi-trash" class="p-button-danger mr-2 mb-2" (click)=deleteMultiple()  *ngIf="deleteActionIsValid"></button>
-                    <button pButton pRipple label=" {{'search' | translate}}" icon="pi pi-{{findByCriteriaShow?'angle-down':'angle-right'}}" class="p-button-secondary mr-2 mb-2" (click)="this.showSearch()"></button>
                 </ng-template>
                 <ng-template pTemplate="right">
-                    <div class="flex">
-                        <p-splitButton label=" {{'export' | translate}}" icon="pi pi-download" styleClass="p-button-secondary" [model]="excelPdfButons"></p-splitButton>
-                    </div>
+
                 </ng-template>
 
             </p-toolbar>
@@ -143,94 +139,94 @@
                         <th style="width: 3rem">
                             <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
                         </th>
-                                
+
                         <th pSortableColumn="startDate">
                             <div class="p-d-flex p-jc-between p-ai-center">
                                 <span>{{'inscriptionCollaborator.startDate' | translate}}</span>
                                 <p-sortIcon field="startDate"></p-sortIcon>
                             </div>
                         </th>
-                                
-                                
+
+
                         <th pSortableColumn="endDate">
                             <div class="p-d-flex p-jc-between p-ai-center">
                                 <span>{{'inscriptionCollaborator.endDate' | translate}}</span>
                                 <p-sortIcon field="endDate"></p-sortIcon>
                             </div>
                         </th>
-                                
-                                
+
+
                         <th pSortableColumn="renewDate">
                             <div class="p-d-flex p-jc-between p-ai-center">
                                 <span>{{'inscriptionCollaborator.renewDate' | translate}}</span>
                                 <p-sortIcon field="renewDate"></p-sortIcon>
                             </div>
                         </th>
-                                
-                                
+
+
                         <th pSortableColumn="packaging">
                             <div class="p-d-flex p-jc-between p-ai-center">
                                 <span>{{'inscriptionCollaborator.packaging' | translate}}</span>
                                 <p-sortIcon field="packaging"></p-sortIcon>
                             </div>
                         </th>
-                                
-                                
+
+
                         <th pSortableColumn="consumedEntity">
                             <div class="p-d-flex p-jc-between p-ai-center">
                                 <span>{{'inscriptionCollaborator.consumedEntity' | translate}}</span>
                                 <p-sortIcon field="consumedEntity"></p-sortIcon>
                             </div>
                         </th>
-                                
-                                
+
+
                         <th pSortableColumn="consumedProjet">
                             <div class="p-d-flex p-jc-between p-ai-center">
                                 <span>{{'inscriptionCollaborator.consumedProjet' | translate}}</span>
                                 <p-sortIcon field="consumedProjet"></p-sortIcon>
                             </div>
                         </th>
-                                
-                                
+
+
                         <th pSortableColumn="consumedAttribut">
                             <div class="p-d-flex p-jc-between p-ai-center">
                                 <span>{{'inscriptionCollaborator.consumedAttribut' | translate}}</span>
                                 <p-sortIcon field="consumedAttribut"></p-sortIcon>
                             </div>
                         </th>
-                                
-                                
+
+
                         <th pSortableColumn="consumedIndicator">
                             <div class="p-d-flex p-jc-between p-ai-center">
                                 <span>{{'inscriptionCollaborator.consumedIndicator' | translate}}</span>
                                 <p-sortIcon field="consumedIndicator"></p-sortIcon>
                             </div>
                         </th>
-                                
-                                
+
+
                         <th pSortableColumn="collaborator">
                             <div class="p-d-flex p-jc-between p-ai-center">
                                 <span>{{'inscriptionCollaborator.collaborator' | translate}}</span>
                                 <p-sortIcon field="collaborator"></p-sortIcon>
                             </div>
                         </th>
-                                
-                                <!-- 
+
+                                <!--
                         <th pSortableColumn="inscriptionCollaboratorState">
                             <div class="p-d-flex p-jc-between p-ai-center">
                                 <span>{{'inscriptionCollaborator.inscriptionCollaboratorState' | translate}}</span>
                                 <p-sortIcon field="inscriptionCollaboratorState"></p-sortIcon>
                             </div>
                         </th>
-                                --> 
-                                <!-- 
+                                -->
+                                <!--
                         <th pSortableColumn="inscriptionCollaboratorType">
                             <div class="p-d-flex p-jc-between p-ai-center">
                                 <span>{{'inscriptionCollaborator.inscriptionCollaboratorType' | translate}}</span>
                                 <p-sortIcon field="inscriptionCollaboratorType"></p-sortIcon>
                             </div>
                         </th>
-                                --> 
+                                -->
                         <th>Actions</th>
                     </tr>
                 </ng-template>
@@ -239,39 +235,39 @@
                         <td>
                             <p-tableCheckbox [value]="element"></p-tableCheckbox>
                         </td>
-                            
+
                         <td>{{element.startDate | date :'dd/MM/yyyy HH:mm' }}</td>
-                            
-                            
+
+
                         <td>{{element.endDate | date :'dd/MM/yyyy HH:mm' }}</td>
-                            
-                            
+
+
                         <td>{{element.renewDate | date :'dd/MM/yyyy HH:mm' }}</td>
-                            
-                            
+
+
                         <td>{{element.packaging?.id}}</td>
-                            
-                            
+
+
                         <td>{{element.consumedEntity}}</td>
-                            
-                            
+
+
                         <td>{{element.consumedProjet}}</td>
-                            
-                            
+
+
                         <td>{{element.consumedAttribut}}</td>
-                            
-                            
+
+
                         <td>{{element.consumedIndicator}}</td>
-                            
-                            
+
+
                         <td>{{element.collaborator?.description}}</td>
-                            
-                             <!-- 
+
+                             <!--
                         <td>{{element.inscriptionCollaboratorState?.name}}</td>
-                             --> 
-                             <!-- 
+                             -->
+                             <!--
                         <td>{{element.inscriptionCollaboratorType?.name}}</td>
-                             --> 
+                             -->
                         <td>
                             <button pButton pRipple icon="pi pi-pencil"  class="p-button-rounded p-button-info mr-2" (click)="edit(element)"  *ngIf="editActionIsValid"></button>
                             <button pButton pRipple icon="pi pi-list" class="p-button-rounded p-button-secondary mr-2" (click)="view(element)"  *ngIf="viewActionIsValid"></button>

@@ -1,8 +1,8 @@
-        <p-dialog [(visible)]="createDialog" [style]="{width: '70vw'}" header="{{'coupon.tabPan' | translate}}" [modal]="true" styleClass="p-fluid" [maximizable]="true" [draggable]="false" [resizable]="false">
+        <p-dialog [(visible)]="createDialog" [style]="{width: '70vw'}" [modal]="true" styleClass="p-fluid" [maximizable]="true" [draggable]="false" [resizable]="false">
             <ng-template pTemplate="content" >
-                        <p-tabView>
-                            <p-tabPanel header="{{'coupon.tabPan' | translate}}">
-                                <div class="grid">
+                <div>
+                    <h2>Coupon</h2>
+                    <div class="grid">
 
                                                 <div class="field col-12 md:col-6">
                                                     <label for="1">{{'coupon.code' | translate}}<span style="color: red;">*</span></label>
@@ -18,7 +18,7 @@
                                                     <p-calendar appendTo="body" id="2"  [showTime]="true" [showSeconds]="false" placeholder="{{'coupon.dateStart' | translate}}"  [(ngModel)]="item.dateStart"
                                                             dateFormat="{{dateFormat}}"  >
                                                     </p-calendar>
-                                                    
+
                                                 </div>
 
                                                 <div class="field col-12 md:col-6">
@@ -26,7 +26,7 @@
                                                     <p-calendar appendTo="body" id="3"  [showTime]="true" [showSeconds]="false" placeholder="{{'coupon.dateEnd' | translate}}"  [(ngModel)]="item.dateEnd"
                                                             dateFormat="{{dateFormat}}"  >
                                                     </p-calendar>
-                                                    
+
                                                 </div>
 
                                                 <div class="field col-12 md:col-6">
@@ -43,11 +43,10 @@
                                                 <p-dropdown  appendTo="body"  [options]="influencers" [(ngModel)]="item.influencer" id="6" [filter]="true" filterMatchMode="contains"
                                                         [showClear]="true" optionLabel="id" placeholder="{{'coupon.influencer' | translate}}"  >
                                                 </p-dropdown>
-                                                
+
                                             </div>
 
                                 </div>
-                            </p-tabPanel>
                                     <p-tabPanel header="{{'coupon.couponDetails' | translate}}">
                                         <p-tabView [(activeIndex)]="activeTab">
                                             <p-tabPanel header="Création">
@@ -58,28 +57,28 @@
                                                                                      id="1"  [filter]="true" filterMatchMode="contains" [showClear]="true" optionLabel="id"
                                                                                      placeholder="Packaging"  >
                                                                         </p-dropdown>
-                                                                        
+
                                                                     </div>
 
                                                                     <div class="field col-12 md:col-6">
                                                                         <label for="2">Discount</label>
                                                                         <p-inputNumber class="mb-2 mr-2" id="discount" placeholder="Discount"  [(ngModel)]="couponDetailsElement.discount"></p-inputNumber>
-                                                                        
+
                                                                     </div>
                                                                     <div class="field col-12 md:col-6">
                                                                         <label for="3">Amount given influencer</label>
                                                                         <p-inputNumber class="mb-2 mr-2" id="amountGivenInfluencer" placeholder="Amount given influencer"  [(ngModel)]="couponDetailsElement.amountGivenInfluencer"></p-inputNumber>
-                                                                        
+
                                                                     </div>
                                                                     <div class="field col-12 md:col-6">
                                                                         <label for="4">Using number</label>
                                                                         <p-inputNumber class="mb-2 mr-2" id="usingNumber" placeholder="Using number"  [(ngModel)]="couponDetailsElement.usingNumber"></p-inputNumber>
-                                                                        
+
                                                                     </div>
                                                                     <div class="field col-12 md:col-6">
                                                                         <label for="5">Max using number</label>
                                                                         <p-inputNumber class="mb-2 mr-2" id="maxUsingNumber" placeholder="Max using number"  [(ngModel)]="couponDetailsElement.maxUsingNumber"></p-inputNumber>
-                                                                        
+
                                                                     </div>
                                                         <div class="field col-12 md:col-1">
                                                             <button pButton pRipple type="button" icon="pi pi-plus" class="mt-4" label="OK" (click)="addCouponDetails()"></button>
@@ -120,8 +119,7 @@
                                         </p-tabView>
                                     </p-tabPanel>
 
-
-                        </p-tabView>
+                </div>
 
             </ng-template>
 

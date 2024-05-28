@@ -1,9 +1,9 @@
 
-    <p-dialog [(visible)]="editDialog" [style]="{width: '70vw'}" header="{{'collaborator.tabPan' | translate}}" [modal]="true" styleClass="p-fluid" [maximizable]="true" [draggable]="false" [resizable]="false">
-        <ng-template pTemplate="content" >
-                <p-tabView>
-                    <p-tabPanel header="{{'collaborator.tabPan' | translate}}">
-                        <div class="grid">
+<p-dialog [(visible)]="editDialog" [style]="{width: '70vw'}" [modal]="true" styleClass="p-fluid" [maximizable]="true" [draggable]="false" [resizable]="false">
+    <ng-template pTemplate="content" >
+        <div>
+            <h2>Collaborator</h2>
+            <div class="grid">
 
                                         <div class="field col-12 md:col-6">
                                             <label for="1">{{'collaborator.description' | translate}}<span style="color: red;">*</span></label>
@@ -107,9 +107,7 @@
 
 
                         </div>
-                    </p-tabPanel>
-
-                </p-tabView>
+                        </div>
 
         </ng-template>
 

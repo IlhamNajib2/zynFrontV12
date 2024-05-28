@@ -1,8 +1,8 @@
-        <p-dialog [(visible)]="createDialog" [style]="{width: '70vw'}" header="{{'levelTemplate.tabPan' | translate}}" [modal]="true" styleClass="p-fluid" [maximizable]="true" [draggable]="false" [resizable]="false">
+        <p-dialog [(visible)]="createDialog" [style]="{width: '70vw'}" [modal]="true" styleClass="p-fluid" [maximizable]="true" [draggable]="false" [resizable]="false">
             <ng-template pTemplate="content" >
-                        <p-tabView>
-                            <p-tabPanel header="{{'levelTemplate.tabPan' | translate}}">
-                                <div class="grid">
+                <div>
+                    <h2>Level</h2>
+                    <div class="grid">
 
                                                 <div class="field col-12 md:col-6">
                                                     <label for="1">{{'levelTemplate.code' | translate}}<span style="color: red;">*</span></label>
@@ -23,9 +23,7 @@
 
 
                                 </div>
-                            </p-tabPanel>
-
-                        </p-tabView>
+                                </div>
 
             </ng-template>
 

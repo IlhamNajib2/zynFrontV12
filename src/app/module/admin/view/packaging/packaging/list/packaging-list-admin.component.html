@@ -5,13 +5,8 @@
             <p-toolbar styleClass="mb-4">
                 <ng-template pTemplate="left">
                                         <button pButton pRipple label=" {{'new' | translate}}" icon="pi pi-plus" class="p-button-info mr-2 mb-2" (click)="openCreate('Packaging')" *ngIf="createActionIsValid"></button>
-                    <button [disabled]="isSelectionDisabled()" pButton pRipple label=" {{'delete' | translate}}" icon="pi pi-trash" class="p-button-danger mr-2 mb-2" (click)=deleteMultiple()  *ngIf="deleteActionIsValid"></button>
-                    <button pButton pRipple label=" {{'search' | translate}}" icon="pi pi-{{findByCriteriaShow?'angle-down':'angle-right'}}" class="p-button-secondary mr-2 mb-2" (click)="this.showSearch()"></button>
                 </ng-template>
                 <ng-template pTemplate="right">
-                    <div class="flex">
-                        <p-splitButton label=" {{'export' | translate}}" icon="pi pi-download" styleClass="p-button-secondary" [model]="excelPdfButons"></p-splitButton>
-                    </div>
                 </ng-template>
 
             </p-toolbar>
@@ -128,7 +123,7 @@
                         <th style="width: 3rem">
                             <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
                         </th>
-                                
+
                         <th pSortableColumn="name">
                             <div class="p-d-flex p-jc-between p-ai-center">
                                 <span>{{'packaging.name' | translate}}</span>
@@ -136,8 +131,8 @@
                                 <p-columnFilter type="text" field="element.name" display="menu" class="ml-auto"></p-columnFilter>
                             </div>
                         </th>
-                                
-                                
+
+
                         <th pSortableColumn="code">
                             <div class="p-d-flex p-jc-between p-ai-center">
                                 <span>{{'packaging.code' | translate}}</span>
@@ -145,71 +140,71 @@
                                 <p-columnFilter type="text" field="element.code" display="menu" class="ml-auto"></p-columnFilter>
                             </div>
                         </th>
-                                
-                                
+
+
                         <th pSortableColumn="dateStart">
                             <div class="p-d-flex p-jc-between p-ai-center">
                                 <span>{{'packaging.dateStart' | translate}}</span>
                                 <p-sortIcon field="dateStart"></p-sortIcon>
                             </div>
                         </th>
-                                
-                                
+
+
                         <th pSortableColumn="dateEnd">
                             <div class="p-d-flex p-jc-between p-ai-center">
                                 <span>{{'packaging.dateEnd' | translate}}</span>
                                 <p-sortIcon field="dateEnd"></p-sortIcon>
                             </div>
                         </th>
-                                
-                                
+
+
                         <th pSortableColumn="price">
                             <div class="p-d-flex p-jc-between p-ai-center">
                                 <span>{{'packaging.price' | translate}}</span>
                                 <p-sortIcon field="price"></p-sortIcon>
                             </div>
                         </th>
-                                
-                                
+
+
                         <th pSortableColumn="maxEntity">
                             <div class="p-d-flex p-jc-between p-ai-center">
                                 <span>{{'packaging.maxEntity' | translate}}</span>
                                 <p-sortIcon field="maxEntity"></p-sortIcon>
                             </div>
                         </th>
-                                
-                                
+
+
                         <th pSortableColumn="maxProjet">
                             <div class="p-d-flex p-jc-between p-ai-center">
                                 <span>{{'packaging.maxProjet' | translate}}</span>
                                 <p-sortIcon field="maxProjet"></p-sortIcon>
                             </div>
                         </th>
-                                
-                                
+
+
                         <th pSortableColumn="maxAttribut">
                             <div class="p-d-flex p-jc-between p-ai-center">
                                 <span>{{'packaging.maxAttribut' | translate}}</span>
                                 <p-sortIcon field="maxAttribut"></p-sortIcon>
                             </div>
                         </th>
-                                
-                                
+
+
                         <th pSortableColumn="maxIndicator">
                             <div class="p-d-flex p-jc-between p-ai-center">
                                 <span>{{'packaging.maxIndicator' | translate}}</span>
                                 <p-sortIcon field="maxIndicator"></p-sortIcon>
                             </div>
                         </th>
-                                
-                                <!-- 
+
+                                <!--
                         <th pSortableColumn="categoryPackaging">
                             <div class="p-d-flex p-jc-between p-ai-center">
                                 <span>{{'packaging.categoryPackaging' | translate}}</span>
                                 <p-sortIcon field="categoryPackaging"></p-sortIcon>
                             </div>
                         </th>
-                                --> 
+                                -->
                         <th>Actions</th>
                     </tr>
                 </ng-template>
@@ -218,36 +213,36 @@
                         <td>
                             <p-tableCheckbox [value]="element"></p-tableCheckbox>
                         </td>
-                            
+
                         <td>{{element.name}}</td>
-                            
-                            
+
+
                         <td>{{element.code}}</td>
-                            
-                            
+
+
                         <td>{{element.dateStart | date :'dd/MM/yyyy HH:mm' }}</td>
-                            
-                            
+
+
                         <td>{{element.dateEnd | date :'dd/MM/yyyy HH:mm' }}</td>
-                            
-                            
+
+
                         <td>{{element.price}}</td>
-                            
-                            
+
+
                         <td>{{element.maxEntity}}</td>
-                            
-                            
+
+
                         <td>{{element.maxProjet}}</td>
-                            
-                            
+
+
                         <td>{{element.maxAttribut}}</td>
-                            
-                            
+
+
                         <td>{{element.maxIndicator}}</td>
-                            
-                             <!-- 
+
+                             <!--
                         <td>{{element.categoryPackaging?.name}}</td>
-                             --> 
+                             -->
                         <td>
                             <button pButton pRipple icon="pi pi-pencil"  class="p-button-rounded p-button-info mr-2" (click)="edit(element)"  *ngIf="editActionIsValid"></button>
                             <button pButton pRipple icon="pi pi-list" class="p-button-rounded p-button-secondary mr-2" (click)="view(element)"  *ngIf="viewActionIsValid"></button>

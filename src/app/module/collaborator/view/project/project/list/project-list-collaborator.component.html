@@ -51,7 +51,7 @@
                         <div class=" field col">
                             <div class="text-center p-3 border-round-sm font-bold" [style]="{height: '400px'}">
                                 <span class="vertical-align-baseline mt-2">
-                                   <p-button (click)="showDialog()" icon="pi pi-external-link" icon="pi pi-eye" label="Choose Template" class="top-right relative mr-4"></p-button>
+                                   <p-button [style]="{background:'#0e88b3', borderColor:'#0e88b3'}" (click)="showDialog()" icon="pi pi-external-link" icon="pi pi-eye" label="Choose Template" class="top-right relative mr-4"></p-button>
                                    <button class="btn flex-end relative p-2" (click)="toggleSidebar()">YamlGPT</button>
                                </span>
                                 <div class="grid p-0 m-0" [style]="{width:'100%'}">
@@ -62,10 +62,10 @@
                                         <button class="btn flex-end relative p-2" (click)="toggleSidebar()">YamlGPT</button>
                                     </div>-->
                                     <div class="field col-11 md:col-6 mt-2">
-                                        <input [style]="{width:'100%'}" class="mb-2 mr-2" type="text" pInputText  placeholder="{{'Enter Name Of Project' | translate}}" id="2" [(ngModel)]="item.name"/>
+                                        <input [style]="{width:'100%', background:'#ffffff',borderRadius: '0'}" class="mb-2 mr-2" type="text" pInputText  placeholder="{{'Enter Name Of Project' | translate}}" id="2" [(ngModel)]="item.name"/>
                                     </div>
                                         <div class="field col-11 md:col-6 mt-2">
-                                        <p-dropdown [style]="{width:'100%'}"  appendTo="body"  [options]="domainTemplates" [(ngModel)]="item.domainTemplate" id="7" [filter]="true" filterMatchMode="contains"
+                                        <p-dropdown [style]="{width:'100%', background:'#ffffff',borderRadius: '0'}"  appendTo="body"  [options]="domainTemplates" [(ngModel)]="item.domainTemplate" id="7" [filter]="true" filterMatchMode="contains"
                                                      [showClear]="true" optionLabel="name" placeholder="{{'Select Domain' | translate}}"  >
                                         </p-dropdown>
                                         </div>
@@ -73,9 +73,9 @@
                                 <div class="mb-2 justify-content-left text-left">
                                     <label class="text-surface-900 text-3xl text-bold" for="3">{{'project.yaml' | translate}}</label>
                                 </div>
-                                <textarea [style]="{width: '100%', height:'300px'}" class="border-solid border-black-alpha-60 border-3" id="3" pInputTextarea rows="5" cols="46" placeholder="{{'project.yaml' | translate}}"  [(ngModel)]="item.yaml"></textarea>
+                                <textarea [style]="{width: '100%', height:'300px',background:'#ffffff',borderRadius:'0'}" class="border-solid border-black-alpha-60 border-3" id="3" pInputTextarea rows="5" cols="46" placeholder="{{'project.yaml' | translate}}"  [(ngModel)]="item.yaml"></textarea>
                                 <div class="p-flexbox">
-                                    <button class="ml-8" pButton pRipple  label="{{'Generat' | translate}}"  icon="pi pi-check"  (click)="save()" class="top"></button>
+                                    <button style="background:#0e88b3; border-color:#0e88b3" class="ml-8" pButton pRipple  label="{{'Generat' | translate}}"  icon="pi pi-check"  (click)="save()" class="top"></button>
                                 </div>
                             </div>
                         </div>
@@ -128,7 +128,7 @@
                                 <td>{{element.inscriptionMembre?.id}}</td>-->
                                 <td>{{element.domainTemplate?.name}}</td>
                                 <!--<td><p-button  (click)="showYamlDialog(element.yaml)" label="Yaml" severity="warning" /></td>-->
-                                <td><p-button  (click)="showYamllDialog(element)" label="Yaml" severity="warning" /></td>
+                                <td><p-button style="background:#0e88b3; border-color:#0e88b3"  (click)="showYamllDialog(element)" label="Yaml" severity="warning" /></td>
                                 <!--<td>
                                     <p-button (click)="showTemplateDetails(element.template)" label="Yaml" severity="warning"></p-button>
                                 </td>-->
