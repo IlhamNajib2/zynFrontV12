@@ -30,7 +30,7 @@
                     <ng-template pTemplate="caption">
                         <span class="p-input-icon-left ml-auto mr-4">
                             <i class="pi pi-search"></i>
-                            <input class="text-orange-700" [style]="{width:'500px'}" (click)="findPaginatedByCriteria()" pInputText type="text" placeholder="{{'searchInput' | translate}}" (input)="dt.filterGlobal($event.target.value, 'contains')"/>
+                            <input class="text-orange-700" [style]="{width:'500px',background:'#ffffff'}" (click)="findPaginatedByCriteria()" pInputText type="text" placeholder="{{'searchInput' | translate}}" (input)="dt.filterGlobal($event.target.value, 'contains')"/>
                         </span>
                         <a (click)="selecteProjectTemplate('Public')" class="mr-6 ml-6 text-2xl  aswad underline">Public</a>
                         <a (click)="selecteProjectTemplate('Private')"  class="mr-6 ml-6 text-2xl aswad underline">Private</a>
@@ -56,15 +56,15 @@
                                         <p><u class="text-pink-900 mr-4">domain:</u><b class="text-teal-600">{{ element.domainTemplate.name }}</b></p>
                                         <p><b class="text-red-500">{{ element.categoryTemplate.name }}</b></p>
                                         <p><b class="text-red-500 text-4lg">{{ element.price }}$</b></p>
-                                        <p-button *ngIf="element.categoryTemplate.name==='Private'" class=" text-blue-300 background-blue-200 button" label="shop" (click)="showDialog()" severity="secondary" />
-                                        <p-button *ngIf="element.categoryTemplate.name==='Public'" class=" text-blue-300 background-blue-200 button" label="apload" severity="secondary" />
+                                        <p-button [style]="{background:'#0e88b3', borderColor:'#0e88b3'}" *ngIf="element.categoryTemplate.name==='Private'" class=" text-blue-300 background-blue-200 button" label="shop" (click)="showDialog()" severity="secondary" />
+                                        <p-button [style]="{background:'#0e88b3', borderColor:'#0e88b3'}" *ngIf="element.categoryTemplate.name==='Public'" class=" text-blue-300 background-blue-200 button" label="apload" severity="secondary" />
                                         <i class="pi pi-cart-minus" style="color: green"></i>
                                     </div>
                                     <div class="col-fixed font-bold" style="width:200px">
                                         <p><u class="text-pink-900 mr-4">technology: </u><b class="text-teal-600">{{ element.technology.name }}</b></p>
                                         <p><u class="text-pink-900 mr-4">type: </u><b class="text-teal-600">{{ element.typeTemplate.name }}</b></p>
                                         <p><u class="text-pink-900 mr-4">level:</u>  <b class="text-teal-600">{{ element.levelTemplate.name }}</b></p>
-                                        <p-button class=" text-blue-300 background-blue-200 button" label="use" (click)="use()"   severity="secondary" />
+                                        <p-button [style]="{background:'#0e88b3', borderColor:'#0e88b3'}" class=" text-blue-300 background-blue-200 button" label="use" (click)="use()"   severity="secondary" />
                                     </div>
                                     <div class="col-fixed" style="width:200px">
                                          </div>
@@ -176,7 +176,7 @@
                     </div>
                 </p-tabView>
                 <div class="p-flexbox ml-4">
-                    <button class="ml-4 mr-8 p-button-warning" pButton pRipple  label="{{'validate' | translate}}"  icon="pi pi-check"  (click)="save()"></button>
+                    <button class="ml-4 mr-8" pButton pRipple  label="{{'validate' | translate}}"  icon="pi pi-check"  (click)="save()"></button>
                     <button class="p-button-warning" pButton pRipple  label="{{'cancel' | translate}}" icon="pi pi-times" class="p-button-outlined" (click)="hideCreateDialog()"></button>
                 </div>
             </div>
