@@ -13,7 +13,7 @@
                         </a>
                     </ng-template>
                     <ng-template pTemplate="right">
-                        <button pButton pRipple label=" {{'new' | translate}}" icon="pi pi-plus" class="p-button-info mr-2 mb-2" (click)="openCreate('Project')" *ngIf="createActionIsValid"></button>
+                        <!--<button pButton pRipple label=" {{'new' | translate}}" icon="pi pi-plus" class="p-button-info mr-2 mb-2" (click)="openCreate('Project')" *ngIf="createActionIsValid"></button>-->
                     </ng-template>
                 </p-toolbar>
                     <app-project-create-collaborator  *ngIf="createDialog  && createActionIsValid"></app-project-create-collaborator>
@@ -65,7 +65,7 @@
                                         <input [style]="{width:'100%', background:'rgba(0, 0, 0, 0.06)'}" class="mb-2 mr-2 border-round border-gray-300" type="text" pInputText  placeholder="{{'Enter Name Of Project' | translate}}" id="2" [(ngModel)]="item.name"/>
                                     </div>
                                         <div class="field col-11 md:col-6 mt-2">
-                                        <p-dropdown [style]="{borderRadius: '0.25rem', text:'left'}"  appendTo="body"  [options]="domainTemplates" [(ngModel)]="item.domainTemplate" id="7" [filter]="true" filterMatchMode="contains"
+                                        <p-dropdown [style]="{width:'100%', borderRadius: '0.25rem', text:'left',borderColor:'#EEEEEE'}"  appendTo="body"  [options]="domainTemplates" [(ngModel)]="item.domainTemplate" id="7" [filter]="true" filterMatchMode="contains"
                                                      [showClear]="true" optionLabel="name" placeholder="{{'Select Domain' | translate}}"  >
                                         </p-dropdown>
                                         </div>
@@ -95,14 +95,14 @@
                             </a>
                         </ng-template>
                         <ng-template pTemplate="right">
-                            <button pButton pRipple label=" {{'new' | translate}}" icon="pi pi-plus" class="p-button-info mr-2 mb-2" (click)="openCreate('Project')" *ngIf="createActionIsValid"></button>
+                           <!-- <button pButton pRipple label=" {{'new' | translate}}" icon="pi pi-plus" class="p-button-info mr-2 mb-2" (click)="openCreate('Project')" *ngIf="createActionIsValid"></button>-->
                         </ng-template>
                     </p-toolbar>
                     <app-project-create-collaborator  *ngIf="createDialog  && createActionIsValid"></app-project-create-collaborator>
                     <app-project-edit-collaborator  *ngIf="editDialog  && editActionIsValid"></app-project-edit-collaborator>
                     <app-project-view-collaborator  *ngIf="viewDialog  && viewActionIsValid"></app-project-view-collaborator>
                     <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
-                    <p-table #dt [value]="items" [columns]="cols" [rows]="8" [paginator]="false"
+                    <p-table  #dt [value]="items" [columns]="cols" [rows]="8" [paginator]="false"
                              [globalFilterFields]="['code', 'name', 'generatedDate', 'projectStatecode', 'inscriptionMembreid', 'domainTemplatename']" [(selection)]="selections"
                              [rowHover]="true" dataKey="id" styleClass="p-datatable-customers"
                              currentPageReportTemplate="{{'les éléments de {first} à {last} sur {totalRecords} ' | translate}}"
@@ -115,18 +115,19 @@
                         </ng-template>
                         <ng-template pTemplate="header">
                             <tr>
-                                <th>Name</th>
-                                <th>domain</th>
-                                <th>Yaml</th>
+                                <th style="width: 12%; height: 40px; background-color: #EEEEEE;">Name</th>
+                                <th style="width: 12%; height: 40px; background-color: #EEEEEE;">domain</th>
+                                <th style="width: 12%; height: 40px; background-color: #EEEEEE;">Date</th>
+                                <th style="width: 12%; height: 40px; background-color: #EEEEEE;">Yaml</th>
                             </tr>
                         </ng-template>
                         <ng-template pTemplate="body" let-element>
                             <tr class="bg-">
                                 <td>{{element.name}}</td>
-                               <!-- <td>{{element.generatedDate | date :'dd/MM/yyyy HH:mm' }}</td>-->
+                                <td>{{element.domainTemplate?.name}}</td>
+                                <td>{{element.generatedDate | date :'dd/MM/yyyy HH:mm' }}</td>
                                 <!--<td>{{element.projectState?.code}}</td>
                                 <td>{{element.inscriptionMembre?.id}}</td>-->
-                                <td>{{element.domainTemplate?.name}}</td>
                                 <!--<td><p-button  (click)="showYamlDialog(element.yaml)" label="Yaml" severity="warning" /></td>-->
                                 <td><p-button [style]="{background:'#0e88b3', borderColor:'#0e88b3'}"  (click)="showYamllDialog(element)" label="Yaml" severity="warning" /></td>
                                 <!--<td>
@@ -183,7 +184,7 @@
                             </div>
                             <pre id="yamlText" class="w-auto">
 
-                                 <p id="yamlText" class="text-xl"> {{ selectedProject.yaml }}</p>
+                                 <p id="yamlText" class="text-base"> {{ selectedProject.yaml }}</p>
 
                            </pre>
                             </div>
@@ -214,6 +215,8 @@
                                             <button (click)="copyToClipboard()"><i class="pi pi-clone" style="font-size: 1.5rem"></i></button>
                                         </div>
                                         <pre id="yamlText" class="w-auto">
+                                          <p id="yamlText" class="text-base"> {{ selecteddProject.yaml }}</p>
+
                            </pre>
                                     </div>
                                 </div>
