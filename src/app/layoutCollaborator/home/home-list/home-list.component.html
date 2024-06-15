@@ -9,11 +9,15 @@
     </div>
     <div class="h1">
     <button class="p-tabview-nav-btn hh  m-2 " [routerLink]="['/login']">Get Started  <i class="pi pi-arrow-right"></i></button>
-    <button class="Watch   m-2 " >Watch demo <i class="pi pi-caret-right"></i></button>
+    <button class="Watch   m-2 "  (click)="playVideo()" >Watch demo <i class="pi pi-caret-right"></i></button>
     </div>
 </div>
+
 <div class="body" id="demo" style="display:flex;padding:20px;">
-    <img class="m-50 h-50" src="assets/layout/images/vedioPhoto.png" alt="My App vedio" style="border-radius:3px;width: 80%;"/>
+    <video #videoPlayer muted loop class="m-50 h-50" style="border-radius:3px;width: 80%;" controls>
+        <source src="assets/layout/vedios/vedioGenerate.mp4" type="video/mp4">
+        Votre navigateur ne supporte pas la balise vidéo.
+    </video>
 </div>
 
 <div class="body " style="display:flex;padding:20px;">

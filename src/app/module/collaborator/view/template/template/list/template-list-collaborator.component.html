@@ -9,7 +9,7 @@
                         <i style="font-size: 1rem"></i><span class="link-label">Template</span>
                     </a>
                     <a class="sidebar-link mr-4 ml-4 text-orange-500 underline font-bold hover:text-orange-500 text-2xl " (click)="showTemplate()">
-                        <i style="font-size: 1rem"></i><span class="link-label">New</span>
+                        <i style="font-size: 1rem"></i><span class="link-label">Create</span>
                     </a>
                     <a class="sidebar-link mr-4 ml-4 text-orange-500 underline font-bold hover:text-orange-500 text-2xl " (click)="showMy()">
                         <i style="font-size: 1rem"></i><span class="link-label">My Template</span>
@@ -56,8 +56,8 @@
                                         <p><u class="text-pink-900 mr-4">Domain:</u><b class="text-teal-600">{{ element.domainTemplate.name }}</b></p>
                                         <p><b class="text-red-500">{{ element.categoryTemplate.name }}</b></p>
                                         <p><b class="text-red-500 text-4lg">{{ element.price }}$</b></p>
-                                        <p-button [style]="{background:'#0e88b3', borderColor:'#0e88b3'}" *ngIf="element.categoryTemplate.name==='Private'" class=" text-blue-300 background-blue-200 button" label="shop" (click)="showDialog()" severity="secondary" />
-                                        <p-button [style]="{background:'#0e88b3', borderColor:'#0e88b3'}" *ngIf="element.categoryTemplate.name==='Public'" class=" text-blue-300 background-blue-200 button" label="apload" severity="secondary" />
+                                        <p-button [style]="{background:'#0e88b3', borderColor:'#0e88b3'}" *ngIf="element.categoryTemplate.name==='Private'" class=" text-blue-300 background-blue-200 button" label="Buy" (click)="showDialog()" severity="secondary" />
+                                        <p-button [style]="{background:'#0e88b3', borderColor:'#0e88b3'}" *ngIf="element.categoryTemplate.name==='Public'" class=" text-blue-300 background-blue-200 button" label="Upload" severity="secondary" />
                                         <i class="pi pi-cart-minus" style="color: green"></i>
                                     </div>
                                     <div class="col-fixed font-bold" style="width:200px">
@@ -90,7 +90,7 @@
                             <i style="font-size: 1rem"></i><span class="link-label">Template</span>
                         </a>
                         <a class="sidebar-link mr-4 ml-4 text-orange-500 underline font-bold text-2xl" (click)="showTemplate()">
-                            <i style="font-size: 1rem"></i><span class="link-label">New</span>
+                            <i style="font-size: 1rem"></i><span class="link-label">Create</span>
                         </a>
                         <a class="sidebar-link mr-4 ml-4 text-orange-500 underline font-bold text-2xl" (click)="showMy()">
                             <i style="font-size: 1rem"></i><span class="link-label">My Template</span>
@@ -187,7 +187,7 @@
                             <i style="font-size: 1rem"></i><span class="link-label">Template</span>
                         </a>
                         <a class="sidebar-link mr-4 ml-4 text-orange-500 underline font-bold text-2xl" (click)="showTemplate()">
-                            <i style="font-size: 1rem"></i><span class="link-label">New</span>
+                            <i style="font-size: 1rem"></i><span class="link-label">Create</span>
                         </a>
                         <a class="sidebar-link mr-4 ml-4 text-orange-500 underline font-bold text-2xl" (click)="showMy()">
                             <i style="font-size: 1rem"></i><span class="link-label">My Template</span>
@@ -224,15 +224,15 @@
                         <p><u class="text-pink-900 mr-4">Domain:</u><b class="text-teal-600">{{ element.domainTemplate.name }}</b></p>
                         <p><b class="text-red-500">{{ element.categoryTemplate.name }}</b></p>
                         <p><b class="text-red-500 text-4lg">{{ element.price }}$</b> </p><i class="pi pi-cart-minus" style="color: green"></i>
-                        <p-button [style]="{background:'#0e88b3', borderColor:'#0e88b3'}" *ngIf="element.categoryTemplate.name==='Private'" class=" text-blue-300 background-blue-200 button" label="shop" (click)="showDialog()" severity="secondary" />
-                        <p-button [style]="{background:'#0e88b3', borderColor:'#0e88b3'}" *ngIf="element.categoryTemplate.name==='Public'" class=" text-blue-300 background-blue-200 button" label="apload" (click)="showDialog()" severity="secondary" />
+                        <p-button [style]="{background:'#0e88b3', borderColor:'#0e88b3'}" *ngIf="element.categoryTemplate.name==='Private'" class=" text-blue-300 background-blue-200 button" label="Buy" (click)="showDialog()" severity="secondary" />
+                        <p-button [style]="{background:'#0e88b3', borderColor:'#0e88b3'}" *ngIf="element.categoryTemplate.name==='Public'" class=" text-blue-300 background-blue-200 button" label="Upload" (click)="showDialog()" severity="secondary" />
                         <i class="pi pi-cart-minus" style="color: green"></i>
                     </div>
                     <div class="col-fixed font-bold" style="width:200px">
                         <p><u class="text-pink-900 mr-4">Technology: </u><b class="text-teal-600">{{ element.technology.name }}</b></p>
                         <p><u class="text-pink-900 mr-4">Type: </u><b class="text-teal-600">{{ element.typeTemplate.name }}</b></p>
                         <p><u class="text-pink-900 mr-4">Level:</u>  <b class="text-teal-600">{{ element.levelTemplate.name }}</b></p>
-                        <p-button class=" text-blue-300 background-blue-200 button" label="use" (click)="use()"   severity="secondary" />
+                        <p-button [style]="{background:'#0e88b3', borderColor:'#0e88b3'}" class=" text-blue-300 background-blue-200 button" label="use" (click)="use()"   severity="secondary" />
                     </div>
                     <div class="col-fixed" style="width:200px">
                     </div>

@@ -550,6 +550,25 @@ export class ProjectListCollaboratorComponent implements OnInit {
 
     showYamlDialogVisible: boolean = false;
     separateContent: string = '';
+    projectData: ProjectDto[] = [];
+    protected readonly TemplateDto = TemplateDto;
+    visible: boolean = false;
+    showDefaultView: boolean = true;
+    showProjectView: boolean = false;
+    showYmlView: boolean= false;
+    showPrjctView: boolean= false;
+    selectedTemplate: TemplateDto | null = null;
+    templates: TemplateDto[] = [];
+    displayDialog: boolean = false;
+    showSidebar: boolean = false;
+    attributes: string = '';
+    projects: ProjectDto[] = [];
+    selectedProject: ProjectDto | null = null;
+    selecteddProject: ProjectDto | null = null;
+    showProjectDialogVisible: boolean = false;
+    showProjecttDialogVisible: boolean = false;
+    queryFormGroup!:FormGroup;
+    result:any;
 
     showYamlDialog(yamlContent: string): void {
         this.setView('yaml');
@@ -557,10 +576,6 @@ export class ProjectListCollaboratorComponent implements OnInit {
         this.showYamlDialogVisible = true; // Show the dialog
     }
 
-    projectData: ProjectDto[] = [];
-
-    protected readonly TemplateDto = TemplateDto;
-    visible: boolean = false;
 
     showDialog() {
         // Vous pouvez ajouter ici la logique supplémentaire avant de naviguer, si nécessaire
@@ -571,9 +586,8 @@ export class ProjectListCollaboratorComponent implements OnInit {
     show() {
         this.visible = true;
     }
-    queryFormGroup!:FormGroup;
     messages=[{role:"system", content:"You are a helpful assistant."}];
-    result:any;
+
     handleAskGPT() {
         let url='https://api.openai.com/v1/chat/completions';
         let httpHeaders=new HttpHeaders().set("Authorization","Bearer sk-proj-BOM7Krc0ENi0UijiiUvNT3BlbkFJN4WansIvuuQ6y2inXZX4");
@@ -596,13 +610,11 @@ export class ProjectListCollaboratorComponent implements OnInit {
             })
     }
 
-    showSidebar: boolean = false;
 
     toggleSidebar() {
         this.showSidebar = !this.showSidebar;
     }
 
-    attributes: string = '';
 
 
 
@@ -617,10 +629,6 @@ export class ProjectListCollaboratorComponent implements OnInit {
     // Dans votre composant TypeScript
 
     showContentDefault: boolean = true;
-    showDefaultView: boolean = true;
-    showProjectView: boolean = false;
-    showYmlView: boolean= false;
-    showPrjctView: boolean= false;
     setView(view: string) {
         this.showDefaultView = view === 'default';
         this.showProjectView = view === 'project';
@@ -646,12 +654,6 @@ export class ProjectListCollaboratorComponent implements OnInit {
     }
 
 
-
-
-
-    selectedTemplate: TemplateDto | null = null;
-    templates: TemplateDto[] = [];
-    displayDialog: boolean = false;
     loadTemplates(): void {
         this.templateService.getTemplates().subscribe((data: TemplateDto[]) => {
             this.templates = data;
@@ -662,11 +664,6 @@ export class ProjectListCollaboratorComponent implements OnInit {
         this.selectedTemplate = template;
         this.displayDialog = true;
     }
-    projects: ProjectDto[] = [];
-    selectedProject: ProjectDto | null = null;
-    selecteddProject: ProjectDto | null = null;
-    showProjectDialogVisible: boolean = false;
-    showProjecttDialogVisible: boolean = false;
 
 
     showw(project: ProjectDto) {

@@ -4,14 +4,12 @@
         <div class="card">
             <p-toolbar styleClass="mb-4">
                 <ng-template pTemplate="left">
-                                        <button pButton pRipple label=" {{'new' | translate}}" icon="pi pi-plus" class="p-button-info mr-2 mb-2" (click)="openCreate('Template')" *ngIf="createActionIsValid"></button>
+                <button pButton pRipple label=" {{'new' | translate}}" icon="pi pi-plus" class="p-button-info mr-2 mb-2" (click)="openCreate('Template')" *ngIf="createActionIsValid"></button>
                 </ng-template>
                 <ng-template pTemplate="right">
                 </ng-template>
-
             </p-toolbar>
             <p-toolbar *ngIf="findByCriteriaShow">
-
                 <div class="col-12">
                     <div class="flex flex-wrap p-fluid col-12">
                        <div class="lg:col-3 md:col-6 sm:col-12 mb-4">

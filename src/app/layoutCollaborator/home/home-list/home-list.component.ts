@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 
 import {TranslateService} from "@ngx-translate/core";
 import {LayoutService} from "../../../layout/service/app.layout.service";
@@ -17,6 +17,7 @@ import {UserService} from "../../../zynerator/security/shared/service/User.servi
   styleUrls: ['./home-list.component.scss']
 })
 export class HomeListComponent implements OnInit{
+    @ViewChild('videoPlayer', { static: false }) videoPlayer: ElementRef;
     onSearchInput(event: any) {
         const searchTerm = event.target.value;
         // Handle search input here
@@ -28,5 +29,10 @@ export class HomeListComponent implements OnInit{
 
     }
     ngOnInit(): void {
+    }
+
+    playVideo() {
+        const video: HTMLVideoElement = this.videoPlayer.nativeElement;
+        video.play();
     }
 }
